@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="mRs-Km-VaU">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Поиск-->
+        <scene sceneID="qlC-Ol-s4u">
+            <objects>
+                <viewController id="mRs-Km-VaU" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="jmG-Wz-o47"/>
+                        <viewControllerLayoutGuide type="bottom" id="xmh-uU-AkH"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="8nH-oC-kCU">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Woman's Search" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Yun-1W-ABt">
+                                <rect key="frame" x="123" y="323" width="128.5" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="Yun-1W-ABt" firstAttribute="centerX" secondItem="8nH-oC-kCU" secondAttribute="centerX" id="ObM-W1-qP9"/>
+                            <constraint firstItem="Yun-1W-ABt" firstAttribute="centerY" secondItem="8nH-oC-kCU" secondAttribute="centerY" id="dYE-p8-jis"/>
+                        </constraints>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Поиск" id="VER-iT-vZ8"/>
+                    <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="CIv-Xz-9Lj" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1159" y="196"/>
+        </scene>
+    </scenes>
+</document>

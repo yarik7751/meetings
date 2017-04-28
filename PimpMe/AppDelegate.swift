@@ -16,6 +16,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
   func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
     // Override point for customization after application launch.
+    guard User.isAuthorized else {return true}
+    window?.rootViewController = UIStoryboard.viewController(with: User.isMan ? UIStoryboard.manIdentifier : UIStoryboard.womanIdentifier)
     return true
   }
 
