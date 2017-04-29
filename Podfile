@@ -6,5 +6,7 @@ target 'PimpMe' do
   use_frameworks!
 
   # Pods for PimpMe
-    pod ‘Alamofire’
+    pod 'Alamofire'
+    pod 'MARKRangeSlider'
+    pod 'SDWebImage'
 end

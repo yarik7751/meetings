@@ -10,6 +10,10 @@
 /* Common */
 "COMMON_Error" = "Ошибка";
 
+/* MeetingState */
+"MEETING_STATE_Scheduled" = "Scheduled";
+"MEETING_STATE_Pending" = "Pending";
+
 
 /* AuthViewController */
 

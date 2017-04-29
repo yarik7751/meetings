@@ -49,10 +49,10 @@
             </objects>
             <point key="canvasLocation" x="950" y="81"/>
         </scene>
-        <!--WomanDates-->
+        <!--WomanMeetings-->
         <scene sceneID="ttK-pd-rwo">
             <objects>
-                <viewControllerPlaceholder storyboardName="WomanDates" id="hNw-QE-PDU" sceneMemberID="viewController">
+                <viewControllerPlaceholder storyboardName="WomanMeetings" id="hNw-QE-PDU" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Встречи" id="Xp5-s8-x3O"/>
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qXB-Wr-g2s" userLabel="First Responder" sceneMemberID="firstResponder"/>

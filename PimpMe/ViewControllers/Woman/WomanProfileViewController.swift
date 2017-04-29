@@ -23,11 +23,20 @@ class WomanProfileViewController: UIViewController {
 
   override func viewDidLoad() {
     super.viewDidLoad()
-    startKeyboardObserving()
     let tap = UITapGestureRecognizer(target: self, action: #selector(endEditing))
     containerStackView.addGestureRecognizer(tap)
     pageControl.numberOfPages = photos.count
     pageControl.addObserver(self, forKeyPath: "currentPage", options: .new, context: nil)
+  }
+  
+  override func viewDidAppear(_ animated: Bool) {
+    super.viewDidAppear(animated)
+    startKeyboardObserving()
+  }
+  
+  override func viewWillDisappear(_ animated: Bool) {
+    super.viewWillDisappear(animated)
+    endKeyboardObserving()
   }
   
   override func viewDidLayoutSubviews() {

@@ -20,15 +20,22 @@
 		40A781871EB367AD003D73CC /* Woman.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 40A781841EB367AD003D73CC /* Woman.storyboard */; };
 		40A781881EB367AD003D73CC /* WomanProfile.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 40A781851EB367AD003D73CC /* WomanProfile.storyboard */; };
 		40A781891EB367AD003D73CC /* WomanSearch.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 40A781861EB367AD003D73CC /* WomanSearch.storyboard */; };
-		40A7818B1EB367CB003D73CC /* WomanDates.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 40A7818A1EB367CB003D73CC /* WomanDates.storyboard */; };
+		40A7818B1EB367CB003D73CC /* WomanMeetings.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 40A7818A1EB367CB003D73CC /* WomanMeetings.storyboard */; };
 		40A7818D1EB367EB003D73CC /* WomanWallet.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 40A7818C1EB367EB003D73CC /* WomanWallet.storyboard */; };
 		40A7818F1EB368A0003D73CC /* ManProfile.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 40A7818E1EB368A0003D73CC /* ManProfile.storyboard */; };
-		40A781911EB368BE003D73CC /* ManDates.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 40A781901EB368BE003D73CC /* ManDates.storyboard */; };
+		40A781911EB368BE003D73CC /* ManMeetings.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 40A781901EB368BE003D73CC /* ManMeetings.storyboard */; };
 		40A781931EB368D7003D73CC /* ManWallet.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 40A781921EB368D7003D73CC /* ManWallet.storyboard */; };
 		40A781951EB36A0A003D73CC /* UIStoryboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40A781941EB36A0A003D73CC /* UIStoryboard.swift */; };
 		40A781971EB36F5C003D73CC /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40A781961EB36F5C003D73CC /* User.swift */; };
 		40A7819B1EB37542003D73CC /* WomanProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40A7819A1EB37542003D73CC /* WomanProfileViewController.swift */; };
 		40A7819D1EB377BC003D73CC /* UIScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40A7819C1EB377BC003D73CC /* UIScrollView.swift */; };
+		40A781A81EB395B9003D73CC /* WomanFiltersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40A781A71EB395B9003D73CC /* WomanFiltersViewController.swift */; };
+		40ADF3EE1EB48FF100B69722 /* WomanHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 40ADF3ED1EB48FF100B69722 /* WomanHeaderView.xib */; };
+		40ADF3F01EB4913B00B69722 /* WomanHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40ADF3EF1EB4913B00B69722 /* WomanHeaderView.swift */; };
+		40ADF3F31EB4940400B69722 /* WomanMeetingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40ADF3F21EB4940400B69722 /* WomanMeetingsViewController.swift */; };
+		40ADF3F51EB4AF3000B69722 /* Meeting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40ADF3F41EB4AF3000B69722 /* Meeting.swift */; };
+		40ADF3F81EB4B46C00B69722 /* WomanMeetingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40ADF3F71EB4B46C00B69722 /* WomanMeetingTableViewCell.swift */; };
+		40ADF3FA1EB4B7BC00B69722 /* Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40ADF3F91EB4B7BC00B69722 /* Date.swift */; };
 		A08B283261A9784F6AAAEE76 /* Pods_PimpMe.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 69C6A563A202B8BA2C1E221D /* Pods_PimpMe.framework */; };
 /* End PBXBuildFile section */
 
@@ -49,15 +56,23 @@
 		40A781841EB367AD003D73CC /* Woman.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = Woman.storyboard; path = UI/Woman/Woman.storyboard; sourceTree = "<group>"; };
 		40A781851EB367AD003D73CC /* WomanProfile.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = WomanProfile.storyboard; path = UI/Woman/WomanProfile.storyboard; sourceTree = "<group>"; };
 		40A781861EB367AD003D73CC /* WomanSearch.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = WomanSearch.storyboard; path = UI/Woman/WomanSearch.storyboard; sourceTree = "<group>"; };
-		40A7818A1EB367CB003D73CC /* WomanDates.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = WomanDates.storyboard; path = UI/Woman/WomanDates.storyboard; sourceTree = "<group>"; };
+		40A7818A1EB367CB003D73CC /* WomanMeetings.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = WomanMeetings.storyboard; path = UI/Woman/WomanMeetings.storyboard; sourceTree = "<group>"; };
 		40A7818C1EB367EB003D73CC /* WomanWallet.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = WomanWallet.storyboard; path = UI/Woman/WomanWallet.storyboard; sourceTree = "<group>"; };
 		40A7818E1EB368A0003D73CC /* ManProfile.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = ManProfile.storyboard; path = UI/Man/ManProfile.storyboard; sourceTree = "<group>"; };
-		40A781901EB368BE003D73CC /* ManDates.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = ManDates.storyboard; path = UI/Man/ManDates.storyboard; sourceTree = "<group>"; };
+		40A781901EB368BE003D73CC /* ManMeetings.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = ManMeetings.storyboard; path = UI/Man/ManMeetings.storyboard; sourceTree = "<group>"; };
 		40A781921EB368D7003D73CC /* ManWallet.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = ManWallet.storyboard; path = UI/Man/ManWallet.storyboard; sourceTree = "<group>"; };
 		40A781941EB36A0A003D73CC /* UIStoryboard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UIStoryboard.swift; path = Utils/UIStoryboard.swift; sourceTree = "<group>"; };
 		40A781961EB36F5C003D73CC /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = User.swift; path = DataModels/User.swift; sourceTree = "<group>"; };
 		40A7819A1EB37542003D73CC /* WomanProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = WomanProfileViewController.swift; path = ViewControllers/Woman/WomanProfileViewController.swift; sourceTree = "<group>"; };
 		40A7819C1EB377BC003D73CC /* UIScrollView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UIScrollView.swift; path = Utils/UIScrollView.swift; sourceTree = "<group>"; };
+		40A781A71EB395B9003D73CC /* WomanFiltersViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = WomanFiltersViewController.swift; path = ViewControllers/Woman/WomanFiltersViewController.swift; sourceTree = "<group>"; };
+		40A781A91EB39601003D73CC /* PimpMe-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "PimpMe-Bridging-Header.h"; sourceTree = "<group>"; };
+		40ADF3ED1EB48FF100B69722 /* WomanHeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = WomanHeaderView.xib; path = UI/Views/WomanHeaderView.xib; sourceTree = "<group>"; };
+		40ADF3EF1EB4913B00B69722 /* WomanHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = WomanHeaderView.swift; path = UI/Views/WomanHeaderView.swift; sourceTree = "<group>"; };
+		40ADF3F21EB4940400B69722 /* WomanMeetingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = WomanMeetingsViewController.swift; path = ViewControllers/Woman/WomanMeetingsViewController.swift; sourceTree = "<group>"; };
+		40ADF3F41EB4AF3000B69722 /* Meeting.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Meeting.swift; path = DataModels/Meeting.swift; sourceTree = "<group>"; };
+		40ADF3F71EB4B46C00B69722 /* WomanMeetingTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = WomanMeetingTableViewCell.swift; path = UI/Views/Cells/WomanMeetingTableViewCell.swift; sourceTree = "<group>"; };
+		40ADF3F91EB4B7BC00B69722 /* Date.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Date.swift; path = Utils/Date.swift; sourceTree = "<group>"; };
 		69C6A563A202B8BA2C1E221D /* Pods_PimpMe.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PimpMe.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		EEBD086B786B82049976E22A /* Pods-PimpMe.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PimpMe.release.xcconfig"; path = "Pods/Target Support Files/Pods-PimpMe/Pods-PimpMe.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -105,6 +120,7 @@
 				40A781591EB329FB003D73CC /* Assets.xcassets */,
 				40A7815B1EB329FB003D73CC /* LaunchScreen.storyboard */,
 				40A7815E1EB329FB003D73CC /* Info.plist */,
+				40A781A91EB39601003D73CC /* PimpMe-Bridging-Header.h */,
 			);
 			path = PimpMe;
 			sourceTree = "<group>";
@@ -122,6 +138,7 @@
 		40A781651EB32A60003D73CC /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				40ADF3EC1EB48FD800B69722 /* Views */,
 				40A781801EB36793003D73CC /* Man */,
 				40A781811EB36798003D73CC /* Woman */,
 				40A781681EB32B5B003D73CC /* Auth.storyboard */,
@@ -133,6 +150,7 @@
 			isa = PBXGroup;
 			children = (
 				40A781961EB36F5C003D73CC /* User.swift */,
+				40ADF3F41EB4AF3000B69722 /* Meeting.swift */,
 			);
 			name = DataModels;
 			sourceTree = "<group>";
@@ -152,6 +170,7 @@
 				40A781741EB35644003D73CC /* UIImage.swift */,
 				40A781941EB36A0A003D73CC /* UIStoryboard.swift */,
 				40A7819C1EB377BC003D73CC /* UIScrollView.swift */,
+				40ADF3F91EB4B7BC00B69722 /* Date.swift */,
 			);
 			name = Utils;
 			sourceTree = "<group>";
@@ -169,7 +188,7 @@
 			children = (
 				40A781821EB367A3003D73CC /* Man.storyboard */,
 				40A781921EB368D7003D73CC /* ManWallet.storyboard */,
-				40A781901EB368BE003D73CC /* ManDates.storyboard */,
+				40A781901EB368BE003D73CC /* ManMeetings.storyboard */,
 				40A7818E1EB368A0003D73CC /* ManProfile.storyboard */,
 			);
 			name = Man;
@@ -180,7 +199,7 @@
 			children = (
 				40A781841EB367AD003D73CC /* Woman.storyboard */,
 				40A7818C1EB367EB003D73CC /* WomanWallet.storyboard */,
-				40A7818A1EB367CB003D73CC /* WomanDates.storyboard */,
+				40A7818A1EB367CB003D73CC /* WomanMeetings.storyboard */,
 				40A781851EB367AD003D73CC /* WomanProfile.storyboard */,
 				40A781861EB367AD003D73CC /* WomanSearch.storyboard */,
 			);
@@ -198,8 +217,28 @@
 			isa = PBXGroup;
 			children = (
 				40A7819A1EB37542003D73CC /* WomanProfileViewController.swift */,
+				40A781A71EB395B9003D73CC /* WomanFiltersViewController.swift */,
+				40ADF3F21EB4940400B69722 /* WomanMeetingsViewController.swift */,
 			);
 			name = Woman;
+			sourceTree = "<group>";
+		};
+		40ADF3EC1EB48FD800B69722 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				40ADF3F61EB4B45200B69722 /* Cells */,
+				40ADF3ED1EB48FF100B69722 /* WomanHeaderView.xib */,
+				40ADF3EF1EB4913B00B69722 /* WomanHeaderView.swift */,
+			);
+			name = Views;
+			sourceTree = "<group>";
+		};
+		40ADF3F61EB4B45200B69722 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				40ADF3F71EB4B46C00B69722 /* WomanMeetingTableViewCell.swift */,
+			);
+			name = Cells;
 			sourceTree = "<group>";
 		};
 		6C49754259B043FF31B6F2B9 /* Frameworks */ = {
@@ -255,6 +294,7 @@
 					40A7814E1EB329FA003D73CC = {
 						CreatedOnToolsVersion = 8.3.2;
 						DevelopmentTeam = 66W9KV8MC3;
+						LastSwiftMigration = 0830;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -290,11 +330,12 @@
 				40A781731EB33DEB003D73CC /* Localizable.strings in Resources */,
 				40A781691EB32B5B003D73CC /* Auth.storyboard in Resources */,
 				40A781871EB367AD003D73CC /* Woman.storyboard in Resources */,
-				40A7818B1EB367CB003D73CC /* WomanDates.storyboard in Resources */,
+				40A7818B1EB367CB003D73CC /* WomanMeetings.storyboard in Resources */,
 				40A781891EB367AD003D73CC /* WomanSearch.storyboard in Resources */,
 				40A7815D1EB329FB003D73CC /* LaunchScreen.storyboard in Resources */,
+				40ADF3EE1EB48FF100B69722 /* WomanHeaderView.xib in Resources */,
 				40A7815A1EB329FB003D73CC /* Assets.xcassets in Resources */,
-				40A781911EB368BE003D73CC /* ManDates.storyboard in Resources */,
+				40A781911EB368BE003D73CC /* ManMeetings.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -353,12 +394,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				40ADF3F81EB4B46C00B69722 /* WomanMeetingTableViewCell.swift in Sources */,
+				40ADF3FA1EB4B7BC00B69722 /* Date.swift in Sources */,
+				40ADF3F01EB4913B00B69722 /* WomanHeaderView.swift in Sources */,
 				40A7816E1EB337E5003D73CC /* String.swift in Sources */,
+				40ADF3F51EB4AF3000B69722 /* Meeting.swift in Sources */,
 				40A781751EB35644003D73CC /* UIImage.swift in Sources */,
 				40A7819B1EB37542003D73CC /* WomanProfileViewController.swift in Sources */,
 				40A7819D1EB377BC003D73CC /* UIScrollView.swift in Sources */,
 				40A7816B1EB32D2A003D73CC /* AuthViewController.swift in Sources */,
 				40A781701EB33C7C003D73CC /* UIViewController.swift in Sources */,
+				40ADF3F31EB4940400B69722 /* WomanMeetingsViewController.swift in Sources */,
+				40A781A81EB395B9003D73CC /* WomanFiltersViewController.swift in Sources */,
 				40A781531EB329FB003D73CC /* AppDelegate.swift in Sources */,
 				40A781951EB36A0A003D73CC /* UIStoryboard.swift in Sources */,
 				40A781971EB36F5C003D73CC /* User.swift in Sources */,
@@ -479,12 +526,15 @@
 			baseConfigurationReference = 236C6FBA3343683DF88AEBF7 /* Pods-PimpMe.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				DEVELOPMENT_TEAM = 66W9KV8MC3;
 				INFOPLIST_FILE = PimpMe/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.elatesoftware.PimpMe;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "PimpMe/PimpMe-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
@@ -494,12 +544,14 @@
 			baseConfigurationReference = EEBD086B786B82049976E22A /* Pods-PimpMe.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				DEVELOPMENT_TEAM = 66W9KV8MC3;
 				INFOPLIST_FILE = PimpMe/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.elatesoftware.PimpMe;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "PimpMe/PimpMe-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Release;

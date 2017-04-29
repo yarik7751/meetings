@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+import SDWebImage
 
 class PhotoScrollView: UIScrollView {
   var isPopulated = false
@@ -15,9 +16,10 @@ class PhotoScrollView: UIScrollView {
   func populate(with photos: [UIImage]) {
     self.contentSize = CGSize(width: self.frame.width * CGFloat(photos.count), height: self.frame.height)
     for (index, photo) in photos.enumerated() {
-      let img = UIImageView(frame: CGRect(x:self.frame.width * CGFloat(index), y:0, width:self.frame.width, height:self.frame.height))
-      img.image = photo.image(with: CGSize(width: self.frame.width, height: self.frame.height))
-      self.addSubview(img)
+      let imageView = UIImageView(frame: CGRect(x:self.frame.width * CGFloat(index), y:0, width:self.frame.width, height:self.frame.height))
+      imageView.contentMode = .scaleAspectFill
+      imageView.sd_setImage(with: URL(string: "https://cdn.pixabay.com/photo/2017/04/08/10/23/surfer-2212948_960_720.jpg"), placeholderImage: photo)
+      self.addSubview(imageView)
     }
     self.isPopulated = true
   }
