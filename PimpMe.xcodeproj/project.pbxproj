@@ -36,6 +36,7 @@
 		40ADF3F51EB4AF3000B69722 /* Meeting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40ADF3F41EB4AF3000B69722 /* Meeting.swift */; };
 		40ADF3F81EB4B46C00B69722 /* WomanMeetingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40ADF3F71EB4B46C00B69722 /* WomanMeetingTableViewCell.swift */; };
 		40ADF3FA1EB4B7BC00B69722 /* Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40ADF3F91EB4B7BC00B69722 /* Date.swift */; };
+		40B8184F1EB4C3AB005B8073 /* ReuseIdentifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40B8184E1EB4C3AB005B8073 /* ReuseIdentifiers.swift */; };
 		A08B283261A9784F6AAAEE76 /* Pods_PimpMe.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 69C6A563A202B8BA2C1E221D /* Pods_PimpMe.framework */; };
 /* End PBXBuildFile section */
 
@@ -73,6 +74,7 @@
 		40ADF3F41EB4AF3000B69722 /* Meeting.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Meeting.swift; path = DataModels/Meeting.swift; sourceTree = "<group>"; };
 		40ADF3F71EB4B46C00B69722 /* WomanMeetingTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = WomanMeetingTableViewCell.swift; path = UI/Views/Cells/WomanMeetingTableViewCell.swift; sourceTree = "<group>"; };
 		40ADF3F91EB4B7BC00B69722 /* Date.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Date.swift; path = Utils/Date.swift; sourceTree = "<group>"; };
+		40B8184E1EB4C3AB005B8073 /* ReuseIdentifiers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ReuseIdentifiers.swift; path = Strings/ReuseIdentifiers.swift; sourceTree = "<group>"; };
 		69C6A563A202B8BA2C1E221D /* Pods_PimpMe.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PimpMe.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		EEBD086B786B82049976E22A /* Pods-PimpMe.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PimpMe.release.xcconfig"; path = "Pods/Target Support Files/Pods-PimpMe/Pods-PimpMe.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -179,6 +181,7 @@
 			isa = PBXGroup;
 			children = (
 				40A781721EB33DEB003D73CC /* Localizable.strings */,
+				40B8184E1EB4C3AB005B8073 /* ReuseIdentifiers.swift */,
 			);
 			name = Strings;
 			sourceTree = "<group>";
@@ -405,6 +408,7 @@
 				40A7816B1EB32D2A003D73CC /* AuthViewController.swift in Sources */,
 				40A781701EB33C7C003D73CC /* UIViewController.swift in Sources */,
 				40ADF3F31EB4940400B69722 /* WomanMeetingsViewController.swift in Sources */,
+				40B8184F1EB4C3AB005B8073 /* ReuseIdentifiers.swift in Sources */,
 				40A781A81EB395B9003D73CC /* WomanFiltersViewController.swift in Sources */,
 				40A781531EB329FB003D73CC /* AppDelegate.swift in Sources */,
 				40A781951EB36A0A003D73CC /* UIStoryboard.swift in Sources */,

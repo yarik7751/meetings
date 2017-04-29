@@ -34,7 +34,18 @@ class Meeting {
     let first = Meeting(place: "Restaurant", time: Date().addingTimeInterval(19000), man: "Igor", present: 100)
     let second = Meeting(place: "Cinema", time: Date().addingTimeInterval(6000), man: "Maxim", present: 200)
     let third = Meeting(place: "Bedroom", time: Date().addingTimeInterval(3600), man: "Andrew", present: 50)
+    third.state = .scheduled
     return [first, second, third]
+  }
+  
+  static func getScheduled(from meetings: [Meeting]) -> [Meeting] {
+    var result = [Meeting]()
+    for meeting in meetings {
+      if meeting.state == .scheduled {
+          result.append(meeting)
+      }
+    }
+    return result
   }
   
 }

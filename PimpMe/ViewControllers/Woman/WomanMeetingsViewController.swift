@@ -13,10 +13,14 @@ class WomanMeetingsViewController: UIViewController {
   @IBOutlet weak var womanHeaderView: WomanHeaderView!
   @IBOutlet weak var datesTableView: UITableView!
   var meetings: [Meeting]!
+  fileprivate var scheduledMeetings: [Meeting]!
+  fileprivate var hasScheduled = false
   
   override func viewDidLoad() {
     super.viewDidLoad()
     meetings = Meeting.createFakeMeetings()
+    scheduledMeetings = Meeting.getScheduled(from: meetings)
+    hasScheduled = scheduledMeetings.count > 0 ? true : false
     datesTableView.tableFooterView = UIView()
   }
   
@@ -25,18 +29,27 @@ class WomanMeetingsViewController: UIViewController {
 extension WomanMeetingsViewController: UITableViewDelegate, UITableViewDataSource {
   
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    return meetings.count
+    guard hasScheduled else {return meetings.count }
+    return section == 0 ? scheduledMeetings.count : meetings.count - scheduledMeetings.count
   }
   
   func numberOfSections(in tableView: UITableView) -> Int {
-    //TODO: - If has Scheduled return 2, if no return 1
-    return 1
+    return hasScheduled ? 2 : 1
   }
   
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-    let cell = tableView.dequeueReusableCell(withIdentifier: "womanDateCell") as! WomanMeetingTableViewCell
-    cell.meeting = meetings[indexPath.row]
+    let cell = tableView.dequeueReusableCell(withIdentifier: ReuseIdentifiers.womanDateCell) as! WomanMeetingTableViewCell
+    if hasScheduled {
+      cell.meeting = indexPath.section == 0 ? scheduledMeetings[indexPath.row] : meetings[indexPath.row]
+    } else {
+      cell.meeting = meetings[indexPath.row]
+    }
     return cell
+  }
+  
+  func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+    guard hasScheduled else { return MeetingState.pending.rawValue.localized }
+    return section == 0 ? MeetingState.scheduled.rawValue.localized : MeetingState.pending.rawValue.localized
   }
   
   
