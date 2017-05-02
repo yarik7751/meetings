@@ -26,8 +26,8 @@ class AuthViewController: UIViewController {
   }
   
   func authenticate() {
-    guard emailTextField.hasText, passwordTextField.hasText else {
-      showAlert(withTitle: "COMMON_Error".localized, message: "AUTH_EmptyFields".localized)
+   /* guard emailTextField.hasText, passwordTextField.hasText else {
+      showAlert(withTitle: "COMMON_Error".localized, message: "ERROR_EmptyFields".localized)
       return
     }
     guard emailTextField.text!.isValidEmail else {
@@ -41,7 +41,7 @@ class AuthViewController: UIViewController {
     guard genderSelector.selectedSegmentIndex != UISegmentedControlNoSegment else {
       showAlert(withTitle: "COMMON_Error".localized, message: "AUTH_NoGender".localized)
       return
-    }
+    } */
     signUp()
   }
   

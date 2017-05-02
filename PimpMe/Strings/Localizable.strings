@@ -9,6 +9,15 @@
 
 /* Common */
 "COMMON_Error" = "Ошибка";
+"COMMON_Saved" = "Обновлено";
+"COMMON_PersonalInfoUpdated" = "Ваши данные были успешно обновлены";
+"COMMON_Done" = "Готово";
+"COMMON_Cancel" = "Отменить";
+"COMMON_Yes" = "Да";
+"COMMON_No" = "Нет";
+
+/* Errors */
+"ERROR_EmptyFields" = "Пожалуйста, заполните все поля";
 
 /* MeetingState */
 "MEETING_STATE_Scheduled" = "Scheduled";
@@ -18,8 +27,10 @@
 /* AuthViewController */
 
 "AUTH_NotEmail" = "Проверьте правильность адреса электронной почты";
-"AUTH_EmptyFields" = "Пожалуйста, заполните все поля";
 "AUTH_ShortPassword" = "Длина пароля должна быть не менее 6 символов";
 "AUTH_NoGender" = "Пожалуйста, укажите Ваш пол";
+
+/* WomanMeetingInfoViewController */
+"MEETING_INFO_CancelMeeting" = "Вы действительно хотите отменить эту встречу?";
 
 

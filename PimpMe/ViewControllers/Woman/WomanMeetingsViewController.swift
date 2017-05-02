@@ -19,9 +19,32 @@ class WomanMeetingsViewController: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     meetings = Meeting.createFakeMeetings()
+    navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
     scheduledMeetings = Meeting.getScheduled(from: meetings)
     hasScheduled = scheduledMeetings.count > 0 ? true : false
     datesTableView.tableFooterView = UIView()
+  }
+  
+  override func viewWillAppear(_ animated: Bool) {
+    super.viewWillAppear(animated)
+    if let indexPath = datesTableView.indexPathForSelectedRow {
+      datesTableView.deselectRow(at: indexPath, animated: true)
+    }
+  }
+  
+  override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+    guard segue.identifier == "showMeetingInfo" else { return }
+    let infoVC = segue.destination as! WomanMeetingInfoViewController
+    let indexPath = datesTableView.indexPathForSelectedRow!
+    infoVC.meeting = getAppropriateMeeting(forIndexPath: indexPath)
+  }
+  
+  fileprivate func getAppropriateMeeting(forIndexPath indexPath: IndexPath) -> Meeting {
+    if hasScheduled {
+      return indexPath.section == 0 ? scheduledMeetings[indexPath.row] : meetings[indexPath.row]
+    } else {
+      return meetings[indexPath.row]
+    }
   }
   
 }
@@ -39,11 +62,7 @@ extension WomanMeetingsViewController: UITableViewDelegate, UITableViewDataSourc
   
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     let cell = tableView.dequeueReusableCell(withIdentifier: ReuseIdentifiers.womanDateCell) as! WomanMeetingTableViewCell
-    if hasScheduled {
-      cell.meeting = indexPath.section == 0 ? scheduledMeetings[indexPath.row] : meetings[indexPath.row]
-    } else {
-      cell.meeting = meetings[indexPath.row]
-    }
+    cell.meeting = getAppropriateMeeting(forIndexPath: indexPath)
     return cell
   }
   
