@@ -12,9 +12,9 @@ class Meeting {
   
   var place: String!
   var time: Date!
-  var man: String!
-  var selectedWoman: String?
-  var women: [String]?
+  var man: Man!
+  var selectedWoman: Woman?
+  var women: [Woman]?
   var present: Double!
   var preferredAge: Int?
   var preferredHeight: Double?
@@ -22,7 +22,7 @@ class Meeting {
   var state:MeetingState!
   var id: Int!
   
-  required init(place: String, time: Date, man: String, present: Double) {
+  required init(place: String, time: Date, man: Man, present: Double) {
     self.place = place
     self.time = time
     self.man = man
@@ -31,9 +31,9 @@ class Meeting {
   }
   
   static func createFakeMeetings() -> [Meeting] {
-    let first = Meeting(place: "Restaurant", time: Date().addingTimeInterval(19000), man: "Igor", present: 100)
-    let second = Meeting(place: "Cinema", time: Date().addingTimeInterval(6000), man: "Maxim", present: 200)
-    let third = Meeting(place: "Bedroom", time: Date().addingTimeInterval(3600), man: "Andrew", present: 50)
+    let first = Meeting(place: "Restaurant", time: Date().addingTimeInterval(19000), man: Man(name: "Igor"), present: 100)
+    let second = Meeting(place: "Cinema", time: Date().addingTimeInterval(6000), man: Man(name:"Maxim"), present: 200)
+    let third = Meeting(place: "Bedroom", time: Date().addingTimeInterval(3600), man: Man(name:"Andrew"), present: 50)
     third.state = .scheduled
     return [first, second, third]
   }

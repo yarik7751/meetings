@@ -18,8 +18,8 @@ class WomanMeetingInfoViewController: UIViewController {
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    navigationItem.title = meeting.man
-    nameAgeLabel.text = meeting.man
+    navigationItem.title = meeting.man.name
+    nameAgeLabel.text = meeting.man.name
     dateLabel.text = meeting.time.stringValue
     placeLabel.text = meeting.place
     photoImageView.image = #imageLiteral(resourceName: "banana")

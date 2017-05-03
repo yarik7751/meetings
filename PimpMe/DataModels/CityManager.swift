@@ -45,26 +45,3 @@ class CityManager:NSObject, CLLocationManagerDelegate{
 protocol CityManagerDelegate: class {
   func cityManager(_ manager: CityManager, didUpdateCity city: String)
 }
-
-
-/*
- private static let sharedInstance = CityManager()
- 
- fileprivate let locationManager:CLLocationManager = {
- let locationManager = CLLocationManager()
- locationManager.delegate = CityManager.shared
- locationManager.desiredAccuracy = kCLLocationAccuracyKilometer
- return locationManager
- }()
- 
- fileprivate let geoCoder = CLGeocoder()
- 
- static var shared:CityManager {
- return sharedInstance
- }
- 
- func getCurrentCity() {
- locationManager.startUpdatingLocation()
- }
- 
- */

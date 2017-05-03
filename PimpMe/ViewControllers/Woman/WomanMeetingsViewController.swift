@@ -71,7 +71,4 @@ extension WomanMeetingsViewController: UITableViewDelegate, UITableViewDataSourc
     return section == 0 ? MeetingState.scheduled.rawValue.localized : MeetingState.pending.rawValue.localized
   }
   
-  
-  
-  
 }

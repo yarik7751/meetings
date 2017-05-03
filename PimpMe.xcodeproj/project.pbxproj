@@ -41,6 +41,11 @@
 		40B8184F1EB4C3AB005B8073 /* ReuseIdentifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40B8184E1EB4C3AB005B8073 /* ReuseIdentifiers.swift */; };
 		40B818511EB4DF25005B8073 /* ManProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40B818501EB4DF25005B8073 /* ManProfileViewController.swift */; };
 		40B818531EB4E8F4005B8073 /* Keyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40B818521EB4E8F4005B8073 /* Keyboard.swift */; };
+		40B9AEE01EB8DF8000DEBA54 /* Man.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40B9AEDF1EB8DF8000DEBA54 /* Man.swift */; };
+		40B9AEE21EB8DFC500DEBA54 /* Photo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40B9AEE11EB8DFC500DEBA54 /* Photo.swift */; };
+		40B9AEE41EB8E08800DEBA54 /* Woman.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40B9AEE31EB8E08800DEBA54 /* Woman.swift */; };
+		40F21E4D1EB9B20B002316B9 /* ManMeetingsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40F21E4C1EB9B20B002316B9 /* ManMeetingsTableViewController.swift */; };
+		40F21E4F1EB9C444002316B9 /* UIButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40F21E4E1EB9C444002316B9 /* UIButton.swift */; };
 		A08B283261A9784F6AAAEE76 /* Pods_PimpMe.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 69C6A563A202B8BA2C1E221D /* Pods_PimpMe.framework */; };
 /* End PBXBuildFile section */
 
@@ -83,6 +88,11 @@
 		40B8184E1EB4C3AB005B8073 /* ReuseIdentifiers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ReuseIdentifiers.swift; path = Strings/ReuseIdentifiers.swift; sourceTree = "<group>"; };
 		40B818501EB4DF25005B8073 /* ManProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ManProfileViewController.swift; path = ViewControllers/Man/ManProfileViewController.swift; sourceTree = "<group>"; };
 		40B818521EB4E8F4005B8073 /* Keyboard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Keyboard.swift; path = Utils/Keyboard.swift; sourceTree = "<group>"; };
+		40B9AEDF1EB8DF8000DEBA54 /* Man.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Man.swift; path = DataModels/Man.swift; sourceTree = "<group>"; };
+		40B9AEE11EB8DFC500DEBA54 /* Photo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Photo.swift; path = DataModels/Photo.swift; sourceTree = "<group>"; };
+		40B9AEE31EB8E08800DEBA54 /* Woman.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Woman.swift; path = DataModels/Woman.swift; sourceTree = "<group>"; };
+		40F21E4C1EB9B20B002316B9 /* ManMeetingsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ManMeetingsTableViewController.swift; path = ViewControllers/Man/ManMeetingsTableViewController.swift; sourceTree = "<group>"; };
+		40F21E4E1EB9C444002316B9 /* UIButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UIButton.swift; path = Utils/UIButton.swift; sourceTree = "<group>"; };
 		69C6A563A202B8BA2C1E221D /* Pods_PimpMe.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PimpMe.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		EEBD086B786B82049976E22A /* Pods-PimpMe.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PimpMe.release.xcconfig"; path = "Pods/Target Support Files/Pods-PimpMe/Pods-PimpMe.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -162,6 +172,9 @@
 				40A781961EB36F5C003D73CC /* User.swift */,
 				40ADF3F41EB4AF3000B69722 /* Meeting.swift */,
 				402C527A1EB8BFC700EFC9ED /* CityManager.swift */,
+				40B9AEDF1EB8DF8000DEBA54 /* Man.swift */,
+				40B9AEE11EB8DFC500DEBA54 /* Photo.swift */,
+				40B9AEE31EB8E08800DEBA54 /* Woman.swift */,
 			);
 			name = DataModels;
 			sourceTree = "<group>";
@@ -183,6 +196,7 @@
 				40A7819C1EB377BC003D73CC /* UIScrollView.swift */,
 				40ADF3F91EB4B7BC00B69722 /* Date.swift */,
 				40B818521EB4E8F4005B8073 /* Keyboard.swift */,
+				40F21E4E1EB9C444002316B9 /* UIButton.swift */,
 			);
 			name = Utils;
 			sourceTree = "<group>";
@@ -223,6 +237,7 @@
 			isa = PBXGroup;
 			children = (
 				40B818501EB4DF25005B8073 /* ManProfileViewController.swift */,
+				40F21E4C1EB9B20B002316B9 /* ManMeetingsTableViewController.swift */,
 			);
 			name = Man;
 			sourceTree = "<group>";
@@ -419,8 +434,10 @@
 				40ADF3F01EB4913B00B69722 /* WomanHeaderView.swift in Sources */,
 				40A7816E1EB337E5003D73CC /* String.swift in Sources */,
 				40B818531EB4E8F4005B8073 /* Keyboard.swift in Sources */,
+				40F21E4F1EB9C444002316B9 /* UIButton.swift in Sources */,
 				40B818511EB4DF25005B8073 /* ManProfileViewController.swift in Sources */,
 				40ADF3F51EB4AF3000B69722 /* Meeting.swift in Sources */,
+				40B9AEE01EB8DF8000DEBA54 /* Man.swift in Sources */,
 				40A781751EB35644003D73CC /* UIImage.swift in Sources */,
 				40A7819B1EB37542003D73CC /* WomanProfileViewController.swift in Sources */,
 				402C52771EB8B00500EFC9ED /* WomanMeetingInfoViewController.swift in Sources */,
@@ -430,7 +447,10 @@
 				40A781701EB33C7C003D73CC /* UIViewController.swift in Sources */,
 				40ADF3F31EB4940400B69722 /* WomanMeetingsViewController.swift in Sources */,
 				40B8184F1EB4C3AB005B8073 /* ReuseIdentifiers.swift in Sources */,
+				40F21E4D1EB9B20B002316B9 /* ManMeetingsTableViewController.swift in Sources */,
 				40A781A81EB395B9003D73CC /* WomanFiltersViewController.swift in Sources */,
+				40B9AEE41EB8E08800DEBA54 /* Woman.swift in Sources */,
+				40B9AEE21EB8DFC500DEBA54 /* Photo.swift in Sources */,
 				40A781531EB329FB003D73CC /* AppDelegate.swift in Sources */,
 				40A781951EB36A0A003D73CC /* UIStoryboard.swift in Sources */,
 				40A781971EB36F5C003D73CC /* User.swift in Sources */,
