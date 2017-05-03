@@ -20,10 +20,14 @@ class RotationButton: UIButton {
     didSet {
       switch buttonState {
       case .expanded:
-        let transform = CGAffineTransform(rotationAngle: .pi/2)
-        self.transform = transform
+        UIView.animate(withDuration: 0.25, animations: {
+          let transform = CGAffineTransform(rotationAngle: .pi/2)
+          self.transform = transform
+        })
       default:
-        self.transform = CGAffineTransform.identity
+        UIView.animate(withDuration: 0.25, animations: {
+          self.transform = CGAffineTransform.identity
+        })
       }
     }
   }

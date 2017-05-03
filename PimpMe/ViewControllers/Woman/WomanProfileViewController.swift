@@ -20,13 +20,11 @@ class WomanProfileViewController: UIViewController {
   
   let photos = [#imageLiteral(resourceName: "banana"), #imageLiteral(resourceName: "banana"), #imageLiteral(resourceName: "banana")]
   var activeTextField:UITextField!
-  let cityManager = CityManager()
   
   override func viewDidLoad() {
     super.viewDidLoad()
     let tap = UITapGestureRecognizer(target: self, action: #selector(endEditing))
     containerStackView.addGestureRecognizer(tap)
-    cityManager.delegate = self
     pageControl.numberOfPages = photos.count
     pageControl.addObserver(self, forKeyPath: "currentPage", options: .new, context: nil)
     
@@ -36,6 +34,8 @@ class WomanProfileViewController: UIViewController {
       ageTextField.text = "\(age)"
       heightTextField.text = "\(height)"
     }
+    
+    CityManager.shared.delegate = self
   }
   
   override func viewDidAppear(_ animated: Bool) {
@@ -123,7 +123,7 @@ extension WomanProfileViewController: UIScrollViewDelegate {
 }
 
 extension WomanProfileViewController: CityManagerDelegate {
-  func cityManager(_ manager: CityManager, didUpdateCity city: String) {
+  func cityManager(didUpdateCity city: String) {
     cityLabel.text = city
   }
 }

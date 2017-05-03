@@ -9,4 +9,7 @@ target 'PimpMe' do
     pod 'Alamofire'
     pod 'MARKRangeSlider'
     pod 'SDWebImage'
+    pod 'GooglePlaces'
+    pod 'GooglePlacePicker'
+    pod 'GoogleMaps'
 end

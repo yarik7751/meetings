@@ -10,20 +10,39 @@ import Foundation
 import CoreLocation
 import MapKit
 
-class CityManager:NSObject, CLLocationManagerDelegate{
-  
-  private let locationManager = CLLocationManager()
-  private let geoCoder = CLGeocoder()
-  weak var delegate: CityManagerDelegate?
+protocol CityManagerDelegate: class {
+  func cityManager(didUpdateCity city: String)
+}
 
-  override init() {
+class CityManager: NSObject {
+  fileprivate let locationManager = CLLocationManager()
+  fileprivate let geoCoder = CLGeocoder()
+  fileprivate var city = ""
+  weak var delegate: CityManagerDelegate?
+  
+  private static let sharedInstance = CityManager()
+  static var shared: CityManager {
+    return sharedInstance
+  }
+  
+  private override init() {
     super.init()
     locationManager.delegate = self
-    locationManager.desiredAccuracy = kCLLocationAccuracyKilometer
+    locationManager.desiredAccuracy = kCLLocationAccuracyHundredMeters
     locationManager.requestWhenInUseAuthorization()
     locationManager.startUpdatingLocation()
   }
   
+  func updateCity() {
+    locationManager.startUpdatingLocation()
+  }
+  
+  func getCity() -> String {
+    return city
+  }
+}
+
+extension CityManager: CLLocationManagerDelegate {
   func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
     print("ERROR : \(error)")
   }
@@ -31,7 +50,8 @@ class CityManager:NSObject, CLLocationManagerDelegate{
   func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
     locationManager.stopUpdatingLocation()
     geoCoder.reverseGeocodeLocation(locations.first!, completionHandler: {placemark, error in
-      self.delegate?.cityManager(self, didUpdateCity: placemark?.last?.addressDictionary?["City"] as! String)
+      self.city = placemark?.last?.addressDictionary?["City"] as! String
+      self.delegate?.cityManager(didUpdateCity: self.city)
     })
   }
   
@@ -39,9 +59,4 @@ class CityManager:NSObject, CLLocationManagerDelegate{
     guard status == .authorizedWhenInUse else { return }
     locationManager.startUpdatingLocation()
   }
-  
-}
-
-protocol CityManagerDelegate: class {
-  func cityManager(_ manager: CityManager, didUpdateCity city: String)
 }

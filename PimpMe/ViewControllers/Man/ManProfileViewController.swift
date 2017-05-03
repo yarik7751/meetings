@@ -18,7 +18,8 @@ class ManProfileViewController: UIViewController {
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    addDoneButtonOn(textView: aboutTextView, textField: ageTextField)
+    aboutTextView.addDoneButton()
+    ageTextField.addDoneButton()
     nameTextField.text = User.name
     aboutTextView.text = User.about
     if let age = User.age {
