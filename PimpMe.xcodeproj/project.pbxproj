@@ -47,7 +47,14 @@
 		40B9AEE01EB8DF8000DEBA54 /* Man.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40B9AEDF1EB8DF8000DEBA54 /* Man.swift */; };
 		40B9AEE21EB8DFC500DEBA54 /* Photo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40B9AEE11EB8DFC500DEBA54 /* Photo.swift */; };
 		40B9AEE41EB8E08800DEBA54 /* Woman.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40B9AEE31EB8E08800DEBA54 /* Woman.swift */; };
-		40F21E4D1EB9B20B002316B9 /* ManMeetingsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40F21E4C1EB9B20B002316B9 /* ManMeetingsTableViewController.swift */; };
+		40E3DA3C1EBB2852009CB6A1 /* ManNewMeeting.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 40E3DA3B1EBB2852009CB6A1 /* ManNewMeeting.storyboard */; };
+		40E3DA3E1EBB294F009CB6A1 /* ManMeetingsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40E3DA3D1EBB294F009CB6A1 /* ManMeetingsTableViewCell.swift */; };
+		40E3DA401EBB2CCE009CB6A1 /* ManMeetingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40E3DA3F1EBB2CCE009CB6A1 /* ManMeetingsViewController.swift */; };
+		40E3DA421EBB3A25009CB6A1 /* Schedulable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40E3DA411EBB3A25009CB6A1 /* Schedulable.swift */; };
+		40E3DA441EBB3DEA009CB6A1 /* MeetingsStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40E3DA431EBB3DEA009CB6A1 /* MeetingsStorage.swift */; };
+		40E3DA471EBB4E76009CB6A1 /* ManPreviewMeetingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40E3DA461EBB4E76009CB6A1 /* ManPreviewMeetingViewController.swift */; };
+		40E3DA491EBB4F3C009CB6A1 /* Range.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40E3DA481EBB4F3C009CB6A1 /* Range.swift */; };
+		40F21E4D1EB9B20B002316B9 /* ManNewMeetingTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40F21E4C1EB9B20B002316B9 /* ManNewMeetingTableViewController.swift */; };
 		40F21E4F1EB9C444002316B9 /* UIButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40F21E4E1EB9C444002316B9 /* UIButton.swift */; };
 		40F21E531EB9FD83002316B9 /* PlacePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40F21E521EB9FD83002316B9 /* PlacePicker.swift */; };
 		A08B283261A9784F6AAAEE76 /* Pods_PimpMe.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 69C6A563A202B8BA2C1E221D /* Pods_PimpMe.framework */; };
@@ -98,7 +105,14 @@
 		40B9AEDF1EB8DF8000DEBA54 /* Man.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Man.swift; path = DataModels/Man.swift; sourceTree = "<group>"; };
 		40B9AEE11EB8DFC500DEBA54 /* Photo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Photo.swift; path = DataModels/Photo.swift; sourceTree = "<group>"; };
 		40B9AEE31EB8E08800DEBA54 /* Woman.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Woman.swift; path = DataModels/Woman.swift; sourceTree = "<group>"; };
-		40F21E4C1EB9B20B002316B9 /* ManMeetingsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ManMeetingsTableViewController.swift; path = ViewControllers/Man/ManMeetingsTableViewController.swift; sourceTree = "<group>"; };
+		40E3DA3B1EBB2852009CB6A1 /* ManNewMeeting.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = ManNewMeeting.storyboard; path = UI/Man/ManNewMeeting.storyboard; sourceTree = "<group>"; };
+		40E3DA3D1EBB294F009CB6A1 /* ManMeetingsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ManMeetingsTableViewCell.swift; path = UI/Views/Cells/ManMeetingsTableViewCell.swift; sourceTree = "<group>"; };
+		40E3DA3F1EBB2CCE009CB6A1 /* ManMeetingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ManMeetingsViewController.swift; path = ViewControllers/Man/ManMeetingsViewController.swift; sourceTree = "<group>"; };
+		40E3DA411EBB3A25009CB6A1 /* Schedulable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Schedulable.swift; path = DataModels/Schedulable.swift; sourceTree = "<group>"; };
+		40E3DA431EBB3DEA009CB6A1 /* MeetingsStorage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MeetingsStorage.swift; path = DataModels/MeetingsStorage.swift; sourceTree = "<group>"; };
+		40E3DA461EBB4E76009CB6A1 /* ManPreviewMeetingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ManPreviewMeetingViewController.swift; path = ViewControllers/Man/ManPreviewMeetingViewController.swift; sourceTree = "<group>"; };
+		40E3DA481EBB4F3C009CB6A1 /* Range.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Range.swift; path = Utils/Range.swift; sourceTree = "<group>"; };
+		40F21E4C1EB9B20B002316B9 /* ManNewMeetingTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ManNewMeetingTableViewController.swift; path = ViewControllers/Man/ManNewMeetingTableViewController.swift; sourceTree = "<group>"; };
 		40F21E4E1EB9C444002316B9 /* UIButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UIButton.swift; path = Utils/UIButton.swift; sourceTree = "<group>"; };
 		40F21E521EB9FD83002316B9 /* PlacePicker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PlacePicker.swift; path = DataModels/PlacePicker.swift; sourceTree = "<group>"; };
 		69C6A563A202B8BA2C1E221D /* Pods_PimpMe.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PimpMe.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -186,6 +200,8 @@
 				40B9AEE11EB8DFC500DEBA54 /* Photo.swift */,
 				40B9AEE31EB8E08800DEBA54 /* Woman.swift */,
 				40F21E521EB9FD83002316B9 /* PlacePicker.swift */,
+				40E3DA411EBB3A25009CB6A1 /* Schedulable.swift */,
+				40E3DA431EBB3DEA009CB6A1 /* MeetingsStorage.swift */,
 			);
 			name = DataModels;
 			sourceTree = "<group>";
@@ -209,6 +225,7 @@
 				40B818521EB4E8F4005B8073 /* Keyboard.swift */,
 				40F21E4E1EB9C444002316B9 /* UIButton.swift */,
 				400ADE6B1EBA272D006EA363 /* UIText.swift */,
+				40E3DA481EBB4F3C009CB6A1 /* Range.swift */,
 			);
 			name = Utils;
 			sourceTree = "<group>";
@@ -228,6 +245,7 @@
 				40A781821EB367A3003D73CC /* Man.storyboard */,
 				40A781921EB368D7003D73CC /* ManWallet.storyboard */,
 				40A781901EB368BE003D73CC /* ManMeetings.storyboard */,
+				40E3DA3B1EBB2852009CB6A1 /* ManNewMeeting.storyboard */,
 				40A7818E1EB368A0003D73CC /* ManProfile.storyboard */,
 			);
 			name = Man;
@@ -249,7 +267,9 @@
 			isa = PBXGroup;
 			children = (
 				40B818501EB4DF25005B8073 /* ManProfileViewController.swift */,
-				40F21E4C1EB9B20B002316B9 /* ManMeetingsTableViewController.swift */,
+				40F21E4C1EB9B20B002316B9 /* ManNewMeetingTableViewController.swift */,
+				40E3DA3F1EBB2CCE009CB6A1 /* ManMeetingsViewController.swift */,
+				40E3DA461EBB4E76009CB6A1 /* ManPreviewMeetingViewController.swift */,
 			);
 			name = Man;
 			sourceTree = "<group>";
@@ -279,6 +299,7 @@
 			isa = PBXGroup;
 			children = (
 				40ADF3F71EB4B46C00B69722 /* WomanMeetingTableViewCell.swift */,
+				40E3DA3D1EBB294F009CB6A1 /* ManMeetingsTableViewCell.swift */,
 			);
 			name = Cells;
 			sourceTree = "<group>";
@@ -313,6 +334,7 @@
 				40A7814D1EB329FA003D73CC /* Resources */,
 				2D9D53799C6391A96B67A339 /* [CP] Embed Pods Frameworks */,
 				F1B3C796E3AD2CD1FE8A88D2 /* [CP] Copy Pods Resources */,
+				40E3DA451EBB4080009CB6A1 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -383,6 +405,7 @@
 				40A7815D1EB329FB003D73CC /* LaunchScreen.storyboard in Resources */,
 				40ADF3EE1EB48FF100B69722 /* WomanHeaderView.xib in Resources */,
 				40A7815A1EB329FB003D73CC /* Assets.xcassets in Resources */,
+				40E3DA3C1EBB2852009CB6A1 /* ManNewMeeting.storyboard in Resources */,
 				40A781911EB368BE003D73CC /* ManMeetings.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -404,6 +427,19 @@
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-PimpMe/Pods-PimpMe-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
+		};
+		40E3DA451EBB4080009CB6A1 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "TAGS=\"TODO:|FIXME:\"\nfind \"${SRCROOT}\" \\( -name \"*.h\" -or -name \"*.m\" -or -name \"*.swift\" \\) -print0 | xargs -0 egrep --with-filename --line-number --only-matching \"($TAGS).*\\$\" | perl -p -e \"s/($TAGS)/ warning: \\$1/\"";
 		};
 		CB1F69EC72103467478976F2 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -443,6 +479,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				40ADF3F81EB4B46C00B69722 /* WomanMeetingTableViewCell.swift in Sources */,
+				40E3DA441EBB3DEA009CB6A1 /* MeetingsStorage.swift in Sources */,
 				400ADE6A1EBA0947006EA363 /* DatePickerPopoverViewController.swift in Sources */,
 				40ADF3FA1EB4B7BC00B69722 /* Date.swift in Sources */,
 				40ADF3F01EB4913B00B69722 /* WomanHeaderView.swift in Sources */,
@@ -450,20 +487,25 @@
 				40B818531EB4E8F4005B8073 /* Keyboard.swift in Sources */,
 				40F21E4F1EB9C444002316B9 /* UIButton.swift in Sources */,
 				40B818511EB4DF25005B8073 /* ManProfileViewController.swift in Sources */,
+				40E3DA421EBB3A25009CB6A1 /* Schedulable.swift in Sources */,
 				40ADF3F51EB4AF3000B69722 /* Meeting.swift in Sources */,
 				400ADE6C1EBA272E006EA363 /* UIText.swift in Sources */,
 				40B9AEE01EB8DF8000DEBA54 /* Man.swift in Sources */,
 				40A781751EB35644003D73CC /* UIImage.swift in Sources */,
 				40A7819B1EB37542003D73CC /* WomanProfileViewController.swift in Sources */,
+				40E3DA471EBB4E76009CB6A1 /* ManPreviewMeetingViewController.swift in Sources */,
 				402C52771EB8B00500EFC9ED /* WomanMeetingInfoViewController.swift in Sources */,
+				40E3DA3E1EBB294F009CB6A1 /* ManMeetingsTableViewCell.swift in Sources */,
 				40A7819D1EB377BC003D73CC /* UIScrollView.swift in Sources */,
+				40E3DA491EBB4F3C009CB6A1 /* Range.swift in Sources */,
 				40A7816B1EB32D2A003D73CC /* AuthViewController.swift in Sources */,
 				402C527B1EB8BFC700EFC9ED /* CityManager.swift in Sources */,
 				40A781701EB33C7C003D73CC /* UIViewController.swift in Sources */,
 				40ADF3F31EB4940400B69722 /* WomanMeetingsViewController.swift in Sources */,
 				40F21E531EB9FD83002316B9 /* PlacePicker.swift in Sources */,
 				40B8184F1EB4C3AB005B8073 /* ReuseIdentifiers.swift in Sources */,
-				40F21E4D1EB9B20B002316B9 /* ManMeetingsTableViewController.swift in Sources */,
+				40F21E4D1EB9B20B002316B9 /* ManNewMeetingTableViewController.swift in Sources */,
+				40E3DA401EBB2CCE009CB6A1 /* ManMeetingsViewController.swift in Sources */,
 				40A781A81EB395B9003D73CC /* WomanFiltersViewController.swift in Sources */,
 				40B9AEE41EB8E08800DEBA54 /* Woman.swift in Sources */,
 				40B9AEE21EB8DFC500DEBA54 /* Photo.swift in Sources */,

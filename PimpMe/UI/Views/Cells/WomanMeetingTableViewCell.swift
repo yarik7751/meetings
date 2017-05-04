@@ -20,7 +20,7 @@ class WomanMeetingTableViewCell: UITableViewCell {
       photoImageView.sd_setImage(with: URL(string: "https://cdn.pixabay.com/photo/2017/04/08/10/23/surfer-2212948_960_720.jpg"), placeholderImage: #imageLiteral(resourceName: "banana"))
       nameAgeLabel.text = meeting.man.name
       placeLabel.text = meeting.place
-      dateLabel.text = meeting.time.stringValue
+      dateLabel.text = meeting.time.start.stringValue
       amountLabel.text = "\(Int(meeting.present))$"
     }
   }

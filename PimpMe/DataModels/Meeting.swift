@@ -11,43 +11,33 @@ import Foundation
 class Meeting {
   
   var place: String!
-  var time: Date!
+  var time: Time!
   var man: Man!
   var selectedWoman: Woman?
   var women: [Woman]?
   var present: Double!
-  var preferredAge: Int?
-  var preferredHeight: Double?
+  var preferredAge: Age!
+  var preferredHeight: Height!
   var preferredHairColor: String?
   var state:MeetingState!
   var id: Int!
   
-  required init(place: String, time: Date, man: Man, present: Double) {
+  required init(place: String, time: Time, man: Man, present: Double) {
     self.place = place
     self.time = time
     self.man = man
     self.present = present
     self.state = .pending
+    id = 0 //TODO: - Change for id getting from API
   }
-  
-  static func createFakeMeetings() -> [Meeting] {
-    let first = Meeting(place: "Restaurant", time: Date().addingTimeInterval(19000), man: Man(name: "Igor"), present: 100)
-    let second = Meeting(place: "Cinema", time: Date().addingTimeInterval(6000), man: Man(name:"Maxim"), present: 200)
-    let third = Meeting(place: "Bedroom", time: Date().addingTimeInterval(3600), man: Man(name:"Andrew"), present: 50)
-    third.state = .scheduled
-    return [first, second, third]
+    
+}
+
+extension Meeting: Equatable {
+  static func ==(lhs: Meeting, rhs: Meeting) -> Bool {
+    guard lhs.place == rhs.place && lhs.time.start == rhs.time.start && lhs.id == rhs.id else {return false}
+    return true
   }
-  
-  static func getScheduled(from meetings: [Meeting]) -> [Meeting] {
-    var result = [Meeting]()
-    for meeting in meetings {
-      if meeting.state == .scheduled {
-          result.append(meeting)
-      }
-    }
-    return result
-  }
-  
 }
 
 

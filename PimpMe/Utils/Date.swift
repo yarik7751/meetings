@@ -8,9 +8,9 @@
 
 import Foundation
 
-extension Date {
+extension Double {
   
-  static let dateFormatter: DateFormatter = {
+  private static let dateFormatter: DateFormatter = {
       let formatter = DateFormatter()
       formatter.timeZone = TimeZone.current
       formatter.dateFormat = "dd.MM.yyyy, HH:mm"//"yyyy-MM-dd'T'HH:mm:ss"
@@ -18,6 +18,6 @@ extension Date {
     }()
   
     var stringValue: String {
-      return Date.dateFormatter.string(from: self)
+      return Double.dateFormatter.string(from: Date(timeIntervalSince1970: self))
     }
 }

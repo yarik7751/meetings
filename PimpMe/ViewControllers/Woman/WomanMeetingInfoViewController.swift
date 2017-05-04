@@ -20,7 +20,7 @@ class WomanMeetingInfoViewController: UIViewController {
     super.viewDidLoad()
     navigationItem.title = meeting.man.name
     nameAgeLabel.text = meeting.man.name
-    dateLabel.text = meeting.time.stringValue
+    dateLabel.text = meeting.time.start.stringValue
     placeLabel.text = meeting.place
     photoImageView.image = #imageLiteral(resourceName: "banana")
   }

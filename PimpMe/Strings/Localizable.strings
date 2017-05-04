@@ -33,4 +33,12 @@
 /* WomanMeetingInfoViewController */
 "MEETING_INFO_CancelMeeting" = "Вы действительно хотите отменить эту встречу?";
 
+/* ManNewMeetingViewController */
+"NEW_MEETING_Title" = "Создать встречу";
+"NEW_MEETING_NoPlace" = "Пожалуйста, выберите место встречи";
+"NEW_MEETING_NoTime" = "Пожалуйста, выберите время встречи";
+"NEW_MEETING_NoPresent" = "Пожалуйста, введите сумму подарка";
+"NEW_MEETING_Place" = "Место";
+"NEW_MEETING_Adress" = "Адрес";
+
 

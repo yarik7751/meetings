@@ -8,21 +8,20 @@
 
 import UIKit
 
-class WomanMeetingsViewController: UIViewController {
+class WomanMeetingsViewController: UIViewController, Schedulable {
 
   @IBOutlet weak var womanHeaderView: WomanHeaderView!
   @IBOutlet weak var datesTableView: UITableView!
-  var meetings: [Meeting]!
-  fileprivate var scheduledMeetings: [Meeting]!
-  fileprivate var hasScheduled = false
+  var meetings = MeetingsStorage.shared.getMeetings()
+  var scheduledMeetings = MeetingsStorage.shared.getScheduledMeetings()
+  var hasScheduled = false
   
   override func viewDidLoad() {
-    super.viewDidLoad()
-    meetings = Meeting.createFakeMeetings()
+    super.viewDidLoad()    
     navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
-    scheduledMeetings = Meeting.getScheduled(from: meetings)
-    hasScheduled = scheduledMeetings.count > 0 ? true : false
+    MeetingsStorage.shared.delegate = self
     datesTableView.tableFooterView = UIView()
+    meetingStorageUpdated()
   }
   
   override func viewWillAppear(_ animated: Bool) {
@@ -36,15 +35,7 @@ class WomanMeetingsViewController: UIViewController {
     guard segue.identifier == "showMeetingInfo" else { return }
     let infoVC = segue.destination as! WomanMeetingInfoViewController
     let indexPath = datesTableView.indexPathForSelectedRow!
-    infoVC.meeting = getAppropriateMeeting(forIndexPath: indexPath)
-  }
-  
-  fileprivate func getAppropriateMeeting(forIndexPath indexPath: IndexPath) -> Meeting {
-    if hasScheduled {
-      return indexPath.section == 0 ? scheduledMeetings[indexPath.row] : meetings[indexPath.row]
-    } else {
-      return meetings[indexPath.row]
-    }
+    infoVC.meeting = getMeeting(forIndexPath: indexPath)
   }
   
 }
@@ -52,8 +43,7 @@ class WomanMeetingsViewController: UIViewController {
 extension WomanMeetingsViewController: UITableViewDelegate, UITableViewDataSource {
   
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    guard hasScheduled else {return meetings.count }
-    return section == 0 ? scheduledMeetings.count : meetings.count - scheduledMeetings.count
+     return getNumberOfRows(forSection: section)
   }
   
   func numberOfSections(in tableView: UITableView) -> Int {
@@ -62,13 +52,20 @@ extension WomanMeetingsViewController: UITableViewDelegate, UITableViewDataSourc
   
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     let cell = tableView.dequeueReusableCell(withIdentifier: ReuseIdentifiers.womanDateCell) as! WomanMeetingTableViewCell
-    cell.meeting = getAppropriateMeeting(forIndexPath: indexPath)
+    cell.meeting = getMeeting(forIndexPath: indexPath)
     return cell
   }
   
   func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-    guard hasScheduled else { return MeetingState.pending.rawValue.localized }
-    return section == 0 ? MeetingState.scheduled.rawValue.localized : MeetingState.pending.rawValue.localized
+    return getTitle(forSection: section)
   }
-  
+}
+
+extension WomanMeetingsViewController: MeetingsStorageDelegate {
+  func meetingStorageUpdated() {
+    meetings = MeetingsStorage.shared.getMeetings()
+    scheduledMeetings = MeetingsStorage.shared.getScheduledMeetings()
+    hasScheduled = scheduledMeetings.count > 0 ? true : false
+    datesTableView.reloadData()
+  }
 }

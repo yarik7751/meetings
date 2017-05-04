@@ -9,19 +9,21 @@
 import UIKit
 import MARKRangeSlider
 
-class ManMeetingsTableViewController: UITableViewController {
+class ManNewMeetingTableViewController: UITableViewController {
 
   var collapsedHeight:CGFloat = 60.0
   var selectedIndexPath:IndexPath? = [0,0]
   var previousButton: RotationButton?
   let placePicker = PlacePicker()
+  fileprivate var startDate:Double?
+  fileprivate var endDate: Double?
   
   /* Girl Outlets */
   @IBOutlet weak var expandGirlButton: RotationButton!
   @IBOutlet weak var ageRangeSlider: MARKRangeSlider!
   @IBOutlet weak var minimumAgeLabel: UILabel!
   @IBOutlet weak var maximumAgeLabel: UILabel!
-  @IBOutlet weak var heightTextField: UITextField!
+  @IBOutlet weak var heightRangeSlider: MARKRangeSlider!
   @IBOutlet weak var hairColorTextField: UITextField!
   
   /* Location Outlets */
@@ -40,6 +42,7 @@ class ManMeetingsTableViewController: UITableViewController {
   }
   
   private func setupUI() {
+    navigationItem.title = NSLocalizedString("NEW_MEETING_Title", comment: "")
     tableView.tableFooterView = UIView()
     expandGirlButton.switchState()
     previousButton = expandGirlButton
@@ -47,7 +50,10 @@ class ManMeetingsTableViewController: UITableViewController {
     ageRangeSlider.setLeftValue(18.0, rightValue: 25.0)
     ageRangeSlider.disableOverlapping = true
     ageRangeSlider.minimumDistance = 5.0
-    heightTextField.addDoneButton()
+    heightRangeSlider.setMinValue(150.0, maxValue: 199.0)
+    heightRangeSlider.setLeftValue(150.0, rightValue: 170.0)
+    heightRangeSlider.disableOverlapping = true
+    heightRangeSlider.minimumDistance = 5.0
     amountTextField.addDoneButton()
   }
   
@@ -97,6 +103,7 @@ class ManMeetingsTableViewController: UITableViewController {
   }
   
   private func expandCollapse(button: RotationButton) {
+    view.endEditing(false)
     if previousButton != button {
       previousButton?.buttonState = .collapsed
     }
@@ -108,32 +115,55 @@ class ManMeetingsTableViewController: UITableViewController {
   }
   
   @IBAction func previewMeeting(_ sender: UIButton) {
+    guard placeLabel.text != NSLocalizedString("NEW_MEETING_Place", comment: "") else {showAlert(withTitle: NSLocalizedString("COMMON_Error", comment: ""),
+                                                      message:NSLocalizedString("NEW_MEETING_NoPlace" , comment: ""))
+    return }
     
+    guard let start = startDate, let end = endDate else {
+      showAlert(withTitle: NSLocalizedString("COMMON_Error", comment: ""),
+                message:NSLocalizedString("NEW_MEETING_NoTime" , comment: ""))
+      return
+    }
+    
+    guard let amount = Double(amountTextField.text!) else {
+      showAlert(withTitle: NSLocalizedString("COMMON_Error", comment: ""),
+                message:NSLocalizedString("NEW_MEETING_NoPresent" , comment: ""))
+      return
+    }
+    let meeting = Meeting(place: placeLabel.text!, time: Time(start: start, end: end), man: Man(name: User.name), present: amount)
+    meeting.preferredAge = Age(start: Double(ageRangeSlider.leftValue), end: Double(ageRangeSlider.rightValue))
+    meeting.preferredHeight = Height(start: Double(heightRangeSlider.leftValue), end: Double(heightRangeSlider.rightValue))
+    meeting.preferredHairColor = hairColorTextField.text
+    let preview = UIStoryboard.viewController(with: String(describing: ManPreviewMeetingViewController.self) + "@ManNewMeeting") as! ManPreviewMeetingViewController
+    preview.meeting = meeting
+    navigationController?.pushViewController(preview, animated: true)
   }
   
 }
 
-extension ManMeetingsTableViewController: UITextFieldDelegate {
+extension ManNewMeetingTableViewController: UITextFieldDelegate {
   func textFieldShouldReturn(_ textField: UITextField) -> Bool {
     view.endEditing(false)
     return true
   }
 }
 
-extension ManMeetingsTableViewController: PlacePickerDelegate {
+extension ManNewMeetingTableViewController: PlacePickerDelegate {
   func placePicker(didFinishPicking place: String, address: String) {
     placeLabel.text = place
     adressLabel.text = address
   }
 }
 
-extension ManMeetingsTableViewController: DatePickerPopoverDelegate {
+extension ManNewMeetingTableViewController: DatePickerPopoverDelegate {
   func datePicker(didFinishPicking date: Date) {
-    dateLabel.text = date.stringValue
+    startDate = date.timeIntervalSince1970
+    endDate = date.timeIntervalSince1970 + 19000  //TODO: - Handle end date
+    dateLabel.text = startDate!.stringValue
   }
 }
 
-extension ManMeetingsTableViewController: UIPopoverPresentationControllerDelegate {
+extension ManNewMeetingTableViewController: UIPopoverPresentationControllerDelegate {
   func adaptivePresentationStyle(for controller: UIPresentationController) -> UIModalPresentationStyle {
     return .none
   }
