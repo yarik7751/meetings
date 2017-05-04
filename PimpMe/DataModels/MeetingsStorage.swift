@@ -31,9 +31,15 @@ class MeetingsStorage {
     delegate?.meetingStorageUpdated()
   }
   
-  func remove(_ meeting: Meeting) {
-    guard let index = meetings.index(of: meeting) else {return}
-    meetings.remove(at: index)
+  func cancel(_ meeting: Meeting) {
+    switch meeting.state {
+    case .pending:
+      guard let index = meetings.index(of: meeting) else {return}
+      meetings.remove(at: index)
+    default:
+      guard let index = scheduledMeetings.index(of: meeting) else {return}
+      scheduledMeetings.remove(at: index)
+    }
     delegate?.meetingStorageUpdated()
   }
   

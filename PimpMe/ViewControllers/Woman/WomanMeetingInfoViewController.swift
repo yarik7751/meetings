@@ -29,7 +29,7 @@ class WomanMeetingInfoViewController: UIViewController {
     let alert = UIAlertController(title: NSLocalizedString("COMMON_Cancel", comment: ""), message: NSLocalizedString("MEETING_INFO_CancelMeeting", comment: ""), preferredStyle: .alert)
     let yes = UIAlertAction(title: NSLocalizedString("COMMON_Yes", comment: ""), style: .default, handler: {
       _ in
-      self.meeting.state = .pending
+      MeetingsStorage.shared.cancel(self.meeting)
       self.navigationController?.popViewController(animated: true)
     })
     let no = UIAlertAction(title: NSLocalizedString("COMMON_No", comment: ""), style: .default, handler: nil)

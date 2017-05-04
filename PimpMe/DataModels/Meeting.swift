@@ -19,7 +19,7 @@ class Meeting {
   var preferredAge: Age!
   var preferredHeight: Height!
   var preferredHairColor: String?
-  var state:MeetingState!
+  var state:MeetingState
   var id: Int!
   
   required init(place: String, time: Time, man: Man, present: Double) {

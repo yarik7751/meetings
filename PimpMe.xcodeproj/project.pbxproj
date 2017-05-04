@@ -41,7 +41,6 @@
 		40ADF3F51EB4AF3000B69722 /* Meeting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40ADF3F41EB4AF3000B69722 /* Meeting.swift */; };
 		40ADF3F81EB4B46C00B69722 /* WomanMeetingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40ADF3F71EB4B46C00B69722 /* WomanMeetingTableViewCell.swift */; };
 		40ADF3FA1EB4B7BC00B69722 /* Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40ADF3F91EB4B7BC00B69722 /* Date.swift */; };
-		40B8184F1EB4C3AB005B8073 /* ReuseIdentifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40B8184E1EB4C3AB005B8073 /* ReuseIdentifiers.swift */; };
 		40B818511EB4DF25005B8073 /* ManProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40B818501EB4DF25005B8073 /* ManProfileViewController.swift */; };
 		40B818531EB4E8F4005B8073 /* Keyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40B818521EB4E8F4005B8073 /* Keyboard.swift */; };
 		40B9AEE01EB8DF8000DEBA54 /* Man.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40B9AEDF1EB8DF8000DEBA54 /* Man.swift */; };
@@ -99,7 +98,6 @@
 		40ADF3F41EB4AF3000B69722 /* Meeting.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Meeting.swift; path = DataModels/Meeting.swift; sourceTree = "<group>"; };
 		40ADF3F71EB4B46C00B69722 /* WomanMeetingTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = WomanMeetingTableViewCell.swift; path = UI/Views/Cells/WomanMeetingTableViewCell.swift; sourceTree = "<group>"; };
 		40ADF3F91EB4B7BC00B69722 /* Date.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Date.swift; path = Utils/Date.swift; sourceTree = "<group>"; };
-		40B8184E1EB4C3AB005B8073 /* ReuseIdentifiers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ReuseIdentifiers.swift; path = Strings/ReuseIdentifiers.swift; sourceTree = "<group>"; };
 		40B818501EB4DF25005B8073 /* ManProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ManProfileViewController.swift; path = ViewControllers/Man/ManProfileViewController.swift; sourceTree = "<group>"; };
 		40B818521EB4E8F4005B8073 /* Keyboard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Keyboard.swift; path = Utils/Keyboard.swift; sourceTree = "<group>"; };
 		40B9AEDF1EB8DF8000DEBA54 /* Man.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Man.swift; path = DataModels/Man.swift; sourceTree = "<group>"; };
@@ -234,7 +232,6 @@
 			isa = PBXGroup;
 			children = (
 				40A781721EB33DEB003D73CC /* Localizable.strings */,
-				40B8184E1EB4C3AB005B8073 /* ReuseIdentifiers.swift */,
 			);
 			name = Strings;
 			sourceTree = "<group>";
@@ -503,7 +500,6 @@
 				40A781701EB33C7C003D73CC /* UIViewController.swift in Sources */,
 				40ADF3F31EB4940400B69722 /* WomanMeetingsViewController.swift in Sources */,
 				40F21E531EB9FD83002316B9 /* PlacePicker.swift in Sources */,
-				40B8184F1EB4C3AB005B8073 /* ReuseIdentifiers.swift in Sources */,
 				40F21E4D1EB9B20B002316B9 /* ManNewMeetingTableViewController.swift in Sources */,
 				40E3DA401EBB2CCE009CB6A1 /* ManMeetingsViewController.swift in Sources */,
 				40A781A81EB395B9003D73CC /* WomanFiltersViewController.swift in Sources */,

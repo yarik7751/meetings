@@ -51,7 +51,7 @@ extension WomanMeetingsViewController: UITableViewDelegate, UITableViewDataSourc
   }
   
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-    let cell = tableView.dequeueReusableCell(withIdentifier: ReuseIdentifiers.womanDateCell) as! WomanMeetingTableViewCell
+    let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: WomanMeetingTableViewCell.self)) as! WomanMeetingTableViewCell
     cell.meeting = getMeeting(forIndexPath: indexPath)
     return cell
   }
