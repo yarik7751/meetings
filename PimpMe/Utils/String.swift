@@ -20,9 +20,4 @@ extension String {
     return self.characters.count > 0 ? true : false
   }
   
-  var localized:String {
-    return NSLocalizedString(self, comment: "")
-  }
-  
-  
 }

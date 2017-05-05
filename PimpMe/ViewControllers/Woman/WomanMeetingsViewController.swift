@@ -17,7 +17,7 @@ class WomanMeetingsViewController: UIViewController, Schedulable {
   var hasScheduled = false
   
   override func viewDidLoad() {
-    super.viewDidLoad()    
+    super.viewDidLoad()
     navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
     MeetingsStorage.shared.delegate = self
     datesTableView.tableFooterView = UIView()

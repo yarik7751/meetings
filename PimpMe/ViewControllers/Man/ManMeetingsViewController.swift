@@ -42,6 +42,26 @@ extension ManMeetingsViewController: UITableViewDelegate, UITableViewDataSource 
   func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
     return getTitle(forSection: section)
   }
+  
+  func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
+    let deleteAction = UITableViewRowAction(style: .default, title: NSLocalizedString("COMMON_Cancel", comment: ""), handler: { (action, indexPath) in
+      let meeting = self.getMeeting(forIndexPath: indexPath)
+      self.confirmCancel(meeting)
+    })
+    return [deleteAction]
+  }
+
+  
+  private func confirmCancel(_ meeting: Meeting) {
+    let alertVC = UIAlertController(title: NSLocalizedString("COMMON_Cancel", comment: ""), message: NSLocalizedString("MEETING_INFO_CancelMeeting", comment: ""), preferredStyle: .alert)
+    let yes = UIAlertAction(title: NSLocalizedString("COMMON_Yes", comment: ""), style: .default, handler: {
+      _ in meeting.cancel()
+    })
+    let no = UIAlertAction(title: NSLocalizedString("COMMON_No", comment: ""), style: .default, handler: nil)
+    alertVC.addAction(yes)
+    alertVC.addAction(no)
+    present(alertVC, animated: true, completion: nil)
+  }
 }
 
 extension ManMeetingsViewController: MeetingsStorageDelegate {

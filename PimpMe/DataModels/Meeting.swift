@@ -30,6 +30,10 @@ class Meeting {
     self.state = .pending
     id = 0 //TODO: - Change for id getting from API
   }
+  
+  func cancel() {
+    MeetingsStorage.shared.cancel(self)
+  }
     
 }
 

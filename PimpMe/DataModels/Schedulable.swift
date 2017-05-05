@@ -29,7 +29,7 @@ extension Schedulable {
   }
   
   func getTitle(forSection section: Int) -> String {
-    guard hasScheduled else { return MeetingState.pending.rawValue.localized }
-    return section == 0 ? MeetingState.scheduled.rawValue.localized : MeetingState.pending.rawValue.localized
+    guard hasScheduled else { return NSLocalizedString(MeetingState.pending.rawValue, comment: "") }
+    return section == 0 ? NSLocalizedString(MeetingState.scheduled.rawValue, comment: ""): NSLocalizedString(MeetingState.pending.rawValue, comment: "")
   }
 }

@@ -52,7 +52,7 @@ enum User {
   
   static var about: String {
     get {
-      return UserDefaults.standard.string(forKey: "about") ?? ""
+      return UserDefaults.standard.string(forKey: "about") ?? NSLocalizedString("PROFILE_About" , comment: "")
     }
     set {
       UserDefaults.standard.set(newValue, forKey: "about")

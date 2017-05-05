@@ -11,10 +11,10 @@ import MARKRangeSlider
 
 class ManNewMeetingTableViewController: UITableViewController {
 
-  var collapsedHeight:CGFloat = 60.0
-  var selectedIndexPath:IndexPath? = [0,0]
-  var previousButton: RotationButton?
-  let placePicker = PlacePicker()
+  fileprivate var collapsedHeight:CGFloat = 60.0
+  fileprivate var selectedIndexPath:IndexPath? = [0,0]
+  fileprivate var previousButton: RotationButton?
+  fileprivate let placePicker = PlacePicker()
   fileprivate var startDate:Double?
   fileprivate var endDate: Double?
   
