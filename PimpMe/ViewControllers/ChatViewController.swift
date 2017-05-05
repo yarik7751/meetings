@@ -18,6 +18,7 @@ class ChatViewController: JSQMessagesViewController {
   
   private lazy var database: FIRDatabaseReference = FIRDatabase.database().reference()
   private lazy var chatRef: FIRDatabaseReference = self.database.child("0") //TODO: - Change to Meeting ID
+  private lazy var messagesRef: FIRDatabaseReference = self.chatRef.child("messages")
   private var newMessageRefHandle: FIRDatabaseHandle?
   
   override func viewDidLoad() {
@@ -46,7 +47,7 @@ class ChatViewController: JSQMessagesViewController {
   }
   
   override func didPressSend(_ button: UIButton!, withMessageText text: String!, senderId: String!, senderDisplayName: String!, date: Date!) {
-    let messageRef = chatRef.childByAutoId()
+    let messageRef = messagesRef.childByAutoId()
     let messageItem = [
       "senderId": Int(senderId) ?? 0,
       "date": Int(Date().timeIntervalSince1970),
@@ -63,12 +64,12 @@ class ChatViewController: JSQMessagesViewController {
   
   private func observeMessages() {
 
-    let messageQuery = chatRef.queryLimited(toLast:25)
+    let messageQuery = messagesRef.queryLimited(toLast:25)
     
     newMessageRefHandle = messageQuery.observe(.childAdded, with: { (snapshot) -> Void in
     guard let messageData = snapshot.value as? NSDictionary  else { self.finishSendingMessage()
       return }
-      self.addMessage(withId: "\(messageData["senderId"] as! Int)", name: "\(messageData["date"] as! Double)", text: messageData["text"] as! String)
+      self.addMessage(withId: "\(messageData["senderId"] as! Int)", name: "\(messageData["date"] as! Int)", text: messageData["text"] as! String)
       self.finishReceivingMessage()
     })
   }
