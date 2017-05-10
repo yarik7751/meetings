@@ -12,13 +12,18 @@
 		400ADE6C1EBA272E006EA363 /* UIText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 400ADE6B1EBA272D006EA363 /* UIText.swift */; };
 		402C52771EB8B00500EFC9ED /* WomanMeetingInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 402C52761EB8B00500EFC9ED /* WomanMeetingInfoViewController.swift */; };
 		402C527B1EB8BFC700EFC9ED /* CityManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 402C527A1EB8BFC700EFC9ED /* CityManager.swift */; };
+		40457F661EC312BD00840841 /* ManScheduledMeetingDetails.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 40457F651EC312BD00840841 /* ManScheduledMeetingDetails.storyboard */; };
+		40457F681EC312FC00840841 /* ManPendingMeetingDetails.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 40457F671EC312FC00840841 /* ManPendingMeetingDetails.storyboard */; };
+		40457F6A1EC3133E00840841 /* ManScheduledMeetingDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40457F691EC3133E00840841 /* ManScheduledMeetingDetailsViewController.swift */; };
+		40457F6E1EC3324300840841 /* ManPendingMeetingDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40457F6D1EC3324300840841 /* ManPendingMeetingDetailsViewController.swift */; };
+		40457F701EC3346600840841 /* WomanProfileTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40457F6F1EC3346600840841 /* WomanProfileTableViewCell.swift */; };
 		40A781531EB329FB003D73CC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40A781521EB329FB003D73CC /* AppDelegate.swift */; };
 		40A7815A1EB329FB003D73CC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 40A781591EB329FB003D73CC /* Assets.xcassets */; };
 		40A7815D1EB329FB003D73CC /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 40A7815B1EB329FB003D73CC /* LaunchScreen.storyboard */; };
 		40A781691EB32B5B003D73CC /* Auth.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 40A781681EB32B5B003D73CC /* Auth.storyboard */; };
 		40A7816B1EB32D2A003D73CC /* AuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40A7816A1EB32D2A003D73CC /* AuthViewController.swift */; };
 		40A7816E1EB337E5003D73CC /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40A7816D1EB337E5003D73CC /* String.swift */; };
-		40A781701EB33C7C003D73CC /* UIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40A7816F1EB33C7C003D73CC /* UIViewController.swift */; };
+		40A781701EB33C7C003D73CC /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40A7816F1EB33C7C003D73CC /* ViewController.swift */; };
 		40A781731EB33DEB003D73CC /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 40A781721EB33DEB003D73CC /* Localizable.strings */; };
 		40A781751EB35644003D73CC /* UIImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40A781741EB35644003D73CC /* UIImage.swift */; };
 		40A781831EB367A3003D73CC /* Man.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 40A781821EB367A3003D73CC /* Man.storyboard */; };
@@ -70,6 +75,11 @@
 		400ADE6B1EBA272D006EA363 /* UIText.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UIText.swift; path = Utils/UIText.swift; sourceTree = "<group>"; };
 		402C52761EB8B00500EFC9ED /* WomanMeetingInfoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = WomanMeetingInfoViewController.swift; path = ViewControllers/Woman/WomanMeetingInfoViewController.swift; sourceTree = "<group>"; };
 		402C527A1EB8BFC700EFC9ED /* CityManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CityManager.swift; path = DataModels/CityManager.swift; sourceTree = "<group>"; };
+		40457F651EC312BD00840841 /* ManScheduledMeetingDetails.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = ManScheduledMeetingDetails.storyboard; path = UI/Man/ManScheduledMeetingDetails.storyboard; sourceTree = "<group>"; };
+		40457F671EC312FC00840841 /* ManPendingMeetingDetails.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = ManPendingMeetingDetails.storyboard; path = UI/Man/ManPendingMeetingDetails.storyboard; sourceTree = "<group>"; };
+		40457F691EC3133E00840841 /* ManScheduledMeetingDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ManScheduledMeetingDetailsViewController.swift; path = ViewControllers/Man/ManScheduledMeetingDetailsViewController.swift; sourceTree = "<group>"; };
+		40457F6D1EC3324300840841 /* ManPendingMeetingDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ManPendingMeetingDetailsViewController.swift; path = ViewControllers/Man/ManPendingMeetingDetailsViewController.swift; sourceTree = "<group>"; };
+		40457F6F1EC3346600840841 /* WomanProfileTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = WomanProfileTableViewCell.swift; path = UI/Views/Cells/WomanProfileTableViewCell.swift; sourceTree = "<group>"; };
 		40A7814F1EB329FA003D73CC /* PimpMe.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PimpMe.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		40A781521EB329FB003D73CC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		40A781591EB329FB003D73CC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -78,7 +88,7 @@
 		40A781681EB32B5B003D73CC /* Auth.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = Auth.storyboard; path = UI/Auth.storyboard; sourceTree = "<group>"; };
 		40A7816A1EB32D2A003D73CC /* AuthViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AuthViewController.swift; path = ViewControllers/AuthViewController.swift; sourceTree = "<group>"; };
 		40A7816D1EB337E5003D73CC /* String.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = String.swift; path = Utils/String.swift; sourceTree = "<group>"; };
-		40A7816F1EB33C7C003D73CC /* UIViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UIViewController.swift; path = Utils/UIViewController.swift; sourceTree = "<group>"; };
+		40A7816F1EB33C7C003D73CC /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ViewController.swift; path = Utils/ViewController.swift; sourceTree = "<group>"; };
 		40A781721EB33DEB003D73CC /* Localizable.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = Localizable.strings; path = Strings/Localizable.strings; sourceTree = "<group>"; };
 		40A781741EB35644003D73CC /* UIImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UIImage.swift; path = Utils/UIImage.swift; sourceTree = "<group>"; };
 		40A781821EB367A3003D73CC /* Man.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = Man.storyboard; path = UI/Man/Man.storyboard; sourceTree = "<group>"; };
@@ -226,7 +236,7 @@
 			isa = PBXGroup;
 			children = (
 				40A7816D1EB337E5003D73CC /* String.swift */,
-				40A7816F1EB33C7C003D73CC /* UIViewController.swift */,
+				40A7816F1EB33C7C003D73CC /* ViewController.swift */,
 				40A781741EB35644003D73CC /* UIImage.swift */,
 				40A781941EB36A0A003D73CC /* UIStoryboard.swift */,
 				40A7819C1EB377BC003D73CC /* UIScrollView.swift */,
@@ -253,8 +263,10 @@
 				40A781821EB367A3003D73CC /* Man.storyboard */,
 				40A781921EB368D7003D73CC /* ManWallet.storyboard */,
 				40A781901EB368BE003D73CC /* ManMeetings.storyboard */,
+				40457F651EC312BD00840841 /* ManScheduledMeetingDetails.storyboard */,
 				40E3DA3B1EBB2852009CB6A1 /* ManNewMeeting.storyboard */,
 				40A7818E1EB368A0003D73CC /* ManProfile.storyboard */,
+				40457F671EC312FC00840841 /* ManPendingMeetingDetails.storyboard */,
 			);
 			name = Man;
 			sourceTree = "<group>";
@@ -279,6 +291,8 @@
 				40F21E4C1EB9B20B002316B9 /* ManNewMeetingTableViewController.swift */,
 				40E3DA3F1EBB2CCE009CB6A1 /* ManMeetingsViewController.swift */,
 				40E3DA461EBB4E76009CB6A1 /* ManPreviewMeetingViewController.swift */,
+				40457F691EC3133E00840841 /* ManScheduledMeetingDetailsViewController.swift */,
+				40457F6D1EC3324300840841 /* ManPendingMeetingDetailsViewController.swift */,
 			);
 			name = Man;
 			sourceTree = "<group>";
@@ -309,6 +323,7 @@
 			children = (
 				40ADF3F71EB4B46C00B69722 /* WomanMeetingTableViewCell.swift */,
 				40E3DA3D1EBB294F009CB6A1 /* ManMeetingsTableViewCell.swift */,
+				40457F6F1EC3346600840841 /* WomanProfileTableViewCell.swift */,
 			);
 			name = Cells;
 			sourceTree = "<group>";
@@ -403,6 +418,7 @@
 				40F813581EBCA92B006BACDC /* Chat.storyboard in Resources */,
 				40A7818F1EB368A0003D73CC /* ManProfile.storyboard in Resources */,
 				40A7818D1EB367EB003D73CC /* WomanWallet.storyboard in Resources */,
+				40457F661EC312BD00840841 /* ManScheduledMeetingDetails.storyboard in Resources */,
 				40A781831EB367A3003D73CC /* Man.storyboard in Resources */,
 				40A781881EB367AD003D73CC /* WomanProfile.storyboard in Resources */,
 				40A781931EB368D7003D73CC /* ManWallet.storyboard in Resources */,
@@ -417,6 +433,7 @@
 				40ADF3EE1EB48FF100B69722 /* WomanHeaderView.xib in Resources */,
 				40A7815A1EB329FB003D73CC /* Assets.xcassets in Resources */,
 				40E3DA3C1EBB2852009CB6A1 /* ManNewMeeting.storyboard in Resources */,
+				40457F681EC312FC00840841 /* ManPendingMeetingDetails.storyboard in Resources */,
 				40A781911EB368BE003D73CC /* ManMeetings.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -497,12 +514,15 @@
 				40ADF3F01EB4913B00B69722 /* WomanHeaderView.swift in Sources */,
 				40A7816E1EB337E5003D73CC /* String.swift in Sources */,
 				40B818531EB4E8F4005B8073 /* Keyboard.swift in Sources */,
+				40457F6A1EC3133E00840841 /* ManScheduledMeetingDetailsViewController.swift in Sources */,
 				40F21E4F1EB9C444002316B9 /* UIButton.swift in Sources */,
 				40B818511EB4DF25005B8073 /* ManProfileViewController.swift in Sources */,
 				40E3DA421EBB3A25009CB6A1 /* Schedulable.swift in Sources */,
 				40ADF3F51EB4AF3000B69722 /* Meeting.swift in Sources */,
 				400ADE6C1EBA272E006EA363 /* UIText.swift in Sources */,
 				40B9AEE01EB8DF8000DEBA54 /* Man.swift in Sources */,
+				40457F6E1EC3324300840841 /* ManPendingMeetingDetailsViewController.swift in Sources */,
+				40457F701EC3346600840841 /* WomanProfileTableViewCell.swift in Sources */,
 				40A781751EB35644003D73CC /* UIImage.swift in Sources */,
 				40A7819B1EB37542003D73CC /* WomanProfileViewController.swift in Sources */,
 				40E3DA471EBB4E76009CB6A1 /* ManPreviewMeetingViewController.swift in Sources */,
@@ -513,7 +533,7 @@
 				40E3DA491EBB4F3C009CB6A1 /* Range.swift in Sources */,
 				40A7816B1EB32D2A003D73CC /* AuthViewController.swift in Sources */,
 				402C527B1EB8BFC700EFC9ED /* CityManager.swift in Sources */,
-				40A781701EB33C7C003D73CC /* UIViewController.swift in Sources */,
+				40A781701EB33C7C003D73CC /* ViewController.swift in Sources */,
 				40ADF3F31EB4940400B69722 /* WomanMeetingsViewController.swift in Sources */,
 				40F21E531EB9FD83002316B9 /* PlacePicker.swift in Sources */,
 				40F21E4D1EB9B20B002316B9 /* ManNewMeetingTableViewController.swift in Sources */,
