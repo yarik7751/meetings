@@ -34,7 +34,14 @@ class Meeting {
   func cancel() {
     MeetingsStorage.shared.cancel(self)
   }
-    
+  
+  func createWoman() {
+    let woman = Woman(name: "Даша", age: 23, height: 178, hairColor: "Синий")
+    let photo = Photo(id: 0, url: URL(string: "https://cdn.pixabay.com/photo/2017/04/08/10/23/surfer-2212948_960_720.jpg")!)
+    woman.photos = [photo, photo, photo]
+    self.women = [woman]
+  }
+  
 }
 
 extension Meeting: Equatable {

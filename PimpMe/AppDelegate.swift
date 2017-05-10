@@ -19,8 +19,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
   func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
     // Override point for customization after application launch.
-    GMSServices.provideAPIKey("AIzaSyC5neDbTFB_ya5u79aezswvTlvT_amK258")
-    GMSPlacesClient.provideAPIKey("AIzaSyAau4MrYZOQa8hvCJpImlQQ5NYs4-22pxc")
+    GMSServices.provideAPIKey("AIzaSyAAbvEmccssR__L2IauoLBaEd2f35cxVCI")
+    GMSPlacesClient.provideAPIKey("AIzaSyBP6fCGb6C4P4w4Z9W6hNFEVutUZE7OMCQ")
     FIRApp.configure()
     guard User.isAuthorized else {return true}
     window?.rootViewController = UIStoryboard.viewController(with: User.isMan ? UIStoryboard.manIdentifier : UIStoryboard.womanIdentifier)

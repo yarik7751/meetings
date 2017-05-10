@@ -10,6 +10,7 @@ import UIKit
 
 class ManScheduledMeetingDetailsViewController: UIViewController {
 
+  var meeting: Meeting!
 
   
 }

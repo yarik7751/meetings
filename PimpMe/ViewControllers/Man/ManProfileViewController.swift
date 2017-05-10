@@ -22,16 +22,15 @@ class ManProfileViewController: UIViewController {
     ageTextField.addDoneButton()
     nameTextField.text = User.name
     aboutTextView.text = User.about
-    if let age = User.age {
-      ageTextField.text = "\(age)"
-    }
+    guard let age = User.age else {return}
+    ageTextField.text = "\(age)"
   }
   
   override func viewDidLayoutSubviews() {
     super.viewDidLayoutSubviews()
     aboutTextView.setContentOffset(CGPoint(x: 0.0, y: 0.0), animated: false)
     guard !photoScrollView.isPopulated else {return }
-    photoScrollView.populate(with: [#imageLiteral(resourceName: "banana")])
+    photoScrollView.populate(with: [Photo(id: 0, url: URL(string: "https://cdn.pixabay.com/photo/2017/04/08/10/23/surfer-2212948_960_720.jpg")!)])
   }
   
   @IBAction func save(_ sender: UIButton) {

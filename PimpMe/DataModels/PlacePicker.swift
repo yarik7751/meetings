@@ -23,11 +23,10 @@ class PlacePicker:NSObject {
   func pickPlace() {
     picker.pickPlace(callback: {
       place, error in
-      guard place != nil else {return}
-      self.delegate?.placePicker(didFinishPicking: place?.name ?? "", address: place?.formattedAddress ?? "")
-      print("Name: \(place!.name)")
-      print("Place address \(String(describing: place!.formattedAddress))")
-      print("Place attributions \(String(describing: place!.attributions))")
+      guard let place = place else {
+        self.delegate?.placePicker(didFinishPicking: "N/A", address: "N/A")
+        return}
+      self.delegate?.placePicker(didFinishPicking: place.name , address: place.formattedAddress ?? "")
     })
   }
 }

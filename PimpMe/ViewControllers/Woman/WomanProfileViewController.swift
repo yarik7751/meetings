@@ -18,11 +18,13 @@ class WomanProfileViewController: UIViewController {
   @IBOutlet weak var hairColorTextField: UITextField!
   @IBOutlet weak var containerStackView: UIStackView!
   
-  let photos = [#imageLiteral(resourceName: "banana"), #imageLiteral(resourceName: "banana"), #imageLiteral(resourceName: "banana")]
+  let photo = Photo(id: 0, url: URL(string: "https://cdn.pixabay.com/photo/2017/04/08/10/23/surfer-2212948_960_720.jpg")!)
+  var photos: [Photo]!
   var activeTextField:UITextField!
   
   override func viewDidLoad() {
     super.viewDidLoad()
+    photos = [photo, photo, photo]
     let tap = UITapGestureRecognizer(target: self, action: #selector(endEditing))
     containerStackView.addGestureRecognizer(tap)
     pageControl.numberOfPages = photos.count

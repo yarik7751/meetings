@@ -15,6 +15,7 @@ class WomanMeetingTableViewCell: UITableViewCell {
   @IBOutlet private weak var placeLabel: UILabel!
   @IBOutlet private weak var dateLabel: UILabel!
   @IBOutlet private weak var amountLabel: UILabel!
+  
   var meeting: Meeting! {
     didSet {
       photoImageView.sd_setImage(with: URL(string: "https://cdn.pixabay.com/photo/2017/04/08/10/23/surfer-2212948_960_720.jpg"), placeholderImage: #imageLiteral(resourceName: "banana"))

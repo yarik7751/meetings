@@ -60,12 +60,17 @@ class MeetingsStorage {
   private func createFakeMeetings(){
     guard meetings.count == 0 else {return}
     let first = Meeting(place: "Restaurant", time: Time(start: Date().timeIntervalSince1970, end: Date(timeIntervalSinceNow: 19000).timeIntervalSince1970), man: Man(name: "Igor"), present: 100)
+    first.createWoman()
     let second = Meeting(place: "Cinema", time: Time(start: Date().timeIntervalSince1970, end: Date(timeIntervalSinceNow: 12000).timeIntervalSince1970), man: Man(name:"Maxim"), present: 200)
+    second.createWoman()
     let third = Meeting(place: "Bedroom", time: Time(start: Date().timeIntervalSince1970, end: Date(timeIntervalSinceNow: 15000).timeIntervalSince1970), man: Man(name:"Andrew"), present: 50)
     third.state = .scheduled
+    third.createWoman()
     meetings.append(first)
     meetings.append(second)
     meetings.append(third)
     delegate?.meetingStorageUpdated()
   }
+  
+
 }

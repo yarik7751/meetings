@@ -22,6 +22,12 @@ class ManMeetingsViewController: UIViewController, Schedulable {
     tableView.tableFooterView = UIView()
     meetingStorageUpdated()
   }
+  
+  override func viewDidAppear(_ animated: Bool) {
+    super.viewDidAppear(animated)
+    guard let indexPath = tableView.indexPathForSelectedRow else {return}
+    tableView.deselectRow(at: indexPath, animated: true)
+  }
 }
 
 extension ManMeetingsViewController: UITableViewDelegate, UITableViewDataSource {
@@ -49,6 +55,19 @@ extension ManMeetingsViewController: UITableViewDelegate, UITableViewDataSource 
       self.confirmCancel(meeting)
     })
     return [deleteAction]
+  }
+  
+  func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    let meeting = getMeeting(forIndexPath: indexPath)
+    if meeting.state == .scheduled {
+      let scheduledVC = UIStoryboard.viewController(with:"@ManScheduledMeetingDetails") as! ManScheduledMeetingDetailsViewController
+      scheduledVC.meeting = meeting
+      navigationController?.pushViewController(scheduledVC, animated: true)
+    } else {
+      let pendingVC = UIStoryboard.viewController(with: "@ManPendingMeetingDetails") as! ManPendingMeetingDetailsViewController
+      pendingVC.meeting = meeting
+      navigationController?.pushViewController(pendingVC, animated: true)
+    }
   }
 
   
