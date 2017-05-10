@@ -8,7 +8,6 @@
 
 import UIKit
 import FirebaseDatabase
-import FirebaseAuth
 import JSQMessagesViewController
 
 class ChatViewController: JSQMessagesViewController {
@@ -23,7 +22,6 @@ class ChatViewController: JSQMessagesViewController {
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    FIRAuth.auth()?.signInAnonymously(completion: nil)
     self.senderId = "0" //TODO: - Change to actual senderID
     self.senderDisplayName = User.name
     

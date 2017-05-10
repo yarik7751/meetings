@@ -12,7 +12,6 @@ class AuthViewController: UIViewController {
   @IBOutlet weak var emailTextField: UITextField!
   @IBOutlet weak var passwordTextField: UITextField!
   @IBOutlet weak var genderSelector: UISegmentedControl!
-
   
   @IBAction func login(_ sender: UIButton) {
     authenticate()

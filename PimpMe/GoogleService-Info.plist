@@ -7,21 +7,21 @@
 	<key>AD_UNIT_ID_FOR_INTERSTITIAL_TEST</key>
 	<string>ca-app-pub-3940256099942544/4411468910</string>
 	<key>CLIENT_ID</key>
-	<string>135941992017-m63g43h0n5j4vciq1f7tid0qq9vcelnk.apps.googleusercontent.com</string>
+	<string>885860699798-76q7u3mfdk6s2tcebtqlrpnn4oof9j8u.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.135941992017-m63g43h0n5j4vciq1f7tid0qq9vcelnk</string>
+	<string>com.googleusercontent.apps.885860699798-76q7u3mfdk6s2tcebtqlrpnn4oof9j8u</string>
 	<key>API_KEY</key>
-	<string>AIzaSyDexmmVyE8l71xf5yxM9temyMljjSgKIo4</string>
+	<string>AIzaSyCTm-hKYezoRFhiuz4h8RONN3t8M_nt4RI</string>
 	<key>GCM_SENDER_ID</key>
-	<string>135941992017</string>
+	<string>885860699798</string>
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
 	<string>com.elatesoftware.PimpMe</string>
 	<key>PROJECT_ID</key>
-	<string>pimpme-1493811380110</string>
+	<string>brothel-d09c2</string>
 	<key>STORAGE_BUCKET</key>
-	<string>pimpme-1493811380110.appspot.com</string>
+	<string>brothel-d09c2.appspot.com</string>
 	<key>IS_ADS_ENABLED</key>
 	<true/>
 	<key>IS_ANALYTICS_ENABLED</key>
@@ -33,8 +33,8 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true/>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:135941992017:ios:f91a40ecf82a8d40</string>
+	<string>1:885860699798:ios:f91a40ecf82a8d40</string>
 	<key>DATABASE_URL</key>
-	<string>https://pimpme-1493811380110.firebaseio.com</string>
+	<string>https://brothel-d09c2.firebaseio.com</string>
 </dict>
 </plist>

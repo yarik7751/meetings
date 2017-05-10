@@ -117,7 +117,7 @@
                 <viewControllerPlaceholder storyboardName="ManNewMeeting" id="F8Y-AC-R9M" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="CGc-KF-myt" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3355.1999999999998" y="-94.452773613193415"/>
+            <point key="canvasLocation" x="3136" y="-425"/>
         </scene>
         <!--Встречи-->
         <scene sceneID="rde-cj-dMQ">
