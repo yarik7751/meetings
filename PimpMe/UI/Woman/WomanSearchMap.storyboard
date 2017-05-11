@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="Cc3-Sw-kbk">
+    <device id="retina4_0" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Woman Search View Controller-->
+        <scene sceneID="HpP-jo-QC8">
+            <objects>
+                <pageViewController autoresizesArchivedViewToFullSize="NO" transitionStyle="pageCurl" navigationOrientation="horizontal" spineLocation="min" id="Upw-p8-dsZ" customClass="WomanSearchViewController" customModule="PimpMe" customModuleProvider="target" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="gO7-jE-FKE">
+                        <nil key="title"/>
+                        <segmentedControl key="titleView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bar" selectedSegmentIndex="0" id="ekk-7o-DjU">
+                            <rect key="frame" x="96" y="7" width="128" height="30"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <segments>
+                                <segment title="First"/>
+                                <segment title="Second"/>
+                            </segments>
+                        </segmentedControl>
+                        <barButtonItem key="rightBarButtonItem" title="Filters" id="LGD-NK-Q6l">
+                            <connections>
+                                <segue destination="oWW-I6-FTb" kind="show" id="q0J-oy-tds"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                </pageViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="iAH-HX-5h0" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2923.125" y="-463.73239436619718"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="qlC-Ol-s4u">
+            <objects>
+                <viewController id="mRs-Km-VaU" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="jmG-Wz-o47"/>
+                        <viewControllerLayoutGuide type="bottom" id="xmh-uU-AkH"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="8nH-oC-kCU">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Woman's Search" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Yun-1W-ABt">
+                                <rect key="frame" x="96" y="273.5" width="128.5" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="Yun-1W-ABt" firstAttribute="centerX" secondItem="8nH-oC-kCU" secondAttribute="centerX" id="ObM-W1-qP9"/>
+                            <constraint firstItem="Yun-1W-ABt" firstAttribute="centerY" secondItem="8nH-oC-kCU" secondAttribute="centerY" id="dYE-p8-jis"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="tFI-G8-SXa">
+                        <barButtonItem key="rightBarButtonItem" title="Filters" id="FYO-TZ-wTG"/>
+                    </navigationItem>
+                    <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="CIv-Xz-9Lj" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3773" y="-1222"/>
+        </scene>
+        <!--Woman Filters View Controller-->
+        <scene sceneID="5dh-ZK-5Sp">
+            <objects>
+                <viewController id="oWW-I6-FTb" customClass="WomanFiltersViewController" customModule="PimpMe" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="USe-PU-KI8"/>
+                        <viewControllerLayoutGuide type="bottom" id="nk9-h5-oqu"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="iIa-Ci-lIs">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9SE-UK-6Kz" customClass="MARKRangeSlider">
+                                <rect key="frame" x="32" y="267" width="256" height="34"/>
+                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="34" id="bcb-ov-29i"/>
+                                </constraints>
+                                <connections>
+                                    <action selector="ageChanged:" destination="oWW-I6-FTb" eventType="valueChanged" id="seT-16-Cn4"/>
+                                </connections>
+                            </view>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="rag-3g-rte">
+                                <rect key="frame" x="16" y="80" width="80" height="30"/>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <outlet property="delegate" destination="oWW-I6-FTb" id="9s1-I3-jSV"/>
+                                </connections>
+                            </textField>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Minimum Amount" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Lhz-st-120">
+                                <rect key="frame" x="112" y="84.5" width="134.5" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="9SE-UK-6Kz" firstAttribute="centerX" secondItem="iIa-Ci-lIs" secondAttribute="centerX" id="Se3-DC-kOe"/>
+                            <constraint firstItem="rag-3g-rte" firstAttribute="leading" secondItem="iIa-Ci-lIs" secondAttribute="leading" constant="16" id="Tkd-Ai-ImR"/>
+                            <constraint firstItem="rag-3g-rte" firstAttribute="width" secondItem="iIa-Ci-lIs" secondAttribute="width" multiplier="0.25" id="WK6-v1-oHI"/>
+                            <constraint firstItem="Lhz-st-120" firstAttribute="centerY" secondItem="rag-3g-rte" secondAttribute="centerY" id="Wra-zG-iPs"/>
+                            <constraint firstItem="Lhz-st-120" firstAttribute="leading" secondItem="rag-3g-rte" secondAttribute="trailing" constant="16" id="a50-Sf-4un"/>
+                            <constraint firstItem="9SE-UK-6Kz" firstAttribute="centerY" secondItem="iIa-Ci-lIs" secondAttribute="centerY" id="fvJ-Hx-4Gq"/>
+                            <constraint firstItem="9SE-UK-6Kz" firstAttribute="width" secondItem="iIa-Ci-lIs" secondAttribute="width" multiplier="0.8" id="iGS-5a-E1l"/>
+                            <constraint firstItem="rag-3g-rte" firstAttribute="top" secondItem="USe-PU-KI8" secondAttribute="bottom" constant="16" id="s5J-9r-BSv"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="ageRangeSlider" destination="9SE-UK-6Kz" id="eh2-vI-ZnE"/>
+                        <outlet property="minimumAmountTextField" destination="rag-3g-rte" id="idQ-Im-FMs"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="p5E-as-NZa" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3773" y="-464"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="Wdg-6a-gYi">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Cc3-Sw-kbk" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="exf-vu-6RT">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="Upw-p8-dsZ" kind="relationship" relationship="rootViewController" id="feP-dm-DWG"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="fFY-2N-9P1" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2145" y="-464"/>
+        </scene>
+    </scenes>
+</document>
