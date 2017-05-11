@@ -17,11 +17,11 @@ class WomanProfileViewController: UIViewController {
   @IBOutlet weak var heightTextField: UITextField!
   @IBOutlet weak var hairColorTextField: UITextField!
   @IBOutlet weak var containerStackView: UIStackView!
-  
+
   let photo = Photo(id: 0, url: URL(string: "https://cdn.pixabay.com/photo/2017/04/08/10/23/surfer-2212948_960_720.jpg")!)
   var photos: [Photo]!
-  var activeTextField:UITextField!
-  
+  var activeTextField: UITextField!
+
   override func viewDidLoad() {
     super.viewDidLoad()
     photos = [photo, photo, photo]
@@ -29,32 +29,32 @@ class WomanProfileViewController: UIViewController {
     containerStackView.addGestureRecognizer(tap)
     pageControl.numberOfPages = photos.count
     pageControl.addObserver(self, forKeyPath: "currentPage", options: .new, context: nil)
-    
+
     nameTextField.text = User.name
     hairColorTextField.text = User.hairColor
     if let age = User.age, let height = User.height {
       ageTextField.text = "\(age)"
       heightTextField.text = "\(height)"
     }
-    
+
     CityManager.shared.delegate = self
   }
-  
+
   override func viewDidAppear(_ animated: Bool) {
     super.viewDidAppear(animated)
     startKeyboardObserving()
   }
-  
+
   override func viewWillDisappear(_ animated: Bool) {
     super.viewWillDisappear(animated)
     endKeyboardObserving()
   }
-  
+
   override func viewDidLayoutSubviews() {
     super.viewDidLayoutSubviews()
-    if !photoScrollView.isPopulated { photoScrollView.populate(with: photos) }    
+    if !photoScrollView.isPopulated { photoScrollView.populate(with: photos) }
   }
-  
+
   override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
     guard keyPath == "currentPage" else { return }
   }
@@ -62,7 +62,7 @@ class WomanProfileViewController: UIViewController {
   func endEditing() {
     view.endEditing(false)
   }
-  
+
   @IBAction func save(_ sender: UIButton) {
     guard nameTextField.hasText, ageTextField.hasText, heightTextField.hasText, hairColorTextField.hasText else {
       showAlert(withTitle: NSLocalizedString("COMMON_Error", comment: ""), message: NSLocalizedString("ERROR_EmptyFields", comment: ""))
@@ -74,14 +74,14 @@ class WomanProfileViewController: UIViewController {
     User.hairColor = hairColorTextField.text!
     showAlert(withTitle: NSLocalizedString("COMMON_Saved", comment: ""), message: NSLocalizedString("COMMON_PersonalInfoUpdated", comment: ""))
   }
-  
+
 }
 
 extension WomanProfileViewController: KeyboardShowing {
   func keyboardWillHide(notification: Notification) {
     view.frame.origin.y = 0
   }
-  
+
   func keyboardWillShow(notification: Notification) {
     guard view.frame.origin.y == 0 else { return }
     if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
@@ -89,7 +89,7 @@ extension WomanProfileViewController: KeyboardShowing {
       self.view.frame.origin.y -= keyboardSize.height - 50.0
     }
   }
-  
+
   func activeTextFieldBottomInSuperview() -> CGFloat {
     return activeTextField.frame.origin.y + activeTextField.frame.height + photoScrollView.frame.height + 16.0
   }
@@ -100,11 +100,11 @@ extension WomanProfileViewController: UITextFieldDelegate {
     view.endEditing(false)
     return true
   }
-  
+
   func textFieldDidBeginEditing(_ textField: UITextField) {
     activeTextField = textField
   }
-  
+
   func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
     guard textField.isEqual(ageTextField) || textField.isEqual(heightTextField) else { return true }
     let allowedCharacters = CharacterSet.decimalDigits.inverted
@@ -112,14 +112,14 @@ extension WomanProfileViewController: UITextFieldDelegate {
     let numberFiltered = compSepByCharInSet.joined(separator: "")
     return string == numberFiltered
   }
-  
+
 }
 
 extension WomanProfileViewController: UIScrollViewDelegate {
-  func scrollViewDidEndDecelerating(_ scrollView: UIScrollView){
+  func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
     let pageWidth = scrollView.frame.width
     let currentPage = floor((scrollView.contentOffset.x - pageWidth / 2) / pageWidth) + 1
-    
+
     self.pageControl.currentPage = Int(currentPage)
   }
 }

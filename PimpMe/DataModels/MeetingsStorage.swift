@@ -13,7 +13,7 @@ protocol MeetingsStorageDelegate: class {
 }
 
 class MeetingsStorage {
-  
+
   private static let sharedInstance = MeetingsStorage()
   static var shared: MeetingsStorage {
     return sharedInstance
@@ -22,15 +22,15 @@ class MeetingsStorage {
   private init() {
     createFakeMeetings() //TODO: - Get rid of fake meetings
   }
-  
+
   private var meetings = [Meeting]()
   private var scheduledMeetings = [Meeting]()
-  
+
   func add(_ meeting: Meeting) {
     meetings.append(meeting)
     delegate?.meetingStorageUpdated()
   }
-  
+
   func cancel(_ meeting: Meeting) {
     switch meeting.state {
     case .pending:
@@ -42,35 +42,29 @@ class MeetingsStorage {
     }
     delegate?.meetingStorageUpdated()
   }
-  
+
   func getMeetings() -> [Meeting] {
     return meetings
   }
-  
+
   func getScheduledMeetings() -> [Meeting] {
-    for meeting in meetings {
-      if meeting.state == .scheduled {
-        scheduledMeetings.append(meeting)
-        meetings.remove(at: meetings.index(of: meeting)!)
-      }
+    for meeting in meetings where meeting.state == .scheduled {
+      scheduledMeetings.append(meeting)
+      meetings.remove(at: meetings.index(of: meeting)!)
     }
     return scheduledMeetings
   }
-  
-  private func createFakeMeetings(){
-    guard meetings.count == 0 else {return}
-    let first = Meeting(place: "Restaurant", time: Time(start: Date().timeIntervalSince1970, end: Date(timeIntervalSinceNow: 19000).timeIntervalSince1970), man: Man(name: "Igor"), present: 100)
-    first.createWoman()
-    let second = Meeting(place: "Cinema", time: Time(start: Date().timeIntervalSince1970, end: Date(timeIntervalSinceNow: 12000).timeIntervalSince1970), man: Man(name:"Maxim"), present: 200)
-    second.createWoman()
-    let third = Meeting(place: "Bedroom", time: Time(start: Date().timeIntervalSince1970, end: Date(timeIntervalSinceNow: 15000).timeIntervalSince1970), man: Man(name:"Andrew"), present: 50)
+
+  private func createFakeMeetings() {
+    guard meetings.isEmpty else {return}
+    let first = Meeting.createMeeting(at: "Restaurant", start: Date(), end: Date().addingTimeInterval(19000), mansName: "Igor", present: 100)
+    let second = Meeting.createMeeting(at: "Cinema", start: Date(), end: Date().addingTimeInterval(14000), mansName: "Maxim", present: 200)
+    let third = Meeting.createMeeting(at: "Bedroom", start: Date(), end: Date().addingTimeInterval(120), mansName: "Andrew", present: 50)
     third.state = .scheduled
-    third.createWoman()
     meetings.append(first)
     meetings.append(second)
     meetings.append(third)
     delegate?.meetingStorageUpdated()
   }
-  
 
 }

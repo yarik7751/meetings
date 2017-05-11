@@ -8,11 +8,10 @@
 
 import Foundation
 
-
 struct Photo {
   let id: Int!
   let url: URL!
-  
+
   init(id: Int, url: URL) {
     self.id = id
     self.url = url

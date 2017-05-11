@@ -10,13 +10,13 @@ import Foundation
 import UIKit
 
 class RotationButton: UIButton {
-  
+
   enum ButtonState {
     case expanded
     case collapsed
   }
-  
-  var buttonState:ButtonState = ButtonState.collapsed {
+
+  var buttonState: ButtonState = ButtonState.collapsed {
     didSet {
       switch buttonState {
       case .expanded:
@@ -31,10 +31,9 @@ class RotationButton: UIButton {
       }
     }
   }
-  
+
   func switchState() {
     self.buttonState = self.buttonState == .collapsed ? .expanded : .collapsed
   }
-  
-  
+
 }

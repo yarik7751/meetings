@@ -17,6 +17,15 @@
 		40457F6A1EC3133E00840841 /* ManScheduledMeetingDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40457F691EC3133E00840841 /* ManScheduledMeetingDetailsViewController.swift */; };
 		40457F6E1EC3324300840841 /* ManPendingMeetingDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40457F6D1EC3324300840841 /* ManPendingMeetingDetailsViewController.swift */; };
 		40457F701EC3346600840841 /* WomanProfileTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40457F6F1EC3346600840841 /* WomanProfileTableViewCell.swift */; };
+		40457F721EC34D8F00840841 /* WomanSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40457F711EC34D8F00840841 /* WomanSearchViewController.swift */; };
+		40457F741EC352AA00840841 /* WomanSearchMap.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 40457F731EC352AA00840841 /* WomanSearchMap.storyboard */; };
+		40457F761EC353A900840841 /* WomanSearchList.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 40457F751EC353A900840841 /* WomanSearchList.storyboard */; };
+		40457F781EC356BE00840841 /* WomanSearchListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40457F771EC356BE00840841 /* WomanSearchListViewController.swift */; };
+		40457F7A1EC356D000840841 /* WomanSearchMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40457F791EC356D000840841 /* WomanSearchMapViewController.swift */; };
+		4092E8CC1EC45F6A00A807EB /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = 4092E8CB1EC45F6A00A807EB /* .swiftlint.yml */; };
+		4092E8D21EC4804400A807EB /* WomanMeetingTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4092E8D11EC4804400A807EB /* WomanMeetingTableViewCell.xib */; };
+		4092E8D41EC486C900A807EB /* WomanMeetingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4092E8D31EC486C900A807EB /* WomanMeetingTableViewCell.swift */; };
+		4092E8D61EC4905C00A807EB /* Place.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4092E8D51EC4905C00A807EB /* Place.swift */; };
 		40A781531EB329FB003D73CC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40A781521EB329FB003D73CC /* AppDelegate.swift */; };
 		40A7815A1EB329FB003D73CC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 40A781591EB329FB003D73CC /* Assets.xcassets */; };
 		40A7815D1EB329FB003D73CC /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 40A7815B1EB329FB003D73CC /* LaunchScreen.storyboard */; };
@@ -44,7 +53,6 @@
 		40ADF3F01EB4913B00B69722 /* WomanHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40ADF3EF1EB4913B00B69722 /* WomanHeaderView.swift */; };
 		40ADF3F31EB4940400B69722 /* WomanMeetingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40ADF3F21EB4940400B69722 /* WomanMeetingsViewController.swift */; };
 		40ADF3F51EB4AF3000B69722 /* Meeting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40ADF3F41EB4AF3000B69722 /* Meeting.swift */; };
-		40ADF3F81EB4B46C00B69722 /* WomanMeetingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40ADF3F71EB4B46C00B69722 /* WomanMeetingTableViewCell.swift */; };
 		40ADF3FA1EB4B7BC00B69722 /* Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40ADF3F91EB4B7BC00B69722 /* Date.swift */; };
 		40B818511EB4DF25005B8073 /* ManProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40B818501EB4DF25005B8073 /* ManProfileViewController.swift */; };
 		40B818531EB4E8F4005B8073 /* Keyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40B818521EB4E8F4005B8073 /* Keyboard.swift */; };
@@ -80,6 +88,15 @@
 		40457F691EC3133E00840841 /* ManScheduledMeetingDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ManScheduledMeetingDetailsViewController.swift; path = ViewControllers/Man/ManScheduledMeetingDetailsViewController.swift; sourceTree = "<group>"; };
 		40457F6D1EC3324300840841 /* ManPendingMeetingDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ManPendingMeetingDetailsViewController.swift; path = ViewControllers/Man/ManPendingMeetingDetailsViewController.swift; sourceTree = "<group>"; };
 		40457F6F1EC3346600840841 /* WomanProfileTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = WomanProfileTableViewCell.swift; path = UI/Views/Cells/WomanProfileTableViewCell.swift; sourceTree = "<group>"; };
+		40457F711EC34D8F00840841 /* WomanSearchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = WomanSearchViewController.swift; path = ViewControllers/Woman/WomanSearchViewController.swift; sourceTree = "<group>"; };
+		40457F731EC352AA00840841 /* WomanSearchMap.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = WomanSearchMap.storyboard; path = UI/Woman/WomanSearchMap.storyboard; sourceTree = "<group>"; };
+		40457F751EC353A900840841 /* WomanSearchList.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = WomanSearchList.storyboard; path = UI/Woman/WomanSearchList.storyboard; sourceTree = "<group>"; };
+		40457F771EC356BE00840841 /* WomanSearchListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = WomanSearchListViewController.swift; path = ViewControllers/Woman/WomanSearchListViewController.swift; sourceTree = "<group>"; };
+		40457F791EC356D000840841 /* WomanSearchMapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = WomanSearchMapViewController.swift; path = ViewControllers/Woman/WomanSearchMapViewController.swift; sourceTree = "<group>"; };
+		4092E8CB1EC45F6A00A807EB /* .swiftlint.yml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = .swiftlint.yml; path = ../.swiftlint.yml; sourceTree = "<group>"; };
+		4092E8D11EC4804400A807EB /* WomanMeetingTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = WomanMeetingTableViewCell.xib; path = UI/Views/WomanMeetingTableViewCell.xib; sourceTree = "<group>"; };
+		4092E8D31EC486C900A807EB /* WomanMeetingTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = WomanMeetingTableViewCell.swift; path = UI/Views/WomanMeetingTableViewCell.swift; sourceTree = "<group>"; };
+		4092E8D51EC4905C00A807EB /* Place.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Place.swift; path = DataModels/Place.swift; sourceTree = "<group>"; };
 		40A7814F1EB329FA003D73CC /* PimpMe.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PimpMe.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		40A781521EB329FB003D73CC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		40A781591EB329FB003D73CC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -110,7 +127,6 @@
 		40ADF3EF1EB4913B00B69722 /* WomanHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = WomanHeaderView.swift; path = UI/Views/WomanHeaderView.swift; sourceTree = "<group>"; };
 		40ADF3F21EB4940400B69722 /* WomanMeetingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = WomanMeetingsViewController.swift; path = ViewControllers/Woman/WomanMeetingsViewController.swift; sourceTree = "<group>"; };
 		40ADF3F41EB4AF3000B69722 /* Meeting.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Meeting.swift; path = DataModels/Meeting.swift; sourceTree = "<group>"; };
-		40ADF3F71EB4B46C00B69722 /* WomanMeetingTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = WomanMeetingTableViewCell.swift; path = UI/Views/Cells/WomanMeetingTableViewCell.swift; sourceTree = "<group>"; };
 		40ADF3F91EB4B7BC00B69722 /* Date.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Date.swift; path = Utils/Date.swift; sourceTree = "<group>"; };
 		40B818501EB4DF25005B8073 /* ManProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ManProfileViewController.swift; path = ViewControllers/Man/ManProfileViewController.swift; sourceTree = "<group>"; };
 		40B818521EB4E8F4005B8073 /* Keyboard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Keyboard.swift; path = Utils/Keyboard.swift; sourceTree = "<group>"; };
@@ -180,6 +196,7 @@
 				40A7815E1EB329FB003D73CC /* Info.plist */,
 				40A781A91EB39601003D73CC /* PimpMe-Bridging-Header.h */,
 				40F813511EBCA425006BACDC /* GoogleService-Info.plist */,
+				4092E8CB1EC45F6A00A807EB /* .swiftlint.yml */,
 			);
 			path = PimpMe;
 			sourceTree = "<group>";
@@ -220,6 +237,7 @@
 				40F21E521EB9FD83002316B9 /* PlacePicker.swift */,
 				40E3DA411EBB3A25009CB6A1 /* Schedulable.swift */,
 				40E3DA431EBB3DEA009CB6A1 /* MeetingsStorage.swift */,
+				4092E8D51EC4905C00A807EB /* Place.swift */,
 			);
 			name = DataModels;
 			sourceTree = "<group>";
@@ -280,6 +298,8 @@
 				40F813571EBCA92B006BACDC /* Chat.storyboard */,
 				40A781851EB367AD003D73CC /* WomanProfile.storyboard */,
 				40A781861EB367AD003D73CC /* WomanSearch.storyboard */,
+				40457F731EC352AA00840841 /* WomanSearchMap.storyboard */,
+				40457F751EC353A900840841 /* WomanSearchList.storyboard */,
 			);
 			name = Woman;
 			sourceTree = "<group>";
@@ -304,6 +324,9 @@
 				40A781A71EB395B9003D73CC /* WomanFiltersViewController.swift */,
 				40ADF3F21EB4940400B69722 /* WomanMeetingsViewController.swift */,
 				402C52761EB8B00500EFC9ED /* WomanMeetingInfoViewController.swift */,
+				40457F711EC34D8F00840841 /* WomanSearchViewController.swift */,
+				40457F771EC356BE00840841 /* WomanSearchListViewController.swift */,
+				40457F791EC356D000840841 /* WomanSearchMapViewController.swift */,
 			);
 			name = Woman;
 			sourceTree = "<group>";
@@ -314,6 +337,8 @@
 				40ADF3F61EB4B45200B69722 /* Cells */,
 				40ADF3ED1EB48FF100B69722 /* WomanHeaderView.xib */,
 				40ADF3EF1EB4913B00B69722 /* WomanHeaderView.swift */,
+				4092E8D11EC4804400A807EB /* WomanMeetingTableViewCell.xib */,
+				4092E8D31EC486C900A807EB /* WomanMeetingTableViewCell.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -321,7 +346,6 @@
 		40ADF3F61EB4B45200B69722 /* Cells */ = {
 			isa = PBXGroup;
 			children = (
-				40ADF3F71EB4B46C00B69722 /* WomanMeetingTableViewCell.swift */,
 				40E3DA3D1EBB294F009CB6A1 /* ManMeetingsTableViewCell.swift */,
 				40457F6F1EC3346600840841 /* WomanProfileTableViewCell.swift */,
 			);
@@ -359,6 +383,7 @@
 				2D9D53799C6391A96B67A339 /* [CP] Embed Pods Frameworks */,
 				F1B3C796E3AD2CD1FE8A88D2 /* [CP] Copy Pods Resources */,
 				40E3DA451EBB4080009CB6A1 /* ShellScript */,
+				4092E8CA1EC45F1900A807EB /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -430,9 +455,13 @@
 				40A781891EB367AD003D73CC /* WomanSearch.storyboard in Resources */,
 				40A7815D1EB329FB003D73CC /* LaunchScreen.storyboard in Resources */,
 				40F813521EBCA425006BACDC /* GoogleService-Info.plist in Resources */,
+				40457F761EC353A900840841 /* WomanSearchList.storyboard in Resources */,
 				40ADF3EE1EB48FF100B69722 /* WomanHeaderView.xib in Resources */,
 				40A7815A1EB329FB003D73CC /* Assets.xcassets in Resources */,
 				40E3DA3C1EBB2852009CB6A1 /* ManNewMeeting.storyboard in Resources */,
+				4092E8D21EC4804400A807EB /* WomanMeetingTableViewCell.xib in Resources */,
+				40457F741EC352AA00840841 /* WomanSearchMap.storyboard in Resources */,
+				4092E8CC1EC45F6A00A807EB /* .swiftlint.yml in Resources */,
 				40457F681EC312FC00840841 /* ManPendingMeetingDetails.storyboard in Resources */,
 				40A781911EB368BE003D73CC /* ManMeetings.storyboard in Resources */,
 			);
@@ -455,6 +484,19 @@
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-PimpMe/Pods-PimpMe-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
+		};
+		4092E8CA1EC45F1900A807EB /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if which swiftlint >/dev/null; then\nswiftlint\nelse\necho \"error: SwiftLint does not exist, download it from https://github.com/realm/SwiftLint\"\nexit 1\nfi";
 		};
 		40E3DA451EBB4080009CB6A1 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -506,7 +548,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				40ADF3F81EB4B46C00B69722 /* WomanMeetingTableViewCell.swift in Sources */,
+				40457F7A1EC356D000840841 /* WomanSearchMapViewController.swift in Sources */,
+				40457F781EC356BE00840841 /* WomanSearchListViewController.swift in Sources */,
 				40E3DA441EBB3DEA009CB6A1 /* MeetingsStorage.swift in Sources */,
 				400ADE6A1EBA0947006EA363 /* DatePickerPopoverViewController.swift in Sources */,
 				40F813561EBCA8AB006BACDC /* ChatViewController.swift in Sources */,
@@ -520,6 +563,7 @@
 				40E3DA421EBB3A25009CB6A1 /* Schedulable.swift in Sources */,
 				40ADF3F51EB4AF3000B69722 /* Meeting.swift in Sources */,
 				400ADE6C1EBA272E006EA363 /* UIText.swift in Sources */,
+				40457F721EC34D8F00840841 /* WomanSearchViewController.swift in Sources */,
 				40B9AEE01EB8DF8000DEBA54 /* Man.swift in Sources */,
 				40457F6E1EC3324300840841 /* ManPendingMeetingDetailsViewController.swift in Sources */,
 				40457F701EC3346600840841 /* WomanProfileTableViewCell.swift in Sources */,
@@ -537,6 +581,8 @@
 				40ADF3F31EB4940400B69722 /* WomanMeetingsViewController.swift in Sources */,
 				40F21E531EB9FD83002316B9 /* PlacePicker.swift in Sources */,
 				40F21E4D1EB9B20B002316B9 /* ManNewMeetingTableViewController.swift in Sources */,
+				4092E8D61EC4905C00A807EB /* Place.swift in Sources */,
+				4092E8D41EC486C900A807EB /* WomanMeetingTableViewCell.swift in Sources */,
 				40E3DA401EBB2CCE009CB6A1 /* ManMeetingsViewController.swift in Sources */,
 				40A781A81EB395B9003D73CC /* WomanFiltersViewController.swift in Sources */,
 				40B9AEE41EB8E08800DEBA54 /* Woman.swift in Sources */,

@@ -13,7 +13,7 @@ protocol Range {
   var end: Double {get set}
 }
 
-struct Age:Range {
+struct Age: Range {
   var start: Double
   var end: Double
 }
@@ -28,9 +28,8 @@ struct Time: Range {
   var end: Double
 }
 
-
 extension Double {
-  func isIn(range: Range)-> Bool {
+  func isIn(range: Range) -> Bool {
     return self > range.start && self < range.end ? true : false
   }
 }

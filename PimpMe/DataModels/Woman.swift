@@ -8,7 +8,7 @@
 
 import Foundation
 
-class Woman  {
+class Woman {
   var mainPhoto: Photo!
   var photos: [Photo]?
   var age: Int!
@@ -16,7 +16,7 @@ class Woman  {
   var height: Int!
   var hairColor: String!
   var id: Int?
-  
+
   init(name: String, age: Int, height: Int, hairColor: String) {
     self.name = name
     self.age = age

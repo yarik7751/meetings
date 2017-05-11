@@ -13,7 +13,7 @@ class WomanFiltersViewController: UIViewController {
 
   @IBOutlet weak var minimumAmountTextField: UITextField!
   @IBOutlet weak var ageRangeSlider: MARKRangeSlider!
-  
+
   override func viewDidLoad() {
     super.viewDidLoad()
     ageRangeSlider.backgroundColor = UIColor.clear

@@ -12,7 +12,7 @@ import SDWebImage
 
 class PhotoScrollView: UIScrollView {
   var isPopulated = false
-  
+
   func populate(with photos: [Photo]) {
     self.contentSize = CGSize(width: self.frame.width * CGFloat(photos.count), height: self.frame.height)
     for (index, photo) in photos.enumerated() {

@@ -14,10 +14,10 @@ class ManMeetingsTableViewCell: UITableViewCell {
   @IBOutlet private weak var dateLabel: UILabel!
   @IBOutlet private weak var numberOfGirlsLabel: UILabel!
   @IBOutlet private weak var amountLabel: UILabel!
-  
+
   var meeting: Meeting! {
     didSet {
-      placeLabel.text = meeting.place
+      placeLabel.text = meeting.place.name
       dateLabel.text = meeting.time.start.stringValue
       numberOfGirlsLabel.text = "Откликнулось девушек: \(meeting.women?.count ?? 0)"
       amountLabel.text = "\(Int(meeting.present))$"

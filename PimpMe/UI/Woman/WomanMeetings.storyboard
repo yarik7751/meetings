@@ -36,66 +36,8 @@
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="aD7-Sw-vsc" id="i2e-ik-QH2">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="127.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ERd-AM-RIi">
-                                                    <rect key="frame" x="8" y="16" width="95.5" height="95.5"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="width" secondItem="ERd-AM-RIi" secondAttribute="height" multiplier="1:1" id="Dln-mF-D5n"/>
-                                                    </constraints>
-                                                    <userDefinedRuntimeAttributes>
-                                                        <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                                            <integer key="value" value="48"/>
-                                                        </userDefinedRuntimeAttribute>
-                                                    </userDefinedRuntimeAttributes>
-                                                </imageView>
-                                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" translatesAutoresizingMaskIntoConstraints="NO" id="CIA-g6-7fj">
-                                                    <rect key="frame" x="119.5" y="8" width="121" height="111.5"/>
-                                                    <subviews>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name, Age" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Vko-sY-1eJ">
-                                                            <rect key="frame" x="0.0" y="0.0" width="121" height="26.5"/>
-                                                            <fontDescription key="fontDescription" type="system" pointSize="22"/>
-                                                            <nil key="textColor"/>
-                                                            <nil key="highlightedColor"/>
-                                                        </label>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Place" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6RW-vW-4fN">
-                                                            <rect key="frame" x="0.0" y="47.5" width="121" height="21.5"/>
-                                                            <fontDescription key="fontDescription" type="system" pointSize="18"/>
-                                                            <nil key="textColor"/>
-                                                            <nil key="highlightedColor"/>
-                                                        </label>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Date" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="14" translatesAutoresizingMaskIntoConstraints="NO" id="7uA-rg-h1e">
-                                                            <rect key="frame" x="0.0" y="90" width="121" height="21.5"/>
-                                                            <fontDescription key="fontDescription" type="system" pointSize="18"/>
-                                                            <nil key="textColor"/>
-                                                            <nil key="highlightedColor"/>
-                                                        </label>
-                                                    </subviews>
-                                                </stackView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iNy-ET-IVO">
-                                                    <rect key="frame" x="248.5" y="48.5" width="63.5" height="31.5"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="26"/>
-                                                    <nil key="textColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                            </subviews>
-                                            <constraints>
-                                                <constraint firstItem="iNy-ET-IVO" firstAttribute="centerY" secondItem="i2e-ik-QH2" secondAttribute="centerY" id="8x2-vz-SMn"/>
-                                                <constraint firstAttribute="bottom" secondItem="ERd-AM-RIi" secondAttribute="bottom" constant="16" id="9gT-L1-yfn"/>
-                                                <constraint firstItem="CIA-g6-7fj" firstAttribute="top" secondItem="i2e-ik-QH2" secondAttribute="top" constant="8" id="J0V-M4-7hc"/>
-                                                <constraint firstAttribute="bottom" secondItem="CIA-g6-7fj" secondAttribute="bottom" constant="8" id="L9I-fK-wjw"/>
-                                                <constraint firstItem="CIA-g6-7fj" firstAttribute="leading" secondItem="ERd-AM-RIi" secondAttribute="trailing" constant="16" id="OSa-6a-rfo"/>
-                                                <constraint firstItem="iNy-ET-IVO" firstAttribute="leading" secondItem="CIA-g6-7fj" secondAttribute="trailing" constant="8" id="Ojk-8q-UPe"/>
-                                                <constraint firstItem="ERd-AM-RIi" firstAttribute="top" secondItem="i2e-ik-QH2" secondAttribute="top" constant="16" id="TPQ-56-SNy"/>
-                                                <constraint firstAttribute="trailing" secondItem="iNy-ET-IVO" secondAttribute="trailing" constant="8" id="h3z-ay-f6t"/>
-                                                <constraint firstItem="ERd-AM-RIi" firstAttribute="leading" secondItem="i2e-ik-QH2" secondAttribute="leading" constant="8" id="maq-sb-XrK"/>
-                                            </constraints>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <outlet property="amountLabel" destination="iNy-ET-IVO" id="Ra7-0X-Gcr"/>
-                                            <outlet property="dateLabel" destination="7uA-rg-h1e" id="MWb-sx-g8G"/>
-                                            <outlet property="nameAgeLabel" destination="Vko-sY-1eJ" id="meJ-E2-YvA"/>
-                                            <outlet property="photoImageView" destination="ERd-AM-RIi" id="r6M-v8-S8u"/>
-                                            <outlet property="placeLabel" destination="6RW-vW-4fN" id="E2a-LR-sXc"/>
                                             <segue destination="dq9-GS-UHA" kind="show" identifier="showMeetingInfo" id="0Qv-ji-30Y"/>
                                         </connections>
                                     </tableViewCell>

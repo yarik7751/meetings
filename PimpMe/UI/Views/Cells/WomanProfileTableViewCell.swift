@@ -13,7 +13,7 @@ class WomanProfileTableViewCell: UITableViewCell {
   @IBOutlet weak var photoScrollView: PhotoScrollView!
   @IBOutlet weak var pageControl: UIPageControl!
   @IBOutlet weak var nameLabel: UILabel!
-  
+
   var woman: Woman! {
     didSet {
       photoScrollView.delegate = self
@@ -30,10 +30,10 @@ class WomanProfileTableViewCell: UITableViewCell {
 }
 
 extension WomanProfileTableViewCell: UIScrollViewDelegate {
-  func scrollViewDidEndDecelerating(_ scrollView: UIScrollView){
+  func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
     let pageWidth = scrollView.frame.width
     let currentPage = floor((scrollView.contentOffset.x - pageWidth / 2) / pageWidth) + 1
-    
+
     self.pageControl.currentPage = Int(currentPage)
   }
 }

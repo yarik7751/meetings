@@ -15,20 +15,19 @@ class WomanMeetingInfoViewController: UIViewController {
   @IBOutlet weak var dateLabel: UILabel!
   @IBOutlet weak var placeLabel: UILabel!
   var meeting: Meeting!
-  
+
   override func viewDidLoad() {
     super.viewDidLoad()
     navigationItem.title = meeting.man.name
     nameAgeLabel.text = meeting.man.name
     dateLabel.text = meeting.time.start.stringValue
-    placeLabel.text = meeting.place
+    placeLabel.text = meeting.place.name
     photoImageView.image = #imageLiteral(resourceName: "banana")
   }
 
   @IBAction func cancelMeeting(_ sender: UIButton) {
     let alert = UIAlertController(title: NSLocalizedString("COMMON_Cancel", comment: ""), message: NSLocalizedString("MEETING_INFO_CancelMeeting", comment: ""), preferredStyle: .alert)
-    let yes = UIAlertAction(title: NSLocalizedString("COMMON_Yes", comment: ""), style: .default, handler: {
-      _ in
+    let yes = UIAlertAction(title: NSLocalizedString("COMMON_Yes", comment: ""), style: .default, handler: { _ in
       self.meeting.cancel()
       self.navigationController?.popViewController(animated: true)
     })

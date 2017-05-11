@@ -8,9 +8,8 @@
 
 import Foundation
 
-  
 enum User {
-  
+
   static var isAuthorized: Bool {
     get {
       return UserDefaults.standard.bool(forKey: "isAuthorized")
@@ -19,7 +18,7 @@ enum User {
       UserDefaults.standard.set(newValue, forKey: "isAuthorized")
     }
   }
-  
+
   static var isMan: Bool {
     get {
       return UserDefaults.standard.bool(forKey: "isMan")
@@ -28,7 +27,7 @@ enum User {
       UserDefaults.standard.set(newValue, forKey: "isMan")
     }
   }
-  
+
   static var name: String {
     get {
       return UserDefaults.standard.string(forKey: "name") ?? ""
@@ -37,7 +36,7 @@ enum User {
       UserDefaults.standard.set(newValue, forKey: "name")
     }
   }
-  
+
   static var age: Int? {
     get {
       if let result = UserDefaults.standard.value(forKey: "age") as? Int {
@@ -49,16 +48,16 @@ enum User {
       UserDefaults.standard.set(newValue, forKey: "age")
     }
   }
-  
+
   static var about: String {
     get {
-      return UserDefaults.standard.string(forKey: "about") ?? NSLocalizedString("PROFILE_About" , comment: "")
+      return UserDefaults.standard.string(forKey: "about") ?? NSLocalizedString("PROFILE_About", comment: "")
     }
     set {
       UserDefaults.standard.set(newValue, forKey: "about")
     }
   }
-  
+
   static var hairColor: String {
     get {
       return UserDefaults.standard.string(forKey: "hairColor") ?? ""
@@ -67,7 +66,7 @@ enum User {
       UserDefaults.standard.set(newValue, forKey: "hairColor")
     }
   }
-  
+
   static var height: Int? {
     get {
       if let result = UserDefaults.standard.value(forKey: "height") as? Int {
@@ -80,4 +79,3 @@ enum User {
     }
   }
 }
-  

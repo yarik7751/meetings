@@ -14,7 +14,7 @@ protocol Schedulable {
   var hasScheduled: Bool {get set}
 }
 
-extension Schedulable {  
+extension Schedulable {
   func getMeeting(forIndexPath indexPath: IndexPath) -> Meeting {
     if hasScheduled {
       return indexPath.section == 0 ? scheduledMeetings[indexPath.row] : meetings[indexPath.row]
@@ -22,14 +22,15 @@ extension Schedulable {
       return meetings[indexPath.row]
     }
   }
-  
+
   func getNumberOfRows(forSection section: Int) -> Int {
     guard hasScheduled else {return meetings.count }
     return section == 0 ? scheduledMeetings.count : meetings.count
   }
-  
+
   func getTitle(forSection section: Int) -> String {
     guard hasScheduled else { return NSLocalizedString(MeetingState.pending.rawValue, comment: "") }
-    return section == 0 ? NSLocalizedString(MeetingState.scheduled.rawValue, comment: ""): NSLocalizedString(MeetingState.pending.rawValue, comment: "")
+    return section == 0 ? NSLocalizedString(MeetingState.scheduled.rawValue, comment: "") :
+      NSLocalizedString(MeetingState.pending.rawValue, comment: "")
   }
 }

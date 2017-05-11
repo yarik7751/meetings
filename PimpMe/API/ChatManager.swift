@@ -10,8 +10,8 @@ import Foundation
 import FirebaseDatabase
 
 class ChatManager: NSObject {
-  
+
   private lazy var database: FIRDatabaseReference = FIRDatabase.database().reference()
   private var chatRefHandle: FIRDatabaseHandle?
-  
+
 }

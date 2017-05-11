@@ -12,18 +12,18 @@ class AuthViewController: UIViewController {
   @IBOutlet weak var emailTextField: UITextField!
   @IBOutlet weak var passwordTextField: UITextField!
   @IBOutlet weak var genderSelector: UISegmentedControl!
-  
+
   @IBAction func login(_ sender: UIButton) {
     authenticate()
   }
 
   @IBAction func forgotPassword(_ sender: UIButton) {
   }
-  
+
   @IBAction func endEditingTap(_ sender: UIControl) {
     view.endEditing(false)
   }
-  
+
   func authenticate() {
    /* guard emailTextField.hasText, passwordTextField.hasText else {
       showAlert(withTitle: "COMMON_Error".localized, message: "ERROR_EmptyFields".localized)
@@ -43,7 +43,7 @@ class AuthViewController: UIViewController {
     } */
     signUp()
   }
-  
+
   private func signUp() {
     //TODO: - API Registration/logging should go here
     User.isAuthorized = true
@@ -53,7 +53,6 @@ class AuthViewController: UIViewController {
     present(vc, animated: true, completion: nil)
   }
 }
-
 
 extension AuthViewController: UITextFieldDelegate {
   func textFieldShouldReturn(_ textField: UITextField) -> Bool {

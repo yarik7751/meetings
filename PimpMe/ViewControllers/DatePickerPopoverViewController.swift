@@ -11,8 +11,8 @@ import UIKit
 class DatePickerPopoverViewController: UIViewController {
 
   @IBOutlet private weak var datePicker: UIDatePicker!
-  weak var delegate:DatePickerPopoverDelegate?
-  
+  weak var delegate: DatePickerPopoverDelegate?
+
   @IBAction func done(_ sender: UIButton) {
     delegate?.datePicker(didFinishPicking: datePicker.date)
     dismiss(animated: true, completion: nil)

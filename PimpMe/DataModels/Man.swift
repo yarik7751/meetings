@@ -8,7 +8,6 @@
 
 import Foundation
 
-
 class Man {
   var mainPhoto: Photo?
   var photos: [Photo]?
@@ -16,7 +15,7 @@ class Man {
   var age: Int?
   var about: String?
   var id: Int?
-  
+
   init(name: String) {
     self.name = name
   }

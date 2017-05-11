@@ -26,6 +26,8 @@
 /* Profile */
 "PROFILE_About" = "О себе";
 
+/* Place */
+"PLACE_NoPlace" = "N/A";
 
 /* AuthViewController */
 "AUTH_NotEmail" = "Проверьте правильность адреса электронной почты";

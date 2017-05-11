@@ -11,13 +11,13 @@ import MARKRangeSlider
 
 class ManNewMeetingTableViewController: UITableViewController {
 
-  fileprivate var collapsedHeight:CGFloat = 60.0
-  fileprivate var selectedIndexPath:IndexPath? = [0,0]
+  fileprivate var collapsedHeight: CGFloat = 60.0
+  fileprivate var selectedIndexPath: IndexPath? = [0, 0]
   fileprivate var previousButton: RotationButton?
   fileprivate let placePicker = PlacePicker()
-  fileprivate var startDate:Double?
-  fileprivate var endDate: Double?
-  
+  fileprivate var startDate: Date?
+  fileprivate var endDate: Date?
+
   /* Girl Outlets */
   @IBOutlet weak var expandGirlButton: RotationButton!
   @IBOutlet weak var ageRangeSlider: MARKRangeSlider!
@@ -25,22 +25,21 @@ class ManNewMeetingTableViewController: UITableViewController {
   @IBOutlet weak var maximumAgeLabel: UILabel!
   @IBOutlet weak var heightRangeSlider: MARKRangeSlider!
   @IBOutlet weak var hairColorTextField: UITextField!
-  
+
   /* Location Outlets */
   @IBOutlet weak var placeLabel: UILabel!
   @IBOutlet weak var adressLabel: UILabel!
   @IBOutlet weak var dateLabel: UILabel!
-  
+
   /* Present Outlets */
   @IBOutlet weak var amountTextField: UITextField!
-  
-  
+
   override func viewDidLoad() {
     super.viewDidLoad()
     placePicker.delegate = self
     setupUI()
   }
-  
+
   private func setupUI() {
     navigationItem.title = NSLocalizedString("NEW_MEETING_Title", comment: "")
     tableView.tableFooterView = UIView()
@@ -56,7 +55,7 @@ class ManNewMeetingTableViewController: UITableViewController {
     heightRangeSlider.minimumDistance = 5.0
     amountTextField.addDoneButton()
   }
-  
+
   @IBAction func expandCollapseFirstCell(_ sender: RotationButton) {
     expandCollapse(button: sender)
   }
@@ -64,7 +63,7 @@ class ManNewMeetingTableViewController: UITableViewController {
   @IBAction func expandCollapseSecondCell(_ sender: RotationButton) {
     expandCollapse(button: sender)
   }
-  
+
   @IBAction func expandCollapseThird(_ sender: RotationButton) {
     expandCollapse(button: sender)
   }
@@ -78,16 +77,16 @@ class ManNewMeetingTableViewController: UITableViewController {
     datePicker.delegate = self
     present(datePicker, animated: true, completion: nil)
   }
-  
+
   @IBAction func pickPlace(_ sender: UIButton) {
     placePicker.pickPlace()
   }
-  
+
   @IBAction func ageChanged(_ sender: MARKRangeSlider) {
     minimumAgeLabel.text = String(describing: Int(sender.leftValue))
     maximumAgeLabel.text = String(describing: Int(sender.rightValue))
   }
-  
+
   override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
     if indexPath == selectedIndexPath {
       switch indexPath.row {
@@ -101,7 +100,7 @@ class ManNewMeetingTableViewController: UITableViewController {
     }
     return collapsedHeight
   }
-  
+
   private func expandCollapse(button: RotationButton) {
     view.endEditing(false)
     if previousButton != button {
@@ -113,24 +112,24 @@ class ManNewMeetingTableViewController: UITableViewController {
     tableView.beginUpdates()
     tableView.endUpdates()
   }
-  
+
   @IBAction func previewMeeting(_ sender: UIButton) {
     guard placeLabel.text != NSLocalizedString("NEW_MEETING_Place", comment: "") else {showAlert(withTitle: NSLocalizedString("COMMON_Error", comment: ""),
-                                                      message:NSLocalizedString("NEW_MEETING_NoPlace" , comment: ""))
+                                                      message:NSLocalizedString("NEW_MEETING_NoPlace", comment: ""))
     return }
-    
+
     guard let start = startDate, let end = endDate else {
       showAlert(withTitle: NSLocalizedString("COMMON_Error", comment: ""),
-                message:NSLocalizedString("NEW_MEETING_NoTime" , comment: ""))
+                message:NSLocalizedString("NEW_MEETING_NoTime", comment: ""))
       return
     }
-    
+
     guard let amount = Double(amountTextField.text!) else {
       showAlert(withTitle: NSLocalizedString("COMMON_Error", comment: ""),
-                message:NSLocalizedString("NEW_MEETING_NoPresent" , comment: ""))
+                message:NSLocalizedString("NEW_MEETING_NoPresent", comment: ""))
       return
     }
-    let meeting = Meeting(place: placeLabel.text!, time: Time(start: start, end: end), man: Man(name: User.name), present: amount)
+    let meeting = Meeting.createMeeting(at: placeLabel.text!, start: start, end: end, mansName: User.name, present: amount)
     meeting.preferredAge = Age(start: Double(ageRangeSlider.leftValue), end: Double(ageRangeSlider.rightValue))
     meeting.preferredHeight = Height(start: Double(heightRangeSlider.leftValue), end: Double(heightRangeSlider.rightValue))
     meeting.preferredHairColor = hairColorTextField.text
@@ -138,7 +137,7 @@ class ManNewMeetingTableViewController: UITableViewController {
     preview.meeting = meeting
     navigationController?.pushViewController(preview, animated: true)
   }
-  
+
 }
 
 extension ManNewMeetingTableViewController: UITextFieldDelegate {
@@ -157,9 +156,9 @@ extension ManNewMeetingTableViewController: PlacePickerDelegate {
 
 extension ManNewMeetingTableViewController: DatePickerPopoverDelegate {
   func datePicker(didFinishPicking date: Date) {
-    startDate = date.timeIntervalSince1970
-    endDate = date.timeIntervalSince1970 + 19000  //TODO: - Handle end date
-    dateLabel.text = startDate!.stringValue
+    startDate = date
+    endDate = date.addingTimeInterval(17000)  //TODO: - Handle end date
+    dateLabel.text = startDate!.timeIntervalSince1970.stringValue
   }
 }
 

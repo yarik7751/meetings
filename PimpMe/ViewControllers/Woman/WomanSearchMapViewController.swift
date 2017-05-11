@@ -7,29 +7,34 @@
 //
 
 import UIKit
+import GoogleMaps
 
 class WomanSearchMapViewController: UIViewController {
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
+  @IBOutlet var mapView: GMSMapView!
+  let locationManager = CLLocationManager()
 
-        // Do any additional setup after loading the view.
+  override func viewDidLoad() {
+    super.viewDidLoad()
+    mapView.padding = UIEdgeInsets(top: 0.0, left: 0.0, bottom: self.tabBarController!.tabBar.frame.height, right: 0.0)
+    locationManager.delegate = self
+    locationManager.requestWhenInUseAuthorization()
+  }
+}
+
+extension WomanSearchMapViewController: CLLocationManagerDelegate {
+  func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+    if let location = locations.first {
+      mapView.camera = GMSCameraPosition(target: location.coordinate, zoom: 15, bearing: 0, viewingAngle: 0)
+      locationManager.stopUpdatingLocation()
     }
+  }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+  func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
+    if status == .authorizedWhenInUse {
+      locationManager.startUpdatingLocation()
+      mapView.isMyLocationEnabled = true
+      mapView.settings.myLocationButton = true
     }
-    
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
+  }
 }

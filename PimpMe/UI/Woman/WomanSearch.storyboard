@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="mRs-Km-VaU">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="Cc3-Sw-kbk">
     <device id="retina4_0" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -9,46 +9,33 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Поиск-->
-        <scene sceneID="qlC-Ol-s4u">
+        <!--Woman Search View Controller-->
+        <scene sceneID="HpP-jo-QC8">
             <objects>
-                <viewController id="mRs-Km-VaU" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="jmG-Wz-o47"/>
-                        <viewControllerLayoutGuide type="bottom" id="xmh-uU-AkH"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="8nH-oC-kCU">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Woman's Search" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Yun-1W-ABt">
-                                <rect key="frame" x="96" y="273.5" width="128.5" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UYK-AY-sNf">
-                                <rect key="frame" x="139" y="207.5" width="42" height="30"/>
-                                <state key="normal" title="Filters"/>
-                                <connections>
-                                    <segue destination="oWW-I6-FTb" kind="presentation" id="XFk-Mo-9nt"/>
-                                </connections>
-                            </button>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstItem="UYK-AY-sNf" firstAttribute="centerX" secondItem="8nH-oC-kCU" secondAttribute="centerX" id="5iQ-Kz-fR3"/>
-                            <constraint firstItem="Yun-1W-ABt" firstAttribute="centerX" secondItem="8nH-oC-kCU" secondAttribute="centerX" id="ObM-W1-qP9"/>
-                            <constraint firstItem="Yun-1W-ABt" firstAttribute="top" secondItem="UYK-AY-sNf" secondAttribute="bottom" constant="36" id="aWF-Hk-JgF"/>
-                            <constraint firstItem="Yun-1W-ABt" firstAttribute="centerY" secondItem="8nH-oC-kCU" secondAttribute="centerY" id="dYE-p8-jis"/>
-                        </constraints>
-                    </view>
-                    <tabBarItem key="tabBarItem" title="Поиск" id="VER-iT-vZ8"/>
-                    <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="CIv-Xz-9Lj" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <pageViewController autoresizesArchivedViewToFullSize="NO" transitionStyle="scroll" navigationOrientation="horizontal" spineLocation="none" id="Upw-p8-dsZ" customClass="WomanSearchViewController" customModule="PimpMe" customModuleProvider="target" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="gO7-jE-FKE">
+                        <nil key="title"/>
+                        <segmentedControl key="titleView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bar" selectedSegmentIndex="0" id="ekk-7o-DjU">
+                            <rect key="frame" x="96" y="7" width="128" height="30"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <segments>
+                                <segment title="Map"/>
+                                <segment title="List"/>
+                            </segments>
+                            <connections>
+                                <action selector="switchView:" destination="Upw-p8-dsZ" eventType="valueChanged" id="NL7-Q4-JTM"/>
+                            </connections>
+                        </segmentedControl>
+                        <barButtonItem key="rightBarButtonItem" title="Filters" id="LGD-NK-Q6l">
+                            <connections>
+                                <segue destination="oWW-I6-FTb" kind="show" id="q0J-oy-tds"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                </pageViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="iAH-HX-5h0" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1159" y="196"/>
+            <point key="canvasLocation" x="2923.125" y="-463.73239436619718"/>
         </scene>
         <!--Woman Filters View Controller-->
         <scene sceneID="5dh-ZK-5Sp">
@@ -73,7 +60,7 @@
                                 </connections>
                             </view>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="rag-3g-rte">
-                                <rect key="frame" x="16" y="36" width="80" height="30"/>
+                                <rect key="frame" x="16" y="80" width="80" height="30"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
@@ -82,7 +69,7 @@
                                 </connections>
                             </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Minimum Amount" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Lhz-st-120">
-                                <rect key="frame" x="112" y="40.5" width="134.5" height="21"/>
+                                <rect key="frame" x="112" y="84.5" width="134.5" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -107,7 +94,27 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="p5E-as-NZa" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2012" y="195.6521739130435"/>
+            <point key="canvasLocation" x="3773" y="-464"/>
+        </scene>
+        <!--Поиск-->
+        <scene sceneID="Wdg-6a-gYi">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Cc3-Sw-kbk" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Поиск" id="vdl-ow-5Fj"/>
+                    <toolbarItems/>
+                    <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="exf-vu-6RT">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="Upw-p8-dsZ" kind="relationship" relationship="rootViewController" id="feP-dm-DWG"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="fFY-2N-9P1" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2145" y="-464"/>
         </scene>
     </scenes>
 </document>

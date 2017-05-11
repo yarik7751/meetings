@@ -8,28 +8,32 @@
 
 import UIKit
 
-class WomanSearchViewController: UIViewController {
+class WomanSearchViewController: UIPageViewController {
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
+  var mapVC: WomanSearchMapViewController!
+  var listVC: WomanSearchListViewController!
+  var isViewControllersSetup = false
 
-        // Do any additional setup after loading the view.
+  override func  viewDidLoad() {
+    super.viewDidLoad()
+    mapVC = UIStoryboard.viewController(with: "@WomanSearchMap") as! WomanSearchMapViewController
+    listVC = UIStoryboard.viewController(with: "@WomanSearchList") as! WomanSearchListViewController
+
+  }
+
+  override func viewDidLayoutSubviews() {
+    super.viewDidLayoutSubviews()
+    guard !isViewControllersSetup else {return}
+    setViewControllers([mapVC], direction: .forward, animated: true, completion: nil)
+    isViewControllersSetup = true
+  }
+
+  @IBAction func switchView(_ sender: UISegmentedControl) {
+    if sender.selectedSegmentIndex == 0 {
+      setViewControllers([mapVC], direction: .reverse, animated: true, completion: nil)
+    } else {
+      setViewControllers([listVC], direction: .forward, animated: true, completion: nil)
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
+  }
 
 }
