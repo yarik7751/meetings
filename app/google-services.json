@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "885860699798",
+    "firebase_url": "https://brothel-d09c2.firebaseio.com",
+    "project_id": "brothel-d09c2",
+    "storage_bucket": "brothel-d09c2.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:885860699798:android:5147fd2cc09a215e",
+        "android_client_info": {
+          "package_name": "com.elatesoftware.meetings"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "885860699798-2bou7d9qculn7iunhknh0mn5eqomrddk.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.elatesoftware.meetings",
+            "certificate_hash": "e5dddb27272b285cccfdf2ffad599f015fbd31da"
+          }
+        },
+        {
+          "client_id": "885860699798-dilvv8efbgop87erpuiq2jknhpmru42u.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA98qabszwDBFOlR1ok0uav48b0EA7zp28"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "885860699798-dilvv8efbgop87erpuiq2jknhpmru42u.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

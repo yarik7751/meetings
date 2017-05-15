@@ -1,0 +1,73 @@
+<resources>
+    <string name="app_name">Com_elatesoftware_meetings</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="sign_up">Sign Up</string>
+    <string name="sign_in">Sign In</string>
+    <string name="forgot_password">Forgot password</string>
+    <string name="profile">Profile</string>
+    <string name="search">Search</string>
+    <string name="dales">Dales</string>
+    <string name="wallet">Wallet</string>
+    <string name="name">Name</string>
+    <string name="age">Age</string>
+    <string name="city">City</string>
+    <string name="height">Height</string>
+    <string name="hair_color">Hair color</string>
+    <string name="map">Map</string>
+    <string name="list">List</string>
+    <string name="delete">Delete</string>
+    <string name="min_amount">Min amount</string>
+    <string name="available_time">Available time</string>
+    <string name="filters">Filters</string>
+    <string name="only_with_photo">Only with photo</string>
+    <string name="enable_push">Enable push</string>
+    <string name="pending">Pending</string>
+    <string name="scheduled">Scheduled</string>
+    <string name="balance">Balance</string>
+    <string name="available">Available</string>
+    <string name="blocked">Blocked</string>
+    <string name="withdraw">Withdraw</string>
+    <string name="statements">Statements</string>
+    <string name="apply">Apply</string>
+    <string name="place">Place</string>
+    <string name="date">Date</string>
+    <string name="amount">Amount</string>
+    <string name="done">Done</string>
+    <string name="about_me">About me</string>
+    <string name="birth_date">Birth date</string>
+    <string name="girl">Girl</string>
+    <string name="location">Location</string>
+    <string name="presents">Presents</string>
+    <string name="begin_date">Begin date</string>
+    <string name="end_date">End date</string>
+    <string name="where">Where</string>
+    <string name="age_begin" />
+    <string name="deposit">Deposit</string>
+    <string name="field_is_empty">Field is empty</string>
+    <string name="email_invalid">Value email is invalid</string>
+    <string name="short_password">Short password</string>
+    <string name="chat">Chat</string>
+    <string name="send">SEND</string>
+    <string name="in_map">In map</string>
+    <string name="repeat_password">Repeat password</string>
+    <string name="please_register">Please Register</string>
+    <string name="please_select_your_gender">Please select your gender</string>
+    <string name="woman">Woman</string>
+    <string name="man">Man</string>
+
+    <string-array name="months">
+        <item>January</item>
+        <item>February</item>
+        <item>March</item>
+        <item>April</item>
+        <item>May</item>
+        <item>June</item>
+        <item>July</item>
+        <item>August</item>
+        <item>September</item>
+        <item>October</item>
+        <item>November</item>
+        <item>December</item>
+    </string-array>
+</resources>
