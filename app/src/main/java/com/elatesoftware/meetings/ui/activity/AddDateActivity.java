@@ -61,4 +61,11 @@ public class AddDateActivity extends BaseActivity {
     public void clickImgBack() {
         onBackPressed();
     }
+
+    @OnClick(R.id.btn_preview)
+    public void clickBtnPreview() {
+        Intent intent = new Intent(this, ShowAccountActivity.class);
+        intent.putExtra(ShowAccountActivity.TITLE, getString(R.string.preview));
+        startActivity(intent);
+    }
 }
