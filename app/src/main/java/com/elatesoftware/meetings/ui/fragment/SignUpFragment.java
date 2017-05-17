@@ -29,6 +29,7 @@ import com.elatesoftware.meetings.util.Utils;
 import com.elatesoftware.meetings.util.StringUtils;
 import com.elatesoftware.meetings.util.api.Api;
 import com.elatesoftware.meetings.util.api.pojo.MessageAnswer;
+import com.elatesoftware.meetings.util.model.ButtonAnimation;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -39,11 +40,12 @@ public class SignUpFragment extends BaseFragment {
 
     @BindView(R.id.cet_email) CustomEditText cetEmail;
     @BindView(R.id.cet_pass) CustomEditText cetPass;
-    //@BindView(R.id.cet_rep_pass) CustomEditText etRepPass;
+    @BindView(R.id.cet_rep_pass) CustomEditText etRepPass;
     @BindView(R.id.btn_sign_up) CircularProgressButton btnSignUp;
-    @BindView(R.id.tv_forgot_password) TextView tvForgotPassword;
+    @BindView(R.id.tv_sign_in) TextView tvSignIn;
 
     private RegisterBroadcastReceiver registerBroadcastReceiver;
+    private ButtonAnimation buttonAnimation;
 
     private static SignUpFragment signUpFragment;
     public static SignUpFragment getInstance() {
@@ -69,7 +71,7 @@ public class SignUpFragment extends BaseFragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
+        buttonAnimation = new ButtonAnimation(getContext(), btnSignUp);
     }
 
     @Override
@@ -78,9 +80,9 @@ public class SignUpFragment extends BaseFragment {
         unregisterReceivers();
     }
 
-    @OnClick(R.id.tv_forgot_password)
+    @OnClick(R.id.tv_sign_in)
     public void clickTvSignIn() {
-
+        ((MainActivity) getActivity()).setSignInFragment();
     }
 
     private void registerReceivers() {
@@ -100,8 +102,9 @@ public class SignUpFragment extends BaseFragment {
         Intent intent = new Intent(getContext(), RegisterService.class);
         intent.putExtra(RegisterService.USER_NAME, userName);
         intent.putExtra(RegisterService.PASSWORD, password);
-        intent.putExtra(RegisterService.GENDER, CustomSharedPreference.isMan(getContext()) ? 1 : 0);
+        intent.putExtra(RegisterService.GENDER, CustomSharedPreference.isMan(getContext()) ? Const.MAN_VALUE : Const.WOMAN_VALUE);
         getActivity().startService(intent);
+        buttonAnimation.start();
     }
 
     @OnClick(R.id.btn_sign_up)
@@ -114,14 +117,19 @@ public class SignUpFragment extends BaseFragment {
         @Override
         public void onReceive(Context context, Intent intent) {
             String response = intent.getStringExtra(Const.RESPONSE);
+            buttonAnimation.stop();
             if(response != null && response.equals(String.valueOf(Const.CODE_SUCCESS)) && MessageAnswer.getInstance() != null) {
                 Log.d(TAG, "registration 200");
                 if(MessageAnswer.getInstance().getSuccess()) {
+                    showMessage(R.string.reg_succ);
+                    ((MainActivity) getActivity()).setSignInFragment();
                     Log.d(TAG, "registration TRUE");
                 } else {
+                    showMessage(R.string.wrong_data);
                     Log.d(TAG, "registration FALSE");
                 }
             } else {
+                showMessage(R.string.request_error);
                 Log.d(TAG, "registration error");
             }
             /*CustomSharedPreference.setId(getContext(), 1000);
