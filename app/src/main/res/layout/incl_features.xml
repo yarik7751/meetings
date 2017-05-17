@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:gravity="center_vertical">
+
+        <ImageView
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_marginRight="16dp"
+            android:src="@drawable/features"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:textSize="16sp"
+            android:textColor="@color/button_blue_light"
+            android:text="@string/features"
+            android:textStyle="bold"/>
+    </LinearLayout>
+
+    <com.elatesoftware.meetings.ui.view.CustomEditText
+        android:id="@+id/cet_height"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        android:gravity="left|center_vertical"
+        android:hint="@string/height"/>
+
+    <com.elatesoftware.meetings.ui.view.CustomEditText
+        android:id="@+id/cet_weight"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:layout_marginBottom="8dp"
+        android:gravity="left|center_vertical"
+        android:hint="@string/weight"/>
+
+    <com.elatesoftware.meetings.ui.view.CustomEditText
+        android:id="@+id/cet_about"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:layout_marginBottom="8dp"
+        android:gravity="left|center_vertical"
+        android:hint="@string/hair_color"/>
+</LinearLayout>

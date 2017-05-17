@@ -7,6 +7,7 @@ import android.content.res.TypedArray;
 import android.os.Build;
 import android.support.annotation.RequiresApi;
 import android.support.v7.widget.CardView;
+import android.text.InputType;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.Gravity;
@@ -24,13 +25,17 @@ public class CustomEditText extends FrameLayout {
     private CardView cv;
     private EditText et;
 
-    private int colorFrom = getResources().getColor(android.R.color.darker_gray);
+    private int colorFrom = getResources().getColor(R.color.gray);
     private int colorTo = getResources().getColor(R.color.white);
+    private int hintColor = getResources().getColor(R.color.white);
+    private int hintColorFocus = getResources().getColor(R.color.black);
     private ValueAnimator colorAnimation, colorAnimationBack;
 
     int[] attrsArray = new int[] {
             android.R.attr.gravity,
-            android.R.attr.hint
+            android.R.attr.hint,
+            android.R.attr.maxLines,
+            android.R.attr.inputType
     };
 
     public CustomEditText(Context context) {
@@ -93,8 +98,10 @@ public class CustomEditText extends FrameLayout {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
                 if(hasFocus) {
+                    et.setHintTextColor(hintColorFocus);
                     colorAnimation.start();
                 } else {
+                    et.setHintTextColor(hintColor);
                     colorAnimationBack.start();
                 }
             }
@@ -107,7 +114,13 @@ public class CustomEditText extends FrameLayout {
         int gravity = typedArray.getInt(0, Gravity.LEFT);
         et.setGravity(gravity);
         et.setHint(typedArray.getString(1));
-        Log.d(TAG, "gravity: " + gravity);
+        int maxLines = typedArray.getInt(2, 1);
+        et.setSingleLine(maxLines == 1);
+        et.setMaxLines(maxLines);
+        int inputType = typedArray.getInt(3, -1);
+        if(inputType > 0) {
+            et.setInputType(inputType);
+        }
     }
 
     public EditText getEditText() {

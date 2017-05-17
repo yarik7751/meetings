@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
@@ -9,44 +10,148 @@
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginRight="16dp"
-        android:layout_marginLeft="16dp">
+        android:layout_marginRight="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:padding="8dp"
-            android:text="@string/balance"
-            android:textColor="@android:color/black"
-            android:textSize="20sp"/>
-
-        <TextView
-            android:id="@+id/tv_balance_available"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:padding="8dp"
-            android:text="@string/available"
-            android:textColor="@color/black"
-            android:textSize="14sp"/>
-
-        <TextView
-            android:id="@+id/tv_balance_blocked"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:padding="8dp"
-            android:text="@string/blocked"
-            android:textColor="@color/black"
-            android:textSize="14sp"/>
-
-        <Button
-            android:id="@+id/btn_deposit"
+        <android.support.v7.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
-            android:text="@string/deposit"/>
+            android:layout_marginTop="8dp"
+            card_view:cardCornerRadius="5dp"
+            card_view:cardBackgroundColor="@color/white">
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:padding="16dp"
+                    android:layout_weight="1">
+
+                    <de.hdodenhof.circleimageview.CircleImageView
+                        android:id="@+id/img_photo"
+                        android:layout_width="52dp"
+                        android:layout_height="52dp"
+                        android:layout_margin="8dp"/>
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_margin="8dp">
+
+                        <TextView
+                            android:id="@+id/tv_name"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentTop="true"
+                            android:layout_alignParentLeft="true"
+                            android:textSize="18sp"
+                            android:textColor="@color/text_dark"
+                            android:text="Александр"
+                            android:textStyle="bold"/>
+
+                        <TextView
+                            android:id="@+id/tv_date"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentBottom="true"
+                            android:layout_alignParentLeft="true"
+                            android:textSize="16sp"
+                            android:textColor="@color/text_gray"
+                            android:text="12.02.2017"/>
+                    </RelativeLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:padding="8dp"
+                    android:background="@color/walet_bottom_bg"
+                    android:layout_weight="1">
+
+                    <LinearLayout
+                        android:orientation="vertical"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentBottom="true"
+                            android:layout_alignParentLeft="true"
+                            android:textSize="16sp"
+                            android:textColor="@color/text_gray"
+                            android:text="@string/available"
+                            android:textStyle="bold"/>
+
+                        <TextView
+                            android:id="@+id/tv_balance_available"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentBottom="true"
+                            android:layout_alignParentLeft="true"
+                            android:layout_marginTop="8dp"
+                            android:textSize="30sp"
+                            android:textColor="@color/seek_bar"
+                            android:text="$100"/>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="1dp"
+                        android:layout_height="match_parent"
+                        android:background="@color/text_dark"
+                        android:layout_marginRight="16dp"></LinearLayout>
+
+                    <LinearLayout
+                        android:orientation="vertical"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentBottom="true"
+                            android:layout_alignParentLeft="true"
+                            android:textSize="16sp"
+                            android:textColor="@color/text_gray"
+                            android:text="@string/blocked"
+                            android:textStyle="bold"/>
+
+                        <TextView
+                            android:id="@+id/tv_balance_blocked"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentBottom="true"
+                            android:layout_alignParentLeft="true"
+                            android:layout_marginTop="8dp"
+                            android:textSize="30sp"
+                            android:textColor="@color/text_dark"
+                            android:text="$50"/>
+                    </LinearLayout>
+                </LinearLayout>
+            </LinearLayout>
+        </android.support.v7.widget.CardView>
+
+        <com.dd.CircularProgressButton
+            android:id="@+id/btn_preview"
+            android:layout_width="match_parent"
+            android:layout_height="43dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="16dp"
+            android:layout_alignParentBottom="true"
+            android:textColor="@color/white"
+            android:textSize="14sp"
+            app:cpb_textIdle="@string/deposit"
+            app:cpb_selectorIdle="@drawable/button_blue_bg"
+            app:cpb_cornerRadius="5dp"/>
     </LinearLayout>
-</FrameLayout>
+</RelativeLayout>

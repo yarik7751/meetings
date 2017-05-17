@@ -1,27 +1,79 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@drawable/bg">
 
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="1"
+        android:layout_marginTop="48dp"
         android:fillViewport="true">
 
         <LinearLayout
             android:id="@+id/ll_main"
             android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp">
 
+            <include layout="@layout/incl_date"/>
+
+            <include layout="@layout/incl_features"/>
+
+            <include layout="@layout/incl_time"/>
+
+            <include layout="@layout/incl_location"/>
+
+            <include layout="@layout/incl_present"/>
+
+            <com.dd.CircularProgressButton
+                android:id="@+id/btn_preview"
+                android:layout_width="match_parent"
+                android:layout_height="43dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="8dp"
+                android:textColor="@color/white"
+                android:textSize="14sp"
+                app:cpb_textIdle="@string/preview"
+                app:cpb_selectorIdle="@drawable/button_blue_bg"
+                app:cpb_cornerRadius="5dp"/>
         </LinearLayout>
     </ScrollView>
 
-    <Button
-        android:id="@+id/btn_done"
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/done"/>
-</LinearLayout>
+        android:background="@android:color/transparent"
+        android:layout_alignParentTop="true">
+
+        <RelativeLayout
+            style="?attr/actionButtonStyle"
+            android:id="@+id/rl_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true">
+
+            <ImageView
+                android:id="@+id/img_back"
+                android:layout_width="18dp"
+                android:layout_height="18dp"
+                android:src="@drawable/ic_keyboard_arrow_left_white_18dp"/>
+        </RelativeLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:textSize="16sp"
+            android:textColor="@color/white"
+            android:text="@string/add_date"
+            android:textStyle="bold"/>
+    </RelativeLayout>
+</RelativeLayout>
