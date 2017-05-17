@@ -31,6 +31,10 @@ public class DateUtils {
         return sdf.format(date);
     }
 
+    public static long getAge(long birthDate) {
+        return (System.currentTimeMillis() - birthDate) / 1000 / 31536000;
+    }
+
     public static long stringToUnix(String date) {
         DateFormat sdf = new SimpleDateFormat(DATE_FORMAT);
         sdf.setTimeZone(TimeZone.getTimeZone(DATE_FORMAT));

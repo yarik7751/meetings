@@ -8,4 +8,5 @@ public class Const {
     public static final String SP_ID = "SP_ID";
     public static final String SP_WOMAN_INFORMATION = "SP_WOMAN_INFORMATION";
     public static final String SP_MAN_INFORMATION = "SP_MAN_INFORMATION";
+    public static final int CODE_SUCCESS = 200;
 }
