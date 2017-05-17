@@ -12,7 +12,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.elatesoftware.meetings.R;
-import com.elatesoftware.meetings.ui.activity.AddDaleActivity;
+import com.elatesoftware.meetings.ui.activity.AddDateActivity;
 import com.elatesoftware.meetings.ui.adapter.dales.DalesRecyclerViewAdapter;
 import com.elatesoftware.meetings.ui.fragment.base.BaseFragment;
 
@@ -71,6 +71,6 @@ public class DalesManFragment extends BaseFragment {
 
     @OnClick(R.id.fab_add_dales)
     public void clickFabAddDales() {
-        startActivity(new Intent(getContext(), AddDaleActivity.class));
+        startActivity(new Intent(getContext(), AddDateActivity.class));
     }
 }
