@@ -13,4 +13,7 @@ public interface IApi {
 
     @POST("api/account/register")
     Call<ResponseBody> register(@Body RequestBody params);
+
+    @POST("api/account/login")
+    Call<ResponseBody> login(@Body RequestBody params);
 }

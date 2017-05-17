@@ -65,6 +65,10 @@
     <string name="end_time">End Time</string>
     <string name="preview">Preview</string>
     <string name="intro_text_about_present_amount">Intro text about present amount.</string>
+    <string name="wrong_data">Wrong entry data. Please correct!</string>
+    <string name="request_error">Request error!</string>
+    <string name="reg_succ">Registration completed successfully</string>
+    <string name="publish">Publish</string>
 
     <string-array name="months">
         <item>January</item>

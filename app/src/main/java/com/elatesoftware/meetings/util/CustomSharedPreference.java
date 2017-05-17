@@ -24,12 +24,20 @@ public class CustomSharedPreference {
         return getSharedPreferences(context).getBoolean(Const.SP_IS_MAN, false);
     }
 
-    public static void setId(Context context, int id) {
-        getSharedPreferences(context).edit().putInt(Const.SP_ID, id).commit();
+    public static void setIsFirst(Context context, boolean isFirst) {
+        getSharedPreferences(context).edit().putBoolean(Const.SP_IS_FIRST, isFirst).commit();
     }
 
-    public static int getId(Context context) {
-        return getSharedPreferences(context).getInt(Const.SP_ID, -1);
+    public static boolean isFirst(Context context) {
+        return getSharedPreferences(context).getBoolean(Const.SP_IS_FIRST, true);
+    }
+
+    public static void setId(Context context, long id) {
+        getSharedPreferences(context).edit().putLong(Const.SP_ID, id).commit();
+    }
+
+    public static long getId(Context context) {
+        return getSharedPreferences(context).getLong(Const.SP_ID, -1);
     }
 
     public static void setWomanInformation(Context context, ProfileWoman infoWoman) {

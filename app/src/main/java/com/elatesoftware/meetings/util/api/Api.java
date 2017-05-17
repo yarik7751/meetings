@@ -2,8 +2,14 @@ package com.elatesoftware.meetings.util.api;
 
 import android.util.Log;
 
+import com.elatesoftware.meetings.ui.application.MeetingsApplication;
 import com.elatesoftware.meetings.util.Const;
+import com.elatesoftware.meetings.util.api.pojo.HumanAnswer;
+import com.elatesoftware.meetings.util.api.pojo.LoginAnswer;
 import com.elatesoftware.meetings.util.api.pojo.MessageAnswer;
+import com.franmontiel.persistentcookiejar.PersistentCookieJar;
+import com.franmontiel.persistentcookiejar.cache.SetCookieCache;
+import com.franmontiel.persistentcookiejar.persistence.SharedPrefsCookiePersistor;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -15,6 +21,7 @@ import java.lang.annotation.Annotation;
 import java.lang.reflect.Type;
 import java.util.concurrent.TimeUnit;
 
+import okhttp3.CookieJar;
 import okhttp3.OkHttpClient;
 import okhttp3.RequestBody;
 import okhttp3.ResponseBody;
@@ -36,10 +43,11 @@ public class Api {
 
     public static IApi getApi() {
         if(iApi == null) {
-
+            CookieJar cookieJar = new PersistentCookieJar(new SetCookieCache(), new SharedPrefsCookiePersistor(MeetingsApplication.getAppContext()));
             HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
             interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
             OkHttpClient okHttpClient = new OkHttpClient.Builder()
+                    .cookieJar(cookieJar)
                     .connectTimeout(5, TimeUnit.MINUTES)
                     .writeTimeout(5, TimeUnit.MINUTES)
                     .readTimeout(5, TimeUnit.MINUTES)
@@ -75,8 +83,8 @@ public class Api {
                 response = call.execute();
                 rawJson = response.body().string();
                 rawJson = rawJson.replace("\\", "");
-                Log.d(TAG, "register: " + rawJson);
                 rawJson = rawJson.substring(1, rawJson.length() - 1);
+                Log.d(TAG, "register: " + rawJson);
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -85,6 +93,43 @@ public class Api {
                     Gson gson = new Gson();
                     MessageAnswer messageAnswer = gson.fromJson(rawJson, MessageAnswer.class);
                     MessageAnswer.setInstance(messageAnswer);
+                }
+                result = String.valueOf(response.code());
+            }
+            return result;
+        } catch (JSONException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    public static String login(String userName, String password) {
+        JSONObject object = new JSONObject();
+        try {
+            object.put("Username", userName);
+            object.put("Password", password);
+            RequestBody body = RequestBody.create(okhttp3.MediaType.parse("application/json; charset=utf-8"), object.toString());
+
+            Log.d(TAG, "object.toString: " + object.toString());
+
+            Call<ResponseBody> call = getApi().login(body);
+            Response<ResponseBody> response = null;
+            String result = null;
+            String rawJson = null;
+            try {
+                response = call.execute();
+                rawJson = response.body().string();
+                rawJson = rawJson.replace("\\", "");
+                //rawJson = rawJson.substring(1, rawJson.length() - 1);
+                Log.d(TAG, "login: " + rawJson);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            if(response != null && rawJson != null){
+                if(response.code() == Const.CODE_SUCCESS) {
+                    Gson gson = new Gson();
+                    LoginAnswer messageAnswer = gson.fromJson(rawJson, LoginAnswer.class);
+                    LoginAnswer.setInstance(messageAnswer);
                 }
                 result = String.valueOf(response.code());
             }

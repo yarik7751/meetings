@@ -51,11 +51,11 @@ public class MainActivity extends BaseActivity {
     }
 
     public void setSignUpFragment() {
-        onSwitchFragment(SignUpFragment.getInstance(), SignUpFragment.class.getName(), false, true, R.id.container);
+        onSwitchFragment(SignUpFragment.getInstance(), SignUpFragment.class.getName(), true, true, R.id.container);
     }
 
     public void setSignInFragment() {
-        onSwitchFragment(SignInFragment.getInstance(), SignInFragment.class.getName(), false, true, R.id.container);
+        onSwitchFragment(SignInFragment.getInstance(), SignInFragment.class.getName(), true, true, R.id.container);
     }
 
     public void setGenderFragment() {

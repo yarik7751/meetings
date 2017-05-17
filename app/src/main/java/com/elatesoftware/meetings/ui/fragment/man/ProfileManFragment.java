@@ -46,12 +46,14 @@ public class ProfileManFragment extends BaseFragment {
     @BindView(R.id.rl_photos) RelativeLayout rlPhotos;
     @BindView(R.id.ink_indicator) CircleIndicator inkIndicator;
     @BindView(R.id.tv_name) TextView tvName;
-    @BindView(R.id.tv_height) TextView tvHeight;
-    @BindView(R.id.tv_weight) TextView tvWeight;
+    /*@BindView(R.id.tv_height) TextView tvHeight;
+    @BindView(R.id.tv_weight) TextView tvWeight;*/
     @BindView(R.id.tv_about) TextView tvAbout;
+    @BindView(R.id.tv_age_title) TextView tvAgeTitle;
     @BindView(R.id.tv_age) TextView tvAge;
     @BindView(R.id.img_edit) ImageView imgEdit;
     @BindView(R.id.rl_edit) RelativeLayout rlEdit;
+    @BindView(R.id.line) View line;
 
     private List<View> photos;
 
@@ -82,6 +84,10 @@ public class ProfileManFragment extends BaseFragment {
         setSize();
         loadPhoto();
         loadInfo();
+        if(CustomSharedPreference.isFirst(getContext())) {
+            CustomSharedPreference.setIsFirst(getContext(), false);
+            clickImgEdit();
+        }
     }
 
     @OnClick(R.id.rl_edit)
@@ -125,10 +131,24 @@ public class ProfileManFragment extends BaseFragment {
 
     public void loadInfo() {
         ProfileMan profileMan = CustomSharedPreference.getManInformation(getContext());
+        long age = 0;
         if(profileMan != null) {
             tvName.setText(profileMan.getName());
             tvAbout.setText(profileMan.getAbout());
-            tvAge.setText(String.valueOf(DateUtils.getAge(profileMan.getBirthDate().getTimeInMillis())));
+            age = profileMan.getBirthDate() == null ? 0 : DateUtils.getAge(profileMan.getBirthDate().getTimeInMillis());
+            tvAge.setText(String.valueOf(age));
+        }
+        if(TextUtils.isEmpty(tvAbout.getText().toString())) {
+            line.setVisibility(View.GONE);
+        } else {
+            line.setVisibility(View.VISIBLE);
+        }
+        if(TextUtils.isEmpty(tvAge.getText().toString()) || age <= 0) {
+            tvAgeTitle.setVisibility(View.GONE);
+            tvAge.setVisibility(View.GONE);
+        } else {
+            tvAgeTitle.setVisibility(View.VISIBLE);
+            tvAge.setVisibility(View.VISIBLE);
         }
     }
 }

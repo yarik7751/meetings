@@ -158,7 +158,6 @@
                 android:layout_marginTop="16dp"
                 android:textSize="16sp"
                 android:textColor="@color/button_blue_light"
-                android:text="Александр"
                 android:textStyle="bold"/>
 
             <LinearLayout
@@ -169,6 +168,7 @@
                 android:gravity="center">
 
                 <TextView
+                    android:id="@+id/tv_age_title"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="14sp"
@@ -181,10 +181,9 @@
                     android:layout_height="wrap_content"
                     android:textSize="14sp"
                     android:textColor="@color/button_blue_light"
-                    android:text="22"
                     android:textStyle="bold"/>
 
-                <ImageView
+                <!--<ImageView
                     android:layout_width="4dp"
                     android:layout_height="4dp"
                     android:layout_margin="8dp"
@@ -226,10 +225,11 @@
                     android:textSize="14sp"
                     android:textColor="@color/button_blue_light"
                     android:text="000"
-                    android:textStyle="bold"/>
+                    android:textStyle="bold"/>-->
             </LinearLayout>
 
             <View
+                android:id="@+id/line"
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:layout_margin="16dp"
@@ -243,10 +243,7 @@
                 android:layout_marginRight="16dp"
                 android:layout_marginLeft="16dp"
                 android:textSize="16sp"
-                android:textColor="@color/white"
-                android:text="Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-
-Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat." />
+                android:textColor="@color/white" />
         </LinearLayout>
     </ScrollView>
 
