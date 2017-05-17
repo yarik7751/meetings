@@ -48,13 +48,19 @@
             android:windowSoftInputMode="stateAlwaysHidden"
             android:configChanges="keyboardHidden|orientation|screenSize"></activity>
         <activity
-            android:name=".ui.activity.AddDaleActivity"
+            android:name=".ui.activity.AddDateActivity"
             android:windowSoftInputMode="stateAlwaysHidden"
             android:configChanges="keyboardHidden|orientation|screenSize"></activity>
         <activity
             android:name=".ui.activity.ChatActivity"
             android:windowSoftInputMode="stateAlwaysHidden"
             android:configChanges="keyboardHidden|orientation|screenSize"></activity>
+        <activity
+            android:name=".ui.activity.man.ProfileEditManActivity"
+            android:windowSoftInputMode="stateAlwaysHidden"
+            android:configChanges="keyboardHidden|orientation|screenSize"></activity>
+
+        <service android:name=".ui.service.RegisterService"></service>
 
         <meta-data
             android:name="com.google.android.gms.version"

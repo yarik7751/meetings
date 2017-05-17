@@ -8,8 +8,15 @@
     <color name="black">#000000</color>
     <color name="delete">#e14747</color>
     <color name="background">#dfdfdf</color>
+    <color name="text_white_op">#aaffffff</color>
+    <color name="text_gray">#7d828a</color>
+    <color name="gray">@android:color/darker_gray</color>
     <color name="button_blue_light">#0189ed</color>
     <color name="button_blue_dark">#2f35aa</color>
     <color name="button_red_light">#fc8a7c</color>
     <color name="button_red_dark">#d75372</color>
+    <color name="line">#66ffffff</color>
+    <color name="seek_bar">#185fc9</color>
+    <color name="text_dark">#bb000000</color>
+    <color name="walet_bottom_bg">#f2f2f2</color>
 </resources>

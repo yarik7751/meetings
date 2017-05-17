@@ -2,6 +2,7 @@
     <string name="app_name">Com_elatesoftware_meetings</string>
     <string name="email">Email</string>
     <string name="password">Password</string>
+    <string name="weight">Weight</string>
     <string name="sign_up">Sign Up</string>
     <string name="sign_in">Sign In</string>
     <string name="forgot_password">Forgot password</string>
@@ -55,6 +56,15 @@
     <string name="please_select_your_gender">Please select your gender</string>
     <string name="woman">Woman</string>
     <string name="man">Man</string>
+    <string name="add_date">Add Date</string>
+    <string name="all_information_is_optional">All information is optional</string>
+    <string name="edit_profile">Edit profile</string>
+    <string name="features">Features</string>
+    <string name="time">Time</string>
+    <string name="start_time">Start Time</string>
+    <string name="end_time">End Time</string>
+    <string name="preview">Preview</string>
+    <string name="intro_text_about_present_amount">Intro text about present amount.</string>
 
     <string-array name="months">
         <item>January</item>
