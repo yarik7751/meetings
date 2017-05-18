@@ -15,13 +15,13 @@ public class LoginAnswer extends MessageAnswer {
 
     @SerializedName("Result")
     @Expose
-    protected HumanAnswer result;
+    protected String result;
 
-    public HumanAnswer getResult() {
+    public String getResult() {
         return result;
     }
 
-    public void setResult(HumanAnswer result) {
+    public void setResult(String result) {
         this.result = result;
     }
 }

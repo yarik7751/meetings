@@ -4,8 +4,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.util.Log;
 
-import com.elatesoftware.meetings.util.model.ProfileMan;
-import com.elatesoftware.meetings.util.model.ProfileWoman;
+import com.elatesoftware.meetings.util.api.pojo.HumanAnswer;
 import com.google.gson.Gson;
 
 public class CustomSharedPreference {
@@ -40,33 +39,30 @@ public class CustomSharedPreference {
         return getSharedPreferences(context).getLong(Const.SP_ID, -1);
     }
 
-    public static void setWomanInformation(Context context, ProfileWoman infoWoman) {
-        Gson gson = new Gson();
-        String info = gson.toJson(infoWoman);
-        Log.d(TAG, "info (set): " + info);
-        getSharedPreferences(context).edit().putString(Const.SP_WOMAN_INFORMATION, info).commit();
+    public static void setToken(Context context, String token) {
+        getSharedPreferences(context).edit().putString(Const.SP_TOKEN, token).commit();
     }
 
-    public static ProfileWoman getWomanInformation(Context context) {
-        Gson gson = new Gson();
-        String info = getSharedPreferences(context).getString(Const.SP_WOMAN_INFORMATION, null);
-        Log.d(TAG, "info (get): " + info);
-        ProfileWoman infoWoman = gson.fromJson(info, ProfileWoman.class);
-        return infoWoman;
+    public static String getToken(Context context) {
+        return getSharedPreferences(context).getString(Const.SP_TOKEN, Const.NULL_TOKEN);
     }
 
-    public static void setManInformation(Context context, ProfileMan infoMan) {
+    public static void setProfileInformation(Context context, HumanAnswer infoMan) {
         Gson gson = new Gson();
         String info = gson.toJson(infoMan);
         Log.d(TAG, "info (set): " + info);
-        getSharedPreferences(context).edit().putString(Const.SP_MAN_INFORMATION, info).commit();
+        getSharedPreferences(context).edit().putString(Const.SP_PROFILE_INFORMATION, info).commit();
     }
 
-    public static ProfileMan getManInformation(Context context) {
+    public static HumanAnswer getProfileInformation(Context context) {
         Gson gson = new Gson();
-        String info = getSharedPreferences(context).getString(Const.SP_MAN_INFORMATION, null);
+        String info = getSharedPreferences(context).getString(Const.SP_PROFILE_INFORMATION, null);
         Log.d(TAG, "info (get): " + info);
-        ProfileMan infoMan = gson.fromJson(info, ProfileMan.class);
-        return infoMan;
+        if(info == null) {
+            return null;
+        } else {
+            HumanAnswer infoMan = gson.fromJson(info, HumanAnswer.class);
+            return infoMan;
+        }
     }
 }

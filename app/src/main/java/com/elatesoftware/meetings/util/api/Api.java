@@ -1,9 +1,12 @@
 package com.elatesoftware.meetings.util.api;
 
+import android.content.Context;
 import android.util.Log;
 
 import com.elatesoftware.meetings.ui.application.MeetingsApplication;
 import com.elatesoftware.meetings.util.Const;
+import com.elatesoftware.meetings.util.CustomSharedPreference;
+import com.elatesoftware.meetings.util.api.pojo.GetInfoAccAnswer;
 import com.elatesoftware.meetings.util.api.pojo.HumanAnswer;
 import com.elatesoftware.meetings.util.api.pojo.LoginAnswer;
 import com.elatesoftware.meetings.util.api.pojo.MessageAnswer;
@@ -11,14 +14,11 @@ import com.franmontiel.persistentcookiejar.PersistentCookieJar;
 import com.franmontiel.persistentcookiejar.cache.SetCookieCache;
 import com.franmontiel.persistentcookiejar.persistence.SharedPrefsCookiePersistor;
 import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
-import java.lang.annotation.Annotation;
-import java.lang.reflect.Type;
 import java.util.concurrent.TimeUnit;
 
 import okhttp3.CookieJar;
@@ -27,8 +27,6 @@ import okhttp3.RequestBody;
 import okhttp3.ResponseBody;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Converter;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
@@ -83,7 +81,7 @@ public class Api {
                 response = call.execute();
                 rawJson = response.body().string();
                 rawJson = rawJson.replace("\\", "");
-                rawJson = rawJson.substring(1, rawJson.length() - 1);
+                //rawJson = rawJson.substring(1, rawJson.length() - 1);
                 Log.d(TAG, "register: " + rawJson);
             } catch (IOException e) {
                 e.printStackTrace();
@@ -91,8 +89,8 @@ public class Api {
             if(response != null && rawJson != null){
                 if(response.code() == Const.CODE_SUCCESS) {
                     Gson gson = new Gson();
-                    MessageAnswer messageAnswer = gson.fromJson(rawJson, MessageAnswer.class);
-                    MessageAnswer.setInstance(messageAnswer);
+                    LoginAnswer messageAnswer = gson.fromJson(rawJson, LoginAnswer.class);
+                    LoginAnswer.setInstance(messageAnswer);
                 }
                 result = String.valueOf(response.code());
             }
@@ -138,5 +136,59 @@ public class Api {
             e.printStackTrace();
             return null;
         }
+    }
+
+    public static String updateAccountInfo(String sessionKey, HumanAnswer profile) {
+        Gson gson = new Gson();
+        String profileStr = gson.toJson(profile, HumanAnswer.class);
+        RequestBody body = RequestBody.create(okhttp3.MediaType.parse("application/json; charset=utf-8"), profileStr);
+
+        Log.d(TAG, "object.toString: " + profileStr);
+
+        Call<ResponseBody> call = getApi().updateAccountInfo(sessionKey, body);
+        Response<ResponseBody> response = null;
+        String result = null;
+        String rawJson = null;
+        try {
+            response = call.execute();
+            rawJson = response.body().string();
+            rawJson = rawJson.replace("\\", "");
+            //rawJson = rawJson.substring(1, rawJson.length() - 1);
+            Log.d(TAG, "updateAccountInfo: " + rawJson);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        if(response != null && rawJson != null){
+            if(response.code() == Const.CODE_SUCCESS) {
+                MessageAnswer messageAnswer = gson.fromJson(rawJson, MessageAnswer.class);
+                MessageAnswer.setInstance(messageAnswer);
+            }
+            result = String.valueOf(response.code());
+        }
+        return result;
+    }
+
+    public static String getAccountInfo(Context context, String sessionKey) {
+        Call<ResponseBody> call = getApi().getAccountInfo(sessionKey);
+        Response<ResponseBody> response = null;
+        String result = null;
+        String rawJson = null;
+        try {
+            response = call.execute();
+            rawJson = response.body().string();
+            rawJson = rawJson.replace("\\", "");
+            Log.d(TAG, "getAccountInfo: " + rawJson);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        if(response != null && rawJson != null){
+            if(response.code() == Const.CODE_SUCCESS) {
+                Gson gson = new Gson();
+                GetInfoAccAnswer answer = gson.fromJson(rawJson, GetInfoAccAnswer.class);
+                GetInfoAccAnswer.setInstance(answer);
+            }
+            result = String.valueOf(response.code());
+        }
+        return result;
     }
 }

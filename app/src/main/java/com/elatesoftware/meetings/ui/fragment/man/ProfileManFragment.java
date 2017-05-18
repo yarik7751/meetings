@@ -1,18 +1,16 @@
 package com.elatesoftware.meetings.ui.fragment.man;
 
-import android.app.DatePickerDialog;
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
-import android.provider.ContactsContract;
 import android.support.annotation.Nullable;
 import android.support.v4.view.ViewPager;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.DatePicker;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -22,18 +20,17 @@ import com.elatesoftware.meetings.ui.activity.AddDateActivity;
 import com.elatesoftware.meetings.ui.activity.man.ProfileEditManActivity;
 import com.elatesoftware.meetings.ui.adapter.page.PageAdapter;
 import com.elatesoftware.meetings.ui.fragment.base.BaseFragment;
-import com.elatesoftware.meetings.ui.view.InkPageIndicator;
+import com.elatesoftware.meetings.ui.service.GetAccountInfoService;
 import com.elatesoftware.meetings.util.AndroidUtils;
+import com.elatesoftware.meetings.util.Const;
 import com.elatesoftware.meetings.util.CustomSharedPreference;
 import com.elatesoftware.meetings.util.DateUtils;
-import com.elatesoftware.meetings.util.model.ProfileMan;
-import com.elatesoftware.meetings.util.model.ProfileWoman;
+import com.elatesoftware.meetings.util.api.pojo.GetInfoAccAnswer;
+import com.elatesoftware.meetings.util.api.pojo.HumanAnswer;
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.GregorianCalendar;
 import java.util.List;
 
 import butterknife.BindView;
@@ -57,6 +54,8 @@ public class ProfileManFragment extends BaseFragment {
 
     private List<View> photos;
 
+    private GetAccountInfoBroadcastReceiver getAccountInfoBroadcastReceiver;
+
     private static ProfileManFragment profileManFragment;
     public static ProfileManFragment getInstance() {
         if(profileManFragment == null) {
@@ -68,6 +67,7 @@ public class ProfileManFragment extends BaseFragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        registerReceivers();
     }
 
     @Nullable
@@ -84,10 +84,17 @@ public class ProfileManFragment extends BaseFragment {
         setSize();
         loadPhoto();
         loadInfo();
-        if(CustomSharedPreference.isFirst(getContext())) {
+        //if(CustomSharedPreference.isFirst(getContext())) {
             CustomSharedPreference.setIsFirst(getContext(), false);
-            clickImgEdit();
-        }
+            //clickImgEdit();
+            requestGetAccInfo();
+        //}
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        unregisterReceivers();
     }
 
     @OnClick(R.id.rl_edit)
@@ -98,6 +105,23 @@ public class ProfileManFragment extends BaseFragment {
     @OnClick(R.id.ll_add_date)
     public void clickLlAddDate() {
         startActivity(new Intent(getContext(), AddDateActivity.class));
+    }
+
+
+
+    private void registerReceivers() {
+        getAccountInfoBroadcastReceiver = new GetAccountInfoBroadcastReceiver();
+        IntentFilter intentFilter = new IntentFilter(GetAccountInfoService.ACTION);
+        intentFilter.addCategory(Intent.CATEGORY_DEFAULT);
+        getActivity().registerReceiver(getAccountInfoBroadcastReceiver, intentFilter);
+    }
+
+    private void unregisterReceivers() {
+        getActivity().unregisterReceiver(getAccountInfoBroadcastReceiver);
+    }
+
+    private void requestGetAccInfo() {
+        getActivity().startService(new Intent(getContext(), GetAccountInfoService.class));
     }
 
     private void setSize() {
@@ -130,12 +154,12 @@ public class ProfileManFragment extends BaseFragment {
     }
 
     public void loadInfo() {
-        ProfileMan profileMan = CustomSharedPreference.getManInformation(getContext());
+        HumanAnswer profileMan = CustomSharedPreference.getProfileInformation(getContext());
         long age = 0;
         if(profileMan != null) {
-            tvName.setText(profileMan.getName());
-            tvAbout.setText(profileMan.getAbout());
-            age = profileMan.getBirthDate() == null ? 0 : DateUtils.getAge(profileMan.getBirthDate().getTimeInMillis());
+            tvName.setText(profileMan.getFirstName());
+            tvAbout.setText(profileMan.getAboutMe());
+            age = profileMan.getDateOfBirthByCalendar() == null ? 0 : DateUtils.getAge(profileMan.getDateOfBirthByCalendar().getTimeInMillis());
             tvAge.setText(String.valueOf(age));
         }
         if(TextUtils.isEmpty(tvAbout.getText().toString())) {
@@ -149,6 +173,21 @@ public class ProfileManFragment extends BaseFragment {
         } else {
             tvAgeTitle.setVisibility(View.VISIBLE);
             tvAge.setVisibility(View.VISIBLE);
+        }
+    }
+
+    public class GetAccountInfoBroadcastReceiver extends BroadcastReceiver {
+
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            String response = intent.getStringExtra(Const.RESPONSE);
+            if(response != null && response.equals(String.valueOf(Const.CODE_SUCCESS)) && GetInfoAccAnswer.getInstance() != null) {
+                if(GetInfoAccAnswer.getInstance().getSuccess()) {
+                    CustomSharedPreference.setProfileInformation(context, GetInfoAccAnswer.getInstance().getHumanAnswer());
+                    loadInfo();
+                }
+                clickImgEdit();
+            }
         }
     }
 }

@@ -67,6 +67,8 @@
 
         <service android:name=".ui.service.RegisterService"></service>
         <service android:name=".ui.service.LoginService"></service>
+        <service android:name=".ui.service.UpdateAccountService"></service>
+        <service android:name=".ui.service.GetAccountInfoService"></service>
 
         <meta-data
             android:name="com.google.android.gms.version"

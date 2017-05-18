@@ -10,6 +10,7 @@ import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
+import android.text.TextUtils;
 import android.util.Log;
 import android.widget.TextView;
 
@@ -80,5 +81,10 @@ public class Utils {
             messages.add(iterator.next());
         }
         return messages;
+    }
+
+    public static boolean isToken(Context context) {
+        String token = CustomSharedPreference.getToken(context);
+        return !TextUtils.isEmpty(token) && !token.equals(Const.NULL_TOKEN);
     }
 }

@@ -3,7 +3,9 @@ package com.elatesoftware.meetings.util.api.pojo;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class HumanAnswer{
+import java.util.GregorianCalendar;
+
+public class HumanAnswer {
 
     @SerializedName("Username")
     @Expose
@@ -31,11 +33,11 @@ public class HumanAnswer{
 
     @SerializedName("HairColor")
     @Expose
-    protected String hairColor;
+    protected Integer hairColor;
 
     @SerializedName("DateOfBirth")
     @Expose
-    protected String dateOfBirth;
+    protected Long dateOfBirth;
 
     @SerializedName("Id")
     @Expose
@@ -45,20 +47,23 @@ public class HumanAnswer{
     @Expose
     protected String city;
 
+    @SerializedName("AboutMe")
+    @Expose
+    protected String aboutMe;
+
+    public HumanAnswer(String firstName, Long dateOfBirth, String aboutMe, String city) {
+        this.firstName = firstName;
+        this.dateOfBirth = dateOfBirth;
+        this.aboutMe = aboutMe;
+        this.city = city;
+    }
+
     public static HumanAnswer answersInstance = null;
     public static HumanAnswer getInstance() {
         return answersInstance;
     }
     public static void setInstance(HumanAnswer answers) {
         answersInstance = answers;
-    }
-
-    public static HumanAnswer getAnswersInstance() {
-        return answersInstance;
-    }
-
-    public static void setAnswersInstance(HumanAnswer answersInstance) {
-        HumanAnswer.answersInstance = answersInstance;
     }
 
     public String getCity() {
@@ -69,11 +74,20 @@ public class HumanAnswer{
         this.city = city;
     }
 
-    public String getDateOfBirth() {
+    public Long getDateOfBirth() {
         return dateOfBirth;
     }
 
-    public void setDateOfBirth(String dateOfBirth) {
+    public GregorianCalendar getDateOfBirthByCalendar() {
+        if(dateOfBirth <= 0) {
+            return null;
+        }
+        GregorianCalendar calendar = new GregorianCalendar();
+        calendar.setTimeInMillis(dateOfBirth);
+        return calendar;
+    }
+
+    public void setDateOfBirth(Long dateOfBirth) {
         this.dateOfBirth = dateOfBirth;
     }
 
@@ -93,11 +107,11 @@ public class HumanAnswer{
         this.gender = gender;
     }
 
-    public String getHairColor() {
+    public Integer getHairColor() {
         return hairColor;
     }
 
-    public void setHairColor(String hairColor) {
+    public void setHairColor(Integer hairColor) {
         this.hairColor = hairColor;
     }
 
@@ -139,5 +153,13 @@ public class HumanAnswer{
 
     public void setWeight(Double weight) {
         this.weight = weight;
+    }
+
+    public String getAboutMe() {
+        return aboutMe;
+    }
+
+    public void setAboutMe(String aboutMe) {
+        this.aboutMe = aboutMe;
     }
 }

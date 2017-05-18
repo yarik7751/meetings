@@ -25,7 +25,6 @@ import com.elatesoftware.meetings.util.AndroidUtils;
 import com.elatesoftware.meetings.util.CustomSharedPreference;
 import com.elatesoftware.meetings.util.DateUtils;
 import com.elatesoftware.meetings.util.Utils;
-import com.elatesoftware.meetings.util.model.ProfileWoman;
 import com.squareup.picasso.Picasso;
 
 import java.io.IOException;
@@ -114,8 +113,8 @@ public class ProfileWomanFragment extends BaseFragment {
         String city = etCity.getText().toString();
         String heightStr = etHeight.getText().toString();
         int height = TextUtils.isEmpty(heightStr) ? -1 : Integer.parseInt(heightStr);
-        ProfileWoman profileWoman = new ProfileWoman(name, height, hairColor, city, birthDate);
-        CustomSharedPreference.setWomanInformation(getContext(), profileWoman);
+        /*ProfileWoman profileWoman = new ProfileWoman(name, height, hairColor, city, birthDate);
+        CustomSharedPreference.setWomanInformation(getContext(), profileWoman);*/
     }
 
     private void setSize() {
@@ -140,7 +139,7 @@ public class ProfileWomanFragment extends BaseFragment {
     private void loadInfo() {
         //Todo test
         loadPhoto();
-        ProfileWoman profileWoman = CustomSharedPreference.getWomanInformation(getContext());
+        /*ProfileWoman profileWoman = CustomSharedPreference.getWomanInformation(getContext());
         if(profileWoman != null) {
             etName.setText(profileWoman.getName());
             etHairColor.setText(profileWoman.getHairColor());
@@ -155,6 +154,6 @@ public class ProfileWomanFragment extends BaseFragment {
                 Log.d(TAG, "IOException " + e);
                 e.printStackTrace();
             }
-        }
+        }*/
     }
 }
