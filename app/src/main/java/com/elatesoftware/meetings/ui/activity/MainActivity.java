@@ -18,6 +18,7 @@ import com.elatesoftware.meetings.ui.fragment.GenderFragment;
 import com.elatesoftware.meetings.ui.fragment.SignInFragment;
 import com.elatesoftware.meetings.ui.fragment.SignUpFragment;
 import com.elatesoftware.meetings.util.CustomSharedPreference;
+import com.elatesoftware.meetings.util.Utils;
 
 public class MainActivity extends BaseActivity {
 
@@ -29,7 +30,7 @@ public class MainActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        if(CustomSharedPreference.getId(this) > 0) {
+        if(Utils.isToken(this)) {
             if(CustomSharedPreference.isMan(this)) {
                 startActivity(new Intent(this, WorkActivityMan.class));
             } else {
@@ -45,7 +46,7 @@ public class MainActivity extends BaseActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        if(CustomSharedPreference.getId(this) > 0) {
+        if(Utils.isToken(this)) {
             finish();
         }
     }

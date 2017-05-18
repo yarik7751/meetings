@@ -20,13 +20,13 @@ import com.elatesoftware.meetings.ui.activity.MainActivity;
 import com.elatesoftware.meetings.ui.activity.man.WorkActivityMan;
 import com.elatesoftware.meetings.ui.activity.woman.WorkActivityWoman;
 import com.elatesoftware.meetings.ui.fragment.base.BaseFragment;
+import com.elatesoftware.meetings.ui.receiver.AutarizationBroadcastReceiver;
 import com.elatesoftware.meetings.ui.service.LoginService;
 import com.elatesoftware.meetings.ui.service.RegisterService;
 import com.elatesoftware.meetings.ui.view.CustomEditText;
 import com.elatesoftware.meetings.util.Const;
 import com.elatesoftware.meetings.util.CustomSharedPreference;
 import com.elatesoftware.meetings.util.StringUtils;
-import com.elatesoftware.meetings.util.api.pojo.HumanAnswer;
 import com.elatesoftware.meetings.util.api.pojo.LoginAnswer;
 import com.elatesoftware.meetings.util.model.ButtonAnimation;
 
@@ -116,30 +116,12 @@ public class SignInFragment extends BaseFragment {
         getActivity().unregisterReceiver(loginBroadcastReceiver);
     }
     
-    public class LoginBroadcastReceiver extends BroadcastReceiver {
+    public class LoginBroadcastReceiver extends AutarizationBroadcastReceiver {
 
         @Override
         public void onReceive(Context context, Intent intent) {
-            String response = intent.getStringExtra(Const.RESPONSE);
+            super.onReceive(context, intent);
             buttonAnimation.stop();
-            if(response != null && response.equals(String.valueOf(Const.CODE_SUCCESS)) && LoginAnswer.getInstance() != null) {
-                Log.d(TAG, "registration 200");
-                if(LoginAnswer.getInstance().getSuccess()) {
-                    CustomSharedPreference.setId(getContext(), LoginAnswer.getInstance().getResult().getId().longValue());
-                    if(CustomSharedPreference.isMan(getContext())) {
-                        startActivity(new Intent(getContext(), WorkActivityMan.class));
-                    } else {
-                        startActivity(new Intent(getContext(), WorkActivityWoman.class));
-                    }
-                    Log.d(TAG, "registration TRUE");
-                } else {
-                    showMessage(R.string.wrong_data);
-                    Log.d(TAG, "registration FALSE");
-                }
-            } else {
-                showMessage(R.string.request_error);
-                Log.d(TAG, "registration error");
-            }
         }
     }
 }

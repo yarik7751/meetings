@@ -17,7 +17,7 @@ public class LoginService extends IntentService {
 
     public LoginService() {
         super(TAG);
-        Log.d(TAG, TAG);
+        Log.d(TAG, ACTION);
     }
 
     @Override

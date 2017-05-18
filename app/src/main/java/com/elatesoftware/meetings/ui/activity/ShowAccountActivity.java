@@ -12,12 +12,11 @@ import android.widget.TextView;
 
 import com.elatesoftware.meetings.R;
 import com.elatesoftware.meetings.ui.activity.base.BaseActivity;
-import com.elatesoftware.meetings.ui.activity.man.ProfileEditManActivity;
 import com.elatesoftware.meetings.ui.adapter.page.PageAdapter;
 import com.elatesoftware.meetings.util.AndroidUtils;
 import com.elatesoftware.meetings.util.CustomSharedPreference;
 import com.elatesoftware.meetings.util.DateUtils;
-import com.elatesoftware.meetings.util.model.ProfileMan;
+import com.elatesoftware.meetings.util.api.pojo.HumanAnswer;
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 
@@ -99,12 +98,12 @@ public class ShowAccountActivity extends BaseActivity {
     }
 
     public void loadInfo() {
-        ProfileMan profileMan = CustomSharedPreference.getManInformation(this);
+        HumanAnswer profileMan = CustomSharedPreference.getProfileInformation(this);
         long age = 0;
         if(profileMan != null) {
-            tvName.setText(profileMan.getName());
+            tvName.setText(profileMan.getFirstName());
             //tvAbout.setText(profileMan.getAbout());
-            age = profileMan.getBirthDate() == null ? 0 : DateUtils.getAge(profileMan.getBirthDate().getTimeInMillis());
+            age = profileMan.getDateOfBirthByCalendar() == null ? 0 : DateUtils.getAge(profileMan.getDateOfBirthByCalendar().getTimeInMillis());
             tvAge.setText(String.valueOf(age));
         }
         /*if(TextUtils.isEmpty(tvAbout.getText().toString())) {

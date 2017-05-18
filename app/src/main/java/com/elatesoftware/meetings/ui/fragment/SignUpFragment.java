@@ -21,6 +21,7 @@ import com.elatesoftware.meetings.ui.activity.MainActivity;
 import com.elatesoftware.meetings.ui.activity.man.WorkActivityMan;
 import com.elatesoftware.meetings.ui.activity.woman.WorkActivityWoman;
 import com.elatesoftware.meetings.ui.fragment.base.BaseFragment;
+import com.elatesoftware.meetings.ui.receiver.AutarizationBroadcastReceiver;
 import com.elatesoftware.meetings.ui.service.RegisterService;
 import com.elatesoftware.meetings.ui.view.CustomEditText;
 import com.elatesoftware.meetings.util.Const;
@@ -112,32 +113,12 @@ public class SignUpFragment extends BaseFragment {
         requestRegister();
     }
 
-    public class RegisterBroadcastReceiver extends BroadcastReceiver {
+    public class RegisterBroadcastReceiver extends AutarizationBroadcastReceiver {
 
         @Override
         public void onReceive(Context context, Intent intent) {
-            String response = intent.getStringExtra(Const.RESPONSE);
+            super.onReceive(context, intent);
             buttonAnimation.stop();
-            if(response != null && response.equals(String.valueOf(Const.CODE_SUCCESS)) && MessageAnswer.getInstance() != null) {
-                Log.d(TAG, "registration 200");
-                if(MessageAnswer.getInstance().getSuccess()) {
-                    showMessage(R.string.reg_succ);
-                    ((MainActivity) getActivity()).setSignInFragment();
-                    Log.d(TAG, "registration TRUE");
-                } else {
-                    showMessage(R.string.wrong_data);
-                    Log.d(TAG, "registration FALSE");
-                }
-            } else {
-                showMessage(R.string.request_error);
-                Log.d(TAG, "registration error");
-            }
-            /*CustomSharedPreference.setId(getContext(), 1000);
-            if(CustomSharedPreference.isMan(getContext())) {
-                startActivity(new Intent(getContext(), WorkActivityMan.class));
-            } else {
-                startActivity(new Intent(getContext(), WorkActivityWoman.class));
-            }*/
         }
     }
 }
