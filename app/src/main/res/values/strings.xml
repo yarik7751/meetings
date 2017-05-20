@@ -69,6 +69,13 @@
     <string name="request_error">Request error!</string>
     <string name="reg_succ">Registration completed successfully</string>
     <string name="publish">Publish</string>
+    <string name="choose_a_meeting_place">Choose a meeting place</string>
+    <string name="wrong_date">Wrong date! Please correct.</string>
+
+    <string-array name="hair_colors">
+        <item>Blondie</item>
+        <item>Brunette</item>
+    </string-array>
 
     <string-array name="months">
         <item>January</item>

@@ -1,8 +1,12 @@
 package com.elatesoftware.meetings.util;
 
+import android.app.Activity;
 import android.content.Context;
+import android.support.v4.app.FragmentManager;
 
 import com.elatesoftware.meetings.R;
+import com.github.jjobes.slidedatetimepicker.SlideDateTimeListener;
+import com.github.jjobes.slidedatetimepicker.SlideDateTimePicker;
 
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -49,5 +53,14 @@ public class DateUtils {
         } else {
             return -1;
         }
+    }
+
+    public static void showSlideDateTimeDialog(FragmentManager fragmentManager, SlideDateTimeListener listener) {
+        new SlideDateTimePicker.Builder(fragmentManager)
+                .setListener(listener)
+                .setInitialDate(new Date())
+                .setIs24HourTime(true)
+                .build()
+                .show();
     }
 }

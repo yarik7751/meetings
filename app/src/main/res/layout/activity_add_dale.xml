@@ -24,7 +24,7 @@
             android:layout_marginLeft="16dp"
             android:layout_marginRight="16dp">
 
-            <include layout="@layout/incl_date"/>
+            <!--<include layout="@layout/incl_date"/>-->
 
             <include layout="@layout/incl_features"/>
 
