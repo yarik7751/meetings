@@ -24,8 +24,10 @@ import com.crystal.crystalrangeseekbar.widgets.CrystalRangeSeekbar;
 import com.elatesoftware.meetings.R;
 import com.elatesoftware.meetings.ui.activity.base.BaseActivity;
 import com.elatesoftware.meetings.ui.adapter.view_pager.ViewPagerAdapter;
+import com.elatesoftware.meetings.ui.view.CustomEditText;
 import com.elatesoftware.meetings.util.AndroidUtils;
 import com.elatesoftware.meetings.util.DateUtils;
+import com.elatesoftware.meetings.util.api.pojo.Meeting;
 import com.github.jjobes.slidedatetimepicker.SlideDateTimeListener;
 import com.github.jjobes.slidedatetimepicker.SlideDateTimePicker;
 import com.google.android.gms.common.GooglePlayServicesNotAvailableException;
@@ -81,10 +83,11 @@ public class AddDateActivity extends BaseActivity implements OnMapReadyCallback 
     @BindView(R.id.img_left) ImageView imgLeft;
     @BindView(R.id.img_right) ImageView imgRight;
     @BindView(R.id.vp_hair_color) ViewPager vpHairColor;
+    @BindView(R.id.cet_present) CustomEditText cetPresent;
 
     private SupportMapFragment mapFragment;
     private GoogleMap map;
-    private LatLng place;
+    private Place place;
     private Date dateStart = null, dateEnd = null;
     private ViewPagerAdapter vpHairColorAdapter;
 
@@ -138,7 +141,7 @@ public class AddDateActivity extends BaseActivity implements OnMapReadyCallback 
             switch(requestCode) {
                 case REQUEST_PLACE_PICKER:
                     flMap.setVisibility(View.VISIBLE);
-                    Place place = PlacePicker.getPlace(data, this);
+                    place = PlacePicker.getPlace(data, this);
                     CharSequence name = place.getName();
                     CharSequence address = place.getAddress();
                     String attributions = PlacePicker.getAttributions(data);
@@ -195,6 +198,7 @@ public class AddDateActivity extends BaseActivity implements OnMapReadyCallback 
 
     @OnClick(R.id.btn_preview)
     public void clickBtnPreview() {
+        saveInfoMeeting();
         Intent intent = new Intent(this, ShowAccountActivity.class);
         intent.putExtra(ShowAccountActivity.TITLE, getString(R.string.preview));
         startActivity(intent);
@@ -269,6 +273,30 @@ public class AddDateActivity extends BaseActivity implements OnMapReadyCallback 
         vpHairColorAdapter = new ViewPagerAdapter(pages);
         vpHairColor.setAdapter(vpHairColorAdapter);
         checkArrows();
+    }
+
+    private void saveInfoMeeting() {
+        Meeting meeting = new Meeting();
+        meeting.setAmount(Double.parseDouble(cetPresent.getEditText().getText().toString()));
+        meeting.setHairColor(vpHairColor.getCurrentItem());
+        meeting.setLatitude(place.getLatLng().latitude);
+        meeting.setLongitude(place.getLatLng().longitude);
+        meeting.setPlace(place.getName() + "\n" + place.getAddress());
+        
+        meeting.setPrefAgeStart(Double.parseDouble(tvFirstAge.getText().toString()));
+        meeting.setPrefAgeEnd(Double.parseDouble(tvLastAge.getText().toString()));
+
+        meeting.setPrefHeightStart(Double.parseDouble(tvFirstHeight.getText().toString()));
+        meeting.setPrefHeightEnd(Double.parseDouble(tvLastHeight.getText().toString()));
+
+        meeting.setPrefWeightStart(Double.parseDouble(tvFirstWeight.getText().toString()));
+        meeting.setPrefWeightEnd(Double.parseDouble(tvLastWeight.getText().toString()));
+
+        meeting.setStartTime(dateStart.getTime());
+        meeting.setEndTime(dateEnd.getTime());
+
+        meeting.setWithPhoto(false);
+        Meeting.setInstance(meeting);
     }
 
     @Override
