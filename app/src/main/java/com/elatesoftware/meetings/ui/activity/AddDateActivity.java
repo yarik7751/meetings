@@ -1,5 +1,7 @@
 package com.elatesoftware.meetings.ui.activity;
 
+import android.animation.Animator;
+import android.animation.AnimatorListenerAdapter;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -28,6 +30,7 @@ import com.elatesoftware.meetings.ui.view.CustomEditText;
 import com.elatesoftware.meetings.util.AndroidUtils;
 import com.elatesoftware.meetings.util.DateUtils;
 import com.elatesoftware.meetings.util.api.pojo.Meeting;
+import com.github.aakira.expandablelayout.ExpandableRelativeLayout;
 import com.github.jjobes.slidedatetimepicker.SlideDateTimeListener;
 import com.github.jjobes.slidedatetimepicker.SlideDateTimePicker;
 import com.google.android.gms.common.GooglePlayServicesNotAvailableException;
@@ -84,6 +87,11 @@ public class AddDateActivity extends BaseActivity implements OnMapReadyCallback 
     @BindView(R.id.img_right) ImageView imgRight;
     @BindView(R.id.vp_hair_color) ViewPager vpHairColor;
     @BindView(R.id.cet_present) CustomEditText cetPresent;
+
+    @BindView(R.id.erl_features) ExpandableRelativeLayout llFeatures;
+    @BindView(R.id.erl_time) ExpandableRelativeLayout llTime;
+    @BindView(R.id.erl_location) ExpandableRelativeLayout llLocation;
+    @BindView(R.id.erl_present) ExpandableRelativeLayout llPresent;
 
     private SupportMapFragment mapFragment;
     private GoogleMap map;
@@ -237,6 +245,34 @@ public class AddDateActivity extends BaseActivity implements OnMapReadyCallback 
                 }
             }
         });
+    }
+
+    @OnClick(R.id.ll_features_title)
+    public void clickFeaturesTitle() {
+        clickExpRelativeLayout(llFeatures);
+    }
+
+    @OnClick(R.id.ll_time_title)
+    public void clickTimeTitle() {
+        clickExpRelativeLayout(llTime);
+    }
+
+    @OnClick(R.id.ll_location_title)
+    public void clickLocationTitle() {
+        clickExpRelativeLayout(llLocation);
+    }
+
+    @OnClick(R.id.ll_present_title)
+    public void clickPresentTitle() {
+        clickExpRelativeLayout(llPresent);
+    }
+
+    private void clickExpRelativeLayout(ExpandableRelativeLayout layout) {
+        if(layout.isExpanded()) {
+            layout.collapse();
+        } else {
+            layout.expand();
+        }
     }
 
     public void сhoicePlace() {

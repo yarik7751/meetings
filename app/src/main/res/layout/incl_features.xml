@@ -7,6 +7,7 @@
     android:layout_height="wrap_content">
 
     <LinearLayout
+        android:id="@+id/ll_features_title"
         android:orientation="horizontal"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -29,266 +30,274 @@
             android:textStyle="bold"/>
     </LinearLayout>
 
-    <android.support.v7.widget.CardView
+    <com.github.aakira.expandablelayout.ExpandableRelativeLayout
+        android:id="@+id/erl_features"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        card_view:cardCornerRadius="5dp"
-        card_view:cardBackgroundColor="@color/white">
+        app:ael_expanded="false"
+        app:ael_duration="200"
+        app:ael_interpolator="bounce"
+        app:ael_orientation="vertical">
 
         <LinearLayout
             android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="8dp">
+            android:layout_height="wrap_content">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:textSize="14sp"
-                android:textColor="@color/text_dark"
-                android:text="@string/age"/>
-
-            <LinearLayout
-                android:orientation="horizontal"
+            <android.support.v7.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center_horizontal">
+                android:layout_marginTop="8dp"
+                card_view:cardCornerRadius="5dp"
+                card_view:cardBackgroundColor="@color/white">
 
-                <TextView
-                    android:id="@+id/tv_first_age"
-                    android:layout_width="wrap_content"
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
-                    android:textSize="14sp"
-                    android:textColor="@color/text_dark"
-                    android:text="26"/>
+                    android:layout_margin="8dp">
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
-                    android:textSize="14sp"
-                    android:textColor="@color/text_dark"
-                    android:text="—"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:textSize="14sp"
+                        android:textColor="@color/text_dark"
+                        android:text="@string/age"/>
 
-                <TextView
-                    android:id="@+id/tv_last_age"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
-                    android:textSize="14sp"
-                    android:textColor="@color/text_dark"
-                    android:text="26"/>
-            </LinearLayout>
+                    <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_horizontal">
 
-            <com.crystal.crystalrangeseekbar.widgets.CrystalRangeSeekbar
-                android:id="@+id/crs_age"
+                        <TextView
+                            android:id="@+id/tv_first_age"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_horizontal"
+                            android:textSize="14sp"
+                            android:textColor="@color/text_dark"
+                            android:text="26"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_horizontal"
+                            android:textSize="14sp"
+                            android:textColor="@color/text_dark"
+                            android:text="—"/>
+
+                        <TextView
+                            android:id="@+id/tv_last_age"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_horizontal"
+                            android:textSize="14sp"
+                            android:textColor="@color/text_dark"
+                            android:text="26"/>
+                    </LinearLayout>
+
+                    <com.crystal.crystalrangeseekbar.widgets.CrystalRangeSeekbar
+                        android:id="@+id/crs_age"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        android:layout_marginBottom="8dp"
+                        app:corner_radius="3"
+                        app:min_value="18"
+                        app:max_value="40"
+                        app:gap="3"
+                        app:bar_color="@color/gray"
+                        app:bar_highlight_color="@color/seek_bar"
+                        app:left_thumb_image="@drawable/ellipse_point"
+                        app:right_thumb_image="@drawable/ellipse_point"
+                        app:data_type="_integer"/>
+                </LinearLayout>
+            </android.support.v7.widget.CardView>
+
+            <android.support.v7.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:layout_marginBottom="8dp"
-                app:corner_radius="3"
-                app:min_value="18"
-                app:max_value="40"
-                app:gap="3"
-                app:bar_color="@color/gray"
-                app:bar_highlight_color="@color/seek_bar"
-                app:left_thumb_image="@drawable/ellipse_point"
-                app:right_thumb_image="@drawable/ellipse_point"
-                app:data_type="_integer"/>
+                android:layout_marginTop="8dp"
+                card_view:cardCornerRadius="5dp"
+                card_view:cardBackgroundColor="@color/white">
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="8dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:textSize="14sp"
+                        android:textColor="@color/text_dark"
+                        android:text="@string/height"/>
+
+                    <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_horizontal">
+
+                        <TextView
+                            android:id="@+id/tv_first_height"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_horizontal"
+                            android:textSize="14sp"
+                            android:textColor="@color/text_dark"
+                            android:text="26"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_horizontal"
+                            android:textSize="14sp"
+                            android:textColor="@color/text_dark"
+                            android:text="—"/>
+
+                        <TextView
+                            android:id="@+id/tv_last_height"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_horizontal"
+                            android:textSize="14sp"
+                            android:textColor="@color/text_dark"
+                            android:text="26"/>
+                    </LinearLayout>
+
+                    <com.crystal.crystalrangeseekbar.widgets.CrystalRangeSeekbar
+                        android:id="@+id/crs_height"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        android:layout_marginBottom="8dp"
+                        app:corner_radius="3"
+                        app:min_value="140"
+                        app:max_value="250"
+                        app:gap="30"
+                        app:bar_color="@color/gray"
+                        app:bar_highlight_color="@color/seek_bar"
+                        app:left_thumb_image="@drawable/ellipse_point"
+                        app:right_thumb_image="@drawable/ellipse_point"
+                        app:data_type="_integer"/>
+                </LinearLayout>
+            </android.support.v7.widget.CardView>
+
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                card_view:cardCornerRadius="5dp"
+                card_view:cardBackgroundColor="@color/white">
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="8dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:textSize="14sp"
+                        android:textColor="@color/text_dark"
+                        android:text="@string/weight"/>
+
+                    <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_horizontal">
+
+                        <TextView
+                            android:id="@+id/tv_first_weight"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_horizontal"
+                            android:textSize="14sp"
+                            android:textColor="@color/text_dark"
+                            android:text="26"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_horizontal"
+                            android:textSize="14sp"
+                            android:textColor="@color/text_dark"
+                            android:text="—"/>
+
+                        <TextView
+                            android:id="@+id/tv_last_weight"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_horizontal"
+                            android:textSize="14sp"
+                            android:textColor="@color/text_dark"
+                            android:text="26"/>
+                    </LinearLayout>
+
+                    <com.crystal.crystalrangeseekbar.widgets.CrystalRangeSeekbar
+                        android:id="@+id/crs_weight"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        android:layout_marginBottom="8dp"
+                        app:corner_radius="3"
+                        app:min_value="40"
+                        app:max_value="150"
+                        app:gap="10"
+                        app:bar_color="@color/gray"
+                        app:bar_highlight_color="@color/seek_bar"
+                        app:left_thumb_image="@drawable/ellipse_point"
+                        app:right_thumb_image="@drawable/ellipse_point"
+                        app:data_type="_integer"/>
+                </LinearLayout>
+            </android.support.v7.widget.CardView>
+
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp">
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="8dp">
+
+                    <ImageView
+                        style="?attr/actionButtonStyle"
+                        android:id="@+id/img_left"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:tint="@color/button_blue_light"
+                        android:src="@drawable/ic_keyboard_arrow_left_black_24dp"/>
+
+                    <android.support.v4.view.ViewPager
+                        android:id="@+id/vp_hair_color"
+                        android:layout_width="match_parent"
+                        android:layout_height="24dp"
+                        android:layout_weight="1"/>
+
+                    <ImageView
+                        style="?attr/actionButtonStyle"
+                        android:id="@+id/img_right"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:tint="@color/button_blue_light"
+                        android:src="@drawable/ic_keyboard_arrow_right_black_24dp"/>
+                </LinearLayout>
+            </android.support.v7.widget.CardView>
         </LinearLayout>
-    </android.support.v7.widget.CardView>
-
-    <android.support.v7.widget.CardView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        card_view:cardCornerRadius="5dp"
-        card_view:cardBackgroundColor="@color/white">
-
-        <LinearLayout
-            android:orientation="vertical"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="8dp">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:textSize="14sp"
-                android:textColor="@color/text_dark"
-                android:text="@string/height"/>
-
-            <LinearLayout
-                android:orientation="horizontal"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center_horizontal">
-
-                <TextView
-                    android:id="@+id/tv_first_height"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
-                    android:textSize="14sp"
-                    android:textColor="@color/text_dark"
-                    android:text="26"/>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
-                    android:textSize="14sp"
-                    android:textColor="@color/text_dark"
-                    android:text="—"/>
-
-                <TextView
-                    android:id="@+id/tv_last_height"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
-                    android:textSize="14sp"
-                    android:textColor="@color/text_dark"
-                    android:text="26"/>
-            </LinearLayout>
-
-            <com.crystal.crystalrangeseekbar.widgets.CrystalRangeSeekbar
-                android:id="@+id/crs_height"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:layout_marginBottom="8dp"
-                app:corner_radius="3"
-                app:min_value="140"
-                app:max_value="250"
-                app:gap="30"
-                app:bar_color="@color/gray"
-                app:bar_highlight_color="@color/seek_bar"
-                app:left_thumb_image="@drawable/ellipse_point"
-                app:right_thumb_image="@drawable/ellipse_point"
-                app:data_type="_integer"/>
-        </LinearLayout>
-    </android.support.v7.widget.CardView>
-
-    <android.support.v7.widget.CardView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        card_view:cardCornerRadius="5dp"
-        card_view:cardBackgroundColor="@color/white">
-
-        <LinearLayout
-            android:orientation="vertical"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="8dp">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:textSize="14sp"
-                android:textColor="@color/text_dark"
-                android:text="@string/weight"/>
-
-            <LinearLayout
-                android:orientation="horizontal"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center_horizontal">
-
-                <TextView
-                    android:id="@+id/tv_first_weight"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
-                    android:textSize="14sp"
-                    android:textColor="@color/text_dark"
-                    android:text="26"/>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
-                    android:textSize="14sp"
-                    android:textColor="@color/text_dark"
-                    android:text="—"/>
-
-                <TextView
-                    android:id="@+id/tv_last_weight"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
-                    android:textSize="14sp"
-                    android:textColor="@color/text_dark"
-                    android:text="26"/>
-            </LinearLayout>
-
-            <com.crystal.crystalrangeseekbar.widgets.CrystalRangeSeekbar
-                android:id="@+id/crs_weight"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:layout_marginBottom="8dp"
-                app:corner_radius="3"
-                app:min_value="40"
-                app:max_value="150"
-                app:gap="10"
-                app:bar_color="@color/gray"
-                app:bar_highlight_color="@color/seek_bar"
-                app:left_thumb_image="@drawable/ellipse_point"
-                app:right_thumb_image="@drawable/ellipse_point"
-                app:data_type="_integer"/>
-        </LinearLayout>
-    </android.support.v7.widget.CardView>
-
-    <!--<com.elatesoftware.meetings.ui.view.CustomEditText
-        android:id="@+id/cet_about"
-        android:layout_width="match_parent"
-        android:layout_height="45dp"
-        android:layout_marginTop="8dp"
-        android:gravity="left|center_vertical"
-        android:hint="@string/hair_color"/>-->
-
-    <android.support.v7.widget.CardView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp">
-
-        <LinearLayout
-            android:orientation="horizontal"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="8dp">
-
-            <ImageView
-                style="?attr/actionButtonStyle"
-                android:id="@+id/img_left"
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:clickable="true"
-                android:focusable="true"
-                android:tint="@color/button_blue_light"
-                android:src="@drawable/ic_keyboard_arrow_left_black_24dp"/>
-
-            <android.support.v4.view.ViewPager
-                android:id="@+id/vp_hair_color"
-                android:layout_width="match_parent"
-                android:layout_height="24dp"
-                android:layout_weight="1"/>
-
-            <ImageView
-                style="?attr/actionButtonStyle"
-                android:id="@+id/img_right"
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:clickable="true"
-                android:focusable="true"
-                android:tint="@color/button_blue_light"
-                android:src="@drawable/ic_keyboard_arrow_right_black_24dp"/>
-        </LinearLayout>
-    </android.support.v7.widget.CardView>
+    </com.github.aakira.expandablelayout.ExpandableRelativeLayout>
 </LinearLayout>

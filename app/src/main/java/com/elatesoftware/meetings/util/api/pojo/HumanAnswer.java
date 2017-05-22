@@ -51,7 +51,7 @@ public class HumanAnswer {
     @Expose
     protected String aboutMe;
 
-    public HumanAnswer(String firstName, Long dateOfBirth, String aboutMe, String city) {
+    public HumanAnswer(String firstName, Long dateOfBirth, String aboutMe) {
         this.firstName = firstName;
         this.dateOfBirth = dateOfBirth;
         this.aboutMe = aboutMe;

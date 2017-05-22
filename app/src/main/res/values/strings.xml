@@ -73,6 +73,7 @@
     <string name="wrong_date">Wrong date! Please correct.</string>
 
     <string-array name="hair_colors">
+        <item>Doesn\'t matter</item>
         <item>Blondie</item>
         <item>Brunette</item>
     </string-array>

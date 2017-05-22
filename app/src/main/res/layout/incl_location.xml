@@ -7,6 +7,7 @@
     android:layout_height="wrap_content">
 
     <LinearLayout
+        android:id="@+id/ll_location_title"
         android:orientation="horizontal"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -29,39 +30,55 @@
             android:textStyle="bold"/>
     </LinearLayout>
 
-    <android.support.v7.widget.CardView
-        android:id="@+id/cv_choose_place"
+    <com.github.aakira.expandablelayout.ExpandableRelativeLayout
+        android:id="@+id/erl_location"
         android:layout_width="match_parent"
-        android:layout_height="150dp"
-        android:layout_marginTop="8dp"
-        android:padding="0dp"
-        card_view:cardCornerRadius="5dp"
-        card_view:cardBackgroundColor="@color/white">
+        android:layout_height="wrap_content"
+        app:ael_expanded="false"
+        app:ael_duration="200"
+        app:ael_interpolator="bounce"
+        app:ael_orientation="vertical">
 
-        <RelativeLayout
+        <LinearLayout
+            android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content">
 
-            <FrameLayout
-                android:id="@+id/map"
+            <android.support.v7.widget.CardView
+                android:id="@+id/cv_choose_place"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent" />
+                android:layout_height="150dp"
+                android:layout_marginTop="8dp"
+                android:padding="0dp"
+                card_view:cardCornerRadius="5dp"
+                card_view:cardBackgroundColor="@color/white">
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@drawable/map_bg"/>
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
 
-            <TextView
-                android:id="@+id/tv_place_title"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_margin="8dp"
-                android:layout_centerVertical="true"
-                android:layout_centerHorizontal="true"
-                android:textSize="14sp"
-                android:textColor="@color/text_dark"
-                android:text="@string/choose_a_meeting_place"/>
-        </RelativeLayout>
-    </android.support.v7.widget.CardView>
+                    <FrameLayout
+                        android:id="@+id/map"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/map_bg"/>
+
+                    <TextView
+                        android:id="@+id/tv_place_title"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_margin="8dp"
+                        android:layout_centerVertical="true"
+                        android:layout_centerHorizontal="true"
+                        android:textSize="14sp"
+                        android:textColor="@color/text_dark"
+                        android:text="@string/choose_a_meeting_place"/>
+                </RelativeLayout>
+            </android.support.v7.widget.CardView>
+        </LinearLayout>
+    </com.github.aakira.expandablelayout.ExpandableRelativeLayout>
 </LinearLayout>
