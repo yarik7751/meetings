@@ -15,13 +15,40 @@ public class LoginAnswer extends MessageAnswer {
 
     @SerializedName("Result")
     @Expose
-    protected String result;
+    protected Result result;
 
-    public String getResult() {
+    public Result getResult() {
         return result;
     }
 
-    public void setResult(String result) {
+    public void setResult(Result result) {
         this.result = result;
+    }
+
+    public class Result {
+
+        @SerializedName("SessionKey")
+        @Expose
+        protected String sessionKey;
+
+        @SerializedName("Account")
+        @Expose
+        protected HumanAnswer account;
+
+        public HumanAnswer getAccount() {
+            return account;
+        }
+
+        public void setAccount(HumanAnswer account) {
+            this.account = account;
+        }
+
+        public String getSessionKey() {
+            return sessionKey;
+        }
+
+        public void setSessionKey(String sessionKey) {
+            this.sessionKey = sessionKey;
+        }
     }
 }

@@ -26,7 +26,7 @@ public class AutarizationBroadcastReceiver extends BroadcastReceiver {
         if(response != null && response.equals(String.valueOf(Const.CODE_SUCCESS)) && LoginAnswer.getInstance() != null) {
             Log.d(TAG, "registration 200");
             if(LoginAnswer.getInstance().getSuccess()) {
-                CustomSharedPreference.setToken(context, LoginAnswer.getInstance().getResult());
+                CustomSharedPreference.setToken(context, LoginAnswer.getInstance().getResult().getSessionKey());
                 if(CustomSharedPreference.isMan(context)) {
                     context.startActivity(new Intent(context, WorkActivityMan.class));
                 } else {
