@@ -1,5 +1,7 @@
 package com.elatesoftware.meetings.ui.activity.man;
 
+import android.Manifest;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -11,10 +13,13 @@ import com.elatesoftware.meetings.ui.activity.base.BaseActivity;
 import com.elatesoftware.meetings.ui.fragment.man.DalesManFragment;
 import com.elatesoftware.meetings.ui.fragment.man.ProfileManFragment;
 import com.elatesoftware.meetings.ui.fragment.man.WalletManFragment;
+import com.elatesoftware.meetings.util.Utils;
 
 import butterknife.BindView;
 
 public class WorkActivityMan extends BaseActivity {
+
+    private int REQUEST_PERMISSIONS = 1;
 
     @BindView(R.id.bnv_menu)
     BottomNavigationView bnvMenu;
@@ -47,5 +52,16 @@ public class WorkActivityMan extends BaseActivity {
                 return true;
             }
         });
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            requestPermissions(new String[]{ Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION }, REQUEST_PERMISSIONS);
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if(requestCode == REQUEST_PERMISSIONS && Utils.isPermissionsGranted(grantResults)) {
+
+        }
     }
 }
