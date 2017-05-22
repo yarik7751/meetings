@@ -6,12 +6,9 @@ import android.util.Log;
 
 import com.elatesoftware.meetings.util.Const;
 import com.elatesoftware.meetings.util.CustomSharedPreference;
+import com.elatesoftware.meetings.util.Utils;
 import com.elatesoftware.meetings.util.api.Api;
 import com.elatesoftware.meetings.util.api.pojo.HumanAnswer;
-
-/**
- * Created by user on 18.05.2017.
- */
 
 public class UpdateAccountService extends IntentService {
 
@@ -25,6 +22,13 @@ public class UpdateAccountService extends IntentService {
 
     @Override
     protected void onHandleIntent(Intent intent) {
+        String city = "qwerty";
+        try {
+            city = Utils.getCity(this);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        HumanAnswer.getInstance().setCity(city);
         String response = Api.updateAccountInfo(CustomSharedPreference.getToken(this), HumanAnswer.getInstance());
         Intent responseIntent = new Intent();
         responseIntent.setAction(ACTION);

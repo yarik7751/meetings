@@ -21,9 +21,11 @@ import com.elatesoftware.meetings.util.AndroidUtils;
 import com.elatesoftware.meetings.util.Const;
 import com.elatesoftware.meetings.util.CustomSharedPreference;
 import com.elatesoftware.meetings.util.DateUtils;
+import com.elatesoftware.meetings.util.Utils;
 import com.elatesoftware.meetings.util.api.pojo.HumanAnswer;
 import com.elatesoftware.meetings.util.api.pojo.MessageAnswer;
 
+import java.io.IOException;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
@@ -122,7 +124,7 @@ public class ProfileEditManActivity extends BaseActivity {
     private void updateLocalInfo() {
         String name = cetName.getEditText().getText().toString();
         String aboutMe = cetAbout.getEditText().getText().toString();
-        profileMan = new HumanAnswer(name, birthDate == null ? 0 : birthDate.getTimeInMillis(), aboutMe, "qwetuio");
+        profileMan = new HumanAnswer(name, birthDate == null ? 0 : birthDate.getTimeInMillis(), aboutMe);
     }
 
     private void loadInfo() {
