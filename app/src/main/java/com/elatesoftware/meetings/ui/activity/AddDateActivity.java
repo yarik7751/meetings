@@ -3,12 +3,15 @@ package com.elatesoftware.meetings.ui.activity;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.CardView;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -45,6 +48,7 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.unnamed.b.atv.model.TreeNode;
 import com.unnamed.b.atv.view.AndroidTreeView;
@@ -60,7 +64,9 @@ import butterknife.OnClick;
 public class AddDateActivity extends BaseActivity implements OnMapReadyCallback {
 
     private static final String TAG = "AddDaleActivity_logs";
-    private static final int REQUEST_PLACE_PICKER = 104;
+    public static final int REQUEST_PLACE_PICKER = 104;
+    public static final int CLOSE = 105;
+    public static final String IS_CLOSE = "IS_CLOSE";
 
     @BindView(R.id.ll_main) LinearLayout llMain;
     
@@ -158,15 +164,20 @@ public class AddDateActivity extends BaseActivity implements OnMapReadyCallback 
                     }
                     tvPlaceTitle.setText(name + "\n" + address);
 
+                    map.clear();
                     CameraPosition cameraPosition = new CameraPosition.Builder()
                             .target(place.getLatLng())
                             .zoom(16.0f)
-                            .bearing(90)
-                            .tilt(30)
                             .build();
                     map.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
                     map.addMarker(new MarkerOptions()
                             .position(place.getLatLng()));
+                    break;
+
+                case CLOSE:
+                    if(data.getBooleanExtra(IS_CLOSE, false)) {
+                        finish();
+                    }
                     break;
             }
         } else {
@@ -206,13 +217,16 @@ public class AddDateActivity extends BaseActivity implements OnMapReadyCallback 
 
     @OnClick(R.id.btn_preview)
     public void clickBtnPreview() {
-        saveInfoMeeting();
-        Intent intent = new Intent(this, ShowAccountActivity.class);
-        intent.putExtra(ShowAccountActivity.TITLE, getString(R.string.preview));
-        startActivity(intent);
+        if(checkInfo()) {
+            saveInfoMeeting();
+            Intent intent = new Intent(this, ShowDateActivity.class);
+            intent.putExtra(ShowDateActivity.TITLE, getString(R.string.preview));
+            intent.putExtra(ShowDateActivity.IS_SHOW_MAN_INFO, false);
+            startActivityForResult(intent, CLOSE);
+        }
     }
 
-    @OnClick(R.id.tv_place_title)
+    @OnClick(R.id.ll_place)
     public void clickChoosePlace() {
         сhoicePlace();
     }
@@ -225,7 +239,7 @@ public class AddDateActivity extends BaseActivity implements OnMapReadyCallback 
                 if(dateEnd != null && date.getTime() >= dateEnd.getTime()) {
                     showMessage(R.string.wrong_date);
                 } else {
-                    dateStart = date;
+                    dateStart = new Date(date.getTime());
                     tvStartTime.setText(DateUtils.getDateByStr(date, DateUtils.DATE_FORMAT_OUTPUT));
                 }
             }
@@ -240,7 +254,7 @@ public class AddDateActivity extends BaseActivity implements OnMapReadyCallback 
                 if(dateStart != null && date.getTime() <= dateStart.getTime()) {
                     showMessage(R.string.wrong_date);
                 } else {
-                    dateEnd = date;
+                    dateEnd = new Date(date.getTime());
                     tvEndTime.setText(DateUtils.getDateByStr(date, DateUtils.DATE_FORMAT_OUTPUT));
                 }
             }
@@ -313,26 +327,60 @@ public class AddDateActivity extends BaseActivity implements OnMapReadyCallback 
 
     private void saveInfoMeeting() {
         Meeting meeting = new Meeting();
-        meeting.setAmount(Double.parseDouble(cetPresent.getEditText().getText().toString()));
+        meeting.setAmount(Integer.parseInt(cetPresent.getEditText().getText().toString()));
         meeting.setHairColor(vpHairColor.getCurrentItem());
         meeting.setLatitude(place.getLatLng().latitude);
         meeting.setLongitude(place.getLatLng().longitude);
         meeting.setPlace(place.getName() + "\n" + place.getAddress());
-        
-        meeting.setPrefAgeStart(Double.parseDouble(tvFirstAge.getText().toString()));
-        meeting.setPrefAgeEnd(Double.parseDouble(tvLastAge.getText().toString()));
 
-        meeting.setPrefHeightStart(Double.parseDouble(tvFirstHeight.getText().toString()));
-        meeting.setPrefHeightEnd(Double.parseDouble(tvLastHeight.getText().toString()));
+        meeting.setPrefAgeStart(Integer.parseInt(tvFirstAge.getText().toString()));
+        meeting.setPrefAgeEnd(Integer.parseInt(tvLastAge.getText().toString()));
 
-        meeting.setPrefWeightStart(Double.parseDouble(tvFirstWeight.getText().toString()));
-        meeting.setPrefWeightEnd(Double.parseDouble(tvLastWeight.getText().toString()));
+        meeting.setPrefHeightStart(Integer.parseInt(tvFirstHeight.getText().toString()));
+        meeting.setPrefHeightEnd(Integer.parseInt(tvLastHeight.getText().toString()));
 
-        meeting.setStartTime(dateStart.getTime());
-        meeting.setEndTime(dateEnd.getTime());
+        meeting.setPrefWeightStart(Integer.parseInt(tvFirstWeight.getText().toString()));
+        meeting.setPrefWeightEnd(Integer.parseInt(tvLastWeight.getText().toString()));
+
+        Log.d(TAG, "dateStart: " + dateStart.getTime());
+        Log.d(TAG, "dateEnd  : " + dateEnd.getTime());
+        meeting.setStartTime(dateStart.getTime() / 1000);
+        meeting.setEndTime(dateEnd.getTime() / 1000);
+
+        Log.d(TAG, "meeting.getStartTime(): " + meeting.getStartTime());
+        Log.d(TAG, "meeting.getEndTime()  : " + meeting.getEndTime());
+        Log.d(TAG, "valid  : " + (meeting.getEndTime() > meeting.getStartTime()));
 
         meeting.setWithPhoto(false);
         Meeting.setInstance(meeting);
+    }
+
+    private boolean checkInfo() {
+        String msgError = "";
+        if(dateStart == null && dateEnd == null) {
+            msgError += getString(R.string.entry_time) + "\n";
+        }
+        if(place == null) {
+            msgError += getString(R.string.entry_place) + "\n";
+        }
+        if(place == null) {
+            msgError += getString(R.string.entry_present);
+        }
+        if(TextUtils.isEmpty(msgError)) {
+            return true;
+        } else {
+            new AlertDialog.Builder(this)
+                .setTitle(R.string.error_add_date)
+                .setMessage(msgError)
+                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.cancel();
+                    }
+                })
+                .create().show();
+            return false;
+        }
     }
 
     @Override

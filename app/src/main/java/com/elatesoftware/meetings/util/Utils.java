@@ -6,15 +6,18 @@ import android.content.pm.PackageManager;
 import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
-import android.location.LocationListener;
 import android.location.LocationManager;
-import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
 import android.text.TextUtils;
 import android.util.Log;
 import android.widget.TextView;
 
 import com.elatesoftware.meetings.R;
+import com.google.android.gms.maps.CameraUpdateFactory;
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.model.CameraPosition;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.firebase.database.DataSnapshot;
 
 import java.io.IOException;
@@ -86,5 +89,15 @@ public class Utils {
     public static boolean isToken(Context context) {
         String token = CustomSharedPreference.getToken(context);
         return !TextUtils.isEmpty(token) && !token.equals(Const.NULL_TOKEN);
+    }
+
+    public static void setMarkerInMap(GoogleMap map, LatLng latLng) {
+        CameraPosition cameraPosition = new CameraPosition.Builder()
+                .target(latLng)
+                .zoom(17.0f)
+                .build();
+        map.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
+        map.addMarker(new MarkerOptions()
+                .position(latLng));
     }
 }

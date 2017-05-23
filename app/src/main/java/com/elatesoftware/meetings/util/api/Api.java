@@ -10,6 +10,7 @@ import com.elatesoftware.meetings.util.Utils;
 import com.elatesoftware.meetings.util.api.pojo.GetInfoAccAnswer;
 import com.elatesoftware.meetings.util.api.pojo.HumanAnswer;
 import com.elatesoftware.meetings.util.api.pojo.LoginAnswer;
+import com.elatesoftware.meetings.util.api.pojo.Meeting;
 import com.elatesoftware.meetings.util.api.pojo.MessageAnswer;
 import com.franmontiel.persistentcookiejar.PersistentCookieJar;
 import com.franmontiel.persistentcookiejar.cache.SetCookieCache;
@@ -169,7 +170,7 @@ public class Api {
         return result;
     }
 
-    public static String getAccountInfo(Context context, String sessionKey) {
+    public static String getAccountInfo(String sessionKey) {
         Call<ResponseBody> call = getApi().getAccountInfo(sessionKey);
         Response<ResponseBody> response = null;
         String result = null;
@@ -187,6 +188,37 @@ public class Api {
                 Gson gson = new Gson();
                 GetInfoAccAnswer answer = gson.fromJson(rawJson, GetInfoAccAnswer.class);
                 GetInfoAccAnswer.setInstance(answer);
+            }
+            result = String.valueOf(response.code());
+        }
+        return result;
+    }
+
+    public static String createDate(String sessionKey, Meeting meeting) {
+        Gson gson = new Gson();
+        String meetingStr = gson.toJson(meeting, Meeting.class);
+        Log.d(TAG, "meetingStr: " + meetingStr);
+        RequestBody body = RequestBody.create(okhttp3.MediaType.parse("application/json; charset=utf-8"), meetingStr);
+        Call<ResponseBody> call = getApi().createDate(sessionKey, body);
+        Response<ResponseBody> response = null;
+        String result = null;
+        String rawJson = null;
+        try {
+            response = call.execute();
+            if(response != null && response.body() != null) {
+                rawJson = response.body().string();
+                rawJson = rawJson.replace("\\", "");
+                Log.d(TAG, "createDate: " + rawJson);
+            } else {
+                Log.d(TAG, "createDate: null");
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        if(response != null && rawJson != null){
+            if(response.code() == Const.CODE_SUCCESS) {
+                MessageAnswer messageAnswer = gson.fromJson(rawJson, MessageAnswer.class);
+                MessageAnswer.setInstance(messageAnswer);
             }
             result = String.valueOf(response.code());
         }

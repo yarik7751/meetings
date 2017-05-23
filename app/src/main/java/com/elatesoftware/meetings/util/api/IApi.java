@@ -26,4 +26,8 @@ public interface IApi {
 
     @GET("api/account/details")
     Call<ResponseBody> getAccountInfo(@Query("sessionKey") String sessionKey);
+
+    @POST("api/dates/CreateDate")
+    Call<ResponseBody> createDate(@Query("sessionKey") String sessionKey, @Body RequestBody params);
+
 }

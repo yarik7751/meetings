@@ -7,20 +7,21 @@ import android.util.Log;
 import com.elatesoftware.meetings.util.Const;
 import com.elatesoftware.meetings.util.CustomSharedPreference;
 import com.elatesoftware.meetings.util.api.Api;
+import com.elatesoftware.meetings.util.api.pojo.Meeting;
 
-public class GetAccountInfoService extends IntentService {
+public class CreateDateService extends IntentService {
 
-    public static final String TAG = "GetAInfoS_log";
-    public static final String ACTION = "com.elatesoftware.meetings.ui.service.GetAccountInfoService";
+    public static final String TAG = "CreateDateS_log";
+    public static final String ACTION = "com.elatesoftware.meetings.ui.service.CreateDateService";
 
-    public GetAccountInfoService() {
+    public CreateDateService() {
         super(TAG);
         Log.d(TAG, ACTION);
     }
 
     @Override
     protected void onHandleIntent(Intent intent) {
-        String response = Api.getAccountInfo(CustomSharedPreference.getToken(this));
+        String response = Api.createDate(CustomSharedPreference.getToken(this), Meeting.getInstance());
         Intent responseIntent = new Intent();
         responseIntent.setAction(ACTION);
         responseIntent.addCategory(Intent.CATEGORY_DEFAULT);

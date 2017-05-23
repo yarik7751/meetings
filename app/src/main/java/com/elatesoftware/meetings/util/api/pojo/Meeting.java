@@ -27,31 +27,31 @@ public class Meeting {
 
     @SerializedName("Amount")
     @Expose
-    protected Double amount;
+    protected Integer amount;
 
     @SerializedName("PrefAgeStart")
     @Expose
-    protected Double prefAgeStart;
+    protected Integer prefAgeStart;
 
     @SerializedName("PrefAgeEnd")
     @Expose
-    protected Double prefAgeEnd;
+    protected Integer prefAgeEnd;
 
     @SerializedName("PrefHeightStart")
     @Expose
-    protected Double prefHeightStart;
+    protected Integer prefHeightStart;
 
     @SerializedName("PrefHeightEnd")
     @Expose
-    protected Double prefHeightEnd;
+    protected Integer prefHeightEnd;
 
     @SerializedName("PrefWeightStart")
     @Expose
-    protected Double prefWeightStart;
+    protected Integer prefWeightStart;
 
     @SerializedName("PrefWeightEnd")
     @Expose
-    protected Double prefWeightEnd;
+    protected Integer prefWeightEnd;
 
     @SerializedName("HairColor")
     @Expose
@@ -109,51 +109,51 @@ public class Meeting {
         this.place = place;
     }
 
-    public Double getPrefAgeEnd() {
+    public Integer getPrefAgeEnd() {
         return prefAgeEnd;
     }
 
-    public void setPrefAgeEnd(Double prefAgeEnd) {
+    public void setPrefAgeEnd(Integer prefAgeEnd) {
         this.prefAgeEnd = prefAgeEnd;
     }
 
-    public Double getPrefAgeStart() {
+    public Integer getPrefAgeStart() {
         return prefAgeStart;
     }
 
-    public void setPrefAgeStart(Double prefAgeStart) {
+    public void setPrefAgeStart(Integer prefAgeStart) {
         this.prefAgeStart = prefAgeStart;
     }
 
-    public Double getPrefHeightEnd() {
+    public Integer getPrefHeightEnd() {
         return prefHeightEnd;
     }
 
-    public void setPrefHeightEnd(Double prefHeightEnd) {
+    public void setPrefHeightEnd(Integer prefHeightEnd) {
         this.prefHeightEnd = prefHeightEnd;
     }
 
-    public Double getPrefHeightStart() {
+    public Integer getPrefHeightStart() {
         return prefHeightStart;
     }
 
-    public void setPrefHeightStart(Double prefHeightStart) {
+    public void setPrefHeightStart(Integer prefHeightStart) {
         this.prefHeightStart = prefHeightStart;
     }
 
-    public Double getPrefWeightEnd() {
+    public Integer getPrefWeightEnd() {
         return prefWeightEnd;
     }
 
-    public void setPrefWeightEnd(Double prefWeightEnd) {
+    public void setPrefWeightEnd(Integer prefWeightEnd) {
         this.prefWeightEnd = prefWeightEnd;
     }
 
-    public Double getPrefWeightStart() {
+    public Integer getPrefWeightStart() {
         return prefWeightStart;
     }
 
-    public void setPrefWeightStart(Double prefWeightStart) {
+    public void setPrefWeightStart(Integer prefWeightStart) {
         this.prefWeightStart = prefWeightStart;
     }
 
@@ -173,11 +173,11 @@ public class Meeting {
         this.withPhoto = withPhoto;
     }
 
-    public Double getAmount() {
+    public Integer getAmount() {
         return amount;
     }
 
-    public void setAmount(Double amount) {
+    public void setAmount(Integer amount) {
         this.amount = amount;
     }
 }

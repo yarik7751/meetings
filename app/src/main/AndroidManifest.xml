@@ -61,7 +61,7 @@
             android:windowSoftInputMode="stateAlwaysHidden"
             android:configChanges="keyboardHidden|orientation|screenSize"></activity>
         <activity
-            android:name=".ui.activity.ShowAccountActivity"
+            android:name=".ui.activity.ShowDateActivity"
             android:windowSoftInputMode="stateAlwaysHidden"
             android:configChanges="keyboardHidden|orientation|screenSize"></activity>
 
@@ -69,6 +69,7 @@
         <service android:name=".ui.service.LoginService"></service>
         <service android:name=".ui.service.UpdateAccountService"></service>
         <service android:name=".ui.service.GetAccountInfoService"></service>
+        <service android:name=".ui.service.CreateDateService"></service>
 
         <meta-data
             android:name="com.google.android.gms.version"

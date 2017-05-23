@@ -71,6 +71,12 @@
     <string name="publish">Publish</string>
     <string name="choose_a_meeting_place">Choose a meeting place</string>
     <string name="wrong_date">Wrong date! Please correct.</string>
+    <string name="entry_time">Entry time!</string>
+    <string name="entry_place">Check place!</string>
+    <string name="entry_present">Entry present!</string>
+    <string name="error_add_date">Error</string>
+    <string name="something_wrong">Something wrong</string>
+    <string name="date_created_successfully">Date created successfully!</string>
 
     <string-array name="hair_colors">
         <item>Doesn\'t matter</item>
