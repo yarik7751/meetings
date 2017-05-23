@@ -26,6 +26,13 @@
                 android:layout_width="match_parent"
                 android:layout_height="200dp"
                 android:background="@drawable/button_blue">
+                
+                <ImageView
+                    android:layout_width="152dp"
+                    android:layout_height="53dp"
+                    android:layout_centerHorizontal="true"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/sunglasses"/>
 
                 <android.support.v4.view.ViewPager
                     android:id="@+id/vp_photos"
@@ -40,6 +47,16 @@
                     android:layout_alignParentBottom="true"
                     app:ci_drawable="@drawable/activ_dot"
                     app:ci_drawable_unselected="@drawable/normal_dot"/>
+
+                <android.support.design.widget.FloatingActionButton
+                    android:id="@+id/fab_add_photo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginBottom="8dp"
+                    android:layout_marginRight="8dp"
+                    android:src="@drawable/ic_add_white_24dp"/>
             </RelativeLayout>
 
             <LinearLayout

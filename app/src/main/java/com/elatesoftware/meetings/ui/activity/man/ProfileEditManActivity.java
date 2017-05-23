@@ -70,6 +70,11 @@ public class ProfileEditManActivity extends BaseActivity {
         unregisterReceiver(updateAccountInfoBroadcastReceiver);
     }
 
+    @OnClick(R.id.fab_add_photo)
+    public void clickAddPhoto() {
+
+    }
+
     @OnClick(R.id.rl_back)
     public void clickImgBack() {
         onBackPressed();
