@@ -2,13 +2,17 @@ package com.elatesoftware.meetings.util;
 
 import android.Manifest;
 import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
 import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
 import android.location.LocationManager;
 import android.support.v4.app.ActivityCompat;
 import android.text.TextUtils;
+import android.util.Base64;
 import android.util.Log;
 import android.widget.TextView;
 
@@ -20,6 +24,8 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.firebase.database.DataSnapshot;
 
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -99,5 +105,11 @@ public class Utils {
         map.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
         map.addMarker(new MarkerOptions()
                 .position(latLng));
+    }
+
+    public static IntentFilter getIntentFilter(String action) {
+        IntentFilter intentFilter = new IntentFilter(action);
+        intentFilter.addCategory(Intent.CATEGORY_DEFAULT);
+        return intentFilter;
     }
 }

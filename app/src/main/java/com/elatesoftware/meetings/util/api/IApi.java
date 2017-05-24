@@ -30,4 +30,14 @@ public interface IApi {
     @POST("api/dates/CreateDate")
     Call<ResponseBody> createDate(@Query("sessionKey") String sessionKey, @Body RequestBody params);
 
+    @POST("api/account/addFiles")
+    Call<ResponseBody> addPhoto(@Query("sessionKey") String sessionKey, @Body RequestBody params);
+
+    @GET("api/account/photos")
+    Call<ResponseBody> getPhotos(@Query("sessionKey") String sessionKey);
+
+    @GET("api/account/photoContent")
+    Call<ResponseBody> getPhoto(@Query("sessionKey") String sessionKey, @Query("photoId") int photoId);
+
+
 }

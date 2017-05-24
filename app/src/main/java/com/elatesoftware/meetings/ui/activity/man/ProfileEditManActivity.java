@@ -1,11 +1,20 @@
 package com.elatesoftware.meetings.ui.activity.man;
 
+import android.Manifest;
+import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
+import android.provider.MediaStore;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.util.Log;
 import android.widget.DatePicker;
@@ -15,12 +24,14 @@ import com.dd.CircularProgressButton;
 import com.elatesoftware.meetings.R;
 import com.elatesoftware.meetings.ui.activity.base.BaseActivity;
 import com.elatesoftware.meetings.ui.fragment.man.ProfileManFragment;
+import com.elatesoftware.meetings.ui.service.AddPhotoService;
 import com.elatesoftware.meetings.ui.service.UpdateAccountService;
 import com.elatesoftware.meetings.ui.view.CustomEditText;
 import com.elatesoftware.meetings.util.AndroidUtils;
 import com.elatesoftware.meetings.util.Const;
 import com.elatesoftware.meetings.util.CustomSharedPreference;
 import com.elatesoftware.meetings.util.DateUtils;
+import com.elatesoftware.meetings.util.ImageHelper;
 import com.elatesoftware.meetings.util.Utils;
 import com.elatesoftware.meetings.util.api.pojo.HumanAnswer;
 import com.elatesoftware.meetings.util.api.pojo.MessageAnswer;
@@ -31,10 +42,13 @@ import java.util.GregorianCalendar;
 
 import butterknife.BindView;
 import butterknife.OnClick;
+import rx.Single;
+import rx.Subscriber;
 
 public class ProfileEditManActivity extends BaseActivity {
 
     public static final String TAG = "ProfileEditMan_logs";
+    private static final int RESULT_LOAD_IMG = 302;
 
     @BindView(R.id.cet_name) CustomEditText cetName;
     /*@BindView(R.id.cet_height) CustomEditText cetHeight;
@@ -46,12 +60,17 @@ public class ProfileEditManActivity extends BaseActivity {
 
     private Calendar birthDate;
     private HumanAnswer profileMan;
+    private boolean isPermissionsAddPhoto = false;
 
     private UpdateAccountInfoBroadcastReceiver updateAccountInfoBroadcastReceiver;
+    private AddPhotoBroadcastReceiver addPhotoBroadcastReceiver;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            requestPermissions(new String[]{ Manifest.permission.READ_EXTERNAL_STORAGE}, Const.REQUEST_PERMISSIONS);
+        }
         registerBroadcast();
         setContentView(R.layout.activity_profile_edit_man);
         setSize();
@@ -67,12 +86,45 @@ public class ProfileEditManActivity extends BaseActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        unregisterReceiver(updateAccountInfoBroadcastReceiver);
+        unregisterBroadcast();
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == RESULT_LOAD_IMG && resultCode == RESULT_OK
+                && null != data) {
+            Uri selectedImage = data.getData();
+            String[] filePathColumn = { MediaStore.Images.Media.DATA };
+
+            Cursor cursor = getContentResolver().query(selectedImage,
+                    filePathColumn, null, null, null);
+            cursor.moveToFirst();
+            int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
+            String imgDecodableString = cursor.getString(columnIndex);
+            cursor.close();
+            Bitmap bitmapPhoto = BitmapFactory.decodeFile(imgDecodableString);
+            AddPhotoService.bitmap = bitmapPhoto;
+            requestAddPhoto(bitmapPhoto);
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if(requestCode == Const.REQUEST_PERMISSIONS && Utils.isPermissionsGranted(grantResults)) {
+            isPermissionsAddPhoto = true;
+        }
     }
 
     @OnClick(R.id.fab_add_photo)
     public void clickAddPhoto() {
-
+        if(isPermissionsAddPhoto) {
+            Intent galleryIntent = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+            startActivityForResult(galleryIntent, RESULT_LOAD_IMG);
+        } else {
+            showMessage(R.string.permission_not_found);
+        }
     }
 
     @OnClick(R.id.rl_back)
@@ -111,15 +163,27 @@ public class ProfileEditManActivity extends BaseActivity {
 
     private void registerBroadcast() {
         updateAccountInfoBroadcastReceiver = new UpdateAccountInfoBroadcastReceiver();
-        IntentFilter intentFilter = new IntentFilter(UpdateAccountService.ACTION);
-        intentFilter.addCategory(Intent.CATEGORY_DEFAULT);
-        registerReceiver(updateAccountInfoBroadcastReceiver, intentFilter);
+        registerReceiver(updateAccountInfoBroadcastReceiver, Utils.getIntentFilter(UpdateAccountService.ACTION));
+        addPhotoBroadcastReceiver = new AddPhotoBroadcastReceiver();
+        registerReceiver(addPhotoBroadcastReceiver, Utils.getIntentFilter(AddPhotoService.ACTION));
+    }
+
+    private void unregisterBroadcast() {
+        unregisterReceiver(updateAccountInfoBroadcastReceiver);
+        unregisterReceiver(addPhotoBroadcastReceiver);
     }
 
     private void requestUpdateInfo() {
         updateLocalInfo();
         HumanAnswer.setInstance(profileMan);
         startService(new Intent(this, UpdateAccountService.class));
+    }
+
+    private void requestAddPhoto(Bitmap bitmap) {
+        setProgressDialogMessage(getString(R.string.loading_photo) + " ...");
+        showProgressDialog();
+        Log.d(TAG, "requestAddPhoto");
+        startService(new Intent(this, AddPhotoService.class));
     }
 
     private void setSize() {
@@ -129,7 +193,7 @@ public class ProfileEditManActivity extends BaseActivity {
     private void updateLocalInfo() {
         String name = cetName.getEditText().getText().toString();
         String aboutMe = cetAbout.getEditText().getText().toString();
-        profileMan = new HumanAnswer(name, birthDate == null ? 0 : birthDate.getTimeInMillis(), aboutMe);
+        profileMan = new HumanAnswer(name, birthDate == null ? 0 : birthDate.getTimeInMillis() / 1000, aboutMe);
     }
 
     private void loadInfo() {
@@ -154,20 +218,41 @@ public class ProfileEditManActivity extends BaseActivity {
         public void onReceive(Context context, Intent intent) {
             String response = intent.getStringExtra(Const.RESPONSE);
             if(response != null && response.equals(String.valueOf(Const.CODE_SUCCESS)) && MessageAnswer.getInstance() != null) {
-                Log.d(TAG, "registration 200");
+                Log.d(TAG, "UpdateAccount 200");
                 if(MessageAnswer.getInstance().getSuccess()) {
                     updateLocalInfo();
                     CustomSharedPreference.setProfileInformation(ProfileEditManActivity.this, profileMan);
                     ProfileManFragment.getInstance().loadInfo();
                     onBackPressed();
-                    Log.d(TAG, "registration TRUE");
+                    Log.d(TAG, "UpdateAccount TRUE");
                 } else {
                     showMessage(R.string.wrong_data);
-                    Log.d(TAG, "registration FALSE");
+                    Log.d(TAG, "UpdateAccount FALSE");
                 }
             } else {
                 showMessage(R.string.request_error);
-                Log.d(TAG, "registration error");
+                Log.d(TAG, "UpdateAccount error");
+            }
+        }
+    }
+
+    public class AddPhotoBroadcastReceiver extends BroadcastReceiver {
+
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            String response = intent.getStringExtra(Const.RESPONSE);
+            hideProgressDialog();
+            if(response != null && response.equals(String.valueOf(Const.CODE_SUCCESS)) && MessageAnswer.getInstance() != null) {
+                Log.d(TAG, "AddPhoto 200");
+                if(MessageAnswer.getInstance().getSuccess()) {
+                    Log.d(TAG, "AddPhoto TRUE");
+                } else {
+                    showMessage(R.string.wrong_data);
+                    Log.d(TAG, "AddPhoto FALSE");
+                }
+            } else {
+                showMessage(R.string.request_error);
+                Log.d(TAG, "AddPhoto error");
             }
         }
     }

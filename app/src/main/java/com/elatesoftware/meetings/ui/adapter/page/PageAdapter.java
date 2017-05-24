@@ -36,4 +36,9 @@ public class PageAdapter extends PagerAdapter {
     public boolean isViewFromObject(View view, Object object) {
         return view.equals(object);
     }
+
+    public void addView(View v) {
+        pages.add(v);
+        notifyDataSetChanged();
+    }
 }

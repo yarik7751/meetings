@@ -8,15 +8,19 @@ import com.elatesoftware.meetings.util.Const;
 import com.elatesoftware.meetings.util.CustomSharedPreference;
 import com.elatesoftware.meetings.util.Utils;
 import com.elatesoftware.meetings.util.api.pojo.GetInfoAccAnswer;
+import com.elatesoftware.meetings.util.api.pojo.GetPhotoAnswer;
+import com.elatesoftware.meetings.util.api.pojo.GetPhotosAnswer;
 import com.elatesoftware.meetings.util.api.pojo.HumanAnswer;
 import com.elatesoftware.meetings.util.api.pojo.LoginAnswer;
 import com.elatesoftware.meetings.util.api.pojo.Meeting;
 import com.elatesoftware.meetings.util.api.pojo.MessageAnswer;
+import com.elatesoftware.meetings.util.model.Message;
 import com.franmontiel.persistentcookiejar.PersistentCookieJar;
 import com.franmontiel.persistentcookiejar.cache.SetCookieCache;
 import com.franmontiel.persistentcookiejar.persistence.SharedPrefsCookiePersistor;
 import com.google.gson.Gson;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -219,6 +223,94 @@ public class Api {
             if(response.code() == Const.CODE_SUCCESS) {
                 MessageAnswer messageAnswer = gson.fromJson(rawJson, MessageAnswer.class);
                 MessageAnswer.setInstance(messageAnswer);
+            }
+            result = String.valueOf(response.code());
+        }
+        return result;
+    }
+
+    public static String addPhoto(String sessionKey, String base64) {
+        Log.d(TAG, "addPhoto");
+        JSONArray array = new JSONArray();
+        JSONObject object = new JSONObject();
+        try {
+            object.put("content", base64);
+            array.put(object);
+            RequestBody body = RequestBody.create(okhttp3.MediaType.parse("application/json; charset=utf-8"), array.toString());
+
+            Log.d(TAG, "array.toString: " + array.toString());
+
+            Call<ResponseBody> call = getApi().addPhoto(sessionKey, body);
+            Response<ResponseBody> response = null;
+            String result = null;
+            String rawJson = null;
+            try {
+                response = call.execute();
+                if(response != null && response.body() != null) {
+                    rawJson = response.body().string();
+                    Log.d(TAG, "addPhoto: " + rawJson);
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            if(response != null){
+                if(response.code() == Const.CODE_SUCCESS) {
+                    Gson gson = new Gson();
+                    MessageAnswer messageAnswer = gson.fromJson(rawJson, MessageAnswer.class);
+                    MessageAnswer.setInstance(messageAnswer);
+                }
+                result = String.valueOf(response.code());
+            }
+            Log.d(TAG, "addPhoto result: " + result);
+            return result;
+        } catch (JSONException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    public static String getPhotos(String sessionKey) {
+        Call<ResponseBody> call = getApi().getPhotos(sessionKey);
+        Response<ResponseBody> response = null;
+        String result = null;
+        String rawJson = null;
+        try {
+            response = call.execute();
+            rawJson = response.body().string();
+            rawJson = rawJson.replace("\\", "");
+            Log.d(TAG, "getPhotos: " + rawJson);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        if(response != null && rawJson != null){
+            if(response.code() == Const.CODE_SUCCESS) {
+                Gson gson = new Gson();
+                GetPhotosAnswer answer = gson.fromJson(rawJson, GetPhotosAnswer.class);
+                GetPhotosAnswer.setInstance(answer);
+            }
+            result = String.valueOf(response.code());
+        }
+        return result;
+    }
+
+    public static String getPhoto(String sessionKey, int photoId) {
+        Call<ResponseBody> call = getApi().getPhoto(sessionKey, photoId);
+        Response<ResponseBody> response = null;
+        String result = null;
+        String rawJson = null;
+        try {
+            response = call.execute();
+            rawJson = response.body().string();
+            rawJson = rawJson.replace("\\", "");
+            Log.d(TAG, "getPhotO: " + rawJson);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        if(response != null && rawJson != null){
+            if(response.code() == Const.CODE_SUCCESS) {
+                Gson gson = new Gson();
+                GetPhotoAnswer answer = gson.fromJson(rawJson, GetPhotoAnswer.class);
+                GetPhotoAnswer.setInstance(answer);
             }
             result = String.valueOf(response.code());
         }

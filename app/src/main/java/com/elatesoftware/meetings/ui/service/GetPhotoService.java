@@ -1,35 +1,38 @@
 package com.elatesoftware.meetings.ui.service;
 
 import android.app.IntentService;
+import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
 
 import com.elatesoftware.meetings.util.Const;
 import com.elatesoftware.meetings.util.CustomSharedPreference;
 import com.elatesoftware.meetings.util.api.Api;
-import com.elatesoftware.meetings.util.api.pojo.LoginAnswer;
 
-public class LoginService extends IntentService {
+public class GetPhotoService extends IntentService {
 
-    public static final String TAG = "LoginService_log";
-    public static final String ACTION = "com.elatesoftware.meetings.ui.service.LoginService";
-    public static final String USER_NAME = "USER_NAME";
-    public static final String PASSWORD = "PASSWORD ";
+    public static final String TAG = "GetPhotosS_log";
+    public static final String ACTION = "com.elatesoftware.meetings.ui.service.GetPhotosService";
+    public static final String PHOTO_ID = "PHOTO_ID";
 
-    public LoginService() {
+    public GetPhotoService() {
         super(TAG);
         Log.d(TAG, ACTION);
     }
 
     @Override
     protected void onHandleIntent(Intent intent) {
-        String userName = intent.getStringExtra(USER_NAME);
-        String password = intent.getStringExtra(PASSWORD);
-        String response = Api.login(userName, password);
+        String response = Api.getPhoto(CustomSharedPreference.getToken(this), intent.getIntExtra(PHOTO_ID, -1));
         Intent responseIntent = new Intent();
         responseIntent.setAction(ACTION);
         responseIntent.addCategory(Intent.CATEGORY_DEFAULT);
         responseIntent.putExtra(Const.RESPONSE, response);
         sendBroadcast(responseIntent);
+    }
+
+    public static Intent getIntent(Context context, int photoId) {
+        Intent intent = new Intent(context, GetPhotoService.class);
+        intent.putExtra(PHOTO_ID, photoId);
+        return intent;
     }
 }

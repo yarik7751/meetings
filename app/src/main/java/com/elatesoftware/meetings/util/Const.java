@@ -14,6 +14,7 @@ public class Const {
     public static final int MAN_VALUE = 1;
     public static final int WOMAN_VALUE = 2;
     public static final int CODE_SUCCESS = 200;
+    public static final int REQUEST_PERMISSIONS = 145;
 
     public static final String NULL_TOKEN = "null";
 }

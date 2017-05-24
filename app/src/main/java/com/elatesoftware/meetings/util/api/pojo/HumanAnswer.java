@@ -55,7 +55,6 @@ public class HumanAnswer {
         this.firstName = firstName;
         this.dateOfBirth = dateOfBirth;
         this.aboutMe = aboutMe;
-        this.city = city;
     }
 
     public static HumanAnswer answersInstance = null;
@@ -83,7 +82,7 @@ public class HumanAnswer {
             return null;
         }
         GregorianCalendar calendar = new GregorianCalendar();
-        calendar.setTimeInMillis(dateOfBirth);
+        calendar.setTimeInMillis(dateOfBirth * 1000);
         return calendar;
     }
 
