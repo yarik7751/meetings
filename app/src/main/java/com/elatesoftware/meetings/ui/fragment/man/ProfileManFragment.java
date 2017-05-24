@@ -84,11 +84,10 @@ public class ProfileManFragment extends BaseFragment {
         setSize();
         loadPhoto();
         loadInfo();
-        if(CustomSharedPreference.isFirst(getContext())) {
+        /*if(CustomSharedPreference.isFirst(getContext())) {
             CustomSharedPreference.setIsFirst(getContext(), false);
-            //clickImgEdit();
             requestGetAccInfo();
-        }
+        }*/
     }
 
     @Override

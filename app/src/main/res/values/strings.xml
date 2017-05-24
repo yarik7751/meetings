@@ -77,6 +77,9 @@
     <string name="error_add_date">Error</string>
     <string name="something_wrong">Something wrong</string>
     <string name="date_created_successfully">Date created successfully!</string>
+    <string name="please_login">Please Login</string>
+    <string name="permission_not_found">Resolution not found</string>
+    <string name="loading_photo">Loading photo</string>
 
     <string-array name="hair_colors">
         <item>Doesn\'t matter</item>
