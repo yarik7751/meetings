@@ -16,15 +16,22 @@ import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.view.ViewPager;
 import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
 import android.widget.DatePicker;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
 import com.dd.CircularProgressButton;
 import com.elatesoftware.meetings.R;
 import com.elatesoftware.meetings.ui.activity.base.BaseActivity;
+import com.elatesoftware.meetings.ui.adapter.page.PageAdapter;
+import com.elatesoftware.meetings.ui.adapter.page.PhotoFragmentPageAdapter;
 import com.elatesoftware.meetings.ui.fragment.man.ProfileManFragment;
 import com.elatesoftware.meetings.ui.service.AddPhotoService;
+import com.elatesoftware.meetings.ui.service.GetPhotosService;
 import com.elatesoftware.meetings.ui.service.UpdateAccountService;
 import com.elatesoftware.meetings.ui.view.CustomEditText;
 import com.elatesoftware.meetings.util.AndroidUtils;
@@ -33,15 +40,22 @@ import com.elatesoftware.meetings.util.CustomSharedPreference;
 import com.elatesoftware.meetings.util.DateUtils;
 import com.elatesoftware.meetings.util.ImageHelper;
 import com.elatesoftware.meetings.util.Utils;
+import com.elatesoftware.meetings.util.api.pojo.GetPhotosAnswer;
 import com.elatesoftware.meetings.util.api.pojo.HumanAnswer;
 import com.elatesoftware.meetings.util.api.pojo.MessageAnswer;
+import com.elatesoftware.meetings.util.api.pojo.Photo;
+import com.squareup.picasso.Callback;
+import com.squareup.picasso.Picasso;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.OnClick;
+import me.relex.circleindicator.CircleIndicator;
 import rx.Single;
 import rx.Subscriber;
 
@@ -51,12 +65,11 @@ public class ProfileEditManActivity extends BaseActivity {
     private static final int RESULT_LOAD_IMG = 302;
 
     @BindView(R.id.cet_name) CustomEditText cetName;
-    /*@BindView(R.id.cet_height) CustomEditText cetHeight;
-    @BindView(R.id.cet_weight) CustomEditText cetWeight;*/
-    //@BindView(R.id.cet_age) CustomEditText cetAge;
     @BindView(R.id.btn_birth_date) CircularProgressButton btnBirthDate;
     @BindView(R.id.cet_about) CustomEditText cetAbout;
+    @BindView(R.id.vp_photos) ViewPager vpPhotos;
     @BindView(R.id.rl_photos) RelativeLayout rlPhotos;
+    @BindView(R.id.ink_indicator) CircleIndicator inkIndicator;
 
     private Calendar birthDate;
     private HumanAnswer profileMan;
@@ -64,6 +77,7 @@ public class ProfileEditManActivity extends BaseActivity {
 
     private UpdateAccountInfoBroadcastReceiver updateAccountInfoBroadcastReceiver;
     private AddPhotoBroadcastReceiver addPhotoBroadcastReceiver;
+    private GetPhotosBroadcastReceiver getPhotosBroadcastReceiver;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -75,6 +89,7 @@ public class ProfileEditManActivity extends BaseActivity {
         setContentView(R.layout.activity_profile_edit_man);
         setSize();
         loadInfo();
+        requestGetPhotos();
     }
 
     @Override
@@ -166,11 +181,14 @@ public class ProfileEditManActivity extends BaseActivity {
         registerReceiver(updateAccountInfoBroadcastReceiver, Utils.getIntentFilter(UpdateAccountService.ACTION));
         addPhotoBroadcastReceiver = new AddPhotoBroadcastReceiver();
         registerReceiver(addPhotoBroadcastReceiver, Utils.getIntentFilter(AddPhotoService.ACTION));
+        getPhotosBroadcastReceiver = new GetPhotosBroadcastReceiver();
+        registerReceiver(getPhotosBroadcastReceiver, Utils.getIntentFilter(GetPhotosService.ACTION));
     }
 
     private void unregisterBroadcast() {
         unregisterReceiver(updateAccountInfoBroadcastReceiver);
         unregisterReceiver(addPhotoBroadcastReceiver);
+        unregisterReceiver(getPhotosBroadcastReceiver);
     }
 
     private void requestUpdateInfo() {
@@ -184,6 +202,10 @@ public class ProfileEditManActivity extends BaseActivity {
         showProgressDialog();
         Log.d(TAG, "requestAddPhoto");
         startService(new Intent(this, AddPhotoService.class));
+    }
+
+    private void requestGetPhotos() {
+        startService(GetPhotosService.getIntent(this));
     }
 
     private void setSize() {
@@ -210,6 +232,13 @@ public class ProfileEditManActivity extends BaseActivity {
         } else {
 
         }
+    }
+
+    private void loadPhoto(List<Photo> photo) {
+        PhotoFragmentPageAdapter adapter = new PhotoFragmentPageAdapter(getSupportFragmentManager(), photo);
+        vpPhotos.setAdapter(adapter);
+        inkIndicator.setViewPager(vpPhotos);
+        vpPhotos.setOffscreenPageLimit(adapter.getCount());
     }
 
     public class UpdateAccountInfoBroadcastReceiver extends BroadcastReceiver {
@@ -245,6 +274,8 @@ public class ProfileEditManActivity extends BaseActivity {
             if(response != null && response.equals(String.valueOf(Const.CODE_SUCCESS)) && MessageAnswer.getInstance() != null) {
                 Log.d(TAG, "AddPhoto 200");
                 if(MessageAnswer.getInstance().getSuccess()) {
+                    showMessage("Photo loaded successfully");
+                    requestGetPhotos();
                     Log.d(TAG, "AddPhoto TRUE");
                 } else {
                     showMessage(R.string.wrong_data);
@@ -253,6 +284,19 @@ public class ProfileEditManActivity extends BaseActivity {
             } else {
                 showMessage(R.string.request_error);
                 Log.d(TAG, "AddPhoto error");
+            }
+        }
+    }
+
+    public class GetPhotosBroadcastReceiver extends BroadcastReceiver {
+
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            String response = intent.getStringExtra(Const.RESPONSE);
+            if(response != null && response.equals(String.valueOf(Const.CODE_SUCCESS)) && GetPhotosAnswer.getInstance() != null) {
+                if(GetPhotosAnswer.getInstance().getSuccess()) {
+                    loadPhoto(GetPhotosAnswer.getInstance().getResult());
+                }
             }
         }
     }

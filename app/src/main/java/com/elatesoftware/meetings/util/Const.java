@@ -8,6 +8,7 @@ public class Const {
     public static final String SP_IS_FIRST = "SP_IS_FIRST";
     public static final String SP_ID = "SP_ID";
     public static final String SP_TOKEN = "SP_TOKEN";
+    public static final String SP_PIN = "SP_PIN";
     public static final String SP_WOMAN_INFORMATION = "SP_WOMAN_INFORMATION";
     public static final String SP_MAN_INFORMATION = "SP_MAN_INFORMATION";
     public static final String SP_PROFILE_INFORMATION = "SP_PROFILE_INFORMATION";

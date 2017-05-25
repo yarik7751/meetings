@@ -11,8 +11,8 @@ import com.elatesoftware.meetings.util.api.Api;
 
 public class GetPhotoService extends IntentService {
 
-    public static final String TAG = "GetPhotosS_log";
-    public static final String ACTION = "com.elatesoftware.meetings.ui.service.GetPhotosService";
+    public static final String TAG = "GetPhotoS_log";
+    public static final String ACTION = "com.elatesoftware.meetings.ui.service.GetPhotoService";
     public static final String PHOTO_ID = "PHOTO_ID";
 
     public GetPhotoService() {
@@ -22,7 +22,7 @@ public class GetPhotoService extends IntentService {
 
     @Override
     protected void onHandleIntent(Intent intent) {
-        String response = Api.getPhoto(CustomSharedPreference.getToken(this), intent.getIntExtra(PHOTO_ID, -1));
+        String response = Api.getPhoto(CustomSharedPreference.getToken(this), intent.getLongExtra(PHOTO_ID, -1));
         Intent responseIntent = new Intent();
         responseIntent.setAction(ACTION);
         responseIntent.addCategory(Intent.CATEGORY_DEFAULT);
@@ -30,7 +30,7 @@ public class GetPhotoService extends IntentService {
         sendBroadcast(responseIntent);
     }
 
-    public static Intent getIntent(Context context, int photoId) {
+    public static Intent getIntent(Context context, long photoId) {
         Intent intent = new Intent(context, GetPhotoService.class);
         intent.putExtra(PHOTO_ID, photoId);
         return intent;

@@ -14,6 +14,7 @@ import com.elatesoftware.meetings.util.api.pojo.HumanAnswer;
 import com.elatesoftware.meetings.util.api.pojo.LoginAnswer;
 import com.elatesoftware.meetings.util.api.pojo.Meeting;
 import com.elatesoftware.meetings.util.api.pojo.MessageAnswer;
+import com.elatesoftware.meetings.util.api.pojo.RegisterAnswer;
 import com.elatesoftware.meetings.util.model.Message;
 import com.franmontiel.persistentcookiejar.PersistentCookieJar;
 import com.franmontiel.persistentcookiejar.cache.SetCookieCache;
@@ -95,8 +96,8 @@ public class Api {
             if(response != null && rawJson != null){
                 if(response.code() == Const.CODE_SUCCESS) {
                     Gson gson = new Gson();
-                    LoginAnswer messageAnswer = gson.fromJson(rawJson, LoginAnswer.class);
-                    LoginAnswer.setInstance(messageAnswer);
+                    RegisterAnswer messageAnswer = gson.fromJson(rawJson, RegisterAnswer.class);
+                    RegisterAnswer.setInstance(messageAnswer);
                 }
                 result = String.valueOf(response.code());
             }
@@ -293,7 +294,7 @@ public class Api {
         return result;
     }
 
-    public static String getPhoto(String sessionKey, int photoId) {
+    public static String getPhoto(String sessionKey, long photoId) {
         Call<ResponseBody> call = getApi().getPhoto(sessionKey, photoId);
         Response<ResponseBody> response = null;
         String result = null;

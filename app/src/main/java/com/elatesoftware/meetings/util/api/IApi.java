@@ -37,7 +37,7 @@ public interface IApi {
     Call<ResponseBody> getPhotos(@Query("sessionKey") String sessionKey);
 
     @GET("api/account/photoContent")
-    Call<ResponseBody> getPhoto(@Query("sessionKey") String sessionKey, @Query("photoId") int photoId);
+    Call<ResponseBody> getPhoto(@Query("sessionKey") String sessionKey, @Query("photoId") long photoId);
 
 
 }

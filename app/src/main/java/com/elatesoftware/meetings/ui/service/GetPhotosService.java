@@ -1,6 +1,7 @@
 package com.elatesoftware.meetings.ui.service;
 
 import android.app.IntentService;
+import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
 
@@ -26,5 +27,10 @@ public class GetPhotosService extends IntentService {
         responseIntent.addCategory(Intent.CATEGORY_DEFAULT);
         responseIntent.putExtra(Const.RESPONSE, response);
         sendBroadcast(responseIntent);
+    }
+
+    public static Intent getIntent(Context context) {
+        Intent intent = new Intent(context, GetPhotosService.class);
+        return intent;
     }
 }

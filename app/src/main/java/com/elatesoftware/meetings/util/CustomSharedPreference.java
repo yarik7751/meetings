@@ -39,6 +39,14 @@ public class CustomSharedPreference {
         return getSharedPreferences(context).getLong(Const.SP_ID, -1);
     }
 
+    public static void setPin(Context context, String pin) {
+        getSharedPreferences(context).edit().putString(Const.SP_PIN, pin).commit();
+    }
+
+    public static String getPin(Context context) {
+        return getSharedPreferences(context).getString(Const.SP_PIN, null);
+    }
+
     public static void setToken(Context context, String token) {
         getSharedPreferences(context).edit().putString(Const.SP_TOKEN, token).commit();
     }

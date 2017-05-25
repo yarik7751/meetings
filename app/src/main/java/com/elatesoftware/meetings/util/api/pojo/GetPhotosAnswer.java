@@ -19,11 +19,11 @@ public class GetPhotosAnswer extends MessageAnswer {
         answersInstance = answers;
     }
 
-    public static GetPhotosAnswer getAnswersInstance() {
-        return answersInstance;
+    public List<Photo> getResult() {
+        return result;
     }
 
-    public static void setAnswersInstance(GetPhotosAnswer answersInstance) {
-        GetPhotosAnswer.answersInstance = answersInstance;
+    public void setResult(List<Photo> result) {
+        this.result = result;
     }
 }
