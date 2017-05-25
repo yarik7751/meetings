@@ -87,7 +87,7 @@ public class SignUpFragment extends BaseFragment {
     }
 
     private void registerReceivers() {
-        registerBroadcastReceiver = new RegisterBroadcastReceiver();
+        registerBroadcastReceiver = new RegisterBroadcastReceiver(AutarizationBroadcastReceiver.SIGN_UP);
         IntentFilter intentFilterRegisterBroadcastReceiver = new IntentFilter(RegisterService.ACTION);
         intentFilterRegisterBroadcastReceiver.addCategory(Intent.CATEGORY_DEFAULT);
         getActivity().registerReceiver(registerBroadcastReceiver, intentFilterRegisterBroadcastReceiver);
@@ -114,6 +114,10 @@ public class SignUpFragment extends BaseFragment {
     }
 
     public class RegisterBroadcastReceiver extends AutarizationBroadcastReceiver {
+
+        public RegisterBroadcastReceiver(int sign) {
+            super(sign);
+        }
 
         @Override
         public void onReceive(Context context, Intent intent) {

@@ -106,7 +106,7 @@ public class SignInFragment extends BaseFragment {
     }
 
     private void registerReceivers() {
-        loginBroadcastReceiver = new LoginBroadcastReceiver();
+        loginBroadcastReceiver = new LoginBroadcastReceiver(AutarizationBroadcastReceiver.SIGN_IN);
         IntentFilter intentFilterLoginBroadcastReceiver = new IntentFilter(LoginService.ACTION);
         intentFilterLoginBroadcastReceiver.addCategory(Intent.CATEGORY_DEFAULT);
         getActivity().registerReceiver(loginBroadcastReceiver, intentFilterLoginBroadcastReceiver);
@@ -117,6 +117,10 @@ public class SignInFragment extends BaseFragment {
     }
     
     public class LoginBroadcastReceiver extends AutarizationBroadcastReceiver {
+
+        public LoginBroadcastReceiver(int sign) {
+            super(sign);
+        }
 
         @Override
         public void onReceive(Context context, Intent intent) {
