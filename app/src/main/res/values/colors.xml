@@ -5,6 +5,8 @@
     <color name="colorAccent">#FF4081</color>
 
     <color name="white">#ffffff</color>
+    <color name="pin_code_deselect">#66ffffff</color>
+    <color name="pin_code_select">@color/white</color>
     <color name="black">#000000</color>
     <color name="delete">#e14747</color>
     <color name="background">#dfdfdf</color>

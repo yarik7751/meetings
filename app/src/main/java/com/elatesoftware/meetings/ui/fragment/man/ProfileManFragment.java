@@ -19,14 +19,19 @@ import com.elatesoftware.meetings.R;
 import com.elatesoftware.meetings.ui.activity.AddDateActivity;
 import com.elatesoftware.meetings.ui.activity.man.ProfileEditManActivity;
 import com.elatesoftware.meetings.ui.adapter.page.PageAdapter;
+import com.elatesoftware.meetings.ui.adapter.page.PhotoFragmentPageAdapter;
 import com.elatesoftware.meetings.ui.fragment.base.BaseFragment;
 import com.elatesoftware.meetings.ui.service.GetAccountInfoService;
+import com.elatesoftware.meetings.ui.service.GetPhotosService;
 import com.elatesoftware.meetings.util.AndroidUtils;
 import com.elatesoftware.meetings.util.Const;
 import com.elatesoftware.meetings.util.CustomSharedPreference;
 import com.elatesoftware.meetings.util.DateUtils;
+import com.elatesoftware.meetings.util.Utils;
 import com.elatesoftware.meetings.util.api.pojo.GetInfoAccAnswer;
+import com.elatesoftware.meetings.util.api.pojo.GetPhotosAnswer;
 import com.elatesoftware.meetings.util.api.pojo.HumanAnswer;
+import com.elatesoftware.meetings.util.api.pojo.Photo;
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 
@@ -55,6 +60,7 @@ public class ProfileManFragment extends BaseFragment {
     private List<View> photos;
 
     private GetAccountInfoBroadcastReceiver getAccountInfoBroadcastReceiver;
+    private GetPhotosBroadcastReceiver getPhotosBroadcastReceiver;
 
     private static ProfileManFragment profileManFragment;
     public static ProfileManFragment getInstance() {
@@ -82,12 +88,8 @@ public class ProfileManFragment extends BaseFragment {
         super.onViewCreated(view, savedInstanceState);
 
         setSize();
-        loadPhoto();
         loadInfo();
-        /*if(CustomSharedPreference.isFirst(getContext())) {
-            CustomSharedPreference.setIsFirst(getContext(), false);
-            requestGetAccInfo();
-        }*/
+        requestGetPhotos();
     }
 
     @Override
@@ -110,46 +112,33 @@ public class ProfileManFragment extends BaseFragment {
 
     private void registerReceivers() {
         getAccountInfoBroadcastReceiver = new GetAccountInfoBroadcastReceiver();
-        IntentFilter intentFilter = new IntentFilter(GetAccountInfoService.ACTION);
-        intentFilter.addCategory(Intent.CATEGORY_DEFAULT);
-        getActivity().registerReceiver(getAccountInfoBroadcastReceiver, intentFilter);
+        getActivity().registerReceiver(getAccountInfoBroadcastReceiver, Utils.getIntentFilter(GetAccountInfoService.ACTION));
+        getPhotosBroadcastReceiver = new GetPhotosBroadcastReceiver();
+        getActivity().registerReceiver(getPhotosBroadcastReceiver, Utils.getIntentFilter(GetPhotosService.ACTION));
     }
 
     private void unregisterReceivers() {
         getActivity().unregisterReceiver(getAccountInfoBroadcastReceiver);
+        getActivity().unregisterReceiver(getPhotosBroadcastReceiver);
     }
 
     private void requestGetAccInfo() {
         getActivity().startService(new Intent(getContext(), GetAccountInfoService.class));
     }
 
+    private void requestGetPhotos() {
+        getActivity().startService(GetPhotosService.getIntent(getContext()));
+    }
+
     private void setSize() {
         rlPhotos.getLayoutParams().height = (int) (AndroidUtils.getWindowsSizeParams(getContext())[1] * 0.3);
     }
 
-    //Todo test
-    private void loadPhoto() {
-        photos = new ArrayList<>();
-        for(int i = 0; i < 5; i++) {
-            View viewPhoto = LayoutInflater.from(getContext()).inflate(R.layout.item_photo, null);
-            //((ImageView) viewPhoto.findViewById(R.id.img_photo)).setImageResource(R.drawable.example_photo);
-            Picasso.with(getContext()).load(R.drawable.example_photo).centerCrop()
-                    .resize(AndroidUtils.getWindowsSizeParams(getContext())[0], (int) (AndroidUtils.getWindowsSizeParams(getContext())[1] * 0.3))
-                    .into((ImageView) viewPhoto.findViewById(R.id.img_photo), new Callback() {
-                        @Override
-                        public void onSuccess() {
-
-                        }
-
-                        @Override
-                        public void onError() {
-
-                        }
-                    });
-            photos.add(viewPhoto);
-        }
-        vpPhotos.setAdapter(new PageAdapter(photos));
+    private void loadPhoto(List<Photo> photo) {
+        PhotoFragmentPageAdapter adapter = new PhotoFragmentPageAdapter(getFragmentManager(), photo);
+        vpPhotos.setAdapter(adapter);
         inkIndicator.setViewPager(vpPhotos);
+        vpPhotos.setOffscreenPageLimit(adapter.getCount());
     }
 
     public void loadInfo() {
@@ -186,6 +175,19 @@ public class ProfileManFragment extends BaseFragment {
                     loadInfo();
                 }
                 clickImgEdit();
+            }
+        }
+    }
+
+    public class GetPhotosBroadcastReceiver extends BroadcastReceiver {
+
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            String response = intent.getStringExtra(Const.RESPONSE);
+            if(response != null && response.equals(String.valueOf(Const.CODE_SUCCESS)) && GetPhotosAnswer.getInstance() != null) {
+                if(GetPhotosAnswer.getInstance().getSuccess()) {
+                    loadPhoto(GetPhotosAnswer.getInstance().getResult());
+                }
             }
         }
     }

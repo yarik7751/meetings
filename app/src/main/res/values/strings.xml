@@ -80,6 +80,7 @@
     <string name="please_login">Please Login</string>
     <string name="permission_not_found">Resolution not found</string>
     <string name="loading_photo">Loading photo</string>
+    <string name="forgot_pincode">Forgot pincode</string>
 
     <string-array name="hair_colors">
         <item>Doesn\'t matter</item>
