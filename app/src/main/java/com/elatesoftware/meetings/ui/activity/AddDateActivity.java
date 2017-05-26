@@ -54,6 +54,8 @@ import com.unnamed.b.atv.model.TreeNode;
 import com.unnamed.b.atv.view.AndroidTreeView;
 import com.unnamed.b.atv.view.TreeNodeWrapperView;
 
+import org.florescu.android.rangeseekbar.RangeSeekBar;
+
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -69,10 +71,12 @@ public class AddDateActivity extends BaseActivity implements OnMapReadyCallback 
     public static final String IS_CLOSE = "IS_CLOSE";
 
     @BindView(R.id.ll_main) LinearLayout llMain;
-    
-    @BindView(R.id.crs_age) CrystalRangeSeekbar crsAge;
-    @BindView(R.id.tv_first_age) TextView tvFirstAge;
-    @BindView(R.id.tv_last_age) TextView tvLastAge;
+
+    //@BindView(R.id.rl_age_indicators) RelativeLayout rlAgeIndicators;
+    //@BindView(R.id.crs_age) CrystalRangeSeekbar crsAge;
+    @BindView(R.id.rsb_age) RangeSeekBar rsbAge;
+    /*@BindView(R.id.tv_first_age) TextView tvFirstAge;
+    @BindView(R.id.tv_last_age) TextView tvLastAge;*/
 
     @BindView(R.id.crs_height) CrystalRangeSeekbar crsHeight;
     @BindView(R.id.tv_first_height) TextView tvFirstHeight;
@@ -112,13 +116,20 @@ public class AddDateActivity extends BaseActivity implements OnMapReadyCallback 
 
         initMap();
         setHairColors();
-        crsAge.setOnRangeSeekbarChangeListener(new OnRangeSeekbarChangeListener() {
+
+
+        /*crsAge.setOnRangeSeekbarChangeListener(new OnRangeSeekbarChangeListener() {
             @Override
             public void valueChanged(Number minValue, Number maxValue) {
+                Log.d(TAG, "rlAgeIndicators.getWidth: " + rlAgeIndicators.getWidth());
+                int width = rlAgeIndicators.getWidth();
+                int selectedMaxValue = crsAge.getSelectedMaxValue().intValue();
+                int persent = selectedMaxValue /
+                Log.d(TAG, "selectedMaxValue: " + selectedMaxValue);
                 tvFirstAge.setText(String.valueOf(minValue));
                 tvLastAge.setText(String.valueOf(maxValue));
             }
-        });
+        });*/
         crsHeight.setOnRangeSeekbarChangeListener(new OnRangeSeekbarChangeListener() {
             @Override
             public void valueChanged(Number minValue, Number maxValue) {
@@ -333,8 +344,8 @@ public class AddDateActivity extends BaseActivity implements OnMapReadyCallback 
         meeting.setLongitude(place.getLatLng().longitude);
         meeting.setPlace(place.getName() + "\n" + place.getAddress());
 
-        meeting.setPrefAgeStart(Integer.parseInt(tvFirstAge.getText().toString()));
-        meeting.setPrefAgeEnd(Integer.parseInt(tvLastAge.getText().toString()));
+        meeting.setPrefAgeStart(rsbAge.getSelectedMaxValue().intValue());
+        meeting.setPrefAgeEnd(rsbAge.getSelectedMinValue().intValue());
 
         meeting.setPrefHeightStart(Integer.parseInt(tvFirstHeight.getText().toString()));
         meeting.setPrefHeightEnd(Integer.parseInt(tvLastHeight.getText().toString()));

@@ -2,6 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:rsb="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
@@ -14,11 +15,11 @@
         android:layout_marginTop="0dp"
         android:gravity="center_vertical">
 
-        <ImageView
+        <!--<ImageView
             android:layout_width="20dp"
             android:layout_height="20dp"
             android:layout_marginRight="16dp"
-            android:src="@drawable/features"/>
+            android:src="@drawable/features"/>-->
 
         <TextView
             android:layout_width="wrap_content"
@@ -26,7 +27,7 @@
             android:layout_gravity="center_horizontal"
             android:textSize="16sp"
             android:textColor="@color/button_blue_light"
-            android:text="@string/features"
+            android:text="@string/i_m_looking_for"
             android:textStyle="bold"/>
     </LinearLayout>
 
@@ -44,6 +45,58 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_gravity="left"
+                android:textSize="12sp"
+                android:textColor="@color/white"
+                android:text="@string/girl"/>
+
+            <android.support.v7.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            card_view:cardCornerRadius="5dp"
+            card_view:cardBackgroundColor="@color/white">
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:layout_marginLeft="16dp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="3.5"
+                    android:textSize="18sp"
+                    android:textColor="@color/text_dark"
+                    android:text="@string/age"
+                    android:textStyle="bold"
+                    android:id="@+id/textView3" />
+
+                <org.florescu.android.rangeseekbar.RangeSeekBar
+                    android:id="@+id/rsb_age"
+                    rsb:thumbPressed="@drawable/trumb_seek_bar"
+                    rsb:thumbNormal="@drawable/trumb_seek_bar"
+                    rsb:thumbDisabled="@drawable/trumb_seek_bar"
+                    rsb:activeColor="@color/seek_bar"
+                    rsb:textAboveThumbsColor="@color/seek_bar"
+                    rsb:defaultColor="@color/gray"
+                    rsb:barHeight="4dp"
+                    android:layout_marginBottom="8dp"
+                    android:layout_marginRight="0dp"
+                    android:layout_marginLeft="0dp"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+        </android.support.v7.widget.CardView>
+
             <android.support.v7.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -52,67 +105,36 @@
                 card_view:cardBackgroundColor="@color/white">
 
                 <LinearLayout
-                    android:orientation="vertical"
+                    android:orientation="horizontal"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_margin="8dp">
+                    android:gravity="center_vertical"
+                    android:layout_marginLeft="16dp">
 
                     <TextView
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="center_horizontal"
-                        android:textSize="14sp"
+                        android:layout_weight="3.5"
+                        android:textSize="18sp"
                         android:textColor="@color/text_dark"
-                        android:text="@string/age"/>
+                        android:text="@string/height"
+                        android:textStyle="bold" />
 
-                    <LinearLayout
-                        android:orientation="horizontal"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:gravity="center_horizontal">
-
-                        <TextView
-                            android:id="@+id/tv_first_age"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center_horizontal"
-                            android:textSize="14sp"
-                            android:textColor="@color/text_dark"
-                            android:text="26"/>
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center_horizontal"
-                            android:textSize="14sp"
-                            android:textColor="@color/text_dark"
-                            android:text="—"/>
-
-                        <TextView
-                            android:id="@+id/tv_last_age"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center_horizontal"
-                            android:textSize="14sp"
-                            android:textColor="@color/text_dark"
-                            android:text="26"/>
-                    </LinearLayout>
-
-                    <com.crystal.crystalrangeseekbar.widgets.CrystalRangeSeekbar
-                        android:id="@+id/crs_age"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="16dp"
+                    <org.florescu.android.rangeseekbar.RangeSeekBar
+                        android:id="@+id/rsb_height"
+                        rsb:thumbPressed="@drawable/trumb_seek_bar"
+                        rsb:thumbNormal="@drawable/trumb_seek_bar"
+                        rsb:thumbDisabled="@drawable/trumb_seek_bar"
+                        rsb:activeColor="@color/seek_bar"
+                        rsb:textAboveThumbsColor="@color/seek_bar"
+                        rsb:defaultColor="@color/gray"
+                        rsb:barHeight="4dp"
                         android:layout_marginBottom="8dp"
-                        app:corner_radius="3"
-                        app:min_value="18"
-                        app:max_value="40"
-                        app:gap="3"
-                        app:bar_color="@color/gray"
-                        app:bar_highlight_color="@color/seek_bar"
-                        app:left_thumb_image="@drawable/ellipse_point"
-                        app:right_thumb_image="@drawable/ellipse_point"
-                        app:data_type="_integer"/>
+                        android:layout_marginRight="0dp"
+                        android:layout_gravity="center"
+                        android:layout_weight="1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
                 </LinearLayout>
             </android.support.v7.widget.CardView>
 

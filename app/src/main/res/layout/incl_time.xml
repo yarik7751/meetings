@@ -14,11 +14,11 @@
         android:layout_marginTop="16dp"
         android:gravity="center_vertical">
 
-        <ImageView
+        <!--<ImageView
             android:layout_width="20dp"
             android:layout_height="20dp"
             android:layout_marginRight="16dp"
-            android:src="@drawable/time"/>
+            android:src="@drawable/time"/>-->
 
         <TextView
             android:layout_width="wrap_content"
@@ -26,7 +26,7 @@
             android:layout_gravity="center_horizontal"
             android:textSize="16sp"
             android:textColor="@color/button_blue_light"
-            android:text="@string/time"
+            android:text="@string/when"
             android:textStyle="bold"/>
     </LinearLayout>
 

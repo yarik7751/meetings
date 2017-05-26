@@ -81,6 +81,14 @@
     <string name="permission_not_found">Resolution not found</string>
     <string name="loading_photo">Loading photo</string>
     <string name="forgot_pincode">Forgot pincode</string>
+    <string name="enter_pin">Enter PIN</string>
+    <string name="confirm_pin">Confirm PIN</string>
+    <string name="incorrect_pin">Incorrect PIN</string>
+    <string name="i_m_looking_for">I\'m Looking For</string>
+    <string name="when">When</string>
+
+    <string name="demo_min_label"></string>
+    <string name="demo_max_label"></string>
 
     <string-array name="hair_colors">
         <item>Doesn\'t matter</item>
