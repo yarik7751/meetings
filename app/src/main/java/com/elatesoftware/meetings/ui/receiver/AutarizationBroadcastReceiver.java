@@ -7,6 +7,7 @@ import android.util.Log;
 import android.widget.Toast;
 
 import com.elatesoftware.meetings.R;
+import com.elatesoftware.meetings.ui.activity.PinCodeActivity;
 import com.elatesoftware.meetings.ui.activity.man.WorkActivityMan;
 import com.elatesoftware.meetings.ui.activity.woman.WorkActivityWoman;
 import com.elatesoftware.meetings.util.Const;
@@ -42,11 +43,12 @@ public class AutarizationBroadcastReceiver extends BroadcastReceiver {
                 }
                 String token = sign == SIGN_IN ? LoginAnswer.getInstance().getResult().getSessionKey() : RegisterAnswer.getInstance().getResult();
                 CustomSharedPreference.setToken(context, token);
-                if(CustomSharedPreference.isMan(context)) {
+                context.startActivity(new Intent(context, PinCodeActivity.class));
+                /*if(CustomSharedPreference.isMan(context)) {
                     context.startActivity(new Intent(context, WorkActivityMan.class));
                 } else {
                     context.startActivity(new Intent(context, WorkActivityWoman.class));
-                }
+                }*/
                 Log.d(TAG, "registration TRUE");
             } else {
                 Toast.makeText(context, R.string.wrong_data, Toast.LENGTH_SHORT).show();

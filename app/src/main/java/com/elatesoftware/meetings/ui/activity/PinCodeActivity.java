@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.elatesoftware.meetings.R;
 import com.elatesoftware.meetings.ui.activity.base.BaseActivity;
@@ -22,6 +23,7 @@ public class PinCodeActivity extends BaseActivity {
     public static final String TAG = "PinCodeActivity_logs";
 
     @BindView(R.id.ll_indicators) LinearLayout llIndicators;
+    @BindView(R.id.tv_pin_status) TextView tvPinStatus;
 
     private String pin = "";
 
@@ -29,6 +31,8 @@ public class PinCodeActivity extends BaseActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pin_code);
+
+        showPinStatus();
 
         if(TextUtils.isEmpty(CustomSharedPreference.getToken(this))) {
             startActivity(new Intent(this, MainActivity.class));
@@ -42,6 +46,14 @@ public class PinCodeActivity extends BaseActivity {
             pin = pin.substring(0, pin.length() - 1);
         }
         setIndicators();
+    }
+
+    public void showPinStatus() {
+        if(TextUtils.isEmpty(CustomSharedPreference.getPin(this))) {
+            tvPinStatus.setText(R.string.enter_pin);
+        } else {
+            tvPinStatus.setText(R.string.confirm_pin);
+        }
     }
 
     public void clickNumber(View v) {
@@ -61,6 +73,7 @@ public class PinCodeActivity extends BaseActivity {
                 img.setImageResource(R.drawable.indicator);
             }
         }
+        showPinStatus();
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
@@ -69,7 +82,7 @@ public class PinCodeActivity extends BaseActivity {
                     checkPin();
                 }
             }
-        }, 100);
+        }, 50);
     }
 
     private void checkPin() {
@@ -78,14 +91,25 @@ public class PinCodeActivity extends BaseActivity {
             CustomSharedPreference.setPin(this, pin);
             pin = "";
             setIndicators();
+            showPinStatus();
             return;
         } else {
             if(savePin.equals(pin)) {
                 startActivity(new Intent(this, MainActivity.class));
+                //setResult(RESULT_OK);
                 finish();
             } else {
+                setError();
                 return;
             }
         }
+    }
+
+    private void setError() {
+        for(int i = 0; i < llIndicators.getChildCount(); i++) {
+            ImageView img = (ImageView) llIndicators.getChildAt(i);
+            img.setImageResource(R.drawable.indicator_red);
+        }
+        tvPinStatus.setText(R.string.incorrect_pin);
     }
 }

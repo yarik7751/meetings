@@ -1,24 +1,30 @@
 package com.elatesoftware.meetings.ui.activity.man;
 
 import android.Manifest;
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.BottomNavigationView;
+import android.text.TextUtils;
 import android.view.MenuItem;
 
 import com.elatesoftware.meetings.R;
+import com.elatesoftware.meetings.ui.activity.PinCodeActivity;
 import com.elatesoftware.meetings.ui.activity.base.BaseActivity;
 import com.elatesoftware.meetings.ui.fragment.man.DalesManFragment;
 import com.elatesoftware.meetings.ui.fragment.man.ProfileManFragment;
 import com.elatesoftware.meetings.ui.fragment.man.WalletManFragment;
 import com.elatesoftware.meetings.util.Const;
+import com.elatesoftware.meetings.util.CustomSharedPreference;
 import com.elatesoftware.meetings.util.Utils;
 
 import butterknife.BindView;
 
 public class WorkActivityMan extends BaseActivity {
+
+    public static final int PIN = 134;
 
     @BindView(R.id.bnv_menu)
     BottomNavigationView bnvMenu;
@@ -54,6 +60,12 @@ public class WorkActivityMan extends BaseActivity {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             requestPermissions(new String[]{ Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION }, Const.REQUEST_PERMISSIONS);
         }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        //onSwitchFragment(ProfileManFragment.getInstance(), ProfileManFragment.class.getName(), false, true, R.id.container);
     }
 
     @Override

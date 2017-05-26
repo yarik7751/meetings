@@ -52,7 +52,7 @@ public class CustomSharedPreference {
     }
 
     public static String getToken(Context context) {
-        return getSharedPreferences(context).getString(Const.SP_TOKEN, Const.NULL_TOKEN);
+        return getSharedPreferences(context).getString(Const.SP_TOKEN, null);
     }
 
     public static void setProfileInformation(Context context, HumanAnswer infoMan) {
