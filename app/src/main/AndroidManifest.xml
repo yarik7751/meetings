@@ -35,26 +35,28 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ui.activity.man.WorkActivityMan"
+            android:name=".ui.activity.man.WorkManActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateAlwaysHidden"
-            android:configChanges="keyboardHidden|orientation|screenSize"></activity>
+            android:configChanges="keyboardHidden|orientation|screenSize" />
         <activity
-            android:name=".ui.activity.woman.WorkActivityWoman"
+            android:name=".ui.activity.woman.WorkWomanActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateAlwaysHidden"
-            android:configChanges="keyboardHidden|orientation|screenSize"></activity>
+            android:configChanges="keyboardHidden|orientation|screenSize"/>
         <activity
             android:name=".ui.activity.SearchActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateAlwaysHidden"
-            android:configChanges="keyboardHidden|orientation|screenSize"
-            ></activity>
+            android:configChanges="keyboardHidden|orientation|screenSize" />
         <activity
             android:name=".ui.activity.DaleDetailsActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateAlwaysHidden"
-            android:configChanges="keyboardHidden|orientation|screenSize"></activity>
+            android:configChanges="keyboardHidden|orientation|screenSize" />
+
+        <!--todo 15 убираем пустые теги-->
+
         <activity
             android:name=".ui.activity.AddDateActivity"
             android:screenOrientation="portrait"

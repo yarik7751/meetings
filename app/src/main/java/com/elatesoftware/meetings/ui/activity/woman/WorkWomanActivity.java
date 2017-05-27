@@ -16,7 +16,7 @@ import com.elatesoftware.meetings.util.AndroidUtils;
 
 import butterknife.BindView;
 
-public class WorkActivityWoman extends BaseActivity {
+public class WorkWomanActivity extends BaseActivity {
 
     @BindView(R.id.bnv_menu) BottomNavigationView bnvMenu;
 
@@ -32,7 +32,7 @@ public class WorkActivityWoman extends BaseActivity {
         bnvMenu.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                AndroidUtils.hideKeyboard(WorkActivityWoman.this);
+                AndroidUtils.hideKeyboard(WorkWomanActivity.this);
                 switch (item.getItemId()) {
                     case R.id.action_profile:
                         onSwitchFragment(ProfileWomanFragment.getInstance(), ProfileWomanFragment.class.getName(), false, true, R.id.container);

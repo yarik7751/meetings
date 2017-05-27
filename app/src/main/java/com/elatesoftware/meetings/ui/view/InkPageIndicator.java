@@ -45,7 +45,7 @@ import java.util.Arrays;
 
 
 
-
+//todo 13 удалить
 public class InkPageIndicator extends View implements ViewPager.OnPageChangeListener,
         View.OnAttachStateChangeListener {
 

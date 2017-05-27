@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:card_view="http://schemas.android.com/apk/res-auto"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
     xmlns:rsb="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
 
     <LinearLayout
         android:id="@+id/ll_features_title"
-        android:orientation="horizontal"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="0dp"
-        android:gravity="center_vertical">
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
 
         <!--<ImageView
             android:layout_width="20dp"
@@ -25,116 +25,75 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:textSize="16sp"
-            android:textColor="@color/button_blue_light"
             android:text="@string/i_m_looking_for"
-            android:textStyle="bold"/>
+            android:textColor="@color/button_blue_light"
+            android:textSize="16sp"
+            android:textStyle="bold" />
     </LinearLayout>
 
     <com.github.aakira.expandablelayout.ExpandableRelativeLayout
         android:id="@+id/erl_features"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:ael_expanded="false"
         app:ael_duration="200"
+        app:ael_expanded="false"
         app:ael_interpolator="bounce"
         app:ael_orientation="vertical">
 
         <LinearLayout
-            android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
                 android:layout_gravity="left"
-                android:textSize="12sp"
+                android:layout_marginTop="8dp"
+                android:text="@string/girl"
                 android:textColor="@color/white"
-                android:text="@string/girl"/>
-
-            <android.support.v7.widget.CardView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            card_view:cardCornerRadius="5dp"
-            card_view:cardBackgroundColor="@color/white">
-
-            <LinearLayout
-                android:orientation="horizontal"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center_vertical"
-                android:layout_marginLeft="16dp">
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="3.5"
-                    android:textSize="18sp"
-                    android:textColor="@color/text_dark"
-                    android:text="@string/age"
-                    android:textStyle="bold"
-                    android:id="@+id/textView3" />
-
-                <org.florescu.android.rangeseekbar.RangeSeekBar
-                    android:id="@+id/rsb_age"
-                    rsb:thumbPressed="@drawable/trumb_seek_bar"
-                    rsb:thumbNormal="@drawable/trumb_seek_bar"
-                    rsb:thumbDisabled="@drawable/trumb_seek_bar"
-                    rsb:activeColor="@color/seek_bar"
-                    rsb:textAboveThumbsColor="@color/seek_bar"
-                    rsb:defaultColor="@color/gray"
-                    rsb:barHeight="4dp"
-                    android:layout_marginBottom="8dp"
-                    android:layout_marginRight="0dp"
-                    android:layout_marginLeft="0dp"
-                    android:layout_gravity="center"
-                    android:layout_weight="1"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
-            </LinearLayout>
-        </android.support.v7.widget.CardView>
+                android:textSize="12sp" />
 
             <android.support.v7.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                card_view:cardCornerRadius="5dp"
-                card_view:cardBackgroundColor="@color/white">
+                card_view:cardBackgroundColor="@color/white"
+                card_view:cardCornerRadius="5dp">
 
                 <LinearLayout
-                    android:orientation="horizontal"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginLeft="16dp"
                     android:gravity="center_vertical"
-                    android:layout_marginLeft="16dp">
+                    android:orientation="horizontal">
 
                     <TextView
+                        android:id="@+id/textView3"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="3.5"
-                        android:textSize="18sp"
+                        android:text="@string/age"
                         android:textColor="@color/text_dark"
-                        android:text="@string/height"
+                        android:textSize="18sp"
                         android:textStyle="bold" />
 
                     <org.florescu.android.rangeseekbar.RangeSeekBar
-                        android:id="@+id/rsb_height"
-                        rsb:thumbPressed="@drawable/trumb_seek_bar"
-                        rsb:thumbNormal="@drawable/trumb_seek_bar"
-                        rsb:thumbDisabled="@drawable/trumb_seek_bar"
-                        rsb:activeColor="@color/seek_bar"
-                        rsb:textAboveThumbsColor="@color/seek_bar"
-                        rsb:defaultColor="@color/gray"
-                        rsb:barHeight="4dp"
-                        android:layout_marginBottom="8dp"
-                        android:layout_marginRight="0dp"
-                        android:layout_gravity="center"
-                        android:layout_weight="1"
+                        android:id="@+id/rsb_age"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content" />
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginBottom="8dp"
+                        android:layout_marginLeft="0dp"
+                        android:layout_marginRight="0dp"
+                        android:layout_weight="1"
+                        rsb:activeColor="@color/seek_bar"
+                        rsb:barHeight="4dp"
+                        rsb:defaultColor="@color/gray"
+                        rsb:textAboveThumbsColor="@color/seek_bar"
+                        rsb:thumbDisabled="@drawable/trumb_seek_bar"
+                        rsb:thumbNormal="@drawable/trumb_seek_bar"
+                        rsb:thumbPressed="@drawable/trumb_seek_bar" />
                 </LinearLayout>
             </android.support.v7.widget.CardView>
 
@@ -142,71 +101,112 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                card_view:cardCornerRadius="5dp"
-                card_view:cardBackgroundColor="@color/white">
+                card_view:cardBackgroundColor="@color/white"
+                card_view:cardCornerRadius="5dp">
 
                 <LinearLayout
-                    android:orientation="vertical"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_margin="8dp">
+                    android:layout_marginLeft="16dp"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="3.5"
+                        android:text="@string/height"
+                        android:textColor="@color/text_dark"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
+
+                    <org.florescu.android.rangeseekbar.RangeSeekBar
+                        android:id="@+id/rsb_height"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginBottom="8dp"
+                        android:layout_marginRight="0dp"
+                        android:layout_weight="1"
+                        rsb:activeColor="@color/seek_bar"
+                        rsb:barHeight="4dp"
+                        rsb:defaultColor="@color/gray"
+                        rsb:textAboveThumbsColor="@color/seek_bar"
+                        rsb:thumbDisabled="@drawable/trumb_seek_bar"
+                        rsb:thumbNormal="@drawable/trumb_seek_bar"
+                        rsb:thumbPressed="@drawable/trumb_seek_bar" />
+                </LinearLayout>
+            </android.support.v7.widget.CardView>
+
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                card_view:cardBackgroundColor="@color/white"
+                card_view:cardCornerRadius="5dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="8dp"
+                    android:orientation="vertical">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_horizontal"
-                        android:textSize="14sp"
+                        android:text="@string/height"
                         android:textColor="@color/text_dark"
-                        android:text="@string/height"/>
+                        android:textSize="14sp" />
 
                     <LinearLayout
-                        android:orientation="horizontal"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:gravity="center_horizontal">
+                        android:gravity="center_horizontal"
+                        android:orientation="horizontal">
 
                         <TextView
                             android:id="@+id/tv_first_height"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_horizontal"
-                            android:textSize="14sp"
+                            android:text="26"
                             android:textColor="@color/text_dark"
-                            android:text="26"/>
+                            android:textSize="14sp" />
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_horizontal"
-                            android:textSize="14sp"
+                            android:text="—"
                             android:textColor="@color/text_dark"
-                            android:text="—"/>
+                            android:textSize="14sp" />
 
                         <TextView
                             android:id="@+id/tv_last_height"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_horizontal"
-                            android:textSize="14sp"
+                            android:text="26"
                             android:textColor="@color/text_dark"
-                            android:text="26"/>
+                            android:textSize="14sp" />
                     </LinearLayout>
 
                     <com.crystal.crystalrangeseekbar.widgets.CrystalRangeSeekbar
                         android:id="@+id/crs_height"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="16dp"
                         android:layout_marginBottom="8dp"
-                        app:corner_radius="3"
-                        app:min_value="140"
-                        app:max_value="250"
-                        app:gap="30"
+                        android:layout_marginTop="16dp"
                         app:bar_color="@color/gray"
                         app:bar_highlight_color="@color/seek_bar"
+                        app:corner_radius="3"
+                        app:data_type="_integer"
+                        app:gap="30"
                         app:left_thumb_image="@drawable/ellipse_point"
-                        app:right_thumb_image="@drawable/ellipse_point"
-                        app:data_type="_integer"/>
+                        app:max_value="250"
+                        app:min_value="140"
+                        app:right_thumb_image="@drawable/ellipse_point" />
                 </LinearLayout>
             </android.support.v7.widget.CardView>
 
@@ -214,71 +214,71 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                card_view:cardCornerRadius="5dp"
-                card_view:cardBackgroundColor="@color/white">
+                card_view:cardBackgroundColor="@color/white"
+                card_view:cardCornerRadius="5dp">
 
                 <LinearLayout
-                    android:orientation="vertical"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_margin="8dp">
+                    android:layout_margin="8dp"
+                    android:orientation="vertical">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_horizontal"
-                        android:textSize="14sp"
+                        android:text="@string/weight"
                         android:textColor="@color/text_dark"
-                        android:text="@string/weight"/>
+                        android:textSize="14sp" />
 
                     <LinearLayout
-                        android:orientation="horizontal"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:gravity="center_horizontal">
+                        android:gravity="center_horizontal"
+                        android:orientation="horizontal">
 
                         <TextView
                             android:id="@+id/tv_first_weight"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_horizontal"
-                            android:textSize="14sp"
+                            android:text="26"
                             android:textColor="@color/text_dark"
-                            android:text="26"/>
+                            android:textSize="14sp" />
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_horizontal"
-                            android:textSize="14sp"
+                            android:text="—"
                             android:textColor="@color/text_dark"
-                            android:text="—"/>
+                            android:textSize="14sp" />
 
                         <TextView
                             android:id="@+id/tv_last_weight"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_horizontal"
-                            android:textSize="14sp"
+                            android:text="26"
                             android:textColor="@color/text_dark"
-                            android:text="26"/>
+                            android:textSize="14sp" />
                     </LinearLayout>
 
                     <com.crystal.crystalrangeseekbar.widgets.CrystalRangeSeekbar
                         android:id="@+id/crs_weight"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="16dp"
                         android:layout_marginBottom="8dp"
-                        app:corner_radius="3"
-                        app:min_value="40"
-                        app:max_value="150"
-                        app:gap="10"
+                        android:layout_marginTop="16dp"
                         app:bar_color="@color/gray"
                         app:bar_highlight_color="@color/seek_bar"
+                        app:corner_radius="3"
+                        app:data_type="_integer"
+                        app:gap="10"
                         app:left_thumb_image="@drawable/ellipse_point"
-                        app:right_thumb_image="@drawable/ellipse_point"
-                        app:data_type="_integer"/>
+                        app:max_value="150"
+                        app:min_value="40"
+                        app:right_thumb_image="@drawable/ellipse_point" />
                 </LinearLayout>
             </android.support.v7.widget.CardView>
 
@@ -288,36 +288,36 @@
                 android:layout_marginTop="8dp">
 
                 <LinearLayout
-                    android:orientation="horizontal"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_margin="8dp">
+                    android:layout_margin="8dp"
+                    android:orientation="horizontal">
 
                     <ImageView
-                        style="?attr/actionButtonStyle"
                         android:id="@+id/img_left"
+                        style="?attr/actionButtonStyle"
                         android:layout_width="24dp"
                         android:layout_height="24dp"
                         android:clickable="true"
                         android:focusable="true"
-                        android:tint="@color/button_blue_light"
-                        android:src="@drawable/ic_keyboard_arrow_left_black_24dp"/>
+                        android:src="@drawable/ic_keyboard_arrow_left_black_24dp"
+                        android:tint="@color/button_blue_light" />
 
                     <android.support.v4.view.ViewPager
                         android:id="@+id/vp_hair_color"
                         android:layout_width="match_parent"
                         android:layout_height="24dp"
-                        android:layout_weight="1"/>
+                        android:layout_weight="1" />
 
                     <ImageView
-                        style="?attr/actionButtonStyle"
                         android:id="@+id/img_right"
+                        style="?attr/actionButtonStyle"
                         android:layout_width="24dp"
                         android:layout_height="24dp"
                         android:clickable="true"
                         android:focusable="true"
-                        android:tint="@color/button_blue_light"
-                        android:src="@drawable/ic_keyboard_arrow_right_black_24dp"/>
+                        android:src="@drawable/ic_keyboard_arrow_right_black_24dp"
+                        android:tint="@color/button_blue_light" />
                 </LinearLayout>
             </android.support.v7.widget.CardView>
         </LinearLayout>

@@ -131,6 +131,7 @@ public class ProfileManFragment extends BaseFragment {
     }
 
     private void setSize() {
+        //todo 8
         rlPhotos.getLayoutParams().height = (int) (AndroidUtils.getWindowsSizeParams(getContext())[1] * 0.3);
     }
 

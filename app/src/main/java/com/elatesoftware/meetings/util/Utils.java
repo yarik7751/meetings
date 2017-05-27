@@ -92,6 +92,7 @@ public class Utils {
         return messages;
     }
 
+    //todo 5
     public static boolean isToken(Context context) {
         String token = CustomSharedPreference.getToken(context);
         return !TextUtils.isEmpty(token) && !token.equals(Const.NULL_TOKEN);

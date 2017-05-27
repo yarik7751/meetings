@@ -34,6 +34,7 @@
                     android:padding="16dp"
                     android:layout_weight="1">
 
+                    <!--todo 9 айди элементов. указываем место!-->
                     <de.hdodenhof.circleimageview.CircleImageView
                         android:id="@+id/img_photo"
                         android:layout_width="52dp"

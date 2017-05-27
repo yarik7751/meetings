@@ -1,19 +1,12 @@
 package com.elatesoftware.meetings.ui.activity;
 
-import android.Manifest;
 import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.location.Location;
-import android.location.LocationListener;
-import android.location.LocationManager;
-import android.support.v4.app.ActivityCompat;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
 import com.elatesoftware.meetings.R;
 import com.elatesoftware.meetings.ui.activity.base.BaseActivity;
-import com.elatesoftware.meetings.ui.activity.man.WorkActivityMan;
-import com.elatesoftware.meetings.ui.activity.woman.WorkActivityWoman;
+import com.elatesoftware.meetings.ui.activity.man.WorkManActivity;
+import com.elatesoftware.meetings.ui.activity.woman.WorkWomanActivity;
 import com.elatesoftware.meetings.ui.fragment.GenderFragment;
 import com.elatesoftware.meetings.ui.fragment.SignInFragment;
 import com.elatesoftware.meetings.ui.fragment.SignUpFragment;
@@ -32,9 +25,9 @@ public class MainActivity extends BaseActivity {
 
         if(Utils.isToken(this)) {
             if(CustomSharedPreference.isMan(this)) {
-                startActivity(new Intent(this, WorkActivityMan.class));
+                startActivity(new Intent(this, WorkManActivity.class));
             } else {
-                startActivity(new Intent(this, WorkActivityWoman.class));
+                startActivity(new Intent(this, WorkWomanActivity.class));
             }
         }
 

@@ -1,4 +1,5 @@
 <resources>
+    <!--todo 14 указываем где используется строка-->
     <string name="app_name">Com_elatesoftware_meetings</string>
     <string name="email">Email</string>
     <string name="password">Password</string>

@@ -22,7 +22,7 @@ import com.elatesoftware.meetings.util.Utils;
 
 import butterknife.BindView;
 
-public class WorkActivityMan extends BaseActivity {
+public class WorkManActivity extends BaseActivity {
 
     public static final int PIN = 134;
 
@@ -58,16 +58,19 @@ public class WorkActivityMan extends BaseActivity {
             }
         });
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            //todo 6
             requestPermissions(new String[]{ Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION }, Const.REQUEST_PERMISSIONS);
         }
     }
 
+    //todo 7
     @Override
     protected void onResume() {
         super.onResume();
         //onSwitchFragment(ProfileManFragment.getInstance(), ProfileManFragment.class.getName(), false, true, R.id.container);
     }
 
+    //todo 6
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);

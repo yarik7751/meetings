@@ -20,6 +20,7 @@ import butterknife.BindView;
 import butterknife.OnClick;
 import de.hdodenhof.circleimageview.CircleImageView;
 
+//todo 10 имя класса
 public class DalesManFragment extends BaseFragment {
 
     @BindView(R.id.img_avatar) CircleImageView imgAvatar;

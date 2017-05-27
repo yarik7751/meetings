@@ -64,6 +64,7 @@ public class PinCodeActivity extends BaseActivity {
         setIndicators();
     }
 
+    //todo 1
     private void setIndicators() {
         for(int i = 0; i < llIndicators.getChildCount(); i++) {
             ImageView img = (ImageView) llIndicators.getChildAt(i);
@@ -74,6 +75,7 @@ public class PinCodeActivity extends BaseActivity {
             }
         }
         showPinStatus();
+        //todo 2
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
@@ -92,6 +94,7 @@ public class PinCodeActivity extends BaseActivity {
             pin = "";
             setIndicators();
             showPinStatus();
+            //todo 3
             return;
         } else {
             if(savePin.equals(pin)) {
@@ -100,6 +103,7 @@ public class PinCodeActivity extends BaseActivity {
                 finish();
             } else {
                 setError();
+                //todo 3
                 return;
             }
         }
