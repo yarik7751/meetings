@@ -12,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -34,6 +35,7 @@ import com.elatesoftware.meetings.util.api.pojo.HumanAnswer;
 import com.elatesoftware.meetings.util.api.pojo.Photo;
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
+import com.wang.avi.AVLoadingIndicatorView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -56,6 +58,7 @@ public class ProfileManFragment extends BaseFragment {
     @BindView(R.id.img_edit) ImageView imgEdit;
     @BindView(R.id.rl_edit) RelativeLayout rlEdit;
     @BindView(R.id.line) View line;
+    @BindView(R.id.pb_progress) AVLoadingIndicatorView pbProgress;
 
     private List<View> photos;
 
@@ -185,6 +188,7 @@ public class ProfileManFragment extends BaseFragment {
         @Override
         public void onReceive(Context context, Intent intent) {
             String response = intent.getStringExtra(Const.RESPONSE);
+            pbProgress.setVisibility(View.GONE);
             if(response != null && response.equals(String.valueOf(Const.CODE_SUCCESS)) && GetPhotosAnswer.getInstance() != null) {
                 if(GetPhotosAnswer.getInstance().getSuccess()) {
                     loadPhoto(GetPhotosAnswer.getInstance().getResult());

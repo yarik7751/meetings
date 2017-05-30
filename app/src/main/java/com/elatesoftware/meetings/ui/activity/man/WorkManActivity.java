@@ -47,11 +47,13 @@ public class WorkManActivity extends BaseActivity {
                         break;
 
                     case R.id.action_dales:
-                        onSwitchFragment(DalesManFragment.getInstance(), DalesManFragment.class.getName(), false, true, R.id.container);
+                        showMessage("Oops ;) It is not ready yet!");
+                        //onSwitchFragment(DalesManFragment.getInstance(), DalesManFragment.class.getName(), false, true, R.id.container);
                         break;
 
                     case R.id.action_wallet:
-                        onSwitchFragment(WalletManFragment.getInstance(), WalletManFragment.class.getName(), false, true, R.id.container);
+                        showMessage("Oops ;) It is not ready yet!");
+                        //onSwitchFragment(WalletManFragment.getInstance(), WalletManFragment.class.getName(), false, true, R.id.container);
                         break;
                 }
                 return true;
