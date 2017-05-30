@@ -1,6 +1,6 @@
 <resources>
     <!--todo 14 указываем где используется строка-->
-    <string name="app_name">Com_elatesoftware_meetings</string>
+    <string name="app_name">YES</string>
     <string name="email">Email</string>
     <string name="password">Password</string>
     <string name="weight">Weight</string>
@@ -9,7 +9,7 @@
     <string name="forgot_password">Forgot password</string>
     <string name="profile">Profile</string>
     <string name="search">Search</string>
-    <string name="dales">Dales</string>
+    <string name="dates">Dates</string>
     <string name="wallet">Wallet</string>
     <string name="name">Name</string>
     <string name="age">Age</string>
@@ -90,6 +90,11 @@
 
     <string name="demo_min_label"></string>
     <string name="demo_max_label"></string>
+    <string name="etc">Etc</string>
+    <string name="invalid_email">Email is invalid!</string>
+    <string name="empty_data">Empty data!</string>
+    <string name="passwords_is_not_equals">Passwords is not equals!</string>
+    <string name="present_more_zero">Present must be greater than zero</string>
 
     <string-array name="hair_colors">
         <item>Doesn\'t matter</item>

@@ -28,6 +28,7 @@ import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
 import com.squareup.picasso.Picasso;
+import com.wang.avi.AVLoadingIndicatorView;
 
 import butterknife.BindView;
 import cz.msebera.android.httpclient.Header;
@@ -38,7 +39,7 @@ public class PhotoFragment extends BaseFragment {
     public static final String PHOTO_ID = "PHOTO_ID";
 
     @BindView(R.id.img_photo) ImageView imgPhoto;
-    @BindView(R.id.pb_progress) ProgressBar pbProgress;
+    @BindView(R.id.pb_progress) AVLoadingIndicatorView pbProgress;
 
     private long photoId = -1;
 
@@ -93,6 +94,8 @@ public class PhotoFragment extends BaseFragment {
                         imgPhoto.setImageBitmap(bitmap);
                         imgPhoto.setScaleType(ImageView.ScaleType.CENTER_CROP);
                     }
+                } else {
+                    //requestGetPhoto();
                 }
             }
 

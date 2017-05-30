@@ -9,7 +9,7 @@
     <item
         android:id="@+id/action_dales"
         android:icon="@drawable/ic_date"
-        android:title="@string/dales" />
+        android:title="@string/dates" />
 
     <item
         android:id="@+id/action_wallet"

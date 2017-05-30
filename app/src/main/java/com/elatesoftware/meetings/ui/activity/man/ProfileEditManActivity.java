@@ -22,6 +22,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.DatePicker;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 
 import com.dd.CircularProgressButton;
@@ -46,6 +47,7 @@ import com.elatesoftware.meetings.util.api.pojo.MessageAnswer;
 import com.elatesoftware.meetings.util.api.pojo.Photo;
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
+import com.wang.avi.AVLoadingIndicatorView;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -69,7 +71,9 @@ public class ProfileEditManActivity extends BaseActivity {
     @BindView(R.id.cet_about) CustomEditText cetAbout;
     @BindView(R.id.vp_photos) ViewPager vpPhotos;
     @BindView(R.id.rl_photos) RelativeLayout rlPhotos;
+    @BindView(R.id.rl_photos_fab) RelativeLayout rlPhotosFab;
     @BindView(R.id.ink_indicator) CircleIndicator inkIndicator;
+    @BindView(R.id.pb_progress) AVLoadingIndicatorView pbProgress;
 
     private Calendar birthDate;
     private HumanAnswer profileMan;
@@ -210,6 +214,7 @@ public class ProfileEditManActivity extends BaseActivity {
 
     private void setSize() {
         rlPhotos.getLayoutParams().height = (int) (AndroidUtils.getWindowsSizeParams(this)[1] * 0.3);
+        rlPhotosFab.getLayoutParams().height = (int) (AndroidUtils.getWindowsSizeParams(this)[1] * 0.3);
     }
 
     private void updateLocalInfo() {
@@ -293,6 +298,7 @@ public class ProfileEditManActivity extends BaseActivity {
         @Override
         public void onReceive(Context context, Intent intent) {
             String response = intent.getStringExtra(Const.RESPONSE);
+            pbProgress.setVisibility(View.GONE);
             if(response != null && response.equals(String.valueOf(Const.CODE_SUCCESS)) && GetPhotosAnswer.getInstance() != null) {
                 if(GetPhotosAnswer.getInstance().getSuccess()) {
                     loadPhoto(GetPhotosAnswer.getInstance().getResult());
