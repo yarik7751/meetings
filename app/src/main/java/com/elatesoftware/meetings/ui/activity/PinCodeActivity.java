@@ -66,6 +66,11 @@ public class PinCodeActivity extends BaseActivity {
 
     //todo 1
     private void setIndicators() {
+        String savePin = CustomSharedPreference.getPin(this);
+        if(savePin != null && pin.length() == 4 && !pin.equals(savePin)) {
+            setError();
+            return;
+        }
         for(int i = 0; i < llIndicators.getChildCount(); i++) {
             ImageView img = (ImageView) llIndicators.getChildAt(i);
             if(i <= pin.length() - 1) {
@@ -75,16 +80,10 @@ public class PinCodeActivity extends BaseActivity {
             }
         }
         showPinStatus();
-        //todo 2
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                if(pin.length() == 4) {
-                    Log.d(TAG, "pin :" + pin);
-                    checkPin();
-                }
-            }
-        }, 50);
+        if(pin.length() == 4) {
+            Log.d(TAG, "pin :" + pin);
+            checkPin();
+        }
     }
 
     private void checkPin() {

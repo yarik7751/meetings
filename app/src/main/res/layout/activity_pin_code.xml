@@ -87,6 +87,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
+                    app:mrl_rippleDelayClick="false"
                     app:mrl_rippleOverlay="true"
                     app:mrl_rippleColor="@color/pin_code_deselect">
 
@@ -105,6 +106,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
+                    app:mrl_rippleDelayClick="false"
                     app:mrl_rippleOverlay="true"
                     app:mrl_rippleColor="@color/pin_code_deselect">
 
@@ -123,6 +125,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
+                    app:mrl_rippleDelayClick="false"
                     app:mrl_rippleOverlay="true"
                     app:mrl_rippleColor="@color/pin_code_deselect">
 
@@ -149,6 +152,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
+                    app:mrl_rippleDelayClick="false"
                     app:mrl_rippleOverlay="true"
                     app:mrl_rippleColor="@color/pin_code_deselect">
 
@@ -167,6 +171,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
+                    app:mrl_rippleDelayClick="false"
                     app:mrl_rippleOverlay="true"
                     app:mrl_rippleColor="@color/pin_code_deselect">
 
@@ -186,6 +191,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
+                    app:mrl_rippleDelayClick="false"
                     app:mrl_rippleOverlay="true"
                     app:mrl_rippleColor="@color/pin_code_deselect">
 
@@ -212,6 +218,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
+                    app:mrl_rippleDelayClick="false"
                     app:mrl_rippleOverlay="true"
                     app:mrl_rippleColor="@color/pin_code_deselect">
 
@@ -230,6 +237,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
+                    app:mrl_rippleDelayClick="false"
                     app:mrl_rippleOverlay="true"
                     app:mrl_rippleColor="@color/pin_code_deselect">
 
@@ -248,6 +256,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
+                    app:mrl_rippleDelayClick="false"
                     app:mrl_rippleOverlay="true"
                     app:mrl_rippleColor="@color/pin_code_deselect">
 
@@ -279,6 +288,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
+                    app:mrl_rippleDelayClick="false"
                     app:mrl_rippleOverlay="true"
                     app:mrl_rippleColor="@color/pin_code_deselect">
 
@@ -297,6 +307,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
+                    app:mrl_rippleDelayClick="false"
                     app:mrl_rippleOverlay="true"
                     app:mrl_rippleColor="@color/pin_code_deselect">
 
