@@ -35,7 +35,8 @@ public class CustomEditText extends FrameLayout {
             android.R.attr.gravity,
             android.R.attr.hint,
             android.R.attr.maxLines,
-            android.R.attr.inputType
+            android.R.attr.inputType,
+            android.R.attr.maxLength
     };
 
     public CustomEditText(Context context) {

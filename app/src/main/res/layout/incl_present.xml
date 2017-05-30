@@ -9,25 +9,26 @@
     <LinearLayout
         android:id="@+id/ll_present_title"
         android:orientation="horizontal"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:gravity="center_vertical">
-
-        <!--<ImageView
-            android:layout_width="20dp"
-            android:layout_height="20dp"
-            android:layout_marginRight="16dp"
-            android:src="@drawable/present"/>-->
+        android:gravity="center">
 
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
+            android:layout_weight="1"
             android:textSize="16sp"
             android:textColor="@color/button_blue_light"
             android:text="@string/presents"
             android:textStyle="bold"/>
+
+        <ImageView
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:tint="@color/button_blue_light"
+            android:src="@drawable/ic_keyboard_arrow_left_black_24dp"/>
     </LinearLayout>
 
     <com.github.aakira.expandablelayout.ExpandableRelativeLayout
@@ -36,7 +37,6 @@
         android:layout_height="wrap_content"
         app:ael_expanded="false"
         app:ael_duration="200"
-        app:ael_interpolator="bounce"
         app:ael_orientation="vertical">
 
         <LinearLayout
@@ -59,8 +59,9 @@
                 android:layout_height="45dp"
                 android:layout_marginBottom="8dp"
                 android:gravity="left|center_vertical"
-                android:inputType="numberDecimal"
-                android:hint="$ 0.00"/>
+                android:inputType="number"
+                android:maxLength="10"
+                android:hint="$"/>
         </LinearLayout>
     </com.github.aakira.expandablelayout.ExpandableRelativeLayout>
 </LinearLayout>

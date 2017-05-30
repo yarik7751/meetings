@@ -5,17 +5,21 @@ import android.animation.AnimatorListenerAdapter;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Interpolator;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.CardView;
+import android.text.Editable;
 import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.AccelerateDecelerateInterpolator;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.FrameLayout;
@@ -32,6 +36,7 @@ import com.elatesoftware.meetings.ui.adapter.view_pager.ViewPagerAdapter;
 import com.elatesoftware.meetings.ui.view.CustomEditText;
 import com.elatesoftware.meetings.util.AndroidUtils;
 import com.elatesoftware.meetings.util.DateUtils;
+import com.elatesoftware.meetings.util.StringUtils;
 import com.elatesoftware.meetings.util.api.pojo.Meeting;
 import com.github.aakira.expandablelayout.ExpandableRelativeLayout;
 import com.github.jjobes.slidedatetimepicker.SlideDateTimeListener;
@@ -54,6 +59,9 @@ import com.unnamed.b.atv.model.TreeNode;
 import com.unnamed.b.atv.view.AndroidTreeView;
 import com.unnamed.b.atv.view.TreeNodeWrapperView;
 
+import net.yslibrary.android.keyboardvisibilityevent.KeyboardVisibilityEvent;
+import net.yslibrary.android.keyboardvisibilityevent.KeyboardVisibilityEventListener;
+
 import org.florescu.android.rangeseekbar.RangeSeekBar;
 
 import java.util.ArrayList;
@@ -71,21 +79,10 @@ public class AddDateActivity extends BaseActivity implements OnMapReadyCallback 
     public static final String IS_CLOSE = "IS_CLOSE";
 
     @BindView(R.id.ll_main) LinearLayout llMain;
-
-    //@BindView(R.id.rl_age_indicators) RelativeLayout rlAgeIndicators;
-    //@BindView(R.id.crs_age) CrystalRangeSeekbar crsAge;
+    @BindView(R.id.ll_place) LinearLayout llPlace;
     @BindView(R.id.rsb_age) RangeSeekBar rsbAge;
-    /*@BindView(R.id.tv_first_age) TextView tvFirstAge;
-    @BindView(R.id.tv_last_age) TextView tvLastAge;*/
-
-    @BindView(R.id.crs_height) CrystalRangeSeekbar crsHeight;
-    @BindView(R.id.tv_first_height) TextView tvFirstHeight;
-    @BindView(R.id.tv_last_height) TextView tvLastHeight;
-
-    @BindView(R.id.crs_weight) CrystalRangeSeekbar crsWeight;
-    @BindView(R.id.tv_first_weight) TextView tvFirstWeight;
-    @BindView(R.id.tv_last_weight) TextView tvLastWeight;
-    
+    @BindView(R.id.rsb_height) RangeSeekBar rsbHeight;
+    @BindView(R.id.rsb_weight) RangeSeekBar rsbWeight;
     @BindView(R.id.tv_place_title) TextView tvPlaceTitle;
     @BindView(R.id.cv_choose_place) CardView cvChoosePlace;
     @BindView(R.id.map) FrameLayout flMap;
@@ -97,17 +94,21 @@ public class AddDateActivity extends BaseActivity implements OnMapReadyCallback 
     @BindView(R.id.img_right) ImageView imgRight;
     @BindView(R.id.vp_hair_color) ViewPager vpHairColor;
     @BindView(R.id.cet_present) CustomEditText cetPresent;
-
     @BindView(R.id.erl_features) ExpandableRelativeLayout llFeatures;
     @BindView(R.id.erl_time) ExpandableRelativeLayout llTime;
     @BindView(R.id.erl_location) ExpandableRelativeLayout llLocation;
     @BindView(R.id.erl_present) ExpandableRelativeLayout llPresent;
+    @BindView(R.id.ll_features_title) LinearLayout llFeaturesTitle;
+    @BindView(R.id.ll_time_title) LinearLayout llTimeTitle;
+    @BindView(R.id.ll_location_title) LinearLayout llLocationTitle;
+    @BindView(R.id.ll_present_title) LinearLayout llPresentTitle;
 
     private SupportMapFragment mapFragment;
     private GoogleMap map;
     private Place place;
     private Date dateStart = null, dateEnd = null;
     private ViewPagerAdapter vpHairColorAdapter;
+    private boolean isPresentIterator = true;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -117,34 +118,6 @@ public class AddDateActivity extends BaseActivity implements OnMapReadyCallback 
         initMap();
         setHairColors();
 
-
-        /*crsAge.setOnRangeSeekbarChangeListener(new OnRangeSeekbarChangeListener() {
-            @Override
-            public void valueChanged(Number minValue, Number maxValue) {
-                Log.d(TAG, "rlAgeIndicators.getWidth: " + rlAgeIndicators.getWidth());
-                int width = rlAgeIndicators.getWidth();
-                int selectedMaxValue = crsAge.getSelectedMaxValue().intValue();
-                int persent = selectedMaxValue /
-                Log.d(TAG, "selectedMaxValue: " + selectedMaxValue);
-                tvFirstAge.setText(String.valueOf(minValue));
-                tvLastAge.setText(String.valueOf(maxValue));
-            }
-        });*/
-        crsHeight.setOnRangeSeekbarChangeListener(new OnRangeSeekbarChangeListener() {
-            @Override
-            public void valueChanged(Number minValue, Number maxValue) {
-                tvFirstHeight.setText(String.valueOf(minValue));
-                tvLastHeight.setText(String.valueOf(maxValue));
-            }
-        });
-
-        crsWeight.setOnRangeSeekbarChangeListener(new OnRangeSeekbarChangeListener() {
-            @Override
-            public void valueChanged(Number minValue, Number maxValue) {
-                tvFirstWeight.setText(String.valueOf(minValue));
-                tvLastWeight.setText(String.valueOf(maxValue));
-            }
-        });
         vpHairColor.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {}
@@ -157,6 +130,36 @@ public class AddDateActivity extends BaseActivity implements OnMapReadyCallback 
             @Override
             public void onPageScrollStateChanged(int state) {}
         });
+
+        KeyboardVisibilityEvent.setEventListener(this, new KeyboardVisibilityEventListener() {
+            @Override
+            public void onVisibilityChanged(boolean isOpen) {
+                isPresentIterator = false;
+                StringUtils.setMaskAmount(cetPresent.getEditText(), isOpen);
+                cetPresent.getEditText().setSelection(cetPresent.getEditText().getText().length());
+            }
+        });
+
+        cetPresent.getEditText().addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                int maxLenght = 6;
+                if(s.toString().length() > maxLenght && isPresentIterator) {
+                    cetPresent.getEditText().setText(s.toString().substring(0, maxLenght));
+                    cetPresent.getEditText().setSelection(cetPresent.getEditText().getText().length());
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                isPresentIterator = true;
+            }
+        });
     }
 
     @Override
@@ -166,6 +169,7 @@ public class AddDateActivity extends BaseActivity implements OnMapReadyCallback 
             switch(requestCode) {
                 case REQUEST_PLACE_PICKER:
                     flMap.setVisibility(View.VISIBLE);
+                    llPlace.setBackgroundResource(R.drawable.map_bg);
                     place = PlacePicker.getPlace(data, this);
                     CharSequence name = place.getName();
                     CharSequence address = place.getAddress();
@@ -232,7 +236,7 @@ public class AddDateActivity extends BaseActivity implements OnMapReadyCallback 
             saveInfoMeeting();
             Intent intent = new Intent(this, ShowDateActivity.class);
             intent.putExtra(ShowDateActivity.TITLE, getString(R.string.preview));
-            intent.putExtra(ShowDateActivity.IS_SHOW_MAN_INFO, false);
+            //intent.putExtra(ShowDateActivity.IS_SHOW_MAN_INFO, false);
             startActivityForResult(intent, CLOSE);
         }
     }
@@ -274,29 +278,33 @@ public class AddDateActivity extends BaseActivity implements OnMapReadyCallback 
 
     @OnClick(R.id.ll_features_title)
     public void clickFeaturesTitle() {
-        clickExpRelativeLayout(llFeatures);
+        clickExpRelativeLayout(llFeaturesTitle, llFeatures);
+
     }
 
     @OnClick(R.id.ll_time_title)
     public void clickTimeTitle() {
-        clickExpRelativeLayout(llTime);
+        clickExpRelativeLayout(llTimeTitle, llTime);
     }
 
     @OnClick(R.id.ll_location_title)
     public void clickLocationTitle() {
-        clickExpRelativeLayout(llLocation);
+        clickExpRelativeLayout(llLocationTitle, llLocation);
     }
 
     @OnClick(R.id.ll_present_title)
     public void clickPresentTitle() {
-        clickExpRelativeLayout(llPresent);
+        clickExpRelativeLayout(llPresentTitle, llPresent);
     }
 
-    private void clickExpRelativeLayout(ExpandableRelativeLayout layout) {
+    private void clickExpRelativeLayout(LinearLayout llTitle, ExpandableRelativeLayout layout) {
+        ImageView ivInd = (ImageView) llTitle.getChildAt(1);
         if(layout.isExpanded()) {
-            layout.collapse();
+            layout.toggle();
+            ivInd.setImageResource(R.drawable.ic_keyboard_arrow_left_black_24dp);
         } else {
             layout.expand();
+            ivInd.setImageResource(R.drawable.ic_keyboard_arrow_down_black_24dp);
         }
     }
 
@@ -338,20 +346,22 @@ public class AddDateActivity extends BaseActivity implements OnMapReadyCallback 
 
     private void saveInfoMeeting() {
         Meeting meeting = new Meeting();
-        meeting.setAmount(Integer.parseInt(cetPresent.getEditText().getText().toString()));
+        String amount = cetPresent.getEditText().getText().toString();
+        amount = amount.replace("$", "");
+        meeting.setAmount(Integer.parseInt(amount));
         meeting.setHairColor(vpHairColor.getCurrentItem());
         meeting.setLatitude(place.getLatLng().latitude);
         meeting.setLongitude(place.getLatLng().longitude);
         meeting.setPlace(place.getName() + "\n" + place.getAddress());
 
-        meeting.setPrefAgeStart(rsbAge.getSelectedMaxValue().intValue());
-        meeting.setPrefAgeEnd(rsbAge.getSelectedMinValue().intValue());
+        meeting.setPrefAgeStart(rsbAge.getSelectedMinValue().intValue());
+        meeting.setPrefAgeEnd(rsbAge.getSelectedMaxValue().intValue());
 
-        meeting.setPrefHeightStart(Integer.parseInt(tvFirstHeight.getText().toString()));
-        meeting.setPrefHeightEnd(Integer.parseInt(tvLastHeight.getText().toString()));
+        meeting.setPrefHeightStart(rsbHeight.getSelectedMinValue().intValue());
+        meeting.setPrefHeightEnd(rsbHeight.getSelectedMaxValue().intValue());
 
-        meeting.setPrefWeightStart(Integer.parseInt(tvFirstWeight.getText().toString()));
-        meeting.setPrefWeightEnd(Integer.parseInt(tvLastWeight.getText().toString()));
+        meeting.setPrefWeightStart(rsbWeight.getSelectedMinValue().intValue());
+        meeting.setPrefWeightEnd(rsbWeight.getSelectedMaxValue().intValue());
 
         Log.d(TAG, "dateStart: " + dateStart.getTime());
         Log.d(TAG, "dateEnd  : " + dateEnd.getTime());
@@ -368,14 +378,19 @@ public class AddDateActivity extends BaseActivity implements OnMapReadyCallback 
 
     private boolean checkInfo() {
         String msgError = "";
-        if(dateStart == null && dateEnd == null) {
+        if(dateStart == null || dateEnd == null) {
             msgError += getString(R.string.entry_time) + "\n";
         }
         if(place == null) {
             msgError += getString(R.string.entry_place) + "\n";
         }
-        if(place == null) {
+        String present = cetPresent.getEditText().getText().toString();
+        present = present.replace("$", "");
+        if(TextUtils.isEmpty(present)) {
             msgError += getString(R.string.entry_present);
+        }
+        if(!TextUtils.isEmpty(present) && Integer.parseInt(present) <= 0) {
+            msgError += getString(R.string.present_more_zero);
         }
         if(TextUtils.isEmpty(msgError)) {
             return true;
