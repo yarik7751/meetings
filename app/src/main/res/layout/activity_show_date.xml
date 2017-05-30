@@ -7,6 +7,332 @@
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
     android:background="@drawable/bg">
 
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:layout_gravity="center"
+            android:fillViewport="true"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true">
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <LinearLayout
+                    android:id="@+id/ll_main_info"
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <include layout="@layout/incl_photos"/>
+
+                    <TextView
+                        android:id="@+id/tv_name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginTop="16dp"
+                        android:textSize="16sp"
+                        android:textColor="@color/button_blue_light"
+                        android:textStyle="bold"/>
+
+                    <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:gravity="center">
+
+                        <TextView
+                            android:id="@+id/tv_age_title"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textSize="14sp"
+                            android:textColor="@color/text_white_op"
+                            android:text="Age: "/>
+
+                        <TextView
+                            android:id="@+id/tv_age"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textSize="14sp"
+                            android:textColor="@color/button_blue_light"
+                            android:textStyle="bold"
+                            android:text="32"/>
+                    </LinearLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="16dp"
+                    android:layout_marginLeft="16dp">
+
+                    <android.support.v7.widget.CardView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        card_view:cardCornerRadius="5dp"
+                        card_view:cardBackgroundColor="@color/white">
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="8dp">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentLeft="true"
+                                android:textSize="14sp"
+                                android:textColor="@color/text_dark"
+                                android:text="@string/age"/>
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textSize="14sp"
+                                android:textColor="@color/seek_bar"
+                                android:text="22"
+                                android:id="@+id/tv_age_woman"
+                                android:layout_alignParentTop="true"
+                                android:layout_alignParentRight="true"
+                                android:layout_alignParentEnd="true" />
+                        </RelativeLayout>
+                    </android.support.v7.widget.CardView>
+
+                    <android.support.v7.widget.CardView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="2dp"
+                        card_view:cardCornerRadius="5dp"
+                        card_view:cardBackgroundColor="@color/white">
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="8dp">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentLeft="true"
+                                android:textSize="14sp"
+                                android:textColor="@color/text_dark"
+                                android:text="@string/height"/>
+
+                            <TextView
+                                android:id="@+id/tv_height_woman"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentRight="true"
+                                android:textSize="14sp"
+                                android:textColor="@color/seek_bar"
+                                android:text="182"/>
+                        </RelativeLayout>
+                    </android.support.v7.widget.CardView>
+
+                    <android.support.v7.widget.CardView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="2dp"
+                        card_view:cardCornerRadius="5dp"
+                        card_view:cardBackgroundColor="@color/white">
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="8dp">
+
+                            <TextView
+                                android:id="@+id/tv_weight_woman"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentRight="true"
+                                android:textSize="14sp"
+                                android:textColor="@color/seek_bar"
+                                android:text="70"/>
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textSize="14sp"
+                                android:textColor="@color/text_dark"
+                                android:text="@string/weight"
+                                android:id="@+id/textView2"
+                                android:layout_alignParentTop="true"
+                                android:layout_alignParentLeft="true"
+                                android:layout_alignParentStart="true" />
+                        </RelativeLayout>
+                    </android.support.v7.widget.CardView>
+
+                    <android.support.v7.widget.CardView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="2dp"
+                        card_view:cardCornerRadius="5dp"
+                        card_view:cardBackgroundColor="@color/white">
+
+                        <LinearLayout
+                            android:orientation="vertical"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                            <RelativeLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_margin="8dp">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_alignParentLeft="true"
+                                    android:textSize="14sp"
+                                    android:textColor="@color/text_dark"
+                                    android:text="@string/start_time"/>
+
+                                <TextView
+                                    android:id="@+id/tv_start_time"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_alignParentRight="true"
+                                    android:textSize="14sp"
+                                    android:textColor="@color/seek_bar"
+                                    android:text="20.05.2015 18:00"/>
+                            </RelativeLayout>
+
+                            <RelativeLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_margin="8dp">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_alignParentLeft="true"
+                                    android:textSize="14sp"
+                                    android:textColor="@color/text_dark"
+                                    android:text="@string/end_date"/>
+
+                                <TextView
+                                    android:id="@+id/tv_end_time"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_alignParentRight="true"
+                                    android:textSize="14sp"
+                                    android:textColor="@color/seek_bar"
+                                    android:text="20.05.2015 18:00"/>
+                            </RelativeLayout>
+                        </LinearLayout>
+                    </android.support.v7.widget.CardView>
+
+                    <android.support.v7.widget.CardView
+                        android:layout_width="match_parent"
+                        android:layout_height="150dp"
+                        android:layout_marginTop="2dp"
+                        card_view:cardCornerRadius="5dp"
+                        card_view:cardBackgroundColor="@color/white">
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent">
+
+                            <FrameLayout
+                                android:id="@+id/map"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent" />
+
+                            <View
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:background="@drawable/map_bg"/>
+
+                            <LinearLayout
+                                android:orientation="horizontal"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent">
+
+                                <TextView
+                                    android:id="@+id/tv_place_title"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:layout_margin="8dp"
+                                    android:layout_weight="1"
+                                    android:textSize="14sp"
+                                    android:textColor="@color/text_dark"
+                                    android:text="@string/choose_a_meeting_place"
+                                    android:layout_alignParentBottom="true"
+                                    android:layout_centerHorizontal="true" />
+
+                                <View
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="1"/>
+                            </LinearLayout>
+                        </RelativeLayout>
+                    </android.support.v7.widget.CardView>
+
+                    <android.support.v7.widget.CardView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="2dp"
+                        android:layout_marginBottom="8dp"
+                        card_view:cardCornerRadius="5dp"
+                        card_view:cardBackgroundColor="@color/white">
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="8dp">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentLeft="true"
+                                android:textSize="14sp"
+                                android:textColor="@color/text_dark"
+                                android:text="@string/presents"/>
+
+                            <TextView
+                                android:id="@+id/tv_present"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentRight="true"
+                                android:textSize="14sp"
+                                android:textColor="@color/seek_bar"
+                                android:text="$100"/>
+                        </RelativeLayout>
+                    </android.support.v7.widget.CardView>
+
+                </LinearLayout>
+            </LinearLayout>
+        </ScrollView>
+
+        <com.dd.CircularProgressButton
+            android:id="@+id/btn_publish"
+            android:layout_width="match_parent"
+            android:layout_height="43dp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginLeft="16dp"
+            android:layout_alignParentBottom="true"
+            android:textColor="@color/white"
+            android:textSize="14sp"
+            app:cpb_textIdle="Publish"
+            app:cpb_selectorIdle="@drawable/button_blue_bg"
+            app:cpb_cornerRadius="5dp"/>
+    </LinearLayout>
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -38,339 +364,4 @@
             android:text="Title"
             android:textStyle="bold"/>
     </RelativeLayout>
-
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="1"
-        android:layout_gravity="center"
-        android:fillViewport="true"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true">
-
-        <LinearLayout
-            android:orientation="vertical"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <LinearLayout
-                android:id="@+id/ll_main_info"
-                android:orientation="vertical"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <RelativeLayout
-                    android:id="@+id/rl_photos"
-                    android:layout_width="match_parent"
-                    android:layout_height="200dp">
-
-                    <android.support.v4.view.ViewPager
-                        android:id="@+id/vp_photos"
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"/>
-
-                    <me.relex.circleindicator.CircleIndicator
-                        android:id="@+id/ink_indicator"
-                        android:layout_width="match_parent"
-                        android:layout_height="24dp"
-                        android:layout_marginBottom="16dp"
-                        android:layout_alignParentBottom="true"
-                        app:ci_drawable="@drawable/activ_dot"
-                        app:ci_drawable_unselected="@drawable/normal_dot"/>
-                </RelativeLayout>
-
-                <TextView
-                    android:id="@+id/tv_name"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
-                    android:layout_marginTop="16dp"
-                    android:textSize="16sp"
-                    android:textColor="@color/button_blue_light"
-                    android:textStyle="bold"
-                    android:text="dsggjhdfhdgf"/>
-
-                <LinearLayout
-                    android:orientation="horizontal"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:gravity="center">
-
-                    <TextView
-                        android:id="@+id/tv_age_title"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textSize="14sp"
-                        android:textColor="@color/text_white_op"
-                        android:text="Age: "/>
-
-                    <TextView
-                        android:id="@+id/tv_age"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textSize="14sp"
-                        android:textColor="@color/button_blue_light"
-                        android:textStyle="bold"
-                        android:text="32"/>
-                </LinearLayout>
-            </LinearLayout>
-
-            <LinearLayout
-                android:orientation="vertical"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginRight="16dp"
-                android:layout_marginLeft="16dp">
-
-                <android.support.v7.widget.CardView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
-                    card_view:cardCornerRadius="5dp"
-                    card_view:cardBackgroundColor="@color/white">
-
-                    <RelativeLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="8dp">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_alignParentLeft="true"
-                            android:textSize="14sp"
-                            android:textColor="@color/text_dark"
-                            android:text="@string/age"/>
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:textSize="14sp"
-                            android:textColor="@color/seek_bar"
-                            android:text="22"
-                            android:id="@+id/tv_age_woman"
-                            android:layout_alignParentTop="true"
-                            android:layout_alignParentRight="true"
-                            android:layout_alignParentEnd="true" />
-                    </RelativeLayout>
-                </android.support.v7.widget.CardView>
-
-                <android.support.v7.widget.CardView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="2dp"
-                    card_view:cardCornerRadius="5dp"
-                    card_view:cardBackgroundColor="@color/white">
-
-                    <RelativeLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="8dp">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_alignParentLeft="true"
-                            android:textSize="14sp"
-                            android:textColor="@color/text_dark"
-                            android:text="@string/height"/>
-
-                        <TextView
-                            android:id="@+id/tv_height_woman"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_alignParentRight="true"
-                            android:textSize="14sp"
-                            android:textColor="@color/seek_bar"
-                            android:text="182"/>
-                    </RelativeLayout>
-                </android.support.v7.widget.CardView>
-
-                <android.support.v7.widget.CardView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="2dp"
-                    card_view:cardCornerRadius="5dp"
-                    card_view:cardBackgroundColor="@color/white">
-
-                    <RelativeLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="8dp">
-
-                        <TextView
-                            android:id="@+id/tv_weight_woman"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_alignParentRight="true"
-                            android:textSize="14sp"
-                            android:textColor="@color/seek_bar"
-                            android:text="70"/>
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:textSize="14sp"
-                            android:textColor="@color/text_dark"
-                            android:text="@string/weight"
-                            android:id="@+id/textView2"
-                            android:layout_alignParentTop="true"
-                            android:layout_alignParentLeft="true"
-                            android:layout_alignParentStart="true" />
-                    </RelativeLayout>
-                </android.support.v7.widget.CardView>
-
-                <android.support.v7.widget.CardView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="2dp"
-                    card_view:cardCornerRadius="5dp"
-                    card_view:cardBackgroundColor="@color/white">
-
-                    <LinearLayout
-                        android:orientation="vertical"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
-
-                        <RelativeLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_margin="8dp">
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_alignParentLeft="true"
-                                android:textSize="14sp"
-                                android:textColor="@color/text_dark"
-                                android:text="@string/start_time"/>
-
-                            <TextView
-                                android:id="@+id/tv_start_time"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_alignParentRight="true"
-                                android:textSize="14sp"
-                                android:textColor="@color/seek_bar"
-                                android:text="20.05.2015 18:00"/>
-                        </RelativeLayout>
-
-                        <RelativeLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_margin="8dp">
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_alignParentLeft="true"
-                                android:textSize="14sp"
-                                android:textColor="@color/text_dark"
-                                android:text="@string/end_date"/>
-
-                            <TextView
-                                android:id="@+id/tv_end_time"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_alignParentRight="true"
-                                android:textSize="14sp"
-                                android:textColor="@color/seek_bar"
-                                android:text="20.05.2015 18:00"/>
-                        </RelativeLayout>
-                    </LinearLayout>
-                </android.support.v7.widget.CardView>
-
-                <android.support.v7.widget.CardView
-                    android:layout_width="match_parent"
-                    android:layout_height="150dp"
-                    android:layout_marginTop="2dp"
-                    card_view:cardCornerRadius="5dp"
-                    card_view:cardBackgroundColor="@color/white">
-
-                    <RelativeLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent">
-
-                        <FrameLayout
-                            android:id="@+id/map"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent" />
-
-                        <View
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:background="@drawable/map_bg"/>
-
-                        <LinearLayout
-                            android:orientation="horizontal"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent">
-
-                            <TextView
-                                android:id="@+id/tv_place_title"
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:layout_margin="8dp"
-                                android:layout_weight="1"
-                                android:textSize="14sp"
-                                android:textColor="@color/text_dark"
-                                android:text="@string/choose_a_meeting_place"
-                                android:layout_alignParentBottom="true"
-                                android:layout_centerHorizontal="true" />
-
-                            <View
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:layout_weight="1"/>
-                        </LinearLayout>
-                    </RelativeLayout>
-                </android.support.v7.widget.CardView>
-
-                <android.support.v7.widget.CardView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="2dp"
-                    card_view:cardCornerRadius="5dp"
-                    card_view:cardBackgroundColor="@color/white">
-
-                    <RelativeLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="8dp">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_alignParentLeft="true"
-                            android:textSize="14sp"
-                            android:textColor="@color/text_dark"
-                            android:text="@string/presents"/>
-
-                        <TextView
-                            android:id="@+id/tv_present"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_alignParentRight="true"
-                            android:textSize="14sp"
-                            android:textColor="@color/seek_bar"
-                            android:text="$100"/>
-                    </RelativeLayout>
-                </android.support.v7.widget.CardView>
-
-                <com.dd.CircularProgressButton
-                    android:id="@+id/btn_publish"
-                    android:layout_width="match_parent"
-                    android:layout_height="43dp"
-                    android:layout_marginTop="16dp"
-                    android:layout_marginBottom="8dp"
-                    android:textColor="@color/white"
-                    android:textSize="14sp"
-                    app:cpb_textIdle="Publish"
-                    app:cpb_selectorIdle="@drawable/button_blue_bg"
-                    app:cpb_cornerRadius="5dp"/>
-            </LinearLayout>
-        </LinearLayout>
-    </ScrollView>
 </RelativeLayout>

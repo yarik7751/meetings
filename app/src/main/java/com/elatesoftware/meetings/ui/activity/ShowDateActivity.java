@@ -14,26 +14,38 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.dd.CircularProgressButton;
 import com.elatesoftware.meetings.R;
 import com.elatesoftware.meetings.ui.activity.base.BaseActivity;
 import com.elatesoftware.meetings.ui.activity.man.ProfileEditManActivity;
 import com.elatesoftware.meetings.ui.adapter.page.PageAdapter;
+import com.elatesoftware.meetings.ui.adapter.page.PhotoFragmentPageAdapter;
 import com.elatesoftware.meetings.ui.fragment.man.ProfileManFragment;
+import com.elatesoftware.meetings.ui.service.AddPhotoService;
 import com.elatesoftware.meetings.ui.service.CreateDateService;
+import com.elatesoftware.meetings.ui.service.GetPhotosService;
+import com.elatesoftware.meetings.ui.service.UpdateAccountService;
 import com.elatesoftware.meetings.util.AndroidUtils;
 import com.elatesoftware.meetings.util.Const;
 import com.elatesoftware.meetings.util.CustomSharedPreference;
 import com.elatesoftware.meetings.util.DateUtils;
+import com.elatesoftware.meetings.util.StringUtils;
+import com.elatesoftware.meetings.util.Utils;
+import com.elatesoftware.meetings.util.api.pojo.GetPhotosAnswer;
 import com.elatesoftware.meetings.util.api.pojo.HumanAnswer;
 import com.elatesoftware.meetings.util.api.pojo.LoginAnswer;
 import com.elatesoftware.meetings.util.api.pojo.Meeting;
 import com.elatesoftware.meetings.util.api.pojo.MessageAnswer;
+import com.elatesoftware.meetings.util.api.pojo.Photo;
+import com.elatesoftware.meetings.util.model.ButtonAnimation;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -44,6 +56,7 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import com.j256.ormlite.stmt.query.In;
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
+import com.wang.avi.AVLoadingIndicatorView;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -75,6 +88,8 @@ public class ShowDateActivity extends BaseActivity implements OnMapReadyCallback
     @BindView(R.id.tv_place_title) TextView tvPlaceTitle;
     @BindView(R.id.ll_main_info) LinearLayout llManInfo;
     @BindView(R.id.map) FrameLayout flMap;
+    @BindView(R.id.btn_publish) CircularProgressButton btnPublish;
+    @BindView(R.id.pb_progress) AVLoadingIndicatorView pbProgress;
 
     private SupportMapFragment mapFragment;
     private GoogleMap map;
@@ -82,6 +97,9 @@ public class ShowDateActivity extends BaseActivity implements OnMapReadyCallback
     private Meeting meeting;
 
     private CreateDateBroadcastReceiver createDateBroadcastReceiver;
+    private GetPhotosBroadcastReceiver getPhotosBroadcastReceiver;
+
+    private ButtonAnimation buttonAnimation;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -89,27 +107,20 @@ public class ShowDateActivity extends BaseActivity implements OnMapReadyCallback
         setContentView(R.layout.activity_show_date);
 
         meeting = Meeting.getInstance();
+        buttonAnimation = new ButtonAnimation(this, btnPublish);
 
         initMap();
+        registerBroadcast();
         setSize();
         setTitle();
-        loadPhoto();
         loadInfo();
-
-        if(!getIntent().getBooleanExtra(IS_SHOW_MAN_INFO, true)) {
-            llManInfo.setVisibility(View.GONE);
-        }
-
-        createDateBroadcastReceiver = new CreateDateBroadcastReceiver();
-        IntentFilter intentFilter = new IntentFilter(CreateDateService.ACTION);
-        intentFilter.addCategory(Intent.CATEGORY_DEFAULT);
-        registerReceiver(createDateBroadcastReceiver, intentFilter);
+        requestGetPhotos();
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        unregisterReceiver(createDateBroadcastReceiver);
+        unregisterBroadcast();
     }
 
     @OnClick(R.id.rl_back)
@@ -123,36 +134,35 @@ public class ShowDateActivity extends BaseActivity implements OnMapReadyCallback
     }
 
     private void requestCreateDate() {
+        buttonAnimation.start();
         startService(new Intent(this, CreateDateService.class));
+    }
+
+    private void requestGetPhotos() {
+        startService(GetPhotosService.getIntent(this));
     }
 
     private void setSize() {
         rlPhotos.getLayoutParams().height = (int) (AndroidUtils.getWindowsSizeParams(this)[1] * 0.3);
     }
 
-    //Todo test
-    private void loadPhoto() {
-        photos = new ArrayList<>();
-        for(int i = 0; i < 5; i++) {
-            View viewPhoto = LayoutInflater.from(this).inflate(R.layout.item_photo, null);
-            //((ImageView) viewPhoto.findViewById(R.id.img_photo)).setImageResource(R.drawable.example_photo);
-            Picasso.with(this).load(R.drawable.example_photo).centerCrop()
-                    .resize(AndroidUtils.getWindowsSizeParams(this)[0], (int) (AndroidUtils.getWindowsSizeParams(this)[1] * 0.3))
-                    .into((ImageView) viewPhoto.findViewById(R.id.img_photo), new Callback() {
-                        @Override
-                        public void onSuccess() {
+    private void registerBroadcast() {
+        getPhotosBroadcastReceiver = new GetPhotosBroadcastReceiver();
+        registerReceiver(getPhotosBroadcastReceiver, Utils.getIntentFilter(GetPhotosService.ACTION));
+        createDateBroadcastReceiver = new CreateDateBroadcastReceiver();
+        registerReceiver(createDateBroadcastReceiver, Utils.getIntentFilter(CreateDateService.ACTION));
+    }
 
-                        }
+    private void unregisterBroadcast() {
+        unregisterReceiver(getPhotosBroadcastReceiver);
+        unregisterReceiver(createDateBroadcastReceiver);
+    }
 
-                        @Override
-                        public void onError() {
-
-                        }
-                    });
-            photos.add(viewPhoto);
-        }
-        vpPhotos.setAdapter(new PageAdapter(photos));
+    private void loadPhoto(List<Photo> photo) {
+        PhotoFragmentPageAdapter adapter = new PhotoFragmentPageAdapter(getSupportFragmentManager(), photo);
+        vpPhotos.setAdapter(adapter);
         inkIndicator.setViewPager(vpPhotos);
+        vpPhotos.setOffscreenPageLimit(adapter.getCount());
     }
 
     private void setTitle() {
@@ -186,12 +196,12 @@ public class ShowDateActivity extends BaseActivity implements OnMapReadyCallback
             tvAge.setVisibility(View.VISIBLE);
         }
 
-        tvAge.setText(meeting.getPrefAgeStart() + "—" + meeting.getPrefAgeEnd());
+        tvAgeWoman.setText(meeting.getPrefAgeStart() + "—" + meeting.getPrefAgeEnd());
         tvHeightWoman.setText(meeting.getPrefHeightStart() + "—" + meeting.getPrefHeightEnd());
         tvWeightWoman.setText(meeting.getPrefWeightStart() + "—" + meeting.getPrefWeightEnd());
         tvStartTime.setText(DateUtils.getDateByStr(new Date(meeting.getStartTime()), DateUtils.DATE_FORMAT_OUTPUT));
         tvEndTime.setText(DateUtils.getDateByStr(new Date(meeting.getEndTime()), DateUtils.DATE_FORMAT_OUTPUT));
-        tvPresent.setText(String.valueOf(meeting.getAmount()));
+        tvPresent.setText("$" + String.valueOf(meeting.getAmount()));
         tvPlaceTitle.setText(meeting.getPlace());
     }
 
@@ -218,21 +228,42 @@ public class ShowDateActivity extends BaseActivity implements OnMapReadyCallback
     public class CreateDateBroadcastReceiver extends BroadcastReceiver {
 
         @Override
+        public void onReceive(Context context, final Intent intent) {
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    String response = intent.getStringExtra(Const.RESPONSE);
+                    if(response != null && response.equals(String.valueOf(Const.CODE_SUCCESS)) && MessageAnswer.getInstance() != null) {
+                        Log.d(TAG, "CreateDate 200");
+                        if(MessageAnswer.getInstance().getSuccess()) {
+                            Log.d(TAG, "CreateDate TRUE");
+                            showMessage(R.string.date_created_successfully);
+                            closeActivitySuccess();
+                        } else {
+                            buttonAnimation.stop();
+                            showMessage(R.string.something_wrong);
+                            Log.d(TAG, "CreateDate FALSE");
+                        }
+                    } else {
+                        buttonAnimation.stop();
+                        showMessage(R.string.request_error);
+                        Log.d(TAG, "CreateDate error");
+                    }
+                }
+            }, 300);
+        }
+    }
+
+    public class GetPhotosBroadcastReceiver extends BroadcastReceiver {
+
+        @Override
         public void onReceive(Context context, Intent intent) {
             String response = intent.getStringExtra(Const.RESPONSE);
-            if(response != null && response.equals(String.valueOf(Const.CODE_SUCCESS)) && MessageAnswer.getInstance() != null) {
-                Log.d(TAG, "CreateDate 200");
-                if(MessageAnswer.getInstance().getSuccess()) {
-                    Log.d(TAG, "CreateDate TRUE");
-                    showMessage(R.string.date_created_successfully);
-                    closeActivitySuccess();
-                } else {
-                    showMessage(R.string.something_wrong);
-                    Log.d(TAG, "CreateDate FALSE");
+            pbProgress.setVisibility(View.GONE);
+            if(response != null && response.equals(String.valueOf(Const.CODE_SUCCESS)) && GetPhotosAnswer.getInstance() != null) {
+                if(GetPhotosAnswer.getInstance().getSuccess()) {
+                    loadPhoto(GetPhotosAnswer.getInstance().getResult());
                 }
-            } else {
-                showMessage(R.string.request_error);
-                Log.d(TAG, "CreateDate error");
             }
         }
     }
