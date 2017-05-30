@@ -1,10 +1,13 @@
 package com.elatesoftware.meetings.ui.fragment;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v7.app.AlertDialog;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,12 +20,15 @@ import com.elatesoftware.meetings.ui.fragment.base.BaseFragment;
 import com.elatesoftware.meetings.ui.receiver.AutarizationBroadcastReceiver;
 import com.elatesoftware.meetings.ui.service.RegisterService;
 import com.elatesoftware.meetings.ui.view.CustomEditText;
+import com.elatesoftware.meetings.util.AndroidUtils;
 import com.elatesoftware.meetings.util.Const;
 import com.elatesoftware.meetings.util.CustomSharedPreference;
+import com.elatesoftware.meetings.util.Utils;
 import com.elatesoftware.meetings.util.model.ButtonAnimation;
 
 import butterknife.BindView;
 import butterknife.OnClick;
+import okhttp3.internal.Util;
 
 public class SignUpFragment extends BaseFragment {
 
@@ -30,7 +36,7 @@ public class SignUpFragment extends BaseFragment {
 
     @BindView(R.id.cet_email) CustomEditText cetEmail;
     @BindView(R.id.cet_pass) CustomEditText cetPass;
-    @BindView(R.id.cet_rep_pass) CustomEditText etRepPass;
+    @BindView(R.id.cet_rep_pass) CustomEditText cetRepPass;
     @BindView(R.id.btn_sign_up) CircularProgressButton btnSignUp;
     @BindView(R.id.tv_sign_in) TextView tvSignIn;
 
@@ -89,12 +95,15 @@ public class SignUpFragment extends BaseFragment {
     private void requestRegister() {
         String userName = cetEmail.getEditText().getText().toString();
         String password = cetPass.getEditText().getText().toString();
-        Intent intent = new Intent(getContext(), RegisterService.class);
-        intent.putExtra(RegisterService.USER_NAME, userName);
-        intent.putExtra(RegisterService.PASSWORD, password);
-        intent.putExtra(RegisterService.GENDER, CustomSharedPreference.isMan(getContext()) ? Const.MAN_VALUE : Const.WOMAN_VALUE);
-        getActivity().startService(intent);
-        buttonAnimation.start();
+        String repPassword = cetRepPass.getEditText().getText().toString();
+        if(Utils.checkRegInfo(getContext(), cetEmail, cetPass, cetRepPass)) {
+            Intent intent = new Intent(getContext(), RegisterService.class);
+            intent.putExtra(RegisterService.USER_NAME, userName);
+            intent.putExtra(RegisterService.PASSWORD, password);
+            intent.putExtra(RegisterService.GENDER, CustomSharedPreference.isMan(getContext()) ? Const.MAN_VALUE : Const.WOMAN_VALUE);
+            getActivity().startService(intent);
+            buttonAnimation.start();
+        }
     }
 
     @OnClick(R.id.btn_sign_up)

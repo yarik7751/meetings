@@ -23,17 +23,27 @@
         android:supportsRtl="true"
         android:largeHeap="true"
         android:theme="@style/AppTheme">
+
+        <activity
+            android:name=".ui.activity.PreViewActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateAlwaysHidden"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:theme="@style/SplashTheme">
+
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
         <activity
             android:name=".ui.activity.PinCodeActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateAlwaysHidden"
             android:configChanges="keyboardHidden|orientation|screenSize">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
+
         <activity
             android:name=".ui.activity.man.WorkManActivity"
             android:screenOrientation="portrait"
@@ -55,42 +65,40 @@
             android:windowSoftInputMode="stateAlwaysHidden"
             android:configChanges="keyboardHidden|orientation|screenSize" />
 
-        <!--todo 15 убираем пустые теги-->
-
         <activity
             android:name=".ui.activity.AddDateActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateAlwaysHidden"
-            android:configChanges="keyboardHidden|orientation|screenSize"></activity>
+            android:configChanges="keyboardHidden|orientation|screenSize"/>
         <activity
             android:name=".ui.activity.ChatActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateAlwaysHidden"
-            android:configChanges="keyboardHidden|orientation|screenSize"></activity>
+            android:configChanges="keyboardHidden|orientation|screenSize"/>
         <activity
             android:name=".ui.activity.man.ProfileEditManActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateAlwaysHidden"
-            android:configChanges="keyboardHidden|orientation|screenSize"></activity>
+            android:configChanges="keyboardHidden|orientation|screenSize"/>
         <activity
             android:name=".ui.activity.ShowDateActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateAlwaysHidden"
-            android:configChanges="keyboardHidden|orientation|screenSize"></activity>
+            android:configChanges="keyboardHidden|orientation|screenSize"/>
         <activity
             android:name=".ui.activity.MainActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateAlwaysHidden"
-            android:configChanges="keyboardHidden|orientation|screenSize"></activity>
+            android:configChanges="keyboardHidden|orientation|screenSize"/>
 
-        <service android:name=".ui.service.RegisterService"></service>
-        <service android:name=".ui.service.LoginService"></service>
-        <service android:name=".ui.service.UpdateAccountService"></service>
-        <service android:name=".ui.service.GetAccountInfoService"></service>
-        <service android:name=".ui.service.CreateDateService"></service>
-        <service android:name=".ui.service.AddPhotoService"></service>
-        <service android:name=".ui.service.GetPhotosService"></service>
-        <service android:name=".ui.service.GetPhotoService"></service>
+        <service android:name=".ui.service.RegisterService"/>
+        <service android:name=".ui.service.LoginService"/>
+        <service android:name=".ui.service.UpdateAccountService"/>
+        <service android:name=".ui.service.GetAccountInfoService"/>
+        <service android:name=".ui.service.CreateDateService"/>
+        <service android:name=".ui.service.AddPhotoService"/>
+        <service android:name=".ui.service.GetPhotosService" />
+        <service android:name=".ui.service.GetPhotoService"/>
 
         <meta-data
             android:name="com.google.android.gms.version"

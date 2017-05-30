@@ -16,6 +16,7 @@ import com.elatesoftware.meetings.ui.fragment.base.BaseFragment;
 import com.elatesoftware.meetings.ui.receiver.AutarizationBroadcastReceiver;
 import com.elatesoftware.meetings.ui.service.LoginService;
 import com.elatesoftware.meetings.ui.view.CustomEditText;
+import com.elatesoftware.meetings.util.Utils;
 import com.elatesoftware.meetings.util.model.ButtonAnimation;
 
 import butterknife.BindView;
@@ -86,11 +87,13 @@ public class SignInFragment extends BaseFragment {
     public void requestLogin() {
         String username = cetEmail.getEditText().getText().toString();
         String pass = cetPass.getEditText().getText().toString();
-        Intent intent = new Intent(getContext(), LoginService.class);
-        intent.putExtra(LoginService.USER_NAME, username);
-        intent.putExtra(LoginService.PASSWORD, pass);
-        getActivity().startService(intent);
-        buttonAnimation.start();
+        if(Utils.checkAutInfo(getContext(), cetEmail, cetPass)) {
+            Intent intent = new Intent(getContext(), LoginService.class);
+            intent.putExtra(LoginService.USER_NAME, username);
+            intent.putExtra(LoginService.PASSWORD, pass);
+            getActivity().startService(intent);
+            buttonAnimation.start();
+        }
     }
 
     private void registerReceivers() {
