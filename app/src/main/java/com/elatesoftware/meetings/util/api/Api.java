@@ -317,4 +317,28 @@ public class Api {
         }
         return result;
     }
+
+    public static String deletePhoto(String sessionKey, long photoId) {
+        Call<ResponseBody> call = getApi().getPhoto(sessionKey, photoId);
+        Response<ResponseBody> response = null;
+        String result = null;
+        String rawJson = null;
+        try {
+            response = call.execute();
+            rawJson = response.body().string();
+            rawJson = rawJson.replace("\\", "");
+            Log.d(TAG, "deletePhoto: " + rawJson);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        if(response != null && rawJson != null){
+            if(response.code() == Const.CODE_SUCCESS) {
+                Gson gson = new Gson();
+                MessageAnswer answer = gson.fromJson(rawJson, MessageAnswer.class);
+                MessageAnswer.setInstance(answer);
+            }
+            result = String.valueOf(response.code());
+        }
+        return result;
+    }
 }
