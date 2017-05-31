@@ -82,6 +82,7 @@ public class ShowDateActivity extends BaseActivity implements OnMapReadyCallback
     @BindView(R.id.tv_age) TextView tvAge;
     @BindView(R.id.tv_height_woman) TextView tvHeightWoman;
     @BindView(R.id.tv_weight_woman) TextView tvWeightWoman;
+    @BindView(R.id.tv_hair_color) TextView tvHairColor;
     @BindView(R.id.tv_start_time) TextView tvStartTime;
     @BindView(R.id.tv_end_time) TextView tvEndTime;
     @BindView(R.id.tv_present) TextView tvPresent;
@@ -196,6 +197,8 @@ public class ShowDateActivity extends BaseActivity implements OnMapReadyCallback
             tvAge.setVisibility(View.VISIBLE);
         }
 
+        String[] colors = getResources().getStringArray(R.array.hair_colors);
+        tvHairColor.setText(colors[meeting.getHairColor()]);
         tvAgeWoman.setText(meeting.getPrefAgeStart() + "—" + meeting.getPrefAgeEnd());
         tvHeightWoman.setText(meeting.getPrefHeightStart() + "—" + meeting.getPrefHeightEnd());
         tvWeightWoman.setText(meeting.getPrefWeightStart() + "—" + meeting.getPrefWeightEnd());
