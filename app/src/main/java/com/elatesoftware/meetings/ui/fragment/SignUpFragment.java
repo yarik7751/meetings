@@ -67,6 +67,7 @@ public class SignUpFragment extends BaseFragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        setKeyboardListener();
         buttonAnimation = new ButtonAnimation(getContext(), btnSignUp);
     }
 
@@ -90,6 +91,12 @@ public class SignUpFragment extends BaseFragment {
 
     private void unregisterReceivers() {
         getActivity().unregisterReceiver(registerBroadcastReceiver);
+    }
+
+    private void setKeyboardListener() {
+        cetEmail.setKeyboardListener(getActivity());
+        cetPass.setKeyboardListener(getActivity());
+        cetRepPass.setKeyboardListener(getActivity());
     }
 
     private void requestRegister() {

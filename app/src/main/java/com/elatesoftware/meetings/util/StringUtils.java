@@ -49,10 +49,13 @@ public class StringUtils {
     public static void setMaskAmount(EditText v, boolean isBol) {
         String str = v.getText().toString();
         if(isBol) {
+            v.setCursorVisible(true);
             str = str.replace("$", "");
             v.setText(str);
             v.setSelection(v.getText().toString().length());
         } else {
+            v.setCursorVisible(false);
+            v.clearFocus();
             if(!str.contains("$")) {
                 if(TextUtils.isEmpty(str)) {
                     str = "0";

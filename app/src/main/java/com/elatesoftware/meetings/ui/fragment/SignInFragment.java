@@ -56,10 +56,15 @@ public class SignInFragment extends BaseFragment {
         return v;
     }
 
+    private void setKeyboardListener() {
+        cetEmail.setKeyboardListener(getActivity());
+        cetPass.setKeyboardListener(getActivity());
+    }
+
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
+        setKeyboardListener();
         buttonAnimation = new ButtonAnimation(getContext(), btnSignIn);
     }
 

@@ -94,6 +94,7 @@ public class AddDateActivity extends BaseActivity implements OnMapReadyCallback 
     @BindView(R.id.img_right) ImageView imgRight;
     @BindView(R.id.vp_hair_color) ViewPager vpHairColor;
     @BindView(R.id.cet_present) CustomEditText cetPresent;
+    @BindView(R.id.cet_etc) CustomEditText cetEtc;
     @BindView(R.id.erl_features) ExpandableRelativeLayout llFeatures;
     @BindView(R.id.erl_time) ExpandableRelativeLayout llTime;
     @BindView(R.id.erl_location) ExpandableRelativeLayout llLocation;
@@ -115,6 +116,7 @@ public class AddDateActivity extends BaseActivity implements OnMapReadyCallback 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_dale);
 
+        setKeyboardListener();
         initMap();
         setHairColors();
 
@@ -160,6 +162,11 @@ public class AddDateActivity extends BaseActivity implements OnMapReadyCallback 
                 isPresentIterator = true;
             }
         });
+    }
+
+    private void setKeyboardListener() {
+        cetPresent.setKeyboardListener(this);
+        cetEtc.setKeyboardListener(this);
     }
 
     @Override

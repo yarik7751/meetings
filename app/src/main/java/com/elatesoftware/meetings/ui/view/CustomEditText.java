@@ -2,6 +2,7 @@ package com.elatesoftware.meetings.ui.view;
 
 import android.animation.ArgbEvaluator;
 import android.animation.ValueAnimator;
+import android.app.Activity;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.os.Build;
@@ -17,6 +18,9 @@ import android.widget.EditText;
 import android.widget.FrameLayout;
 
 import com.elatesoftware.meetings.R;
+
+import net.yslibrary.android.keyboardvisibilityevent.KeyboardVisibilityEvent;
+import net.yslibrary.android.keyboardvisibilityevent.KeyboardVisibilityEventListener;
 
 public class CustomEditText extends FrameLayout {
 
@@ -108,6 +112,17 @@ public class CustomEditText extends FrameLayout {
             }
         });
 
+    }
+
+    public void setKeyboardListener(Activity activity) {
+        KeyboardVisibilityEvent.setEventListener(activity, new KeyboardVisibilityEventListener() {
+            @Override
+            public void onVisibilityChanged(boolean isOpen) {
+                if(!isOpen) {
+                    et.clearFocus();
+                }
+            }
+        });
     }
 
     private void setAttributes(AttributeSet attrs) {

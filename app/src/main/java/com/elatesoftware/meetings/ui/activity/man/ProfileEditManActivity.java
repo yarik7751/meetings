@@ -89,8 +89,10 @@ public class ProfileEditManActivity extends BaseActivity {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             requestPermissions(new String[]{ Manifest.permission.READ_EXTERNAL_STORAGE}, Const.REQUEST_PERMISSIONS);
         }
+
         registerBroadcast();
         setContentView(R.layout.activity_profile_edit_man);
+        setKeyboardListener();
         setSize();
         loadInfo();
         requestGetPhotos();
@@ -146,6 +148,11 @@ public class ProfileEditManActivity extends BaseActivity {
         }
     }
 
+    /*@OnClick(R.id.fab_delete_photo)
+    public void clickDeletePhoto() {
+
+    }*/
+
     @OnClick(R.id.rl_back)
     public void clickImgBack() {
         onBackPressed();
@@ -178,6 +185,11 @@ public class ProfileEditManActivity extends BaseActivity {
             }
         }, year, month, day);
         dpd.show();
+    }
+
+    private void setKeyboardListener() {
+        cetAbout.setKeyboardListener(this);
+        cetName.setKeyboardListener(this);
     }
 
     private void registerBroadcast() {

@@ -22,4 +22,5 @@
     <color name="text_dark">#bb000000</color>
     <color name="walet_bottom_bg">#f2f2f2</color>
     <color name="fab_add">#75d648</color>
+    <color name="fab_delete">#d65448</color>
 </resources>
