@@ -255,6 +255,7 @@ public class AddDateActivity extends BaseActivity implements OnMapReadyCallback 
 
     @OnClick(R.id.rl_start_time)
     public void clickRlStartTime() {
+        AndroidUtils.hideKeyboard(this);
         DateUtils.showSlideDateTimeDialog(getSupportFragmentManager(), new SlideDateTimeListener() {
             @Override
             public void onDateTimeSet(Date date) {
@@ -270,6 +271,7 @@ public class AddDateActivity extends BaseActivity implements OnMapReadyCallback 
 
     @OnClick(R.id.rl_end_time)
     public void clickRlEndTime() {
+        AndroidUtils.hideKeyboard(this);
         DateUtils.showSlideDateTimeDialog(getSupportFragmentManager(), new SlideDateTimeListener() {
             @Override
             public void onDateTimeSet(Date date) {

@@ -165,6 +165,7 @@ public class ProfileEditManActivity extends BaseActivity {
 
     @OnClick(R.id.btn_birth_date)
     public void clickBtnBirthDate() {
+        AndroidUtils.hideKeyboard(this);
         int year = 1990;
         int month = 0;
         int day = 1;
