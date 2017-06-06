@@ -10,7 +10,7 @@
     </style>
 
     <style name="SplashTheme" parent="Theme.AppCompat.NoActionBar">
-        <item name="android:windowBackground">@drawable/preview</item>
+        <item name="android:windowBackground">@drawable/preview_bg</item>
     </style>
 
     <style name="AVLoadingIndicatorView">
@@ -35,5 +35,12 @@
         <item name="minHeight">24dip</item>
         <item name="maxHeight">24dip</item>
         <item name="indicatorName">BallPulseIndicator</item>
+    </style>
+
+    <style name="SwitchButtonStyle">
+        <item name="android:paddingLeft">10dp</item>
+        <item name="android:paddingRight">10dp</item>
+        <item name="android:paddingTop">4dp</item>
+        <item name="android:paddingBottom">4dp</item>
     </style>
 </resources>
