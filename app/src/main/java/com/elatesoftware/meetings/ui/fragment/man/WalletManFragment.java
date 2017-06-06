@@ -2,6 +2,8 @@ package com.elatesoftware.meetings.ui.fragment.man;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,6 +11,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.elatesoftware.meetings.R;
+import com.elatesoftware.meetings.ui.adapter.wallet.LastOperationAdapter;
 import com.elatesoftware.meetings.ui.fragment.base.BaseFragment;
 import com.elatesoftware.meetings.util.AndroidUtils;
 import com.squareup.picasso.Callback;
@@ -19,9 +22,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 public class WalletManFragment extends BaseFragment {
 
-    @BindView(R.id.tv_balance_available) TextView tvBalanceAvailable;
-    @BindView(R.id.tv_balance_blocked) TextView tvBalanceBlocked;
-    @BindView(R.id.img_photo) CircleImageView imgPhoto;
+    @BindView(R.id.rv_last_operation) RecyclerView rvLastOperation;
 
     private static WalletManFragment walletManFragment;
     public static WalletManFragment getInstance() {
@@ -47,22 +48,16 @@ public class WalletManFragment extends BaseFragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        Picasso.with(getContext()).load(R.drawable.example_photo).centerCrop()
-                .resize(AndroidUtils.dp(48), AndroidUtils.dp(48))
-                .into(imgPhoto, new Callback() {
-                    @Override
-                    public void onSuccess() {
-
-                    }
-
-                    @Override
-                    public void onError() {
-
-                    }
-                });
+        setLastOperations();
         setBalance();
     }
 
     private void setBalance() {
+    }
+
+    private void setLastOperations() {
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
+        rvLastOperation.setLayoutManager(linearLayoutManager);
+        rvLastOperation.setAdapter(new LastOperationAdapter(getContext()));
     }
 }

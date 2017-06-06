@@ -13,7 +13,8 @@ import android.view.MenuItem;
 import com.elatesoftware.meetings.R;
 import com.elatesoftware.meetings.ui.activity.PinCodeActivity;
 import com.elatesoftware.meetings.ui.activity.base.BaseActivity;
-import com.elatesoftware.meetings.ui.fragment.man.DalesManFragment;
+import com.elatesoftware.meetings.ui.fragment.SettingsFragment;
+import com.elatesoftware.meetings.ui.fragment.man.DatesManFragment;
 import com.elatesoftware.meetings.ui.fragment.man.ProfileManFragment;
 import com.elatesoftware.meetings.ui.fragment.man.WalletManFragment;
 import com.elatesoftware.meetings.util.Const;
@@ -47,13 +48,17 @@ public class WorkManActivity extends BaseActivity {
                         break;
 
                     case R.id.action_dales:
-                        showMessage("Oops ;) It is not ready yet!");
-                        //onSwitchFragment(DalesManFragment.getInstance(), DalesManFragment.class.getName(), false, true, R.id.container);
+                        //showMessage("Oops ;) It is not ready yet!");
+                        onSwitchFragment(DatesManFragment.getInstance(), DatesManFragment.class.getName(), false, true, R.id.container);
                         break;
 
                     case R.id.action_wallet:
-                        showMessage("Oops ;) It is not ready yet!");
-                        //onSwitchFragment(WalletManFragment.getInstance(), WalletManFragment.class.getName(), false, true, R.id.container);
+                        //showMessage("Oops ;) It is not ready yet!");
+                        onSwitchFragment(WalletManFragment.getInstance(), WalletManFragment.class.getName(), false, true, R.id.container);
+                        break;
+
+                    case R.id.action_settings:
+                        onSwitchFragment(SettingsFragment.getInstance(), SettingsFragment.class.getName(), false, true, R.id.container);
                         break;
                 }
                 return true;
