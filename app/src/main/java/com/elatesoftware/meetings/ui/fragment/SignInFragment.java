@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,12 +13,14 @@ import android.widget.TextView;
 
 import com.dd.CircularProgressButton;
 import com.elatesoftware.meetings.R;
+import com.elatesoftware.meetings.ui.activity.MainActivity;
 import com.elatesoftware.meetings.ui.fragment.base.BaseFragment;
 import com.elatesoftware.meetings.ui.receiver.AutarizationBroadcastReceiver;
 import com.elatesoftware.meetings.ui.service.LoginService;
 import com.elatesoftware.meetings.ui.view.CustomEditText;
 import com.elatesoftware.meetings.util.Utils;
 import com.elatesoftware.meetings.util.model.ButtonAnimation;
+import com.elatesoftware.meetings.util.model.LoginInfo;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -64,8 +67,18 @@ public class SignInFragment extends BaseFragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        setLoginInfo();
         setKeyboardListener();
         buttonAnimation = new ButtonAnimation(getContext(), btnSignIn);
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        String userName = cetEmail.getEditText().getText().toString();
+        String password = cetPass.getEditText().getText().toString();
+        LoginInfo.getInstance().setLogin(userName);
+        LoginInfo.getInstance().setPass(password);
     }
 
     @Override
@@ -76,7 +89,8 @@ public class SignInFragment extends BaseFragment {
 
     @OnClick(R.id.tv_sign_up)
     public void clickTvSignUp() {
-        getActivity().onBackPressed();
+        //getActivity().onBackPressed();
+        ((MainActivity) getActivity()).setSignUpFragment();
     }
 
     @OnClick(R.id.tv_forgot_pass)
@@ -99,6 +113,12 @@ public class SignInFragment extends BaseFragment {
             getActivity().startService(intent);
             buttonAnimation.start();
         }
+    }
+
+    private void setLoginInfo() {
+        cetEmail.getEditText().setText(LoginInfo.getInstance().getLogin());
+        cetPass.getEditText().setText(LoginInfo.getInstance().getPass());
+        Log.d(TAG, "setLoginInfo: " + LoginInfo.getInstance());
     }
 
     private void registerReceivers() {

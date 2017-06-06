@@ -10,7 +10,6 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.elatesoftware.meetings.R;
-import com.elatesoftware.meetings.ui.adapter.dales.DalesRecyclerViewAdapter;
 import com.elatesoftware.meetings.ui.fragment.base.BaseFragment;
 
 import butterknife.BindView;
@@ -60,7 +59,7 @@ public class DalesWomanFragment extends BaseFragment {
             }
         });
 
-        rvScheduledDales.setAdapter(new DalesRecyclerViewAdapter(getContext()));
-        rvPendingDales.setAdapter(new DalesRecyclerViewAdapter(getContext()));
+        /*rvScheduledDales.setAdapter(new DalesRecyclerViewAdapter(getContext()));
+        rvPendingDales.setAdapter(new DalesRecyclerViewAdapter(getContext()));*/
     }
 }

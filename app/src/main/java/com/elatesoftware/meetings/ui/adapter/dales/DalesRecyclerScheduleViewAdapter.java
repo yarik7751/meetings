@@ -1,5 +1,6 @@
 package com.elatesoftware.meetings.ui.adapter.dales;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
@@ -14,18 +15,39 @@ import android.widget.TextView;
 import com.daimajia.swipe.SwipeLayout;
 import com.elatesoftware.meetings.R;
 import com.elatesoftware.meetings.ui.activity.DaleDetailsActivity;
+import com.elatesoftware.meetings.util.Const;
+import com.elatesoftware.meetings.util.DateUtils;
+import com.elatesoftware.meetings.util.api.pojo.Metting;
+
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
 //TODO test data
-public class DalesRecyclerViewAdapter extends RecyclerView.Adapter<DalesRecyclerViewAdapter.DalesViewHolder> {
+public class DalesRecyclerScheduleViewAdapter extends RecyclerView.Adapter<DalesRecyclerScheduleViewAdapter.DalesViewHolder> {
 
     public static final String TAG = "DalesRVAdapter_logs";
 
-    Context context;
+    private Activity activity;
+    private Context context;
+    private List<Metting> dates;
 
-    public DalesRecyclerViewAdapter(Context context) {
+    public DalesRecyclerScheduleViewAdapter(Activity activity, Context context, List<Metting> dates) {
+        this.activity = activity;
         this.context = context;
+        this.dates = new ArrayList<>();
+        this.dates.addAll(dates);
+        selectDates();
+    }
+
+    private void selectDates() {
+        for(int i = dates.size() - 1; i >= 0; i--) {
+            if(dates.get(i).getStatus() != Const.SCHEDULED) {
+                dates.remove(i);
+            }
+        }
     }
 
     @Override
@@ -36,41 +58,31 @@ public class DalesRecyclerViewAdapter extends RecyclerView.Adapter<DalesRecycler
 
     @Override
     public void onBindViewHolder(DalesViewHolder holder, final int position) {
-        /*holder.sl.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(context, DaleDetailsActivity.class);
-                context.startActivity(intent);
-            }
-        });*/
+        /*holder.tvAmount.setText(dates.get(position).getAmount().toString());
+        holder.tvTime.setText(
+                DateUtils.getDateByStr(new Date(dates.get(position).getStartTime().longValue()), DateUtils.DATE_FORMAT_OUTPUT) + "\n" +
+                        DateUtils.getDateByStr(new Date(dates.get(position).getEndTime().longValue()), DateUtils.DATE_FORMAT_OUTPUT)
+        );
+        holder.tvPlace.setText(dates.get(position).getPlace());*/
     }
 
     @Override
     public int getItemCount() {
-        return 12;
+        return /*dates == null ? 0 : dates.size()*/3;
     }
 
     public class DalesViewHolder extends RecyclerView.ViewHolder {
 
         public View itemView;
-        public LinearLayout llMain;
-        public FrameLayout flDelete;
-        public TextView tvNameAndAge, tvPlace, tvTime, tvAmount;
-        public CircleImageView imgPhoto;
-        public SwipeLayout sl;
+        public TextView tvPlace, tvTime, tvAmount;
 
         public DalesViewHolder(View itemView) {
             super(itemView);
             this.itemView = itemView;
 
-            llMain = (LinearLayout) itemView.findViewById(R.id.ll_main);
-            flDelete = (FrameLayout) itemView.findViewById(R.id.fl_delete);
-            tvNameAndAge = (TextView) itemView.findViewById(R.id.tv_name_and_age);
             tvPlace = (TextView) itemView.findViewById(R.id.tv_place);
             tvTime = (TextView) itemView.findViewById(R.id.tv_time);
             tvAmount = (TextView) itemView.findViewById(R.id.tv_amount);
-            imgPhoto = (CircleImageView) itemView.findViewById(R.id.img_photo);
-            sl = (SwipeLayout) itemView.findViewById(R.id.sl);
         }
     }
 }

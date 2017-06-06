@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AlertDialog;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,6 +26,7 @@ import com.elatesoftware.meetings.util.Const;
 import com.elatesoftware.meetings.util.CustomSharedPreference;
 import com.elatesoftware.meetings.util.Utils;
 import com.elatesoftware.meetings.util.model.ButtonAnimation;
+import com.elatesoftware.meetings.util.model.LoginInfo;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -34,14 +36,18 @@ public class SignUpFragment extends BaseFragment {
 
     public static final String TAG = "SignUpFragment_logs";
 
-    @BindView(R.id.cet_email) CustomEditText cetEmail;
-    @BindView(R.id.cet_pass) CustomEditText cetPass;
-    @BindView(R.id.cet_rep_pass) CustomEditText cetRepPass;
+    //public static final int SIGN_IN = 143;
+    //public static final int SIGN_UP = 145;
+
+    CustomEditText cetEmail;
+    CustomEditText cetPass;
+    //@BindView(R.id.cet_rep_pass) CustomEditText cetRepPass;
     @BindView(R.id.btn_sign_up) CircularProgressButton btnSignUp;
     @BindView(R.id.tv_sign_in) TextView tvSignIn;
 
     private RegisterBroadcastReceiver registerBroadcastReceiver;
     private ButtonAnimation buttonAnimation;
+    //private int screen = SIGN_UP;
 
     private static SignUpFragment signUpFragment;
     public static SignUpFragment getInstance() {
@@ -66,9 +72,22 @@ public class SignUpFragment extends BaseFragment {
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        Log.d(TAG, "onViewCreated");
         super.onViewCreated(view, savedInstanceState);
+        cetEmail = (CustomEditText) view.findViewById(R.id.cet_up_email);
+        cetPass = (CustomEditText) view.findViewById(R.id.cet_up_pass);
+        setLoginInfo();
         setKeyboardListener();
         buttonAnimation = new ButtonAnimation(getContext(), btnSignUp);
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        String userName = cetEmail.getEditText().getText().toString();
+        String password = cetPass.getEditText().getText().toString();
+        LoginInfo.getInstance().setLogin(userName);
+        LoginInfo.getInstance().setPass(password);
     }
 
     @Override
@@ -96,14 +115,14 @@ public class SignUpFragment extends BaseFragment {
     private void setKeyboardListener() {
         cetEmail.setKeyboardListener(getActivity());
         cetPass.setKeyboardListener(getActivity());
-        cetRepPass.setKeyboardListener(getActivity());
+        //cetRepPass.setKeyboardListener(getActivity());
     }
 
     private void requestRegister() {
         String userName = cetEmail.getEditText().getText().toString();
         String password = cetPass.getEditText().getText().toString();
-        String repPassword = cetRepPass.getEditText().getText().toString();
-        if(Utils.checkRegInfo(getContext(), cetEmail, cetPass, cetRepPass)) {
+        //String repPassword = cetRepPass.getEditText().getText().toString();
+        if(Utils.checkRegInfo(getContext(), cetEmail, cetPass, null)) {
             Intent intent = new Intent(getContext(), RegisterService.class);
             intent.putExtra(RegisterService.USER_NAME, userName);
             intent.putExtra(RegisterService.PASSWORD, password);
@@ -111,6 +130,12 @@ public class SignUpFragment extends BaseFragment {
             getActivity().startService(intent);
             buttonAnimation.start();
         }
+    }
+
+    private void setLoginInfo() {
+        Log.d(TAG, "setLoginInfo: " + LoginInfo.getInstance());
+        cetPass.getEditText().setText(LoginInfo.getInstance().getPass());
+        cetEmail.getEditText().setText(LoginInfo.getInstance().getLogin());
     }
 
     @OnClick(R.id.btn_sign_up)

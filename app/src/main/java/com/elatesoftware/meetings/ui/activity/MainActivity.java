@@ -45,11 +45,13 @@ public class MainActivity extends BaseActivity {
     }
 
     public void setSignUpFragment() {
-        onSwitchFragment(SignUpFragment.getInstance(), SignUpFragment.class.getName(), true, true, R.id.container);
+        getSupportFragmentManager().popBackStack();
+        onSwitchFragment(new SignUpFragment(), SignUpFragment.class.getName(), true, true, R.id.container);
     }
 
     public void setSignInFragment() {
-        onSwitchFragment(SignInFragment.getInstance(), SignInFragment.class.getName(), true, true, R.id.container);
+        getSupportFragmentManager().popBackStack();
+        onSwitchFragment(new SignInFragment(), SignInFragment.class.getName(), true, true, R.id.container);
     }
 
     public void setGenderFragment() {

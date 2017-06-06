@@ -15,4 +15,9 @@
         android:id="@+id/action_wallet"
         android:icon="@drawable/ic_wallet"
         android:title="@string/wallet" />
+
+    <item
+        android:id="@+id/action_settings"
+        android:icon="@drawable/settings"
+        android:title="@string/settings" />
 </menu>

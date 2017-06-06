@@ -21,6 +21,7 @@ import com.elatesoftware.meetings.util.Const;
 import com.elatesoftware.meetings.util.CustomSharedPreference;
 import com.elatesoftware.meetings.util.ImageHelper;
 import com.elatesoftware.meetings.util.Utils;
+import com.elatesoftware.meetings.util.api.Api;
 import com.elatesoftware.meetings.util.api.pojo.GetPhotoAnswer;
 import com.elatesoftware.meetings.util.api.pojo.MessageAnswer;
 import com.google.gson.Gson;
@@ -82,12 +83,14 @@ public class PhotoFragment extends BaseFragment {
         RequestParams params = new RequestParams();
         params.add("sessionKey", CustomSharedPreference.getToken(getContext()));
         params.add("photoId", String.valueOf(photoId));
-        client.get("http://dateportal.elatesof.w07.hoster.by/api/account/photoContent", params, new AsyncHttpResponseHandler() {
+        client.get(Api.BASE_URL + "api/account/photoContent", params, new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
                 if(isAdded() && imgPhoto != null) {
                     Gson gson = new Gson();
                     String responseBodyStr = new String(responseBody);
+                    Log.d(TAG, "responseBodyStr: " + responseBodyStr);
+                    Log.d(TAG, "sessionKey: " + CustomSharedPreference.getToken(getContext()));
                     GetPhotoAnswer answer = gson.fromJson(responseBodyStr, GetPhotoAnswer.class);
                     if (answer.getSuccess()) {
                         Bitmap bitmap = ImageHelper.base64ToBitmap(answer.getResult().getContent());

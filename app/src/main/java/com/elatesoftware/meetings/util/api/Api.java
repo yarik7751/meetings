@@ -7,6 +7,7 @@ import com.elatesoftware.meetings.ui.application.MeetingsApplication;
 import com.elatesoftware.meetings.util.Const;
 import com.elatesoftware.meetings.util.CustomSharedPreference;
 import com.elatesoftware.meetings.util.Utils;
+import com.elatesoftware.meetings.util.api.pojo.GetDatesManAnswer;
 import com.elatesoftware.meetings.util.api.pojo.GetInfoAccAnswer;
 import com.elatesoftware.meetings.util.api.pojo.GetPhotoAnswer;
 import com.elatesoftware.meetings.util.api.pojo.GetPhotosAnswer;
@@ -44,7 +45,8 @@ public class Api {
 
     private static IApi iApi = null;
 
-    private static final String BASE_URL = "http://dateportal.elatesof.w07.hoster.by/";
+    public static final String BASE_URL = "http://dateportal.elatesof.w07.hoster.by/";
+    //public static final String BASE_URL = "http://192.168.100.29:3000/";
 
     public static IApi getApi() {
         if(iApi == null) {
@@ -277,9 +279,13 @@ public class Api {
         String rawJson = null;
         try {
             response = call.execute();
-            rawJson = response.body().string();
-            rawJson = rawJson.replace("\\", "");
-            Log.d(TAG, "getPhotos: " + rawJson);
+            if(response != null && response.body() != null){
+                rawJson = response.body().string();
+                rawJson = rawJson.replace("\\", "");
+                Log.d(TAG, "getPhotos: " + rawJson);
+            } else {
+                Log.d(TAG, "getPhotos: null");
+            }
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -336,6 +342,35 @@ public class Api {
                 Gson gson = new Gson();
                 MessageAnswer answer = gson.fromJson(rawJson, MessageAnswer.class);
                 MessageAnswer.setInstance(answer);
+            }
+            result = String.valueOf(response.code());
+        }
+        return result;
+    }
+
+    public static String getDatesList(String sessionKey) {
+        Log.d(TAG, "getDatesList");
+        Call<ResponseBody> call = getApi().getDatesList(sessionKey);
+        Response<ResponseBody> response = null;
+        String result = null;
+        String rawJson = null;
+        try {
+            response = call.execute();
+            if(response != null && response.body() != null) {
+                rawJson = response.body().string();
+                rawJson = rawJson.replace("\\", "");
+                Log.d(TAG, "rawJson: " + rawJson);
+            } else {
+                Log.d(TAG, "rawJson: null");
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        if(response != null && rawJson != null){
+            if(response.code() == Const.CODE_SUCCESS) {
+                Gson gson = new Gson();
+                GetDatesManAnswer answer = gson.fromJson(rawJson, GetDatesManAnswer.class);
+                GetDatesManAnswer.setInstance(answer);
             }
             result = String.valueOf(response.code());
         }

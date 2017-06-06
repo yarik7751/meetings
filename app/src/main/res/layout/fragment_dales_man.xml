@@ -1,9 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@drawable/bg">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:textSize="16sp"
+            android:textColor="@color/white"
+            android:text="@string/profile"
+            android:textStyle="bold"/>
+
+        <RelativeLayout
+            style="?attr/actionButtonStyle"
+            android:id="@+id/rl_edit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true">
+
+            <ImageView
+                android:id="@+id/img_add_date"
+                android:layout_width="18dp"
+                android:layout_height="18dp"
+                android:src="@drawable/ic_add"/>
+        </RelativeLayout>
+    </RelativeLayout>
 
     <android.support.v4.widget.NestedScrollView
         android:layout_width="match_parent"
@@ -14,38 +48,14 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <LinearLayout
-                android:orientation="horizontal"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:layout_marginLeft="8dp">
-
-                <de.hdodenhof.circleimageview.CircleImageView
-                    android:id="@+id/img_avatar"
-                    android:layout_width="84dp"
-                    android:layout_height="84dp"
-                    android:src="@drawable/example_photo"/>
-
-                <TextView
-                    android:id="@+id/tv_name"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:padding="8dp"
-                    android:text="Maxim"
-                    android:textColor="@android:color/black"
-                    android:textSize="20sp"/>
-            </LinearLayout>
-
             <TextView
                 android:layout_height="wrap_content"
                 android:layout_width="wrap_content"
                 android:layout_marginLeft="16dp"
-                android:layout_marginTop="24dp"
+                android:layout_marginTop="0dp"
                 android:layout_marginBottom="16dp"
                 android:text="@string/scheduled"
-                android:textColor="@color/black"
+                android:textColor="@color/white"
                 android:textStyle="bold"
                 android:textSize="14sp"/>
 
@@ -53,8 +63,8 @@
                 android:id="@+id/rv_scheduled_dales"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="8dp"
-                android:layout_marginRight="8dp"/>
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"/>
 
             <TextView
                 android:layout_height="wrap_content"
@@ -63,7 +73,7 @@
                 android:layout_marginTop="24dp"
                 android:layout_marginBottom="16dp"
                 android:text="@string/pending"
-                android:textColor="@color/black"
+                android:textColor="@color/white"
                 android:textStyle="bold"
                 android:textSize="14sp"/>
 
@@ -71,17 +81,8 @@
                 android:id="@+id/rv_pending_dales"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="8dp"
-                android:layout_marginRight="8dp"/>
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"/>
         </LinearLayout>
     </android.support.v4.widget.NestedScrollView>
-
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/fab_add_dales"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom|right"
-        android:layout_marginBottom="16dp"
-        android:layout_marginRight="16dp"
-        android:src="@drawable/ic_add_black_24dp"/>
-</FrameLayout>
+</LinearLayout>

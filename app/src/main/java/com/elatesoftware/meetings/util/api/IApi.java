@@ -41,4 +41,7 @@ public interface IApi {
 
     @GET("api/account/removeFile")
     Call<ResponseBody> deletePhoto(@Query("sessionKey") String sessionKey, @Query("photoId") long photoId);
+
+    @GET("api/dates/getDatesList")
+    Call<ResponseBody> getDatesList(@Query("sessionKey") String sessionKey);
 }

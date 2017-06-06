@@ -65,6 +65,32 @@ public class BaseActivity extends AppCompatActivity {
     }
 
     /**
+     * Смена фрагмента в FrameLayout на Activity
+     * @param fragment - объект фрагмента
+     * @param tag - тег
+     * @param add - добавлять ли фрагмент в стек
+     * @param anim - использовать ли анимацию
+     * @param res - id FrameLayout
+     */
+    protected void onSwitchFragmentAdd(Fragment fragment, String tag, boolean add, boolean anim, int res) {
+        FragmentManager fm = getSupportFragmentManager();
+        FragmentTransaction tr = fm.beginTransaction();
+        if(anim) {
+            tr.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
+        }
+        tr.add(res, fragment, tag);
+        if (add) {
+            //todo 4
+            try {
+                tr.addToBackStack(tag);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        tr.commit();
+    }
+
+    /**
      * показать Toast сообщение из ресурсов
      * @param strRes - строка в ресурсах
      */

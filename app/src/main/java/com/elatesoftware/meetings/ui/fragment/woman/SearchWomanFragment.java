@@ -16,7 +16,6 @@ import android.widget.TextView;
 
 import com.elatesoftware.meetings.R;
 import com.elatesoftware.meetings.ui.activity.SearchActivity;
-import com.elatesoftware.meetings.ui.adapter.dales.DalesRecyclerViewAdapter;
 import com.elatesoftware.meetings.ui.fragment.base.BaseFragment;
 import com.elatesoftware.meetings.util.AndroidUtils;
 import com.elatesoftware.meetings.util.Utils;
@@ -103,13 +102,13 @@ public class SearchWomanFragment extends BaseFragment implements OnMapReadyCallb
                 FrameLayout.LayoutParams.MATCH_PARENT
         );
 
-        RecyclerView rvDales = new RecyclerView(getContext());
+        /*RecyclerView rvDales = new RecyclerView(getContext());
         rvDales.setLayoutManager(new LinearLayoutManager(getContext()));
         DalesRecyclerViewAdapter adapter = new DalesRecyclerViewAdapter(getContext());
         rvDales.setAdapter(adapter);
         rvDales.setPadding(0, AndroidUtils.dp(36), 0, 0);
         rvDales.setItemViewCacheSize(adapter.getItemCount());
-        flContent.addView(rvDales, params);
+        flContent.addView(rvDales, params);*/
     }
 
     @Override

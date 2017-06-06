@@ -184,7 +184,9 @@ public class AddDateActivity extends BaseActivity implements OnMapReadyCallback 
                     if (attributions == null) {
                         attributions = "";
                     }
-                    tvPlaceTitle.setText(name + "\n" + address);
+                    String placeStr = name + "\n" + address;
+                    placeStr = placeStr.replace("\"", "");
+                    tvPlaceTitle.setText(placeStr);
 
                     map.clear();
                     CameraPosition cameraPosition = new CameraPosition.Builder()
