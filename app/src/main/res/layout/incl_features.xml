@@ -37,7 +37,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:ael_duration="200"
-        app:ael_expanded="false"
         app:ael_orientation="vertical">
 
         <LinearLayout

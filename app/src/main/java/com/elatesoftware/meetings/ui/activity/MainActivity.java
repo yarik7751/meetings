@@ -2,6 +2,7 @@ package com.elatesoftware.meetings.ui.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.FragmentManager;
 
 import com.elatesoftware.meetings.R;
 import com.elatesoftware.meetings.ui.activity.base.BaseActivity;
@@ -24,11 +25,16 @@ public class MainActivity extends BaseActivity {
         setContentView(R.layout.activity_main);
 
         if(Utils.isToken(this)) {
+            FragmentManager fm = getSupportFragmentManager();
+            for(int i = 0; i < fm.getBackStackEntryCount(); i++) {
+                fm.popBackStack();
+            }
             if(CustomSharedPreference.isMan(this)) {
                 startActivity(new Intent(this, WorkManActivity.class));
             } else {
                 startActivity(new Intent(this, WorkWomanActivity.class));
             }
+            finish();
         }
 
         if(savedInstanceState == null) {
@@ -55,6 +61,6 @@ public class MainActivity extends BaseActivity {
     }
 
     public void setGenderFragment() {
-        onSwitchFragment(GenderFragment.getInstance(), GenderFragment.class.getName(), false, true, R.id.container);
+        onSwitchFragment(new GenderFragment(), GenderFragment.class.getName(), false, true, R.id.container);
     }
 }

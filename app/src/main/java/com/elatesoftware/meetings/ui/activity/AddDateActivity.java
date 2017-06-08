@@ -116,6 +116,11 @@ public class AddDateActivity extends BaseActivity implements OnMapReadyCallback 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_dale);
 
+        llFeatures.collapse();
+        llTime.collapse();
+        llLocation.collapse();
+        llPresent.collapse();
+
         setKeyboardListener();
         initMap();
         setHairColors();
