@@ -376,4 +376,33 @@ public class Api {
         }
         return result;
     }
+
+    public static String exit(String sessionKey) {
+        Log.d(TAG, "exit");
+        Call<ResponseBody> call = getApi().exit(sessionKey);
+        Response<ResponseBody> response = null;
+        String result = null;
+        String rawJson = null;
+        try {
+            response = call.execute();
+            if(response != null && response.body() != null) {
+                rawJson = response.body().string();
+                rawJson = rawJson.replace("\\", "");
+                Log.d(TAG, "rawJson: " + rawJson);
+            } else {
+                Log.d(TAG, "rawJson: null");
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        if(response != null && rawJson != null){
+            if(response.code() == Const.CODE_SUCCESS) {
+                Gson gson = new Gson();
+                MessageAnswer answer = gson.fromJson(rawJson, MessageAnswer.class);
+                MessageAnswer.setInstance(answer);
+            }
+            result = String.valueOf(response.code());
+        }
+        return result;
+    }
 }

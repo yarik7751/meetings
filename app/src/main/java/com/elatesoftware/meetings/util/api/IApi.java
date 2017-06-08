@@ -21,6 +21,9 @@ public interface IApi {
     @POST("api/account/login")
     Call<ResponseBody> login(@Body RequestBody params);
 
+    @POST("api/account/signout")
+    Call<ResponseBody> exit(@Query("sessionKey") String sessionKey);
+
     @POST("api/account/updateAccount")
     Call<ResponseBody> updateAccountInfo(@Query("sessionKey") String sessionKey, @Body RequestBody params);
 
