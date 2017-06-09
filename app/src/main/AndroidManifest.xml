@@ -90,6 +90,12 @@
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateAlwaysHidden"
             android:configChanges="keyboardHidden|orientation|screenSize"/>
+        <activity
+            android:name=".ui.activity.woman.ProfileEditWomanActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateAlwaysHidden"
+            android:configChanges="keyboardHidden|orientation|screenSize"/>
+
 
         <service android:name=".ui.service.RegisterService"/>
         <service android:name=".ui.service.LoginService"/>

@@ -16,11 +16,11 @@ public class CustomSharedPreference {
     }
 
     public static void setIsMan(Context context, boolean isMan) {
-        getSharedPreferences(context).edit().putBoolean(Const.SP_IS_MAN, isMan).commit();
+        getSharedPreferences(context).edit().putInt(Const.SP_IS_MAN, isMan ? Const.MAN_VALUE : Const.WOMAN_VALUE).commit();
     }
 
-    public static boolean isMan(Context context) {
-        return getSharedPreferences(context).getBoolean(Const.SP_IS_MAN, false);
+    public static int getIsMan(Context context) {
+        return getSharedPreferences(context).getInt(Const.SP_IS_MAN, -1);
     }
 
     public static void setIsFirst(Context context, boolean isFirst) {

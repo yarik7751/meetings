@@ -2,13 +2,18 @@ package com.elatesoftware.meetings.ui.fragment;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v7.app.AlertDialog;
+import android.text.InputType;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 
 import com.dd.CircularProgressButton;
 import com.elatesoftware.meetings.R;
@@ -73,6 +78,26 @@ public class SettingsFragment extends BaseFragment {
     public void clickBtnSingOut() {
         requestSugnOut();
         buttonAnimation.start();
+    }
+
+    @OnClick(R.id.img_change_email)
+    public void clickImgChangeEmail() {
+        Utils.showEditDialog(getContext(), getString(R.string.change) + " " + getString(R.string.mail), "", InputType.TYPE_TEXT_VARIATION_EMAIL_ADDRESS, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+            }
+        });
+    }
+
+    @OnClick(R.id.img_change_phone)
+    public void clickImgChangePhone() {
+        Utils.showEditDialog(getContext(), getString(R.string.change) + " " + getString(R.string.phone), "", InputType.TYPE_CLASS_PHONE, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+            }
+        });
     }
 
     private void requestSugnOut() {

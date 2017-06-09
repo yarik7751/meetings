@@ -1,13 +1,10 @@
 package com.elatesoftware.meetings.ui.fragment;
 
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v7.app.AlertDialog;
-import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,7 +18,6 @@ import com.elatesoftware.meetings.ui.fragment.base.BaseFragment;
 import com.elatesoftware.meetings.ui.receiver.AutarizationBroadcastReceiver;
 import com.elatesoftware.meetings.ui.service.RegisterService;
 import com.elatesoftware.meetings.ui.view.CustomEditText;
-import com.elatesoftware.meetings.util.AndroidUtils;
 import com.elatesoftware.meetings.util.Const;
 import com.elatesoftware.meetings.util.CustomSharedPreference;
 import com.elatesoftware.meetings.util.Utils;
@@ -30,7 +26,6 @@ import com.elatesoftware.meetings.util.model.LoginInfo;
 
 import butterknife.BindView;
 import butterknife.OnClick;
-import okhttp3.internal.Util;
 
 public class SignUpFragment extends BaseFragment {
 
@@ -126,7 +121,7 @@ public class SignUpFragment extends BaseFragment {
             Intent intent = new Intent(getContext(), RegisterService.class);
             intent.putExtra(RegisterService.USER_NAME, userName);
             intent.putExtra(RegisterService.PASSWORD, password);
-            intent.putExtra(RegisterService.GENDER, CustomSharedPreference.isMan(getContext()) ? Const.MAN_VALUE : Const.WOMAN_VALUE);
+            intent.putExtra(RegisterService.GENDER, CustomSharedPreference.getIsMan(getContext()));
             getActivity().startService(intent);
             buttonAnimation.start();
         }

@@ -25,110 +25,121 @@
             android:textStyle="bold"/>
     </RelativeLayout>
 
-    <LinearLayout
-        android:orientation="horizontal"
+    <android.support.v4.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="8dp">
+        android:layout_height="match_parent">
 
         <LinearLayout
             android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="8dp"
-            android:layout_marginRight="8dp"
-            android:layout_weight="1">
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="8dp">
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginRight="8dp"
+                    android:layout_weight="1">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentBottom="true"
+                        android:layout_alignParentLeft="true"
+                        android:textSize="16sp"
+                        android:textColor="@color/text_gray"
+                        android:text="@string/balance"
+                        android:textStyle="bold"/>
+
+                    <TextView
+                        android:id="@+id/tv_balance"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentBottom="true"
+                        android:layout_alignParentLeft="true"
+                        android:layout_marginTop="8dp"
+                        android:textSize="30sp"
+                        android:textColor="@color/white"
+                        android:text="$100"/>
+
+                    <com.dd.CircularProgressButton
+                        android:id="@+id/btn_cash_in"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:layout_marginTop="16dp"
+                        android:textColor="@color/white"
+                        android:textSize="14sp"
+                        app:cpb_textIdle="@string/cash_in"
+                        app:cpb_selectorIdle="@drawable/button_blue_bg"
+                        app:cpb_cornerRadius="5dp"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginRight="8dp"
+                    android:layout_weight="1">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentBottom="true"
+                        android:layout_alignParentLeft="true"
+                        android:textSize="16sp"
+                        android:textColor="@color/text_gray"
+                        android:text="@string/freeze"
+                        android:textStyle="bold"/>
+
+                    <TextView
+                        android:id="@+id/tv_freeze"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentBottom="true"
+                        android:layout_alignParentLeft="true"
+                        android:layout_marginTop="8dp"
+                        android:textSize="30sp"
+                        android:textColor="@color/white"
+                        android:text="$50"/>
+
+                    <com.dd.CircularProgressButton
+                        android:id="@+id/btn_cash_out"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:layout_marginTop="16dp"
+                        android:textColor="@color/white"
+                        android:textSize="14sp"
+                        app:cpb_textIdle="@string/cash_out"
+                        app:cpb_selectorIdle="@drawable/button_blue_bg"
+                        app:cpb_cornerRadius="5dp"/>
+                </LinearLayout>
+            </LinearLayout>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentBottom="true"
-                android:layout_alignParentLeft="true"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:layout_margin="16dp"
                 android:textSize="16sp"
-                android:textColor="@color/text_gray"
-                android:text="@string/balance"
+                android:textColor="@color/white"
+                android:text="@string/last_operation"
                 android:textStyle="bold"/>
 
-            <TextView
-                android:id="@+id/tv_balance"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentBottom="true"
-                android:layout_alignParentLeft="true"
-                android:layout_marginTop="8dp"
-                android:textSize="30sp"
-                android:textColor="@color/white"
-                android:text="$100"/>
-
-            <com.dd.CircularProgressButton
-                android:id="@+id/btn_cash_in"
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/rv_last_operation"
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:layout_marginTop="16dp"
-                android:textColor="@color/white"
-                android:textSize="14sp"
-                app:cpb_textIdle="@string/cash_in"
-                app:cpb_selectorIdle="@drawable/button_blue_bg"
-                app:cpb_cornerRadius="5dp"/>
-        </LinearLayout>
-
-        <LinearLayout
-            android:orientation="vertical"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="8dp"
-            android:layout_marginRight="8dp"
-            android:layout_weight="1">
-
-            <TextView
-                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentBottom="true"
-                android:layout_alignParentLeft="true"
-                android:textSize="16sp"
-                android:textColor="@color/text_gray"
-                android:text="@string/freeze"
-                android:textStyle="bold"/>
-
-            <TextView
-                android:id="@+id/tv_freeze"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentBottom="true"
-                android:layout_alignParentLeft="true"
-                android:layout_marginTop="8dp"
-                android:textSize="30sp"
-                android:textColor="@color/white"
-                android:text="$50"/>
-
-            <com.dd.CircularProgressButton
-                android:id="@+id/btn_cash_out"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:layout_marginTop="16dp"
-                android:textColor="@color/white"
-                android:textSize="14sp"
-                app:cpb_textIdle="@string/cash_out"
-                app:cpb_selectorIdle="@drawable/button_blue_bg"
-                app:cpb_cornerRadius="5dp"/>
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"/>
         </LinearLayout>
-    </LinearLayout>
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        android:layout_margin="16dp"
-        android:textSize="16sp"
-        android:textColor="@color/white"
-        android:text="@string/last_operation"
-        android:textStyle="bold"/>
-
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/rv_last_operation"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="16dp"
-        android:layout_marginRight="16dp"/>
+    </android.support.v4.widget.NestedScrollView>
 </LinearLayout>

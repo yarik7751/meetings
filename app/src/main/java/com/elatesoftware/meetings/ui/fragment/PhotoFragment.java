@@ -78,7 +78,12 @@ public class PhotoFragment extends BaseFragment {
         Log.d(TAG, "onDestroy()");
     }
 
+    public long getPhotoId() {
+        return photoId;
+    }
+
     private void requestGetPhoto() {
+        pbProgress.setVisibility(View.VISIBLE);
         AsyncHttpClient client = new AsyncHttpClient();
         RequestParams params = new RequestParams();
         params.add("sessionKey", CustomSharedPreference.getToken(getContext()));

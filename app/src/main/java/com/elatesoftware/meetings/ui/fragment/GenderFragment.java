@@ -48,9 +48,9 @@ public class GenderFragment extends BaseFragment {
 
     @OnClick(R.id.btn_woman)
     public void clickBtnWoman() {
-        showMessage("Oops ;) It is not ready yet!");
-        /*CustomSharedPreference.setIsMan(getContext(), false);
-        ((MainActivity) getActivity()).setSignUpFragment();*/
+        //showMessage("Oops ;) It is not ready yet!");
+        CustomSharedPreference.setIsMan(getContext(), false);
+        ((MainActivity) getActivity()).setSignUpFragment();
     }
 
     @OnClick(R.id.btn_man)

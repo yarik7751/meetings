@@ -5,7 +5,8 @@
     android:id="@+id/activity_main"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/bg_woman">
 
     <FrameLayout
         android:id="@+id/container"
@@ -19,8 +20,8 @@
         android:id="@+id/bnv_menu"
         android:layout_width="match_parent"
         android:layout_height="56dp"
-        app:itemBackground="@color/colorPrimary"
+        app:itemBackground="@color/button_red_dark"
         app:itemIconTint="@drawable/bottom_navigation_item_background_colors"
         app:itemTextColor="@drawable/bottom_navigation_item_background_colors"
-        app:menu="@menu/menu_woman" />
+        app:menu="@menu/menu_man" />
 </LinearLayout>

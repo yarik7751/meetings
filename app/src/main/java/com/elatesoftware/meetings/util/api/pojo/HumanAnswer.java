@@ -15,7 +15,7 @@ public class HumanAnswer {
     @Expose
     protected String password;
 
-    @SerializedName("FirstName")
+    @SerializedName("Name")
     @Expose
     protected String firstName;
 
@@ -55,6 +55,14 @@ public class HumanAnswer {
         this.firstName = firstName;
         this.dateOfBirth = dateOfBirth;
         this.aboutMe = aboutMe;
+    }
+
+    public HumanAnswer(String firstName, Long dateOfBirth, String aboutMe, Double height, Double weight) {
+        this.firstName = firstName;
+        this.dateOfBirth = dateOfBirth;
+        this.aboutMe = aboutMe;
+        this.height = height;
+        this.weight = weight;
     }
 
     public static HumanAnswer answersInstance = null;

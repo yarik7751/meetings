@@ -87,6 +87,7 @@
     <string name="incorrect_pin">Incorrect PIN</string>
     <string name="i_m_looking_for">I\'m Looking For</string>
     <string name="when">When</string>
+    <string name="change">Change</string>
 
     <string name="demo_min_label"></string>
     <string name="demo_max_label"></string>
@@ -111,6 +112,9 @@
     <string name="cash_out">Cash Out</string>
     <string name="last_operation">Last Operation</string>
     <string name="freeze">Freeze</string>
+    <string name="ok">OK</string>
+    <string name="cancel">Cancel</string>
+    <string name="delete_photo">Delete photo</string>
 
     <string-array name="hair_colors">
         <item>Doesn\'t matter</item>

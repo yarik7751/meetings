@@ -56,8 +56,12 @@ public class WalletManFragment extends BaseFragment {
     }
 
     private void setLastOperations() {
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
-        rvLastOperation.setLayoutManager(linearLayoutManager);
+        rvLastOperation.setLayoutManager(new LinearLayoutManager(getContext()) {
+            @Override
+            public boolean canScrollVertically() {
+                return false;
+            }
+        });
         rvLastOperation.setAdapter(new LastOperationAdapter(getContext()));
     }
 }

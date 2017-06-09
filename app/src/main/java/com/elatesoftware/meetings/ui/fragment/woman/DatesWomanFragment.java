@@ -15,17 +15,17 @@ import com.elatesoftware.meetings.ui.fragment.base.BaseFragment;
 import butterknife.BindView;
 import de.hdodenhof.circleimageview.CircleImageView;
 
-public class DalesWomanFragment extends BaseFragment {
+public class DatesWomanFragment extends BaseFragment {
 
     @BindView(R.id.img_avatar) CircleImageView imgAvatar;
     @BindView(R.id.tv_name) TextView tvName;
     @BindView(R.id.rv_scheduled_dales) RecyclerView rvScheduledDales;
     @BindView(R.id.rv_pending_dales) RecyclerView rvPendingDales;
 
-    private static DalesWomanFragment dalesWomanFragment;
-    public static DalesWomanFragment getInstance() {
+    private static DatesWomanFragment dalesWomanFragment;
+    public static DatesWomanFragment getInstance() {
         if(dalesWomanFragment == null) {
-            dalesWomanFragment = new DalesWomanFragment();
+            dalesWomanFragment = new DatesWomanFragment();
         }
         return dalesWomanFragment;
     }

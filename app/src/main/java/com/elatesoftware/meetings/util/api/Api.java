@@ -50,11 +50,9 @@ public class Api {
 
     public static IApi getApi() {
         if(iApi == null) {
-            CookieJar cookieJar = new PersistentCookieJar(new SetCookieCache(), new SharedPrefsCookiePersistor(MeetingsApplication.getAppContext()));
             HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
             interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
             OkHttpClient okHttpClient = new OkHttpClient.Builder()
-                    .cookieJar(cookieJar)
                     .connectTimeout(5, TimeUnit.MINUTES)
                     .writeTimeout(5, TimeUnit.MINUTES)
                     .readTimeout(5, TimeUnit.MINUTES)
@@ -325,7 +323,9 @@ public class Api {
     }
 
     public static String deletePhoto(String sessionKey, long photoId) {
-        Call<ResponseBody> call = getApi().getPhoto(sessionKey, photoId);
+        String bodyStr = "{\"Id\":" + photoId + "}";
+        RequestBody body = RequestBody.create(okhttp3.MediaType.parse("application/json; charset=utf-8"), bodyStr);
+        Call<ResponseBody> call = getApi().deletePhoto(sessionKey, body);
         Response<ResponseBody> response = null;
         String result = null;
         String rawJson = null;

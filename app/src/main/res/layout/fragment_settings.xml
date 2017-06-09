@@ -113,32 +113,40 @@
                 card_view:cardCornerRadius="5dp"
                 card_view:cardBackgroundColor="@color/white">
 
-                <RelativeLayout
+                <LinearLayout
+                    android:orientation="horizontal"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:gravity="center_vertical"
                     android:layout_margin="8dp">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_alignParentLeft="true"
-                        android:layout_centerVertical="true"
                         android:textSize="18sp"
                         android:textColor="@color/text_dark"
                         android:text="@string/mail"
                         android:textStyle="bold"/>
 
                     <TextView
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:layout_marginRight="16dp"
+                        android:layout_marginLeft="8dp"
+                        android:gravity="right"
                         android:textSize="18sp"
                         android:textColor="@color/seek_bar"
                         android:text="tom@mail.ru"
-                        android:id="@+id/tv_email"
-                        android:layout_alignParentRight="true"
-                        android:layout_alignParentEnd="true"
-                        android:layout_centerVertical="true"/>
-                </RelativeLayout>
+                        android:id="@+id/tv_email"/>
+
+                    <ImageView
+                        android:id="@+id/img_change_email"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/ic_edit"
+                        android:tint="@color/seek_bar"/>
+                </LinearLayout>
             </android.support.v7.widget.CardView>
 
             <android.support.v7.widget.CardView
@@ -148,32 +156,40 @@
                 card_view:cardCornerRadius="5dp"
                 card_view:cardBackgroundColor="@color/white">
 
-                <RelativeLayout
+                <LinearLayout
+                    android:orientation="horizontal"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:gravity="center_vertical"
                     android:layout_margin="8dp">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_alignParentLeft="true"
-                        android:layout_centerVertical="true"
                         android:textSize="18sp"
                         android:textColor="@color/text_dark"
                         android:text="@string/phone"
                         android:textStyle="bold"/>
 
                     <TextView
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:layout_marginRight="16dp"
+                        android:layout_marginLeft="8dp"
+                        android:gravity="right"
                         android:textSize="18sp"
                         android:textColor="@color/seek_bar"
-                        android:text="+375 29 845 54 47"
-                        android:id="@+id/tv_phone"
-                        android:layout_alignParentRight="true"
-                        android:layout_alignParentEnd="true"
-                        android:layout_centerVertical="true"/>
-                </RelativeLayout>
+                        android:text="+375 29 845 74 78"
+                        android:id="@+id/tv_phone"/>
+
+                    <ImageView
+                        android:id="@+id/img_change_phone"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/ic_edit"
+                        android:tint="@color/seek_bar"/>
+                </LinearLayout>
             </android.support.v7.widget.CardView>
 
             <FrameLayout

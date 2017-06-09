@@ -13,6 +13,7 @@ import android.widget.TextView;
 
 import com.elatesoftware.meetings.R;
 import com.elatesoftware.meetings.ui.activity.base.BaseActivity;
+import com.elatesoftware.meetings.util.Const;
 import com.elatesoftware.meetings.util.CustomSharedPreference;
 
 import butterknife.BindView;
@@ -23,6 +24,7 @@ public class PinCodeActivity extends BaseActivity {
     public static final String TAG = "PinCodeActivity_logs";
 
     @BindView(R.id.ll_indicators) LinearLayout llIndicators;
+    @BindView(R.id.ll_main) LinearLayout llMain;
     @BindView(R.id.tv_pin_status) TextView tvPinStatus;
 
     private String pin = "";
@@ -32,6 +34,7 @@ public class PinCodeActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pin_code);
 
+        changeBackground();
         showPinStatus();
 
         if(TextUtils.isEmpty(CustomSharedPreference.getToken(this))) {
@@ -114,5 +117,16 @@ public class PinCodeActivity extends BaseActivity {
             img.setImageResource(R.drawable.indicator_red);
         }
         tvPinStatus.setText(R.string.incorrect_pin);
+    }
+
+    private void changeBackground() {
+        int isMan = CustomSharedPreference.getIsMan(this);
+        if(isMan == Const.MAN_VALUE) {
+            llMain.setBackgroundResource(R.drawable.bg);
+        } else if(isMan == Const.WOMAN_VALUE) {
+            llMain.setBackgroundResource(R.drawable.bg_woman);
+        } else {
+            llMain.setBackgroundResource(R.drawable.bg);
+        }
     }
 }

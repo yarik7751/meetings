@@ -8,7 +8,8 @@ import android.view.MenuItem;
 
 import com.elatesoftware.meetings.R;
 import com.elatesoftware.meetings.ui.activity.base.BaseActivity;
-import com.elatesoftware.meetings.ui.fragment.woman.DalesWomanFragment;
+import com.elatesoftware.meetings.ui.fragment.SettingsFragment;
+import com.elatesoftware.meetings.ui.fragment.woman.DatesWomanFragment;
 import com.elatesoftware.meetings.ui.fragment.woman.ProfileWomanFragment;
 import com.elatesoftware.meetings.ui.fragment.woman.SearchWomanFragment;
 import com.elatesoftware.meetings.ui.fragment.woman.WalletWomanFragment;
@@ -38,16 +39,16 @@ public class WorkWomanActivity extends BaseActivity {
                         onSwitchFragment(ProfileWomanFragment.getInstance(), ProfileWomanFragment.class.getName(), false, true, R.id.container);
                         break;
 
-                    case R.id.action_search:
-                        onSwitchFragment(SearchWomanFragment.getInstance(), SearchWomanFragment.class.getName(), false, true, R.id.container);
-                        break;
-
                     case R.id.action_dales:
-                        onSwitchFragment(DalesWomanFragment.getInstance(), DalesWomanFragment.class.getName(), false, true, R.id.container);
+                        onSwitchFragment(DatesWomanFragment.getInstance(), DatesWomanFragment.class.getName(), false, true, R.id.container);
                         break;
 
                     case R.id.action_wallet:
                         onSwitchFragment(WalletWomanFragment.getInstance(), WalletWomanFragment.class.getName(), false, true, R.id.container);
+                        break;
+
+                    case R.id.action_settings:
+                        onSwitchFragment(SettingsFragment.getInstance(), SettingsFragment.class.getName(), false, true, R.id.container);
                         break;
                 }
                 return true;

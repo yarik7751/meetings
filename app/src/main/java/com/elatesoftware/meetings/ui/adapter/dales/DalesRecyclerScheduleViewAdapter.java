@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -74,7 +75,8 @@ public class DalesRecyclerScheduleViewAdapter extends RecyclerView.Adapter<Dales
     public class DalesViewHolder extends RecyclerView.ViewHolder {
 
         public View itemView;
-        public TextView tvPlace, tvTime, tvAmount;
+        public TextView tvPlace, tvTime, tvAmount, tvName;
+        public CircleImageView imgPhoto;
 
         public DalesViewHolder(View itemView) {
             super(itemView);
@@ -83,6 +85,8 @@ public class DalesRecyclerScheduleViewAdapter extends RecyclerView.Adapter<Dales
             tvPlace = (TextView) itemView.findViewById(R.id.tv_place);
             tvTime = (TextView) itemView.findViewById(R.id.tv_time);
             tvAmount = (TextView) itemView.findViewById(R.id.tv_amount);
+            tvName = (TextView) itemView.findViewById(R.id.tv_name);
+            imgPhoto = (CircleImageView) itemView.findViewById(R.id.img_photo);
         }
     }
 }

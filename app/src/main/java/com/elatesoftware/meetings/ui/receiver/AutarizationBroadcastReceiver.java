@@ -43,7 +43,7 @@ public class AutarizationBroadcastReceiver extends BroadcastReceiver {
                 String token = sign == SIGN_IN ? LoginAnswer.getInstance().getResult().getSessionKey() : RegisterAnswer.getInstance().getResult();
                 CustomSharedPreference.setToken(context, token);
                 context.startActivity(new Intent(context, PinCodeActivity.class));
-                /*if(CustomSharedPreference.isMan(context)) {
+                /*if(CustomSharedPreference.getIsMan(context)) {
                     context.startActivity(new Intent(context, WorkManActivity.class));
                 } else {
                     context.startActivity(new Intent(context, WorkWomanActivity.class));
