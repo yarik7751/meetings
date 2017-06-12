@@ -70,13 +70,6 @@ public class WorkManActivity extends BaseActivity {
         }
     }
 
-    //todo 7
-    @Override
-    protected void onResume() {
-        super.onResume();
-        //onSwitchFragment(ProfileManFragment.getInstance(), ProfileManFragment.class.getName(), false, true, R.id.container);
-    }
-
     //todo 6
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {

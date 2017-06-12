@@ -5,31 +5,25 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import com.elatesoftware.meetings.R;
 import com.elatesoftware.meetings.ui.activity.AddDateActivity;
 import com.elatesoftware.meetings.ui.adapter.dales.DalesPendingRecyclerViewAdapter;
 import com.elatesoftware.meetings.ui.adapter.dales.DalesRecyclerScheduleViewAdapter;
 import com.elatesoftware.meetings.ui.fragment.base.BaseFragment;
-import com.elatesoftware.meetings.ui.service.GetDatesListService;
+import com.elatesoftware.meetings.service.GetDatesListService;
 import com.elatesoftware.meetings.util.Const;
 import com.elatesoftware.meetings.util.Utils;
 import com.elatesoftware.meetings.util.api.pojo.GetDatesManAnswer;
-import com.elatesoftware.meetings.util.api.pojo.GetPhotosAnswer;
 
 import butterknife.BindView;
 import butterknife.OnClick;
-import de.hdodenhof.circleimageview.CircleImageView;
 
-//todo 10 имя класса (OK)
 public class DatesManFragment extends BaseFragment {
 
     @BindView(R.id.rv_scheduled_dales) RecyclerView rvScheduledDales;
@@ -46,8 +40,8 @@ public class DatesManFragment extends BaseFragment {
     }
 
     @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    public void onStart() {
+        super.onStart();
         getDatesListReceiver = new GetDatesListReceiver();
         getActivity().registerReceiver(getDatesListReceiver, Utils.getIntentFilter(GetDatesListService.ACTION));
     }
@@ -80,8 +74,8 @@ public class DatesManFragment extends BaseFragment {
     }
 
     @Override
-    public void onDestroy() {
-        super.onDestroy();
+    public void onStop() {
+        super.onStop();
         getActivity().unregisterReceiver(getDatesListReceiver);
     }
 

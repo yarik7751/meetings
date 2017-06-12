@@ -2,6 +2,7 @@ package com.elatesoftware.meetings.util.model;
 
 public class Message {
 
+    //todo 27 буква m
     public String text;
     public long date;
     public int senderId;

@@ -1,8 +1,5 @@
 package com.elatesoftware.meetings.ui.fragment;
 
-import android.content.BroadcastReceiver;
-import android.content.Context;
-import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -11,24 +8,17 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.ProgressBar;
 
 import com.elatesoftware.meetings.R;
 import com.elatesoftware.meetings.ui.fragment.base.BaseFragment;
-import com.elatesoftware.meetings.ui.service.GetPhotoService;
-import com.elatesoftware.meetings.ui.service.GetPhotosService;
-import com.elatesoftware.meetings.util.Const;
 import com.elatesoftware.meetings.util.CustomSharedPreference;
 import com.elatesoftware.meetings.util.ImageHelper;
-import com.elatesoftware.meetings.util.Utils;
 import com.elatesoftware.meetings.util.api.Api;
 import com.elatesoftware.meetings.util.api.pojo.GetPhotoAnswer;
-import com.elatesoftware.meetings.util.api.pojo.MessageAnswer;
 import com.google.gson.Gson;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
-import com.squareup.picasso.Picasso;
 import com.wang.avi.AVLoadingIndicatorView;
 
 import butterknife.BindView;

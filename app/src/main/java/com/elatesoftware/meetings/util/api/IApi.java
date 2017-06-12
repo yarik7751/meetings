@@ -25,13 +25,15 @@ public interface IApi {
     Call<ResponseBody> exit(@Query("sessionKey") String sessionKey);
 
     @POST("api/account/updateAccount")
-    Call<ResponseBody> updateAccountInfo(@Query("sessionKey") String sessionKey, @Body RequestBody params);
+    Call<ResponseBody> updateAccountInfo(@Query("sessionKey") String sessionKey,
+                                         @Body RequestBody params);
 
     @GET("api/account/details")
     Call<ResponseBody> getAccountInfo(@Query("sessionKey") String sessionKey);
 
     @POST("api/dates/CreateDate")
-    Call<ResponseBody> createDate(@Query("sessionKey") String sessionKey, @Body RequestBody params);
+    Call<ResponseBody> createDate(@Query("sessionKey") String sessionKey,
+                                  @Body RequestBody params);
 
     @POST("api/account/addFiles")
     Call<ResponseBody> addPhoto(@Query("sessionKey") String sessionKey, @Body RequestBody params);

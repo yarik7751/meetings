@@ -1,7 +1,6 @@
-package com.elatesoftware.meetings.ui.application;
+package com.elatesoftware.meetings.application;
 
 import android.app.Application;
-import android.content.Context;
 
 /**
  * Created by user on 17.05.2017.

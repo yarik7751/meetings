@@ -20,5 +20,7 @@ public class Const {
     public static final int PENDING = 1;
     public static final int SCHEDULED = 2;
 
+    public static final double PHOTOS_HEIGHT_PERCENT = 0.3;
+
     public static final String NULL_TOKEN = "null";
 }

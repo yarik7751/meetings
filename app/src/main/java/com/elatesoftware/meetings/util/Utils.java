@@ -84,6 +84,7 @@ public class Utils {
         }
     }
 
+    //todo 20 move to base activity
     public static boolean isPermissionsGranted(int[] permissions) {
         for(int permission : permissions) {
             if(permission != PackageManager.PERMISSION_GRANTED) {
@@ -107,6 +108,7 @@ public class Utils {
         return !TextUtils.isEmpty(token) && !token.equals(Const.NULL_TOKEN);
     }
 
+    //todo 21 remove this method
     public static void setMarkerInMap(GoogleMap map, LatLng latLng) {
         CameraPosition cameraPosition = new CameraPosition.Builder()
                 .target(latLng)
@@ -123,6 +125,7 @@ public class Utils {
         return intentFilter;
     }
 
+    //todo 17 move to fragments
     public static boolean checkRegInfo(Context context, CustomEditText cetEmail, CustomEditText cetPass, CustomEditText cetRepPass) {
         String userName = cetEmail.getEditText().getText().toString();
         String password = cetPass.getEditText().getText().toString();
@@ -146,6 +149,7 @@ public class Utils {
         return true;
     }
 
+    //todo 18 move to fragments
     public static boolean checkAutInfo(Context context, CustomEditText cetEmail, CustomEditText cetPass) {
         String userName = cetEmail.getEditText().getText().toString();
         String password = cetPass.getEditText().getText().toString();

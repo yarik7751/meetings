@@ -1,7 +1,6 @@
-package com.elatesoftware.meetings.ui.service;
+package com.elatesoftware.meetings.service;
 
 import android.app.IntentService;
-import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.util.Log;
@@ -14,7 +13,7 @@ import com.elatesoftware.meetings.util.api.Api;
 public class AddPhotoService extends IntentService {
 
     public static final String TAG = "AddPhotoS_log";
-    public static final String ACTION = "com.elatesoftware.meetings.ui.service.AddPhotoService";
+    public static final String ACTION = "com.elatesoftware.meetings.service.AddPhotoService";
 
     public static Bitmap bitmap = null;
 

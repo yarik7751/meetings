@@ -71,12 +71,15 @@ public class ChatRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.V
     public class ChatViewHolder extends RecyclerView.ViewHolder {
 
         public View itemView;
-        public TextView tvMessage, tvUser, tvTime;
+        public TextView tvMessage;
+        public TextView tvUser;
+        public TextView tvTime;
         public LinearLayout llMain;
 
         public ChatViewHolder(View itemView) {
             super(itemView);
             this.itemView = itemView;
+            //todo 31 убрать это
             ((RecyclerView.LayoutParams) itemView.getLayoutParams()).width = RecyclerView.LayoutParams.MATCH_PARENT;
             tvMessage = (TextView) itemView.findViewById(R.id.tv_message);
             tvUser = (TextView) itemView.findViewById(R.id.tv_user);

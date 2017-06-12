@@ -1,12 +1,8 @@
 package com.elatesoftware.meetings.util.api;
 
-import android.content.Context;
 import android.util.Log;
 
-import com.elatesoftware.meetings.ui.application.MeetingsApplication;
 import com.elatesoftware.meetings.util.Const;
-import com.elatesoftware.meetings.util.CustomSharedPreference;
-import com.elatesoftware.meetings.util.Utils;
 import com.elatesoftware.meetings.util.api.pojo.GetDatesManAnswer;
 import com.elatesoftware.meetings.util.api.pojo.GetInfoAccAnswer;
 import com.elatesoftware.meetings.util.api.pojo.GetPhotoAnswer;
@@ -16,10 +12,6 @@ import com.elatesoftware.meetings.util.api.pojo.LoginAnswer;
 import com.elatesoftware.meetings.util.api.pojo.Meeting;
 import com.elatesoftware.meetings.util.api.pojo.MessageAnswer;
 import com.elatesoftware.meetings.util.api.pojo.RegisterAnswer;
-import com.elatesoftware.meetings.util.model.Message;
-import com.franmontiel.persistentcookiejar.PersistentCookieJar;
-import com.franmontiel.persistentcookiejar.cache.SetCookieCache;
-import com.franmontiel.persistentcookiejar.persistence.SharedPrefsCookiePersistor;
 import com.google.gson.Gson;
 
 import org.json.JSONArray;
@@ -29,7 +21,6 @@ import org.json.JSONObject;
 import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 
-import okhttp3.CookieJar;
 import okhttp3.OkHttpClient;
 import okhttp3.RequestBody;
 import okhttp3.ResponseBody;
@@ -398,6 +389,7 @@ public class Api {
         if(response != null && rawJson != null){
             if(response.code() == Const.CODE_SUCCESS) {
                 Gson gson = new Gson();
+                //todo 29 Плохо. Поговорить с Дашей
                 MessageAnswer answer = gson.fromJson(rawJson, MessageAnswer.class);
                 MessageAnswer.setInstance(answer);
             }

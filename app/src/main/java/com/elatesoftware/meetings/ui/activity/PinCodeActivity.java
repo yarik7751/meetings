@@ -67,7 +67,6 @@ public class PinCodeActivity extends BaseActivity {
         setIndicators();
     }
 
-    //todo 1
     private void setIndicators() {
         String savePin = CustomSharedPreference.getPin(this);
         if(savePin != null && pin.length() == 4 && !pin.equals(savePin)) {
@@ -96,8 +95,6 @@ public class PinCodeActivity extends BaseActivity {
             pin = "";
             setIndicators();
             showPinStatus();
-            //todo 3
-            return;
         } else {
             if(savePin.equals(pin)) {
                 startActivity(new Intent(this, MainActivity.class));
@@ -105,8 +102,6 @@ public class PinCodeActivity extends BaseActivity {
                 finish();
             } else {
                 setError();
-                //todo 3
-                return;
             }
         }
     }

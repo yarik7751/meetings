@@ -2,6 +2,7 @@ package com.elatesoftware.meetings.util.model;
 
 public class LoginInfo {
 
+    //todo 28 не в одну строку
     private String login, pass, repPass;
 
     private static LoginInfo ourInstance = null;

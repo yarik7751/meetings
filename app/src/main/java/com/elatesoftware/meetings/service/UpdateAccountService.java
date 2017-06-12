@@ -1,4 +1,4 @@
-package com.elatesoftware.meetings.ui.service;
+package com.elatesoftware.meetings.service;
 
 import android.app.IntentService;
 import android.content.Intent;
@@ -13,7 +13,7 @@ import com.elatesoftware.meetings.util.api.pojo.HumanAnswer;
 public class UpdateAccountService extends IntentService {
 
     public static final String TAG = "UpdateAS_log";
-    public static final String ACTION = "com.elatesoftware.meetings.ui.service.UpdateAccountService";
+    public static final String ACTION = "com.elatesoftware.meetings.service.UpdateAccountService";
 
     public UpdateAccountService() {
         super(TAG);
@@ -22,7 +22,7 @@ public class UpdateAccountService extends IntentService {
 
     @Override
     protected void onHandleIntent(Intent intent) {
-        String city = "qwerty";
+        String city = null;
         try {
             city = Utils.getCity(this);
         } catch (Exception e) {

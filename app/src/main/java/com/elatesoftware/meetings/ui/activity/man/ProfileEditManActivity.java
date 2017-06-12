@@ -1,12 +1,10 @@
 package com.elatesoftware.meetings.ui.activity.man;
 
 import android.Manifest;
-import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
-import android.content.IntentFilter;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -18,39 +16,30 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.view.ViewPager;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.DatePicker;
-import android.widget.ImageView;
-import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 
 import com.dd.CircularProgressButton;
 import com.elatesoftware.meetings.R;
 import com.elatesoftware.meetings.ui.activity.base.BaseActivity;
-import com.elatesoftware.meetings.ui.adapter.page.PageAdapter;
 import com.elatesoftware.meetings.ui.adapter.page.PhotoFragmentPageAdapter;
 import com.elatesoftware.meetings.ui.fragment.man.ProfileManFragment;
-import com.elatesoftware.meetings.ui.service.AddPhotoService;
-import com.elatesoftware.meetings.ui.service.GetPhotosService;
-import com.elatesoftware.meetings.ui.service.UpdateAccountService;
+import com.elatesoftware.meetings.service.AddPhotoService;
+import com.elatesoftware.meetings.service.GetPhotosService;
+import com.elatesoftware.meetings.service.UpdateAccountService;
 import com.elatesoftware.meetings.ui.view.CustomEditText;
 import com.elatesoftware.meetings.util.AndroidUtils;
 import com.elatesoftware.meetings.util.Const;
 import com.elatesoftware.meetings.util.CustomSharedPreference;
 import com.elatesoftware.meetings.util.DateUtils;
-import com.elatesoftware.meetings.util.ImageHelper;
 import com.elatesoftware.meetings.util.Utils;
 import com.elatesoftware.meetings.util.api.pojo.GetPhotosAnswer;
 import com.elatesoftware.meetings.util.api.pojo.HumanAnswer;
 import com.elatesoftware.meetings.util.api.pojo.MessageAnswer;
 import com.elatesoftware.meetings.util.api.pojo.Photo;
-import com.squareup.picasso.Callback;
-import com.squareup.picasso.Picasso;
 import com.wang.avi.AVLoadingIndicatorView;
 
-import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.List;
@@ -58,8 +47,6 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.OnClick;
 import me.relex.circleindicator.CircleIndicator;
-import rx.Single;
-import rx.Subscriber;
 
 public class ProfileEditManActivity extends BaseActivity {
 
@@ -226,8 +213,8 @@ public class ProfileEditManActivity extends BaseActivity {
     }
 
     private void setSize() {
-        rlPhotos.getLayoutParams().height = (int) (AndroidUtils.getWindowsSizeParams(this)[1] * 0.3);
-        rlPhotosFab.getLayoutParams().height = (int) (AndroidUtils.getWindowsSizeParams(this)[1] * 0.3);
+        rlPhotos.getLayoutParams().height = (int) (AndroidUtils.getWindowsSizeParams(this)[1] * Const.PHOTOS_HEIGHT_PERCENT);
+        rlPhotosFab.getLayoutParams().height = (int) (AndroidUtils.getWindowsSizeParams(this)[1] * Const.PHOTOS_HEIGHT_PERCENT);
     }
 
     private void updateLocalInfo() {

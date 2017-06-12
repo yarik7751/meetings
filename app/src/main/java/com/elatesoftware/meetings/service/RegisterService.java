@@ -1,4 +1,4 @@
-package com.elatesoftware.meetings.ui.service;
+package com.elatesoftware.meetings.service;
 
 import android.app.IntentService;
 import android.content.Intent;
@@ -10,7 +10,7 @@ import com.elatesoftware.meetings.util.api.Api;
 public class RegisterService extends IntentService {
 
     public static final String TAG = "RegisterService_log";
-    public static final String ACTION = "com.elatesoftware.meetings.ui.service.RegisterService";
+    public static final String ACTION = "com.elatesoftware.meetings.service.RegisterService";
     public static final String USER_NAME = "USER_NAME";
     public static final String PASSWORD = "PASSWORD ";
     public static final String GENDER = "GENDER";

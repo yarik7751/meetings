@@ -35,6 +35,7 @@ public class DalesPendingRecyclerViewAdapter extends RecyclerView.Adapter<DalesP
         selectDates();
     }
 
+    //todo 32 убрать из этого класса
     private void selectDates() {
         for(int i = dates.size() - 1; i >= 0; i--) {
             if(dates.get(i).getStatus() != Const.PENDING) {

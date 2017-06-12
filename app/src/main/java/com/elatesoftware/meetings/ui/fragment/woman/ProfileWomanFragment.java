@@ -1,37 +1,25 @@
 package com.elatesoftware.meetings.ui.fragment.woman;
 
-import android.Manifest;
-import android.app.DatePickerDialog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.view.ViewPager;
-import android.text.TextUtils;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.DatePicker;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.elatesoftware.meetings.R;
 import com.elatesoftware.meetings.ui.activity.AddDateActivity;
-import com.elatesoftware.meetings.ui.activity.man.ProfileEditManActivity;
 import com.elatesoftware.meetings.ui.activity.woman.ProfileEditWomanActivity;
-import com.elatesoftware.meetings.ui.adapter.page.PageAdapter;
 import com.elatesoftware.meetings.ui.adapter.page.PhotoFragmentPageAdapter;
 import com.elatesoftware.meetings.ui.fragment.base.BaseFragment;
-import com.elatesoftware.meetings.ui.service.GetAccountInfoService;
-import com.elatesoftware.meetings.ui.service.GetPhotosService;
-import com.elatesoftware.meetings.ui.view.InkPageIndicator;
+import com.elatesoftware.meetings.service.GetAccountInfoService;
+import com.elatesoftware.meetings.service.GetPhotosService;
 import com.elatesoftware.meetings.util.AndroidUtils;
 import com.elatesoftware.meetings.util.Const;
 import com.elatesoftware.meetings.util.CustomSharedPreference;
@@ -41,14 +29,8 @@ import com.elatesoftware.meetings.util.api.pojo.GetInfoAccAnswer;
 import com.elatesoftware.meetings.util.api.pojo.GetPhotosAnswer;
 import com.elatesoftware.meetings.util.api.pojo.HumanAnswer;
 import com.elatesoftware.meetings.util.api.pojo.Photo;
-import com.squareup.picasso.Picasso;
 import com.wang.avi.AVLoadingIndicatorView;
 
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.GregorianCalendar;
 import java.util.List;
 
 import butterknife.BindView;
@@ -86,8 +68,8 @@ public class ProfileWomanFragment extends BaseFragment {
     }
 
     @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    public void onStart() {
+        super.onStart();
         registerReceivers();
     }
 
@@ -110,8 +92,8 @@ public class ProfileWomanFragment extends BaseFragment {
     }
 
     @Override
-    public void onDestroy() {
-        super.onDestroy();
+    public void onStop() {
+        super.onStop();
         unregisterReceivers();
     }
 
@@ -148,7 +130,7 @@ public class ProfileWomanFragment extends BaseFragment {
     }
 
     private void setSize() {
-        rlPhotos.getLayoutParams().height = (int) (AndroidUtils.getWindowsSizeParams(getContext())[1] * 0.3);
+        rlPhotos.getLayoutParams().height = (int) (AndroidUtils.getWindowsSizeParams(getContext())[1] * Const.PHOTOS_HEIGHT_PERCENT);
     }
 
     private void loadPhoto(List<Photo> photo) {

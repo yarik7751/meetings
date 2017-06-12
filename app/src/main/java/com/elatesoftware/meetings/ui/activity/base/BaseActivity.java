@@ -54,12 +54,7 @@ public class BaseActivity extends AppCompatActivity {
         }
         tr.replace(res, fragment, tag);
         if (add) {
-            //todo 4
-            try {
-                tr.addToBackStack(tag);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
+            tr.addToBackStack(tag);
         }
         tr.commit();
     }
@@ -80,12 +75,7 @@ public class BaseActivity extends AppCompatActivity {
         }
         tr.add(res, fragment, tag);
         if (add) {
-            //todo 4
-            try {
-                tr.addToBackStack(tag);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
+            tr.addToBackStack(tag);
         }
         tr.commit();
     }

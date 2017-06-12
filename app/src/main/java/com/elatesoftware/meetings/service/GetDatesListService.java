@@ -1,4 +1,4 @@
-package com.elatesoftware.meetings.ui.service;
+package com.elatesoftware.meetings.service;
 
 import android.app.IntentService;
 import android.content.Context;
@@ -9,19 +9,19 @@ import com.elatesoftware.meetings.util.Const;
 import com.elatesoftware.meetings.util.CustomSharedPreference;
 import com.elatesoftware.meetings.util.api.Api;
 
-public class ExitService extends IntentService {
+public class GetDatesListService extends IntentService {
 
-    public static final String TAG = "ExitService_log";
-    public static final String ACTION = "com.elatesoftware.meetings.ui.service.ExitService";
+    public static final String TAG = "GetDatesListS_log";
+    public static final String ACTION = "com.elatesoftware.meetings.service.GetDatesListService";
 
-    public ExitService() {
+    public GetDatesListService() {
         super(TAG);
         Log.d(TAG, ACTION);
     }
 
     @Override
     protected void onHandleIntent(Intent intent) {
-        String response = Api.exit(CustomSharedPreference.getToken(this));
+        String response = Api.getDatesList(CustomSharedPreference.getToken(this));
         Intent responseIntent = new Intent();
         responseIntent.setAction(ACTION);
         responseIntent.addCategory(Intent.CATEGORY_DEFAULT);
@@ -30,7 +30,7 @@ public class ExitService extends IntentService {
     }
 
     public static Intent getIntent(Context context) {
-        Intent intent = new Intent(context, ExitService.class);
+        Intent intent = new Intent(context, GetDatesListService.class);
         return intent;
     }
 }

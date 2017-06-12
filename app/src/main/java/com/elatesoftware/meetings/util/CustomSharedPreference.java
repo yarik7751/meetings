@@ -16,7 +16,7 @@ public class CustomSharedPreference {
     }
 
     public static void setIsMan(Context context, boolean isMan) {
-        getSharedPreferences(context).edit().putInt(Const.SP_IS_MAN, isMan ? Const.MAN_VALUE : Const.WOMAN_VALUE).commit();
+        getSharedPreferences(context).edit().putInt(Const.SP_IS_MAN, isMan ? Const.MAN_VALUE : Const.WOMAN_VALUE).apply();
     }
 
     public static int getIsMan(Context context) {
@@ -24,7 +24,7 @@ public class CustomSharedPreference {
     }
 
     public static void setIsFirst(Context context, boolean isFirst) {
-        getSharedPreferences(context).edit().putBoolean(Const.SP_IS_FIRST, isFirst).commit();
+        getSharedPreferences(context).edit().putBoolean(Const.SP_IS_FIRST, isFirst).apply();
     }
 
     public static boolean isFirst(Context context) {
@@ -32,7 +32,7 @@ public class CustomSharedPreference {
     }
 
     public static void setId(Context context, long id) {
-        getSharedPreferences(context).edit().putLong(Const.SP_ID, id).commit();
+        getSharedPreferences(context).edit().putLong(Const.SP_ID, id).apply();
     }
 
     public static long getId(Context context) {
@@ -40,7 +40,7 @@ public class CustomSharedPreference {
     }
 
     public static void setPin(Context context, String pin) {
-        getSharedPreferences(context).edit().putString(Const.SP_PIN, pin).commit();
+        getSharedPreferences(context).edit().putString(Const.SP_PIN, pin).apply();
     }
 
     public static String getPin(Context context) {
@@ -48,7 +48,7 @@ public class CustomSharedPreference {
     }
 
     public static void setToken(Context context, String token) {
-        getSharedPreferences(context).edit().putString(Const.SP_TOKEN, token).commit();
+        getSharedPreferences(context).edit().putString(Const.SP_TOKEN, token).apply();
     }
 
     public static String getToken(Context context) {
@@ -59,7 +59,7 @@ public class CustomSharedPreference {
         Gson gson = new Gson();
         String info = gson.toJson(infoMan);
         Log.d(TAG, "info (set): " + info);
-        getSharedPreferences(context).edit().putString(Const.SP_PROFILE_INFORMATION, info).commit();
+        getSharedPreferences(context).edit().putString(Const.SP_PROFILE_INFORMATION, info).apply();
     }
 
     public static HumanAnswer getProfileInformation(Context context) {

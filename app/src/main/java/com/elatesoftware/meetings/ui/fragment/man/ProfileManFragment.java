@@ -3,7 +3,6 @@ package com.elatesoftware.meetings.ui.fragment.man;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
-import android.content.IntentFilter;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.view.ViewPager;
@@ -12,18 +11,16 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.elatesoftware.meetings.R;
 import com.elatesoftware.meetings.ui.activity.AddDateActivity;
 import com.elatesoftware.meetings.ui.activity.man.ProfileEditManActivity;
-import com.elatesoftware.meetings.ui.adapter.page.PageAdapter;
 import com.elatesoftware.meetings.ui.adapter.page.PhotoFragmentPageAdapter;
 import com.elatesoftware.meetings.ui.fragment.base.BaseFragment;
-import com.elatesoftware.meetings.ui.service.GetAccountInfoService;
-import com.elatesoftware.meetings.ui.service.GetPhotosService;
+import com.elatesoftware.meetings.service.GetAccountInfoService;
+import com.elatesoftware.meetings.service.GetPhotosService;
 import com.elatesoftware.meetings.util.AndroidUtils;
 import com.elatesoftware.meetings.util.Const;
 import com.elatesoftware.meetings.util.CustomSharedPreference;
@@ -33,11 +30,8 @@ import com.elatesoftware.meetings.util.api.pojo.GetInfoAccAnswer;
 import com.elatesoftware.meetings.util.api.pojo.GetPhotosAnswer;
 import com.elatesoftware.meetings.util.api.pojo.HumanAnswer;
 import com.elatesoftware.meetings.util.api.pojo.Photo;
-import com.squareup.picasso.Callback;
-import com.squareup.picasso.Picasso;
 import com.wang.avi.AVLoadingIndicatorView;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
@@ -74,8 +68,8 @@ public class ProfileManFragment extends BaseFragment {
     }
 
     @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    public void onStart() {
+        super.onStart();
         registerReceivers();
     }
 
@@ -96,8 +90,8 @@ public class ProfileManFragment extends BaseFragment {
     }
 
     @Override
-    public void onDestroy() {
-        super.onDestroy();
+    public void onStop() {
+        super.onStop();
         unregisterReceivers();
     }
 
@@ -134,8 +128,7 @@ public class ProfileManFragment extends BaseFragment {
     }
 
     private void setSize() {
-        //todo 8
-        rlPhotos.getLayoutParams().height = (int) (AndroidUtils.getWindowsSizeParams(getContext())[1] * 0.3);
+        rlPhotos.getLayoutParams().height = (int) (AndroidUtils.getWindowsSizeParams(getContext())[1] * Const.PHOTOS_HEIGHT_PERCENT);
     }
 
     private void loadPhoto(List<Photo> photo) {

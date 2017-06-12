@@ -66,7 +66,7 @@ public class AndroidUtils {
             if (netInfo != null && (netInfo.isConnectedOrConnecting() || netInfo.isAvailable())) {
                 return true;
             }
-
+            //TODO 26 REMOVE DEPRECATED METHODs
             netInfo = cm.getNetworkInfo(ConnectivityManager.TYPE_MOBILE);
 
             if (netInfo != null && netInfo.isConnectedOrConnecting()) {

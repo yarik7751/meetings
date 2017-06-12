@@ -24,12 +24,11 @@ import com.dd.CircularProgressButton;
 import com.elatesoftware.meetings.R;
 import com.elatesoftware.meetings.ui.activity.base.BaseActivity;
 import com.elatesoftware.meetings.ui.adapter.page.PhotoFragmentPageAdapter;
-import com.elatesoftware.meetings.ui.fragment.man.ProfileManFragment;
 import com.elatesoftware.meetings.ui.fragment.woman.ProfileWomanFragment;
-import com.elatesoftware.meetings.ui.service.AddPhotoService;
-import com.elatesoftware.meetings.ui.service.DeletePhotoService;
-import com.elatesoftware.meetings.ui.service.GetPhotosService;
-import com.elatesoftware.meetings.ui.service.UpdateAccountService;
+import com.elatesoftware.meetings.service.AddPhotoService;
+import com.elatesoftware.meetings.service.DeletePhotoService;
+import com.elatesoftware.meetings.service.GetPhotosService;
+import com.elatesoftware.meetings.service.UpdateAccountService;
 import com.elatesoftware.meetings.ui.view.CustomEditText;
 import com.elatesoftware.meetings.util.AndroidUtils;
 import com.elatesoftware.meetings.util.Const;
@@ -231,8 +230,8 @@ public class ProfileEditWomanActivity extends BaseActivity {
     }
 
     private void setSize() {
-        rlPhotos.getLayoutParams().height = (int) (AndroidUtils.getWindowsSizeParams(this)[1] * 0.3);
-        rlPhotosFab.getLayoutParams().height = (int) (AndroidUtils.getWindowsSizeParams(this)[1] * 0.3);
+        rlPhotos.getLayoutParams().height = (int) (AndroidUtils.getWindowsSizeParams(this)[1] * Const.PHOTOS_HEIGHT_PERCENT);
+        rlPhotosFab.getLayoutParams().height = (int) (AndroidUtils.getWindowsSizeParams(this)[1] * Const.PHOTOS_HEIGHT_PERCENT);
     }
 
     private void updateLocalInfo() {

@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
-import android.content.IntentFilter;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
@@ -12,36 +11,25 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
 import android.text.TextUtils;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.Button;
 import android.widget.FrameLayout;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.dd.CircularProgressButton;
 import com.elatesoftware.meetings.R;
 import com.elatesoftware.meetings.ui.activity.base.BaseActivity;
-import com.elatesoftware.meetings.ui.activity.man.ProfileEditManActivity;
-import com.elatesoftware.meetings.ui.adapter.page.PageAdapter;
 import com.elatesoftware.meetings.ui.adapter.page.PhotoFragmentPageAdapter;
-import com.elatesoftware.meetings.ui.fragment.man.ProfileManFragment;
-import com.elatesoftware.meetings.ui.service.AddPhotoService;
-import com.elatesoftware.meetings.ui.service.CreateDateService;
-import com.elatesoftware.meetings.ui.service.GetPhotosService;
-import com.elatesoftware.meetings.ui.service.UpdateAccountService;
+import com.elatesoftware.meetings.service.CreateDateService;
+import com.elatesoftware.meetings.service.GetPhotosService;
 import com.elatesoftware.meetings.util.AndroidUtils;
 import com.elatesoftware.meetings.util.Const;
 import com.elatesoftware.meetings.util.CustomSharedPreference;
 import com.elatesoftware.meetings.util.DateUtils;
-import com.elatesoftware.meetings.util.StringUtils;
 import com.elatesoftware.meetings.util.Utils;
 import com.elatesoftware.meetings.util.api.pojo.GetPhotosAnswer;
 import com.elatesoftware.meetings.util.api.pojo.HumanAnswer;
-import com.elatesoftware.meetings.util.api.pojo.LoginAnswer;
 import com.elatesoftware.meetings.util.api.pojo.Meeting;
 import com.elatesoftware.meetings.util.api.pojo.MessageAnswer;
 import com.elatesoftware.meetings.util.api.pojo.Photo;
@@ -53,12 +41,8 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
-import com.j256.ormlite.stmt.query.In;
-import com.squareup.picasso.Callback;
-import com.squareup.picasso.Picasso;
 import com.wang.avi.AVLoadingIndicatorView;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -144,7 +128,7 @@ public class ShowDateActivity extends BaseActivity implements OnMapReadyCallback
     }
 
     private void setSize() {
-        rlPhotos.getLayoutParams().height = (int) (AndroidUtils.getWindowsSizeParams(this)[1] * 0.3);
+        rlPhotos.getLayoutParams().height = (int) (AndroidUtils.getWindowsSizeParams(this)[1] * Const.PHOTOS_HEIGHT_PERCENT);
     }
 
     private void registerBroadcast() {

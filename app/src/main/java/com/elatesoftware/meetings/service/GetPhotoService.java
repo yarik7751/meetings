@@ -1,4 +1,4 @@
-package com.elatesoftware.meetings.ui.service;
+package com.elatesoftware.meetings.service;
 
 import android.app.IntentService;
 import android.content.Context;
@@ -12,7 +12,7 @@ import com.elatesoftware.meetings.util.api.Api;
 public class GetPhotoService extends IntentService {
 
     public static final String TAG = "GetPhotoS_log";
-    public static final String ACTION = "com.elatesoftware.meetings.ui.service.GetPhotoService";
+    public static final String ACTION = "com.elatesoftware.meetings.service.GetPhotoService";
     public static final String PHOTO_ID = "PHOTO_ID";
 
     public GetPhotoService() {
