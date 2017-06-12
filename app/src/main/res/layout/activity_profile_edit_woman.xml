@@ -30,27 +30,6 @@
 
                 <include layout="@layout/incl_photos"/>
 
-                <!--<android.support.design.widget.FloatingActionButton
-                    android:id="@+id/fab_add_photo"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentBottom="true"
-                    android:layout_alignParentRight="true"
-                    android:layout_marginBottom="8dp"
-                    android:layout_marginRight="8dp"
-                    android:src="@drawable/ic_add_white_24dp"
-                    app:backgroundTint="@color/fab_add"/>-->
-
-                <!--<android.support.design.widget.FloatingActionButton
-                    android:id="@+id/fab_delete_photo"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentBottom="true"
-                    android:layout_alignParentLeft="true"
-                    android:layout_marginBottom="8dp"
-                    android:layout_marginLeft="8dp"
-                    android:src="@drawable/ic_delete_white_24dp"
-                    app:backgroundTint="@color/fab_delete"/>-->
             </RelativeLayout>
 
             <LinearLayout
@@ -93,6 +72,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="45dp"
                     android:layout_marginBottom="8dp"
+                    android:inputType="number"
                     android:gravity="left|center_vertical"
                     android:hint="@string/height"/>
 
@@ -101,6 +81,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="45dp"
                     android:layout_marginBottom="8dp"
+                    android:inputType="number"
                     android:gravity="left|center_vertical"
                     android:hint="@string/weight"/>
 

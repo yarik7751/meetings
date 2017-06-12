@@ -15,6 +15,7 @@ import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.view.ViewPager;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.DatePicker;
@@ -224,9 +225,11 @@ public class ProfileEditWomanActivity extends BaseActivity {
     }
 
     private void requestDeletePhoto() {
-        setProgressDialogMessage(getString(R.string.delete_photo) + " ...");
-        showProgressDialog();
-        startService(DeletePhotoService.getIntent(this, currPhotoId));
+        if(adapter.getPhotos().size() > 0) {
+            setProgressDialogMessage(getString(R.string.delete_photo) + " ...");
+            showProgressDialog();
+            startService(DeletePhotoService.getIntent(this, currPhotoId));
+        }
     }
 
     private void setSize() {
@@ -237,8 +240,10 @@ public class ProfileEditWomanActivity extends BaseActivity {
     private void updateLocalInfo() {
         String name = cetName.getEditText().getText().toString();
         String aboutMe = cetAbout.getEditText().getText().toString();
-        double height = Double.parseDouble(cetHeight.getEditText().getText().toString());
-        double weight = Double.parseDouble(cetWeight.getEditText().getText().toString());
+        String heightStr = cetHeight.getEditText().getText().toString();
+        double height = TextUtils.isEmpty(heightStr) ? 0 : Double.parseDouble(heightStr);
+        String weightStr = cetWeight.getEditText().getText().toString();
+        double weight = TextUtils.isEmpty(weightStr) ? 0 : Double.parseDouble(weightStr);
         profileMan = new HumanAnswer(name, birthDate == null ? 0 : birthDate.getTimeInMillis() / 1000, aboutMe, height, weight);
     }
 
@@ -250,6 +255,8 @@ public class ProfileEditWomanActivity extends BaseActivity {
             }
             cetName.getEditText().setText(profileMan.getFirstName());
             cetAbout.getEditText().setText(profileMan.getAboutMe());
+            cetHeight.getEditText().setText(String.valueOf(profileMan.getHeight().intValue()));
+            cetWeight.getEditText().setText(String.valueOf(profileMan.getWeight().intValue()));
             if(profileMan.getDateOfBirthByCalendar() != null) {
                 btnBirthDate.setText(DateUtils.getDateToString(ProfileEditWomanActivity.this, profileMan.getDateOfBirthByCalendar()));
             }
@@ -279,7 +286,11 @@ public class ProfileEditWomanActivity extends BaseActivity {
     }
 
     private void setCurrentPhotoId(int position) {
-        currPhotoId = adapter.getPhotos().get(position).getId();
+        if(adapter.getPhotos().size() > 0) {
+            currPhotoId = adapter.getPhotos().get(position).getId();
+        } else {
+            currPhotoId = -1;
+        }
         Log.d(TAG, "currPhotoId: " + currPhotoId);
     }
 
