@@ -13,6 +13,10 @@
         <item name="android:windowBackground">@drawable/preview_bg</item>
     </style>
 
+    <style name="SplashThemeWoman" parent="Theme.AppCompat.NoActionBar">
+        <item name="android:windowBackground">@drawable/preview_woman_bg</item>
+    </style>
+
     <style name="AVLoadingIndicatorView">
         <item name="minWidth">48dip</item>
         <item name="maxWidth">48dip</item>

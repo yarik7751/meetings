@@ -22,7 +22,9 @@ import android.widget.RelativeLayout;
 
 import com.dd.CircularProgressButton;
 import com.elatesoftware.meetings.R;
+import com.elatesoftware.meetings.service.DeletePhotoService;
 import com.elatesoftware.meetings.ui.activity.base.BaseActivity;
+import com.elatesoftware.meetings.ui.activity.woman.ProfileEditWomanActivity;
 import com.elatesoftware.meetings.ui.adapter.page.PhotoFragmentPageAdapter;
 import com.elatesoftware.meetings.ui.fragment.man.ProfileManFragment;
 import com.elatesoftware.meetings.service.AddPhotoService;
@@ -69,6 +71,10 @@ public class ProfileEditManActivity extends BaseActivity {
     private UpdateAccountInfoBroadcastReceiver updateAccountInfoBroadcastReceiver;
     private AddPhotoBroadcastReceiver addPhotoBroadcastReceiver;
     private GetPhotosBroadcastReceiver getPhotosBroadcastReceiver;
+    private DeletePhotoReceiver deletePhotoReceiver;
+
+    private PhotoFragmentPageAdapter adapter;
+    private int currPhotoId = -1;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -125,28 +131,23 @@ public class ProfileEditManActivity extends BaseActivity {
         }
     }
 
-    @OnClick(R.id.fab_add_photo)
+    @OnClick(R.id.rl_add)
     public void clickAddPhoto() {
         if(isPermissionsAddPhoto) {
-            Intent galleryIntent = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+            Intent galleryIntent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
             startActivityForResult(galleryIntent, RESULT_LOAD_IMG);
         } else {
             showMessage(R.string.permission_not_found);
         }
     }
 
-    /*@OnClick(R.id.fab_delete_photo)
+    @OnClick(R.id.rl_delete)
     public void clickDeletePhoto() {
-
-    }*/
+        requestDeletePhoto();
+    }
 
     @OnClick(R.id.rl_back)
     public void clickImgBack() {
-        onBackPressed();
-    }
-
-    @OnClick(R.id.tv_done)
-    public void clickTvDone() {
         requestUpdateInfo();
     }
 
@@ -187,12 +188,15 @@ public class ProfileEditManActivity extends BaseActivity {
         registerReceiver(addPhotoBroadcastReceiver, Utils.getIntentFilter(AddPhotoService.ACTION));
         getPhotosBroadcastReceiver = new GetPhotosBroadcastReceiver();
         registerReceiver(getPhotosBroadcastReceiver, Utils.getIntentFilter(GetPhotosService.ACTION));
+        deletePhotoReceiver = new DeletePhotoReceiver();
+        registerReceiver(deletePhotoReceiver, Utils.getIntentFilter(DeletePhotoService.ACTION));
     }
 
     private void unregisterBroadcast() {
         unregisterReceiver(updateAccountInfoBroadcastReceiver);
         unregisterReceiver(addPhotoBroadcastReceiver);
         unregisterReceiver(getPhotosBroadcastReceiver);
+        unregisterReceiver(deletePhotoReceiver);
     }
 
     private void requestUpdateInfo() {
@@ -210,6 +214,12 @@ public class ProfileEditManActivity extends BaseActivity {
 
     private void requestGetPhotos() {
         startService(GetPhotosService.getIntent(this));
+    }
+
+    private void requestDeletePhoto() {
+        setProgressDialogMessage(getString(R.string.delete_photo) + " ...");
+        showProgressDialog();
+        startService(DeletePhotoService.getIntent(this, currPhotoId));
     }
 
     private void setSize() {
@@ -240,10 +250,28 @@ public class ProfileEditManActivity extends BaseActivity {
     }
 
     private void loadPhoto(List<Photo> photo) {
-        PhotoFragmentPageAdapter adapter = new PhotoFragmentPageAdapter(getSupportFragmentManager(), photo);
+        adapter = new PhotoFragmentPageAdapter(getSupportFragmentManager(), photo);
         vpPhotos.setAdapter(adapter);
         inkIndicator.setViewPager(vpPhotos);
         vpPhotos.setOffscreenPageLimit(adapter.getCount());
+        vpPhotos.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {}
+
+            @Override
+            public void onPageSelected(int position) {
+                setCurrentPhotoId(position);
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {}
+        });
+        setCurrentPhotoId(0);
+    }
+
+    private void setCurrentPhotoId(int position) {
+        currPhotoId = adapter.getPhotos().get(position).getId();
+        Log.d(TAG, "currPhotoId: " + currPhotoId);
     }
 
     public class UpdateAccountInfoBroadcastReceiver extends BroadcastReceiver {
@@ -302,6 +330,21 @@ public class ProfileEditManActivity extends BaseActivity {
             if(response != null && response.equals(String.valueOf(Const.CODE_SUCCESS)) && GetPhotosAnswer.getInstance() != null) {
                 if(GetPhotosAnswer.getInstance().getSuccess()) {
                     loadPhoto(GetPhotosAnswer.getInstance().getResult());
+                }
+            }
+        }
+    }
+
+    public class DeletePhotoReceiver extends BroadcastReceiver {
+
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            String response = intent.getStringExtra(Const.RESPONSE);
+            hideProgressDialog();
+            if(response != null && response.equals(String.valueOf(Const.CODE_SUCCESS)) && MessageAnswer.getInstance() != null) {
+                if(MessageAnswer.getInstance().getSuccess()) {
+                    requestGetPhotos();
+                    Log.d(TAG, "DeletePhoto TRUE");
                 }
             }
         }
