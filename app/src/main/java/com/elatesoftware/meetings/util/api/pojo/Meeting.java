@@ -5,9 +5,17 @@ import com.google.gson.annotations.SerializedName;
 
 public class Meeting {
 
+    @SerializedName("Id")
+    @Expose
+    protected Long id;
+
     @SerializedName("StartTime")
     @Expose
     protected Long startTime;
+
+    @SerializedName("Status")
+    @Expose
+    private Integer status;
 
     @SerializedName("EndTime")
     @Expose
@@ -179,5 +187,21 @@ public class Meeting {
 
     public void setAmount(Integer amount) {
         this.amount = amount;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public Integer getStatus() {
+        return status;
+    }
+
+    public void setStatus(Integer status) {
+        this.status = status;
     }
 }

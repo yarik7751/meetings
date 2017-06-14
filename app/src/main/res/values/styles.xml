@@ -13,8 +13,10 @@
         <item name="android:windowBackground">@drawable/preview_bg</item>
     </style>
 
-    <style name="SplashThemeWoman" parent="Theme.AppCompat.NoActionBar">
-        <item name="android:windowBackground">@drawable/preview_woman_bg</item>
+    <style name="SplashThemeWoman" parent="AppTheme">
+        <item name="colorPrimary">@color/button_red_dark</item>
+        <item name="colorPrimaryDark">@color/button_red_light</item>
+        <item name="colorAccent">@color/button_red_light</item>
     </style>
 
     <style name="AVLoadingIndicatorView">

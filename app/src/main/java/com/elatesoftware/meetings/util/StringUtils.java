@@ -5,6 +5,7 @@ import android.text.TextUtils;
 import android.widget.EditText;
 
 import com.elatesoftware.meetings.R;
+import com.elatesoftware.meetings.util.api.Api;
 import com.elatesoftware.meetings.util.api.pojo.HumanAnswer;
 import com.elatesoftware.meetings.util.api.pojo.Meeting;
 
@@ -43,5 +44,9 @@ public class StringUtils {
                 v.setText("$" + value);
             }
         }
+    }
+
+    public static String getPhotoUrl(int userId, int photoId) {
+        return Api.BASE_URL + "Content/UserPictures/" + userId + "/" + photoId + ".jpeg";
     }
 }

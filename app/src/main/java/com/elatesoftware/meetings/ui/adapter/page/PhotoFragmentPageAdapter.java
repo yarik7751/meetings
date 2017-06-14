@@ -11,7 +11,7 @@ import com.elatesoftware.meetings.util.api.pojo.Photo;
 import java.util.ArrayList;
 import java.util.List;
 
-public class PhotoFragmentPageAdapter extends FragmentStatePagerAdapter {
+public class PhotoFragmentPageAdapter extends FragmentPagerAdapter {
 
     List<Photo> photos;
     List<PhotoFragment> fragments;
@@ -41,6 +41,5 @@ public class PhotoFragmentPageAdapter extends FragmentStatePagerAdapter {
     public int getCount() {
         return photos == null ? 0 : photos.size();
     }
-
 
 }

@@ -36,7 +36,7 @@
                 android:background="@drawable/button_red">
 
                 <LinearLayout
-                    android:id="@+id/ll_add_date"
+                    android:id="@+id/ll_search"
                     android:orientation="vertical"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"

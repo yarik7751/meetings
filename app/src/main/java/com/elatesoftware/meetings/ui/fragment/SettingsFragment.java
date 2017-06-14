@@ -11,6 +11,9 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.dd.CircularProgressButton;
 import com.elatesoftware.meetings.R;
@@ -23,6 +26,7 @@ import com.elatesoftware.meetings.util.Utils;
 import com.elatesoftware.meetings.util.api.pojo.MessageAnswer;
 import com.elatesoftware.meetings.util.model.ButtonAnimation;
 import com.elatesoftware.meetings.util.model.LoginInfo;
+import com.kyleduo.switchbutton.SwitchButton;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -32,6 +36,16 @@ public class SettingsFragment extends BaseFragment {
     public static final String TAG = "SettingsFragment_logs";
 
     @BindView(R.id.btn_sign_out) CircularProgressButton btnSignOut;
+    @BindView(R.id.sb_push_up) SwitchButton sbPushUp;
+    @BindView(R.id.sb_mail_notifications) SwitchButton sbMailNotifications;
+    @BindView(R.id.tv_email) TextView tvEmail;
+    @BindView(R.id.tv_phone) TextView tvPhone;
+    @BindView(R.id.tv_change_password) TextView tvChangePassword;
+    @BindView(R.id.tv_change_pin_code) TextView tvChangePinCode;
+    @BindView(R.id.img_change_email) ImageView imgChangeEmail;
+    @BindView(R.id.img_change_phone) ImageView imgChangePhone;
+    @BindView(R.id.fl_change_password) FrameLayout flChangePassword;
+    @BindView(R.id.fl_change_pin_code) FrameLayout flChangePinCode;
 
     ButtonAnimation buttonAnimation;
 
@@ -63,6 +77,7 @@ public class SettingsFragment extends BaseFragment {
         super.onViewCreated(view, savedInstanceState);
 
         buttonAnimation = new ButtonAnimation(getContext(), btnSignOut);
+        setStyleColor();
     }
 
     @Override
@@ -73,7 +88,7 @@ public class SettingsFragment extends BaseFragment {
 
     @OnClick(R.id.btn_sign_out)
     public void clickBtnSingOut() {
-        requestSugnOut();
+        requestSignOut();
         buttonAnimation.start();
     }
 
@@ -97,7 +112,23 @@ public class SettingsFragment extends BaseFragment {
         });
     }
 
-    private void requestSugnOut() {
+    private void setStyleColor() {
+        if(CustomSharedPreference.getIsMan(getContext()) == Const.WOMAN_VALUE) {
+            sbPushUp.setBackDrawableRes(R.drawable.switch_bg_woman);
+            sbMailNotifications.setBackDrawableRes(R.drawable.switch_bg_woman);
+            int color = getColor(R.color.button_red_dark);
+            tvPhone.setTextColor(color);
+            tvEmail.setTextColor(color);
+            tvChangePassword.setTextColor(color);
+            tvChangePinCode.setTextColor(color);
+            imgChangePhone.setColorFilter(color);
+            imgChangeEmail.setColorFilter(color);
+            flChangePassword.setBackgroundResource(R.drawable.button_settings_bg_woman_border);
+            flChangePinCode.setBackgroundResource(R.drawable.button_settings_bg_woman_border);
+        }
+    }
+
+    private void requestSignOut() {
         getActivity().startService(ExitService.getIntent(getContext()));
     }
 

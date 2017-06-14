@@ -24,4 +24,5 @@
     <color name="fab_add">#75d648</color>
     <color name="fab_delete">#d65448</color>
     <color name="bg_woman">#a27874</color>
+    <color name="edit_text_unselect">#66ffffff</color>
 </resources>

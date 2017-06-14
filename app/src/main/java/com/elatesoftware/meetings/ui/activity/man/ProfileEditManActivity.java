@@ -81,6 +81,8 @@ public class ProfileEditManActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             requestPermissions(new String[]{ Manifest.permission.READ_EXTERNAL_STORAGE}, Const.REQUEST_PERMISSIONS);
+        } else {
+            isPermissionsAddPhoto = true;
         }
 
         registerBroadcast();
@@ -129,6 +131,12 @@ public class ProfileEditManActivity extends BaseActivity {
         if(requestCode == Const.REQUEST_PERMISSIONS && Utils.isPermissionsGranted(grantResults)) {
             isPermissionsAddPhoto = true;
         }
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        requestUpdateInfo();
     }
 
     @OnClick(R.id.rl_add)
@@ -209,7 +217,8 @@ public class ProfileEditManActivity extends BaseActivity {
         setProgressDialogMessage(getString(R.string.loading_photo) + " ...");
         showProgressDialog();
         Log.d(TAG, "requestAddPhoto");
-        startService(new Intent(this, AddPhotoService.class));
+        //boolean isFirstPhoto = GetPhotosAnswer.getInstance() == null ? false : GetPhotosAnswer.getInstance().getResult().size() == 0;
+        startService(AddPhotoService.getIntent(this));
     }
 
     private void requestGetPhotos() {
@@ -217,9 +226,11 @@ public class ProfileEditManActivity extends BaseActivity {
     }
 
     private void requestDeletePhoto() {
-        setProgressDialogMessage(getString(R.string.delete_photo) + " ...");
-        showProgressDialog();
-        startService(DeletePhotoService.getIntent(this, currPhotoId));
+        if(adapter != null && adapter.getPhotos() != null && adapter.getPhotos().size() > 0) {
+            setProgressDialogMessage(getString(R.string.delete_photo) + " ...");
+            showProgressDialog();
+            startService(DeletePhotoService.getIntent(this, currPhotoId));
+        }
     }
 
     private void setSize() {
@@ -230,7 +241,12 @@ public class ProfileEditManActivity extends BaseActivity {
     private void updateLocalInfo() {
         String name = cetName.getEditText().getText().toString();
         String aboutMe = cetAbout.getEditText().getText().toString();
-        profileMan = new HumanAnswer(name, birthDate == null ? 0 : birthDate.getTimeInMillis() / 1000, aboutMe);
+        profileMan = CustomSharedPreference.getProfileInformation(this);
+        profileMan.setFirstName(name);
+        profileMan.setAboutMe(aboutMe);
+        if(birthDate != null) {
+            profileMan.setDateOfBirth(birthDate.getTimeInMillis() / 1000);
+        }
     }
 
     private void loadInfo() {
@@ -270,7 +286,11 @@ public class ProfileEditManActivity extends BaseActivity {
     }
 
     private void setCurrentPhotoId(int position) {
-        currPhotoId = adapter.getPhotos().get(position).getId();
+        if(adapter.getPhotos().size() > 0) {
+            currPhotoId = adapter.getPhotos().get(position).getId();
+        } else {
+            currPhotoId = -1;
+        }
         Log.d(TAG, "currPhotoId: " + currPhotoId);
     }
 
@@ -279,13 +299,12 @@ public class ProfileEditManActivity extends BaseActivity {
         @Override
         public void onReceive(Context context, Intent intent) {
             String response = intent.getStringExtra(Const.RESPONSE);
+            ProfileEditManActivity.super.onBackPressed();
             if(response != null && response.equals(String.valueOf(Const.CODE_SUCCESS)) && MessageAnswer.getInstance() != null) {
                 Log.d(TAG, "UpdateAccount 200");
                 if(MessageAnswer.getInstance().getSuccess()) {
                     updateLocalInfo();
                     CustomSharedPreference.setProfileInformation(ProfileEditManActivity.this, profileMan);
-                    ProfileManFragment.getInstance().loadInfo();
-                    onBackPressed();
                     Log.d(TAG, "UpdateAccount TRUE");
                 } else {
                     showMessage(R.string.wrong_data);

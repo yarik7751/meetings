@@ -11,14 +11,19 @@ import android.widget.ImageView;
 
 import com.elatesoftware.meetings.R;
 import com.elatesoftware.meetings.ui.fragment.base.BaseFragment;
+import com.elatesoftware.meetings.util.AndroidUtils;
+import com.elatesoftware.meetings.util.Const;
 import com.elatesoftware.meetings.util.CustomSharedPreference;
 import com.elatesoftware.meetings.util.ImageHelper;
+import com.elatesoftware.meetings.util.StringUtils;
 import com.elatesoftware.meetings.util.api.Api;
 import com.elatesoftware.meetings.util.api.pojo.GetPhotoAnswer;
 import com.google.gson.Gson;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
+import com.squareup.picasso.Callback;
+import com.squareup.picasso.Picasso;
 import com.wang.avi.AVLoadingIndicatorView;
 
 import butterknife.BindView;
@@ -73,7 +78,22 @@ public class PhotoFragment extends BaseFragment {
     }
 
     private void requestGetPhoto() {
-        pbProgress.setVisibility(View.VISIBLE);
+        long userId = CustomSharedPreference.getProfileInformation(getContext()).getId();
+        String photoUrl = StringUtils.getPhotoUrl((int) userId, (int) photoId);
+        int photoWidth = AndroidUtils.getWindowsSizeParams(getContext())[0];
+        int photoHeight = (int) (AndroidUtils.getWindowsSizeParams(getContext())[1] * Const.PHOTOS_HEIGHT_PERCENT);
+        Picasso.with(getContext()).load(photoUrl).resize(photoWidth, photoHeight).centerCrop().into(imgPhoto, new Callback() {
+            @Override
+            public void onSuccess() {
+                pbProgress.setVisibility(View.GONE);
+            }
+
+            @Override
+            public void onError() {
+
+            }
+        });
+        /*pbProgress.setVisibility(View.VISIBLE);
         AsyncHttpClient client = new AsyncHttpClient();
         RequestParams params = new RequestParams();
         params.add("sessionKey", CustomSharedPreference.getToken(getContext()));
@@ -109,6 +129,6 @@ public class PhotoFragment extends BaseFragment {
                     pbProgress.setVisibility(View.GONE);
                 }
             }
-        });
+        });*/
     }
 }

@@ -190,7 +190,7 @@ public class AddDateActivity extends BaseActivity implements OnMapReadyCallback 
                         attributions = "";
                     }
                     String placeStr = name + "\n" + address;
-                    placeStr = placeStr.replace("\"", "");
+                    placeStr = placeStr.replace("\"", " ");
                     tvPlaceTitle.setText(placeStr);
 
                     map.clear();

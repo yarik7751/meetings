@@ -29,7 +29,7 @@ public class CustomEditText extends FrameLayout {
     private CardView cv;
     private EditText et;
 
-    private int colorFrom = getResources().getColor(R.color.gray);
+    private int colorFrom = getResources().getColor(R.color.edit_text_unselect);
     private int colorTo = getResources().getColor(R.color.white);
     private int hintColor = getResources().getColor(R.color.white);
     private int hintColorFocus = getResources().getColor(R.color.black);

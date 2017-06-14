@@ -53,6 +53,7 @@
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
                     app:kswAnimationDuration="300"
+                    app:kswFadeBack="true"
                     app:kswBackDrawable="@drawable/ios_back_drawable"
                     app:kswBackMeasureRatio="1.4"
                     app:kswThumbDrawable="@drawable/ios_thumb_selector"
@@ -200,6 +201,7 @@
                 android:background="@drawable/button_settings_bg_border">
 
                 <TextView
+                    android:id="@+id/tv_change_password"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
@@ -217,6 +219,7 @@
                 android:background="@drawable/button_settings_bg_border">
 
                 <TextView
+                    android:id="@+id/tv_change_pin_code"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"

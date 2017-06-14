@@ -6,7 +6,6 @@ import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,9 +14,8 @@ import android.widget.FrameLayout;
 import android.widget.TextView;
 
 import com.elatesoftware.meetings.R;
-import com.elatesoftware.meetings.ui.activity.SearchActivity;
+import com.elatesoftware.meetings.ui.activity.FilterActivity;
 import com.elatesoftware.meetings.ui.fragment.base.BaseFragment;
-import com.elatesoftware.meetings.util.AndroidUtils;
 import com.elatesoftware.meetings.util.Utils;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -66,7 +64,7 @@ public class SearchWomanFragment extends BaseFragment implements OnMapReadyCallb
 
     @OnClick(R.id.fab_search)
     public void clickFabSearch() {
-        startActivity(new Intent(getContext(), SearchActivity.class));
+        startActivity(new Intent(getContext(), FilterActivity.class));
     }
 
     @OnClick(R.id.tv_map)

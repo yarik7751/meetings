@@ -44,21 +44,21 @@ public class WorkManActivity extends BaseActivity {
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId()) {
                     case R.id.action_profile:
-                        onSwitchFragment(ProfileManFragment.getInstance(), ProfileManFragment.class.getName(), false, true, R.id.container);
+                        onSwitchFragment(new ProfileManFragment(), ProfileManFragment.class.getName(), false, true, R.id.container);
                         break;
 
                     case R.id.action_dales:
                         //showMessage("Oops ;) It is not ready yet!");
-                        onSwitchFragment(DatesManFragment.getInstance(), DatesManFragment.class.getName(), false, true, R.id.container);
+                        onSwitchFragment(new DatesManFragment(), DatesManFragment.class.getName(), false, true, R.id.container);
                         break;
 
                     case R.id.action_wallet:
                         //showMessage("Oops ;) It is not ready yet!");
-                        onSwitchFragment(WalletManFragment.getInstance(), WalletManFragment.class.getName(), false, true, R.id.container);
+                        onSwitchFragment(new WalletManFragment(), WalletManFragment.class.getName(), false, true, R.id.container);
                         break;
 
                     case R.id.action_settings:
-                        onSwitchFragment(SettingsFragment.getInstance(), SettingsFragment.class.getName(), false, true, R.id.container);
+                        onSwitchFragment(new SettingsFragment(), SettingsFragment.class.getName(), false, true, R.id.container);
                         break;
                 }
                 return true;

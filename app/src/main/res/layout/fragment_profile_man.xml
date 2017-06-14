@@ -102,49 +102,7 @@
                     android:textColor="@color/button_blue_light"
                     android:textStyle="bold"/>
 
-                <ImageView
-                    android:layout_width="4dp"
-                    android:layout_height="4dp"
-                    android:layout_margin="8dp"
-                    android:src="@drawable/indicator"/>
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="14sp"
-                    android:textColor="@color/text_white_op"
-                    android:text="Height: "/>
-
-                <TextView
-                    android:id="@+id/tv_height"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="14sp"
-                    android:textColor="@color/button_blue_light"
-                    android:text="185"
-                    android:textStyle="bold"/>
-
-                <ImageView
-                    android:layout_width="4dp"
-                    android:layout_height="4dp"
-                    android:layout_margin="8dp"
-                    android:src="@drawable/indicator"/>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="14sp"
-                    android:textColor="@color/text_white_op"
-                    android:text="Weight: "/>
-
-                <TextView
-                    android:id="@+id/tv_weight"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="14sp"
-                    android:textColor="@color/button_blue_light"
-                    android:text="000"
-                    android:textStyle="bold"/>
             </LinearLayout>
 
             <View

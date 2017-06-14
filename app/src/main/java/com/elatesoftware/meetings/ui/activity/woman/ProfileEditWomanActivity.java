@@ -83,6 +83,8 @@ public class ProfileEditWomanActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             requestPermissions(new String[]{ Manifest.permission.READ_EXTERNAL_STORAGE}, Const.REQUEST_PERMISSIONS);
+        } else {
+            isPermissionsAddPhoto = true;
         }
 
         registerBroadcast();
@@ -135,6 +137,11 @@ public class ProfileEditWomanActivity extends BaseActivity {
         }
     }
 
+    @Override
+    public void onBackPressed() {
+        requestUpdateInfo();
+    }
+
     @OnClick(R.id.rl_add)
     public void clickAddPhoto() {
         if(isPermissionsAddPhoto) {
@@ -154,8 +161,6 @@ public class ProfileEditWomanActivity extends BaseActivity {
     public void clickImgBack() {
         requestUpdateInfo();
     }
-
-
 
     @OnClick(R.id.btn_birth_date)
     public void clickBtnBirthDate() {
@@ -217,7 +222,8 @@ public class ProfileEditWomanActivity extends BaseActivity {
         setProgressDialogMessage(getString(R.string.loading_photo) + " ...");
         showProgressDialog();
         Log.d(TAG, "requestAddPhoto");
-        startService(new Intent(this, AddPhotoService.class));
+        //boolean isFirstPhoto = GetPhotosAnswer.getInstance() == null ? false : GetPhotosAnswer.getInstance().getResult().size() > 0;
+        startService(AddPhotoService.getIntent(this));
     }
 
     private void requestGetPhotos() {
@@ -225,7 +231,7 @@ public class ProfileEditWomanActivity extends BaseActivity {
     }
 
     private void requestDeletePhoto() {
-        if(adapter.getPhotos().size() > 0) {
+        if(adapter != null && adapter.getPhotos() != null && adapter.getPhotos().size() > 0) {
             setProgressDialogMessage(getString(R.string.delete_photo) + " ...");
             showProgressDialog();
             startService(DeletePhotoService.getIntent(this, currPhotoId));
@@ -244,21 +250,35 @@ public class ProfileEditWomanActivity extends BaseActivity {
         double height = TextUtils.isEmpty(heightStr) ? 0 : Double.parseDouble(heightStr);
         String weightStr = cetWeight.getEditText().getText().toString();
         double weight = TextUtils.isEmpty(weightStr) ? 0 : Double.parseDouble(weightStr);
-        profileMan = new HumanAnswer(name, birthDate == null ? 0 : birthDate.getTimeInMillis() / 1000, aboutMe, height, weight);
+        //profileMan = new HumanAnswer(name, birthDate == null ? 0 : birthDate.getTimeInMillis() / 1000, aboutMe, height, weight);
+        profileMan = CustomSharedPreference.getProfileInformation(this);
+        profileMan.setFirstName(name);
+        profileMan.setAboutMe(aboutMe);
+        if(height > 0) {
+            profileMan.setHeight(height);
+        }
+        if(weight > 0) {
+            profileMan.setWeight(weight);
+        }
+        if(birthDate != null) {
+            profileMan.setDateOfBirth(birthDate.getTimeInMillis() / 1000);
+        }
     }
 
     private void loadInfo() {
-        HumanAnswer profileMan = CustomSharedPreference.getProfileInformation(this);
-        if(profileMan != null) {
-            if(profileMan.getDateOfBirthByCalendar() != null) {
-                birthDate = profileMan.getDateOfBirthByCalendar();
+        HumanAnswer profileWoman = CustomSharedPreference.getProfileInformation(this);
+        if(profileWoman != null) {
+            if(profileWoman.getDateOfBirthByCalendar() != null) {
+                birthDate = profileWoman.getDateOfBirthByCalendar();
             }
-            cetName.getEditText().setText(profileMan.getFirstName());
-            cetAbout.getEditText().setText(profileMan.getAboutMe());
-            cetHeight.getEditText().setText(String.valueOf(profileMan.getHeight().intValue()));
-            cetWeight.getEditText().setText(String.valueOf(profileMan.getWeight().intValue()));
-            if(profileMan.getDateOfBirthByCalendar() != null) {
-                btnBirthDate.setText(DateUtils.getDateToString(ProfileEditWomanActivity.this, profileMan.getDateOfBirthByCalendar()));
+            cetName.getEditText().setText(profileWoman.getFirstName());
+            cetAbout.getEditText().setText(profileWoman.getAboutMe());
+            Double height = profileWoman.getHeight();
+            cetHeight.getEditText().setText(height == null ? "" : String.valueOf(height.intValue()));
+            Double weight = profileWoman.getWeight();
+            cetWeight.getEditText().setText(weight == null ? "" : String.valueOf(weight.intValue()));
+            if(profileWoman.getDateOfBirthByCalendar() != null) {
+                btnBirthDate.setText(DateUtils.getDateToString(ProfileEditWomanActivity.this, profileWoman.getDateOfBirthByCalendar()));
             }
         } else {
 
@@ -299,13 +319,12 @@ public class ProfileEditWomanActivity extends BaseActivity {
         @Override
         public void onReceive(Context context, Intent intent) {
             String response = intent.getStringExtra(Const.RESPONSE);
+            ProfileEditWomanActivity.super.onBackPressed();
             if(response != null && response.equals(String.valueOf(Const.CODE_SUCCESS)) && MessageAnswer.getInstance() != null) {
                 Log.d(TAG, "UpdateAccount 200");
                 if(MessageAnswer.getInstance().getSuccess()) {
                     updateLocalInfo();
                     CustomSharedPreference.setProfileInformation(ProfileEditWomanActivity.this, profileMan);
-                    ProfileWomanFragment.getInstance().loadInfo();
-                    onBackPressed();
                     Log.d(TAG, "UpdateAccount TRUE");
                 } else {
                     showMessage(R.string.wrong_data);

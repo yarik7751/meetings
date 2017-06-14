@@ -2,6 +2,7 @@ package com.elatesoftware.meetings.util;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.text.TextUtils;
 import android.util.Log;
 
 import com.elatesoftware.meetings.util.api.pojo.HumanAnswer;
@@ -66,7 +67,7 @@ public class CustomSharedPreference {
         Gson gson = new Gson();
         String info = getSharedPreferences(context).getString(Const.SP_PROFILE_INFORMATION, null);
         Log.d(TAG, "info (get): " + info);
-        if(info == null) {
+        if(TextUtils.isEmpty(info)) {
             return null;
         } else {
             HumanAnswer infoMan = gson.fromJson(info, HumanAnswer.class);

@@ -85,6 +85,11 @@ public class ProfileManFragment extends BaseFragment {
         super.onViewCreated(view, savedInstanceState);
 
         setSize();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
         loadInfo();
         requestGetPhotos();
     }
@@ -132,7 +137,7 @@ public class ProfileManFragment extends BaseFragment {
     }
 
     private void loadPhoto(List<Photo> photo) {
-        PhotoFragmentPageAdapter adapter = new PhotoFragmentPageAdapter(getFragmentManager(), photo);
+        PhotoFragmentPageAdapter adapter = new PhotoFragmentPageAdapter(getChildFragmentManager(), photo);
         vpPhotos.setAdapter(adapter);
         inkIndicator.setViewPager(vpPhotos);
         vpPhotos.setOffscreenPageLimit(adapter.getCount());

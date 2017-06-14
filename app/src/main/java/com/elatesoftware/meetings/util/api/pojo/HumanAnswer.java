@@ -86,7 +86,7 @@ public class HumanAnswer {
     }
 
     public GregorianCalendar getDateOfBirthByCalendar() {
-        if(dateOfBirth <= 0) {
+        if(dateOfBirth == null || dateOfBirth <= 0) {
             return null;
         }
         GregorianCalendar calendar = new GregorianCalendar();

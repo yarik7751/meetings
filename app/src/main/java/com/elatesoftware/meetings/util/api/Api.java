@@ -11,7 +11,8 @@ import com.elatesoftware.meetings.util.api.pojo.HumanAnswer;
 import com.elatesoftware.meetings.util.api.pojo.LoginAnswer;
 import com.elatesoftware.meetings.util.api.pojo.Meeting;
 import com.elatesoftware.meetings.util.api.pojo.MessageAnswer;
-import com.elatesoftware.meetings.util.api.pojo.RegisterAnswer;
+import com.elatesoftware.meetings.util.api.pojo.SearchDatesAnswer;
+import com.elatesoftware.meetings.util.model.params.SearchDatesFilter;
 import com.google.gson.Gson;
 
 import org.json.JSONArray;
@@ -37,7 +38,7 @@ public class Api {
     private static IApi iApi = null;
 
     public static final String BASE_URL = "http://dateportal.elatesof.w07.hoster.by/";
-    //public static final String BASE_URL = "http://192.168.100.29:3000/";
+    //public static final String BASE_URL = "http://192.168.100.6:3000/";
 
     public static IApi getApi() {
         if(iApi == null) {
@@ -87,8 +88,8 @@ public class Api {
             if(response != null && rawJson != null){
                 if(response.code() == Const.CODE_SUCCESS) {
                     Gson gson = new Gson();
-                    RegisterAnswer messageAnswer = gson.fromJson(rawJson, RegisterAnswer.class);
-                    RegisterAnswer.setInstance(messageAnswer);
+                    LoginAnswer messageAnswer = gson.fromJson(rawJson, LoginAnswer.class);
+                    LoginAnswer.setInstance(messageAnswer);
                 }
                 result = String.valueOf(response.code());
             }
@@ -114,10 +115,14 @@ public class Api {
             String rawJson = null;
             try {
                 response = call.execute();
-                rawJson = response.body().string();
-                rawJson = rawJson.replace("\\", "");
-                //rawJson = rawJson.substring(1, rawJson.length() - 1);
-                Log.d(TAG, "login: " + rawJson);
+                if(response != null && response.body() != null) {
+                    rawJson = response.body().string();
+                    rawJson = rawJson.replace("\\", "");
+                    //rawJson = rawJson.substring(1, rawJson.length() - 1);
+                    Log.d(TAG, "login: " + rawJson);
+                } else {
+                    Log.d(TAG, "login: null");
+                }
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -392,6 +397,38 @@ public class Api {
                 //todo 29 Плохо. Поговорить с Дашей
                 MessageAnswer answer = gson.fromJson(rawJson, MessageAnswer.class);
                 MessageAnswer.setInstance(answer);
+            }
+            result = String.valueOf(response.code());
+        }
+        return result;
+    }
+
+    public static String searchDates(String sessionKey, SearchDatesFilter searchDatesFilterParams) {
+        Log.d(TAG, "searchDatesStr");
+        Gson gson = new Gson();
+        /*String searchDatesStr = gson.toJson(searchDatesFilterParams, SearchDatesFilter.class);
+        Log.d(TAG, "searchDatesStr: " + searchDatesStr);
+        RequestBody body = RequestBody.create(okhttp3.MediaType.parse("application/json; charset=utf-8"), searchDatesStr);*/
+        Call<ResponseBody> call = getApi().searchDates(sessionKey, searchDatesFilterParams.getAmountStart(), searchDatesFilterParams.getStartTime(), searchDatesFilterParams.getPage());
+        Response<ResponseBody> response = null;
+        String result = null;
+        String rawJson = null;
+        try {
+            response = call.execute();
+            if(response != null && response.body() != null) {
+                rawJson = response.body().string();
+                rawJson = rawJson.replace("\\", "");
+                Log.d(TAG, "responseBody: " + rawJson);
+            } else {
+                Log.d(TAG, "responseBody: null");
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        if(response != null && rawJson != null){
+            if(response.code() == Const.CODE_SUCCESS) {
+                SearchDatesAnswer messageAnswer = gson.fromJson(rawJson, SearchDatesAnswer.class);
+                SearchDatesAnswer.setInstance(messageAnswer);
             }
             result = String.valueOf(response.code());
         }

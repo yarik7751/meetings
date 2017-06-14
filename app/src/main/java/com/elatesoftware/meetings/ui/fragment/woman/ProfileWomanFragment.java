@@ -16,6 +16,7 @@ import android.widget.TextView;
 import com.elatesoftware.meetings.R;
 import com.elatesoftware.meetings.ui.activity.AddDateActivity;
 import com.elatesoftware.meetings.ui.activity.woman.ProfileEditWomanActivity;
+import com.elatesoftware.meetings.ui.activity.woman.SearchManActivity;
 import com.elatesoftware.meetings.ui.adapter.page.PhotoFragmentPageAdapter;
 import com.elatesoftware.meetings.ui.fragment.base.BaseFragment;
 import com.elatesoftware.meetings.service.GetAccountInfoService;
@@ -85,8 +86,12 @@ public class ProfileWomanFragment extends BaseFragment {
         super.onViewCreated(view, savedInstanceState);
 
         rlPhotos.setBackgroundResource(R.drawable.button_red);
-
         setSize();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
         loadInfo();
         requestGetPhotos();
     }
@@ -102,12 +107,10 @@ public class ProfileWomanFragment extends BaseFragment {
         startActivity(new Intent(getContext(), ProfileEditWomanActivity.class));
     }
 
-    @OnClick(R.id.ll_add_date)
+    @OnClick(R.id.ll_search)
     public void clickLlAddDate() {
-        startActivity(new Intent(getContext(), AddDateActivity.class));
+        startActivity(new Intent(getContext(), SearchManActivity.class));
     }
-
-
 
     private void registerReceivers() {
         getAccountInfoBroadcastReceiver = new GetAccountInfoBroadcastReceiver();
@@ -134,7 +137,7 @@ public class ProfileWomanFragment extends BaseFragment {
     }
 
     private void loadPhoto(List<Photo> photo) {
-        PhotoFragmentPageAdapter adapter = new PhotoFragmentPageAdapter(getFragmentManager(), photo);
+        PhotoFragmentPageAdapter adapter = new PhotoFragmentPageAdapter(getChildFragmentManager(), photo);
         vpPhotos.setAdapter(adapter);
         inkIndicator.setViewPager(vpPhotos);
         vpPhotos.setOffscreenPageLimit(adapter.getCount());
@@ -147,8 +150,10 @@ public class ProfileWomanFragment extends BaseFragment {
             tvName.setText(profileWoman.getFirstName());
             tvAbout.setText(profileWoman.getAboutMe());
             age = profileWoman.getDateOfBirthByCalendar() == null ? 0 : DateUtils.getAge(profileWoman.getDateOfBirthByCalendar().getTimeInMillis());
-            tvHeight.setText(String.valueOf(profileWoman.getHeight().intValue()));
-            tvWeight.setText(String.valueOf(profileWoman.getWeight().intValue()));
+            Double height = profileWoman.getHeight();
+            tvHeight.setText(height == null ? "" : String.valueOf(height.intValue()));
+            Double weight = profileWoman.getWeight();
+            tvWeight.setText(weight == null ? "" : String.valueOf(weight.intValue()));
             tvAge.setText(String.valueOf(age));
             
         }

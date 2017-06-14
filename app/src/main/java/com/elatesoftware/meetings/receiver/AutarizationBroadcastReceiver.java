@@ -30,32 +30,27 @@ public class AutarizationBroadcastReceiver extends BroadcastReceiver {
 
     @Override
     public void onReceive(Context context, Intent intent) {
+        if(sign == SIGN_UP) {
+            CustomSharedPreference.setProfileInformation(context, null);
+            CustomSharedPreference.setPin(context, null);
+        }
         String response = intent.getStringExtra(Const.RESPONSE);
-        boolean checkAnswer = sign == SIGN_IN ? LoginAnswer.getInstance() != null : RegisterAnswer.getInstance() != null;
-        if(response != null && response.equals(String.valueOf(Const.CODE_SUCCESS)) && checkAnswer) {
+        if(response != null && response.equals(String.valueOf(Const.CODE_SUCCESS))) {
             Log.d(TAG, "registration 200");
-            boolean success = sign == SIGN_IN ? LoginAnswer.getInstance().getSuccess() : RegisterAnswer.getInstance().getSuccess();
+            boolean success = LoginAnswer.getInstance().getSuccess();
             if(success) {
-                if(sign == SIGN_IN) {
-                    CustomSharedPreference.setProfileInformation(context, LoginAnswer.getInstance().getResult().getAccount());
-                }
-                //todo 11 ЖАХ!!!!! Выпраўляй!!!!
-                String token = sign == SIGN_IN ? LoginAnswer.getInstance().getResult().getSessionKey() : RegisterAnswer.getInstance().getResult();
+                CustomSharedPreference.setProfileInformation(context, LoginAnswer.getInstance().getResult().getAccount());
+                String token = LoginAnswer.getInstance().getResult().getSessionKey();
                 CustomSharedPreference.setToken(context, token);
                 context.startActivity(new Intent(context, PinCodeActivity.class));
-                /*if(CustomSharedPreference.getIsMan(context)) {
-                    context.startActivity(new Intent(context, WorkManActivity.class));
-                } else {
-                    context.startActivity(new Intent(context, WorkWomanActivity.class));
-                }*/
                 Log.d(TAG, "registration TRUE");
             } else {
                 Toast.makeText(context, R.string.wrong_data, Toast.LENGTH_SHORT).show();
-                Log.d(TAG, "registration FALSE");
+                Log.d(TAG, "registration FALSE " + response);
             }
         } else {
             Toast.makeText(context, R.string.request_error, Toast.LENGTH_SHORT).show();
-            Log.d(TAG, "registration error");
+            Log.d(TAG, "registration error " + response);
         }
     }
 }

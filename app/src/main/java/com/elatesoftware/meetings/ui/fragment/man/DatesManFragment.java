@@ -13,13 +13,17 @@ import android.view.ViewGroup;
 
 import com.elatesoftware.meetings.R;
 import com.elatesoftware.meetings.ui.activity.AddDateActivity;
-import com.elatesoftware.meetings.ui.adapter.dales.DalesPendingRecyclerViewAdapter;
+import com.elatesoftware.meetings.ui.adapter.dales.DatesRecyclerViewAdapter;
 import com.elatesoftware.meetings.ui.adapter.dales.DalesRecyclerScheduleViewAdapter;
 import com.elatesoftware.meetings.ui.fragment.base.BaseFragment;
 import com.elatesoftware.meetings.service.GetDatesListService;
 import com.elatesoftware.meetings.util.Const;
 import com.elatesoftware.meetings.util.Utils;
 import com.elatesoftware.meetings.util.api.pojo.GetDatesManAnswer;
+import com.elatesoftware.meetings.util.api.pojo.Result;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -88,6 +92,26 @@ public class DatesManFragment extends BaseFragment {
         getActivity().startService(GetDatesListService.getIntent(getContext()));
     }
 
+    private List<Result> getPendingDates() {
+        List<Result> dates = new ArrayList<>();
+        for(int i = 0; i < GetDatesManAnswer.getInstance().getResult().size(); i++) {
+            if(GetDatesManAnswer.getInstance().getResult().get(i).getDate().getStatus() == Const.PENDING) {
+                dates.add(GetDatesManAnswer.getInstance().getResult().get(i));
+            }
+        }
+        return dates;
+    }
+
+    private List<Result> getScheduledDates() {
+        List<Result> dates = new ArrayList<>();
+        for(int i = 0; i < GetDatesManAnswer.getInstance().getResult().size(); i++) {
+            if(GetDatesManAnswer.getInstance().getResult().get(i).getDate().getStatus() == Const.SCHEDULED) {
+                dates.add(GetDatesManAnswer.getInstance().getResult().get(i));
+            }
+        }
+        return dates;
+    }
+
     public class GetDatesListReceiver extends BroadcastReceiver {
 
         @Override
@@ -95,8 +119,8 @@ public class DatesManFragment extends BaseFragment {
             String response = intent.getStringExtra(Const.RESPONSE);
             if(response != null && response.equals(String.valueOf(Const.CODE_SUCCESS)) && GetDatesManAnswer.getInstance() != null) {
                 if(GetDatesManAnswer.getInstance().getSuccess()) {
-                    rvScheduledDales.setAdapter(new DalesRecyclerScheduleViewAdapter(getActivity(), getContext(), GetDatesManAnswer.getInstance().getResult()));
-                    rvPendingDales.setAdapter(new DalesPendingRecyclerViewAdapter(getActivity(), getContext(), GetDatesManAnswer.getInstance().getResult()));
+                    rvScheduledDales.setAdapter(new DalesRecyclerScheduleViewAdapter(getActivity(), getContext(), getScheduledDates()));
+                    rvPendingDales.setAdapter(new DatesRecyclerViewAdapter(getContext(), getPendingDates(), false, R.drawable.ic_girl, R.color.button_blue_light));
                 } else {
                     showMessage(R.string.something_wrong);
                 }

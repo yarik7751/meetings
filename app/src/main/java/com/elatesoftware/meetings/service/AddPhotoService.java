@@ -1,6 +1,7 @@
 package com.elatesoftware.meetings.service;
 
 import android.app.IntentService;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.util.Log;
@@ -27,12 +28,16 @@ public class AddPhotoService extends IntentService {
         Log.d(TAG, "onHandleIntent");
         String base64 = ImageHelper.convertToBase64(bitmap);
         Log.d(TAG, "base64 : " + base64.length());
-        //String base64 = "1253";
         String response = Api.addPhoto(CustomSharedPreference.getToken(this), base64);
         Intent responseIntent = new Intent();
         responseIntent.setAction(ACTION);
         responseIntent.addCategory(Intent.CATEGORY_DEFAULT);
         responseIntent.putExtra(Const.RESPONSE, response);
         sendBroadcast(responseIntent);
+    }
+
+    public static Intent getIntent(Context context) {
+        Intent intent = new Intent(context, AddPhotoService.class);
+        return intent;
     }
 }

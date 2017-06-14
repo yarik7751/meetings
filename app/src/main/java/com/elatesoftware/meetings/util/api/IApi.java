@@ -49,4 +49,12 @@ public interface IApi {
 
     @GET("api/dates/getDatesList")
     Call<ResponseBody> getDatesList(@Query("sessionKey") String sessionKey);
+
+    @GET("api/dates/searchDates")
+    Call<ResponseBody> searchDates(
+            @Query("sessionKey") String sessionKey,
+            @Query("amountStart") Double amountStart,
+            @Query("startTime") Long startTime,
+            @Query("page") Integer page
+    );
 }
