@@ -18,7 +18,7 @@
     <application
         android:name=".application.MeetingsApplication"
         android:allowBackup="true"
-        android:icon="@drawable/logo"
+        android:icon="@drawable/logo_app"
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:largeHeap="true"
@@ -77,11 +77,6 @@
             android:windowSoftInputMode="stateAlwaysHidden"
             android:configChanges="keyboardHidden|orientation|screenSize"/>
         <activity
-            android:name=".ui.activity.man.ProfileEditManActivity"
-            android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateAlwaysHidden"
-            android:configChanges="keyboardHidden|orientation|screenSize"/>
-        <activity
             android:name=".ui.activity.ShowDateActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateAlwaysHidden"
@@ -92,7 +87,7 @@
             android:windowSoftInputMode="stateAlwaysHidden"
             android:configChanges="keyboardHidden|orientation|screenSize"/>
         <activity
-            android:name=".ui.activity.woman.ProfileEditWomanActivity"
+            android:name=".ui.activity.ProfileEditActivity"
             android:theme="@style/SplashThemeWoman"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateAlwaysHidden"
@@ -117,6 +112,12 @@
         <service android:name=".service.GetDatesListService"/>
         <service android:name=".service.ExitService"/>
         <service android:name=".service.SearchDatesService"/>
+        <service
+            android:name=".service.DatesMessagingService">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT"/>
+            </intent-filter>
+        </service>
 
         <meta-data
             android:name="com.google.android.gms.version"
@@ -125,5 +126,12 @@
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyB7MJrnVO5MlwmuePciAP5ahKEYwC9uAGI" />
+
+        <meta-data
+            android:name="com.google.firebase.messaging.default_notification_icon"
+            android:resource="@drawable/logo_app" />
+        <meta-data
+            android:name="com.google.firebase.messaging.default_notification_color"
+            android:resource="@color/colorAccent" />
     </application>
 </manifest>
