@@ -6,7 +6,7 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
-        <item name="android:windowBackground">@color/background</item>
+        <item name="android:windowBackground">@drawable/bg</item>
     </style>
 
     <style name="SplashTheme" parent="Theme.AppCompat.NoActionBar">
@@ -17,6 +17,7 @@
         <item name="colorPrimary">@color/button_red_dark</item>
         <item name="colorPrimaryDark">@color/button_red_light</item>
         <item name="colorAccent">@color/button_red_light</item>
+        <item name="android:windowBackground">@color/bg_woman</item>
     </style>
 
     <style name="AVLoadingIndicatorView">

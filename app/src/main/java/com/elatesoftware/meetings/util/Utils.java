@@ -84,6 +84,27 @@ public class Utils {
         }
     }
 
+    public static LatLng getLastLocation(Context context) {
+        if(!AndroidUtils.isNetworkOnline(context)) {
+            return null;
+        }
+        LocationManager locationManager = (LocationManager) context.getSystemService(Context.LOCATION_SERVICE);
+        if (ActivityCompat.checkSelfPermission(context, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED &&
+                ActivityCompat.checkSelfPermission(context, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            Log.d(TAG, "checkSelfPermission - false");
+            return null;
+        }
+        Location location = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+        if(location == null) {
+            location = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
+        }
+        if(location != null) {
+            return new LatLng(location.getLatitude(), location.getLongitude());
+        } else {
+            return null;
+        }
+    }
+
     //todo 20 move to base activity
     public static boolean isPermissionsGranted(int[] permissions) {
         for(int permission : permissions) {

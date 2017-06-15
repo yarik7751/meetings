@@ -19,6 +19,7 @@ import android.net.Uri;
 import android.support.v4.graphics.BitmapCompat;
 import android.text.TextUtils;
 import android.util.Base64;
+import android.view.View;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -27,6 +28,8 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -106,5 +109,40 @@ public class ImageHelper {
         byte[] decodedString = Base64.decode(encodedImage, Base64.DEFAULT);
         Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
         return decodedByte;
+    }
+
+    public static Bitmap getBitmapFromURL(String src) {
+        try {
+            URL url = new URL(src);
+            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+            connection.setDoInput(true);
+            connection.connect();
+            InputStream input = connection.getInputStream();
+            Bitmap myBitmap = BitmapFactory.decodeStream(input);
+            return myBitmap;
+        } catch (IOException e) {
+            return null;
+        }
+    }
+
+    public static Bitmap resizeBitmap(Bitmap bitmap,int width, int height) {
+        Bitmap newBitmap = Bitmap.createScaledBitmap(bitmap, width, height, true);
+        return  newBitmap;
+    }
+
+    public static Bitmap loadBitmapFromView(View v) {
+        if(v == null) {
+            return null;
+        }
+        v.setDrawingCacheEnabled(true);
+        v.measure(View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED),
+                View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED));
+        v.layout(0, 0, v.getMeasuredWidth(), v.getMeasuredHeight());
+        v.buildDrawingCache(true);
+        Bitmap bitmap = Bitmap.createBitmap(v.getDrawingCache(true));
+        if(bitmap.isRecycled()) {
+            bitmap.recycle();
+        }
+        return bitmap;
     }
 }

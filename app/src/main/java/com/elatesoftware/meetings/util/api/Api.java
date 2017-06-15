@@ -45,9 +45,9 @@ public class Api {
             HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
             interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
             OkHttpClient okHttpClient = new OkHttpClient.Builder()
-                    .connectTimeout(5, TimeUnit.MINUTES)
-                    .writeTimeout(5, TimeUnit.MINUTES)
-                    .readTimeout(5, TimeUnit.MINUTES)
+                    .connectTimeout(50, TimeUnit.SECONDS)
+                    .writeTimeout(50, TimeUnit.SECONDS)
+                    .readTimeout(50, TimeUnit.SECONDS)
                     .addInterceptor(interceptor)
                     .build();
             Retrofit retrofit = new Retrofit.Builder()
@@ -154,10 +154,13 @@ public class Api {
         String rawJson = null;
         try {
             response = call.execute();
-            rawJson = response.body().string();
-            rawJson = rawJson.replace("\\", "");
-            //rawJson = rawJson.substring(1, rawJson.length() - 1);
-            Log.d(TAG, "updateAccountInfo: " + rawJson);
+            if(response != null && response.body() != null) {
+                rawJson = response.body().string();
+                rawJson = rawJson.replace("\\", "");
+                Log.d(TAG, "updateAccountInfo: " + rawJson);
+            } else {
+                Log.d(TAG, "updateAccountInfo: null");
+            }
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -406,9 +409,6 @@ public class Api {
     public static String searchDates(String sessionKey, SearchDatesFilter searchDatesFilterParams) {
         Log.d(TAG, "searchDatesStr");
         Gson gson = new Gson();
-        /*String searchDatesStr = gson.toJson(searchDatesFilterParams, SearchDatesFilter.class);
-        Log.d(TAG, "searchDatesStr: " + searchDatesStr);
-        RequestBody body = RequestBody.create(okhttp3.MediaType.parse("application/json; charset=utf-8"), searchDatesStr);*/
         Call<ResponseBody> call = getApi().searchDates(sessionKey, searchDatesFilterParams.getAmountStart(), searchDatesFilterParams.getStartTime(), searchDatesFilterParams.getPage());
         Response<ResponseBody> response = null;
         String result = null;
