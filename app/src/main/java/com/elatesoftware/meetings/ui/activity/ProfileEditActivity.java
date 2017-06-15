@@ -1,4 +1,4 @@
-package com.elatesoftware.meetings.ui.activity.man;
+package com.elatesoftware.meetings.ui.activity;
 
 import android.Manifest;
 import android.app.DatePickerDialog;
@@ -15,19 +15,18 @@ import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.view.ViewPager;
+import android.text.TextUtils;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.DatePicker;
 import android.widget.RelativeLayout;
 
-import com.dd.CircularProgressButton;
 import com.elatesoftware.meetings.R;
-import com.elatesoftware.meetings.service.DeletePhotoService;
 import com.elatesoftware.meetings.ui.activity.base.BaseActivity;
-import com.elatesoftware.meetings.ui.activity.woman.ProfileEditWomanActivity;
 import com.elatesoftware.meetings.ui.adapter.page.PhotoFragmentPageAdapter;
-import com.elatesoftware.meetings.ui.fragment.man.ProfileManFragment;
 import com.elatesoftware.meetings.service.AddPhotoService;
+import com.elatesoftware.meetings.service.DeletePhotoService;
 import com.elatesoftware.meetings.service.GetPhotosService;
 import com.elatesoftware.meetings.service.UpdateAccountService;
 import com.elatesoftware.meetings.ui.view.CustomEditText;
@@ -50,14 +49,16 @@ import butterknife.BindView;
 import butterknife.OnClick;
 import me.relex.circleindicator.CircleIndicator;
 
-public class ProfileEditManActivity extends BaseActivity {
+public class ProfileEditActivity extends BaseActivity {
 
-    public static final String TAG = "ProfileEditMan_logs";
+    public static final String TAG = "ProfileEdit_logs";
     private static final int RESULT_LOAD_IMG = 302;
 
     @BindView(R.id.cet_name) CustomEditText cetName;
-    @BindView(R.id.btn_birth_date) CircularProgressButton btnBirthDate;
+    @BindView(R.id.cet_height) CustomEditText cetHeight;
+    @BindView(R.id.cet_weight) CustomEditText cetWeight;
     @BindView(R.id.cet_about) CustomEditText cetAbout;
+    @BindView(R.id.cet_birth_day) CustomEditText cetBirthDay;
     @BindView(R.id.vp_photos) ViewPager vpPhotos;
     @BindView(R.id.rl_photos) RelativeLayout rlPhotos;
     @BindView(R.id.rl_photos_fab) RelativeLayout rlPhotosFab;
@@ -78,6 +79,7 @@ public class ProfileEditManActivity extends BaseActivity {
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
+        setTheme();
         super.onCreate(savedInstanceState);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             requestPermissions(new String[]{ Manifest.permission.READ_EXTERNAL_STORAGE}, Const.REQUEST_PERMISSIONS);
@@ -86,7 +88,8 @@ public class ProfileEditManActivity extends BaseActivity {
         }
 
         registerBroadcast();
-        setContentView(R.layout.activity_profile_edit_man);
+        setContentView(R.layout.activity_profile_edit_woman);
+        setUI();
         setKeyboardListener();
         setSize();
         loadInfo();
@@ -135,7 +138,6 @@ public class ProfileEditManActivity extends BaseActivity {
 
     @Override
     public void onBackPressed() {
-        super.onBackPressed();
         requestUpdateInfo();
     }
 
@@ -159,8 +161,7 @@ public class ProfileEditManActivity extends BaseActivity {
         requestUpdateInfo();
     }
 
-    @OnClick(R.id.btn_birth_date)
-    public void clickBtnBirthDate() {
+    public void showDateDialog() {
         AndroidUtils.hideKeyboard(this);
         int year = 1990;
         int month = 0;
@@ -178,15 +179,50 @@ public class ProfileEditManActivity extends BaseActivity {
                 birthDate.set(Calendar.YEAR, year);
                 birthDate.set(Calendar.MONTH, month);
                 birthDate.set(Calendar.DAY_OF_MONTH, dayOfMonth);
-                btnBirthDate.setText(DateUtils.getDateToString(ProfileEditManActivity.this, birthDate));
+                cetBirthDay.getEditText().setText(DateUtils.getDateToString(ProfileEditActivity.this, birthDate));
             }
         }, year, month, day);
         dpd.show();
     }
 
+    private void setUI() {
+        cetBirthDay.getEditText().setFocusable(false);
+        cetBirthDay.getEditText().setFocusableInTouchMode(false);
+        cetBirthDay.getEditText().setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                if(event.getAction() == MotionEvent.ACTION_DOWN) {
+                    showDateDialog();
+                    return true;
+                }
+                return false;
+            }
+        });
+        if(CustomSharedPreference.getIsMan(this) == Const.WOMAN_VALUE) {
+            setTheme(R.style.SplashThemeWoman);
+            rlPhotos.setBackgroundResource(R.drawable.button_red);
+            cetHeight.setVisibility(View.VISIBLE);
+            cetWeight.setVisibility(View.VISIBLE);
+        } else {
+            rlPhotos.setBackgroundResource(R.drawable.button_blue);
+            cetHeight.setVisibility(View.GONE);
+            cetWeight.setVisibility(View.GONE);
+        }
+    }
+
+    private void setTheme() {
+        if(CustomSharedPreference.getIsMan(this) == Const.WOMAN_VALUE) {
+            setTheme(R.style.SplashThemeWoman);
+        } else {
+            setTheme(R.style.AppTheme);
+        }
+    }
+
     private void setKeyboardListener() {
         cetAbout.setKeyboardListener(this);
         cetName.setKeyboardListener(this);
+        cetHeight.setKeyboardListener(this);
+        cetWeight.setKeyboardListener(this);
     }
 
     private void registerBroadcast() {
@@ -217,7 +253,7 @@ public class ProfileEditManActivity extends BaseActivity {
         setProgressDialogMessage(getString(R.string.loading_photo) + " ...");
         showProgressDialog();
         Log.d(TAG, "requestAddPhoto");
-        //boolean isFirstPhoto = GetPhotosAnswer.getInstance() == null ? false : GetPhotosAnswer.getInstance().getResult().size() == 0;
+        //boolean isFirstPhoto = GetPhotosAnswer.getInstance() == null ? false : GetPhotosAnswer.getInstance().getResult().size() > 0;
         startService(AddPhotoService.getIntent(this));
     }
 
@@ -241,24 +277,39 @@ public class ProfileEditManActivity extends BaseActivity {
     private void updateLocalInfo() {
         String name = cetName.getEditText().getText().toString();
         String aboutMe = cetAbout.getEditText().getText().toString();
+        String heightStr = cetHeight.getEditText().getText().toString();
+        double height = TextUtils.isEmpty(heightStr) ? 0 : Double.parseDouble(heightStr);
+        String weightStr = cetWeight.getEditText().getText().toString();
+        double weight = TextUtils.isEmpty(weightStr) ? 0 : Double.parseDouble(weightStr);
+        //profileMan = new HumanAnswer(name, birthDate == null ? 0 : birthDate.getTimeInMillis() / 1000, aboutMe, height, weight);
         profileMan = CustomSharedPreference.getProfileInformation(this);
         profileMan.setFirstName(name);
         profileMan.setAboutMe(aboutMe);
+        if(height > 0) {
+            profileMan.setHeight(height);
+        }
+        if(weight > 0) {
+            profileMan.setWeight(weight);
+        }
         if(birthDate != null) {
             profileMan.setDateOfBirth(birthDate.getTimeInMillis() / 1000);
         }
     }
 
     private void loadInfo() {
-        HumanAnswer profileMan = CustomSharedPreference.getProfileInformation(this);
-        if(profileMan != null) {
-            if(profileMan.getDateOfBirthByCalendar() != null) {
-                birthDate = profileMan.getDateOfBirthByCalendar();
+        HumanAnswer profileWoman = CustomSharedPreference.getProfileInformation(this);
+        if(profileWoman != null) {
+            if(profileWoman.getDateOfBirthByCalendar() != null) {
+                birthDate = profileWoman.getDateOfBirthByCalendar();
             }
-            cetName.getEditText().setText(profileMan.getFirstName());
-            cetAbout.getEditText().setText(profileMan.getAboutMe());
-            if(profileMan.getDateOfBirthByCalendar() != null) {
-                btnBirthDate.setText(DateUtils.getDateToString(ProfileEditManActivity.this, profileMan.getDateOfBirthByCalendar()));
+            cetName.getEditText().setText(profileWoman.getFirstName());
+            cetAbout.getEditText().setText(profileWoman.getAboutMe());
+            Double height = profileWoman.getHeight();
+            cetHeight.getEditText().setText(height == null ? "" : String.valueOf(height.intValue()));
+            Double weight = profileWoman.getWeight();
+            cetWeight.getEditText().setText(weight == null ? "" : String.valueOf(weight.intValue()));
+            if(profileWoman.getDateOfBirthByCalendar() != null) {
+                cetBirthDay.getEditText().setText(DateUtils.getDateToString(ProfileEditActivity.this, profileWoman.getDateOfBirthByCalendar()));
             }
         } else {
 
@@ -299,12 +350,12 @@ public class ProfileEditManActivity extends BaseActivity {
         @Override
         public void onReceive(Context context, Intent intent) {
             String response = intent.getStringExtra(Const.RESPONSE);
-            ProfileEditManActivity.super.onBackPressed();
+            ProfileEditActivity.super.onBackPressed();
             if(response != null && response.equals(String.valueOf(Const.CODE_SUCCESS)) && MessageAnswer.getInstance() != null) {
                 Log.d(TAG, "UpdateAccount 200");
                 if(MessageAnswer.getInstance().getSuccess()) {
                     updateLocalInfo();
-                    CustomSharedPreference.setProfileInformation(ProfileEditManActivity.this, profileMan);
+                    CustomSharedPreference.setProfileInformation(ProfileEditActivity.this, profileMan);
                     Log.d(TAG, "UpdateAccount TRUE");
                 } else {
                     showMessage(R.string.wrong_data);

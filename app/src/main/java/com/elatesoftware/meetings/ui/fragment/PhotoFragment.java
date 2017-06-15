@@ -85,7 +85,9 @@ public class PhotoFragment extends BaseFragment {
         Picasso.with(getContext()).load(photoUrl).resize(photoWidth, photoHeight).centerCrop().into(imgPhoto, new Callback() {
             @Override
             public void onSuccess() {
-                pbProgress.setVisibility(View.GONE);
+                if(pbProgress != null) {
+                    pbProgress.setVisibility(View.GONE);
+                }
             }
 
             @Override

@@ -47,13 +47,14 @@
                     android:layout_weight="1">
 
                     <ImageView
-                        android:id="@+id/img_add_date"
+                        android:id="@+id/img_dates_func"
                         android:layout_width="24dp"
                         android:layout_height="24dp"
                         android:layout_gravity="top|center_horizontal"
                         android:src="@drawable/ic_search_white_24dp"/>
 
                     <TextView
+                        android:id="@+id/tv_dates_func"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="bottom|center_horizontal"
@@ -104,12 +105,14 @@
                     android:textStyle="bold"/>
 
                 <ImageView
+                    android:id="@+id/img_point1"
                     android:layout_width="4dp"
                     android:layout_height="4dp"
                     android:layout_margin="8dp"
                     android:src="@drawable/indicator"/>
 
                 <TextView
+                    android:id="@+id/tv_height_title"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="14sp"
@@ -126,12 +129,14 @@
                     android:textStyle="bold"/>
 
                 <ImageView
+                    android:id="@+id/img_point2"
                     android:layout_width="4dp"
                     android:layout_height="4dp"
                     android:layout_margin="8dp"
                     android:src="@drawable/indicator"/>
 
                 <TextView
+                    android:id="@+id/tv_weight_title"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="14sp"

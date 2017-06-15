@@ -6,7 +6,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:focusable="true"
     android:focusableInTouchMode="true"
-    android:background="@color/bg_woman">
+    tools:background="@color/bg_woman">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -48,24 +48,13 @@
                     android:gravity="left|center_vertical"
                     android:hint="@string/name"/>
 
-                <!--<com.elatesoftware.meetings.ui.view.CustomEditText
-                    android:id="@+id/cet_age"
+                <com.elatesoftware.meetings.ui.view.CustomEditText
+                    android:id="@+id/cet_birth_day"
                     android:layout_width="match_parent"
                     android:layout_height="45dp"
                     android:layout_marginBottom="8dp"
-                    android:gravity="left|center_vertical"
-                    android:hint="@string/age"/>-->
-
-                <com.dd.CircularProgressButton
-                    android:id="@+id/btn_birth_date"
-                    android:layout_width="match_parent"
-                    android:layout_height="45dp"
-                    android:layout_marginBottom="8dp"
-                    android:textColor="@color/white"
-                    android:textSize="14sp"
-                    app:cpb_textIdle="@string/birth_date"
-                    app:cpb_selectorIdle="@drawable/button_gray_bg"
-                    app:cpb_cornerRadius="5dp"/>
+                    android:gravity="center"
+                    android:hint="@string/birth_date"/>
 
                 <com.elatesoftware.meetings.ui.view.CustomEditText
                     android:id="@+id/cet_height"

@@ -1,4 +1,4 @@
-package com.elatesoftware.meetings.ui.fragment.man;
+package com.elatesoftware.meetings.ui.fragment;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -11,12 +11,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.elatesoftware.meetings.R;
 import com.elatesoftware.meetings.ui.activity.AddDateActivity;
-import com.elatesoftware.meetings.ui.activity.man.ProfileEditManActivity;
+import com.elatesoftware.meetings.ui.activity.ProfileEditActivity;
+import com.elatesoftware.meetings.ui.activity.woman.SearchManActivity;
 import com.elatesoftware.meetings.ui.adapter.page.PhotoFragmentPageAdapter;
 import com.elatesoftware.meetings.ui.fragment.base.BaseFragment;
 import com.elatesoftware.meetings.service.GetAccountInfoService;
@@ -38,33 +40,40 @@ import butterknife.BindView;
 import butterknife.OnClick;
 import me.relex.circleindicator.CircleIndicator;
 
-public class ProfileManFragment extends BaseFragment {
+public class ProfileFragment extends BaseFragment {
 
     @BindView(R.id.vp_photos) ViewPager vpPhotos;
     @BindView(R.id.rl_photos) RelativeLayout rlPhotos;
     @BindView(R.id.ink_indicator) CircleIndicator inkIndicator;
     @BindView(R.id.tv_name) TextView tvName;
-    /*@BindView(R.id.tv_height) TextView tvHeight;
-    @BindView(R.id.tv_weight) TextView tvWeight;*/
+    @BindView(R.id.tv_height) TextView tvHeight;
+    @BindView(R.id.tv_height_title) TextView tvHeightTitle;
+    @BindView(R.id.tv_weight) TextView tvWeight;
+    @BindView(R.id.tv_weight_title) TextView tvWeightTile;
     @BindView(R.id.tv_about) TextView tvAbout;
     @BindView(R.id.tv_age_title) TextView tvAgeTitle;
     @BindView(R.id.tv_age) TextView tvAge;
     @BindView(R.id.img_edit) ImageView imgEdit;
+    @BindView(R.id.img_point1) ImageView imgPoint1;
+    @BindView(R.id.img_point2) ImageView imgPoint2;
     @BindView(R.id.rl_edit) RelativeLayout rlEdit;
+    @BindView(R.id.ll_search) LinearLayout llSearch;
+    @BindView(R.id.ll_info) LinearLayout llInfo;
+    @BindView(R.id.tv_dates_func) TextView tvDatesFunc;
+    @BindView(R.id.img_dates_func) ImageView imgDatesFunc;
     @BindView(R.id.line) View line;
-    @BindView(R.id.pb_progress) AVLoadingIndicatorView pbProgress;
-
-    private List<View> photos;
+    @BindView(R.id.pb_progress)
+    AVLoadingIndicatorView pbProgress;
 
     private GetAccountInfoBroadcastReceiver getAccountInfoBroadcastReceiver;
     private GetPhotosBroadcastReceiver getPhotosBroadcastReceiver;
 
-    private static ProfileManFragment profileManFragment;
-    public static ProfileManFragment getInstance() {
-        if(profileManFragment == null) {
-            profileManFragment = new ProfileManFragment();
+    private static ProfileFragment profileFragment;
+    public static ProfileFragment getInstance() {
+        if(profileFragment == null) {
+            profileFragment = new ProfileFragment();
         }
-        return profileManFragment;
+        return profileFragment;
     }
 
     @Override
@@ -76,7 +85,7 @@ public class ProfileManFragment extends BaseFragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View v = inflater.inflate(R.layout.fragment_profile_man, null);
+        View v = inflater.inflate(R.layout.fragment_profile_woman, null);
         return v;
     }
 
@@ -84,6 +93,7 @@ public class ProfileManFragment extends BaseFragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        setUI();
         setSize();
     }
 
@@ -102,15 +112,44 @@ public class ProfileManFragment extends BaseFragment {
 
     @OnClick(R.id.rl_edit)
     public void clickImgEdit() {
-        startActivity(new Intent(getContext(), ProfileEditManActivity.class));
+        startActivity(new Intent(getContext(), ProfileEditActivity.class));
     }
 
-    @OnClick(R.id.ll_add_date)
+    @OnClick(R.id.ll_search)
     public void clickLlAddDate() {
-        startActivity(new Intent(getContext(), AddDateActivity.class));
+        if(CustomSharedPreference.getIsMan(getContext()) == Const.WOMAN_VALUE) {
+            startActivity(new Intent(getContext(), SearchManActivity.class));
+        } else {
+            startActivity(new Intent(getContext(), AddDateActivity.class));
+        }
     }
 
+    private void setUI() {
+        if(CustomSharedPreference.getIsMan(getContext()) == Const.WOMAN_VALUE) {
+            rlPhotos.setBackgroundResource(R.drawable.button_red);
+            llInfo.setBackgroundResource(R.drawable.button_red);
+            imgDatesFunc.setImageResource(R.drawable.ic_search_white_24dp);
+            tvDatesFunc.setText(R.string.search);
+            tvName.setTextColor(getResources().getColor(R.color.white));
+            tvAge.setTextColor(getResources().getColor(R.color.white));
+            tvHeight.setTextColor(getResources().getColor(R.color.white));
+            tvWeight.setTextColor(getResources().getColor(R.color.white));
 
+        } else {
+            rlPhotos.setBackgroundResource(R.drawable.button_blue);
+            llInfo.setBackgroundResource(R.drawable.button_blue);
+            imgDatesFunc.setImageResource(R.drawable.ic_add);
+            tvDatesFunc.setText(R.string.add_date);
+            tvName.setTextColor(getResources().getColor(R.color.button_blue_light));
+            tvAge.setTextColor(getResources().getColor(R.color.button_blue_light));
+            tvHeightTitle.setVisibility(View.GONE);
+            tvHeight.setVisibility(View.GONE);
+            imgPoint1.setVisibility(View.GONE);
+            tvWeightTile.setVisibility(View.GONE);
+            tvWeight.setVisibility(View.GONE);
+            imgPoint2.setVisibility(View.GONE);
+        }
+    }
 
     private void registerReceivers() {
         getAccountInfoBroadcastReceiver = new GetAccountInfoBroadcastReceiver();
@@ -144,25 +183,44 @@ public class ProfileManFragment extends BaseFragment {
     }
 
     public void loadInfo() {
-        HumanAnswer profileMan = CustomSharedPreference.getProfileInformation(getContext());
+        HumanAnswer profileWoman = CustomSharedPreference.getProfileInformation(getContext());
         long age = 0;
-        if(profileMan != null) {
-            tvName.setText(profileMan.getFirstName());
-            tvAbout.setText(profileMan.getAboutMe());
-            age = profileMan.getDateOfBirthByCalendar() == null ? 0 : DateUtils.getAge(profileMan.getDateOfBirthByCalendar().getTimeInMillis());
+        if(profileWoman != null) {
+            tvName.setText(profileWoman.getFirstName());
+            tvAbout.setText(profileWoman.getAboutMe());
+            age = profileWoman.getDateOfBirthByCalendar() == null ? 0 : DateUtils.getAge(profileWoman.getDateOfBirthByCalendar().getTimeInMillis());
             tvAge.setText(String.valueOf(age));
-        }
-        if(TextUtils.isEmpty(tvAbout.getText().toString())) {
-            line.setVisibility(View.GONE);
-        } else {
-            line.setVisibility(View.VISIBLE);
-        }
-        if(TextUtils.isEmpty(tvAge.getText().toString()) || age <= 0) {
-            tvAgeTitle.setVisibility(View.GONE);
-            tvAge.setVisibility(View.GONE);
-        } else {
-            tvAgeTitle.setVisibility(View.VISIBLE);
-            tvAge.setVisibility(View.VISIBLE);
+            if(TextUtils.isEmpty(tvAbout.getText().toString())) {
+                line.setVisibility(View.GONE);
+            } else {
+                line.setVisibility(View.VISIBLE);
+            }
+            if(TextUtils.isEmpty(tvAge.getText().toString()) || age <= 0) {
+                tvAgeTitle.setVisibility(View.GONE);
+                tvAge.setVisibility(View.GONE);
+            } else {
+                tvAgeTitle.setVisibility(View.VISIBLE);
+                tvAge.setVisibility(View.VISIBLE);
+            }
+
+            Double height = profileWoman.getHeight();
+            if(height == null || height.intValue() <= 0) {
+                tvHeightTitle.setVisibility(View.GONE);
+                tvHeight.setVisibility(View.GONE);
+                imgPoint1.setVisibility(View.GONE);
+            } else {
+                tvHeight.setText(String.valueOf(height.intValue()));
+            }
+
+            Double weight = profileWoman.getWeight();
+            if(weight == null || weight.intValue() <= 0) {
+                tvWeightTile.setVisibility(View.GONE);
+                tvWeight.setVisibility(View.GONE);
+                imgPoint2.setVisibility(View.GONE);
+            } else {
+                tvWeight.setText(String.valueOf(weight.intValue()));
+            }
+
         }
     }
 

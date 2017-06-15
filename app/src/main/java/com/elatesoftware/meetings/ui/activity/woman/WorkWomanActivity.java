@@ -12,8 +12,7 @@ import com.elatesoftware.meetings.R;
 import com.elatesoftware.meetings.ui.activity.base.BaseActivity;
 import com.elatesoftware.meetings.ui.fragment.SettingsFragment;
 import com.elatesoftware.meetings.ui.fragment.woman.DatesWomanFragment;
-import com.elatesoftware.meetings.ui.fragment.woman.ProfileWomanFragment;
-import com.elatesoftware.meetings.ui.fragment.woman.SearchWomanFragment;
+import com.elatesoftware.meetings.ui.fragment.ProfileFragment;
 import com.elatesoftware.meetings.ui.fragment.woman.WalletWomanFragment;
 import com.elatesoftware.meetings.util.AndroidUtils;
 import com.elatesoftware.meetings.util.Const;
@@ -31,7 +30,7 @@ public class WorkWomanActivity extends BaseActivity {
         setContentView(R.layout.activity_work_woman);
 
         if(savedInstanceState == null) {
-            onSwitchFragment(ProfileWomanFragment.getInstance(), ProfileWomanFragment.class.getName(), false, true, R.id.container);
+            onSwitchFragment(ProfileFragment.getInstance(), ProfileFragment.class.getName(), false, true, R.id.container);
         }
 
         bnvMenu.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -40,7 +39,7 @@ public class WorkWomanActivity extends BaseActivity {
                 AndroidUtils.hideKeyboard(WorkWomanActivity.this);
                 switch (item.getItemId()) {
                     case R.id.action_profile:
-                        onSwitchFragment(new ProfileWomanFragment(), ProfileWomanFragment.class.getName(), false, true, R.id.container);
+                        onSwitchFragment(new ProfileFragment(), ProfileFragment.class.getName(), false, true, R.id.container);
                         break;
 
                     case R.id.action_dales:

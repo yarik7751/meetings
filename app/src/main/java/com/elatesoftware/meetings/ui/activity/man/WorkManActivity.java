@@ -1,24 +1,20 @@
 package com.elatesoftware.meetings.ui.activity.man;
 
 import android.Manifest;
-import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.BottomNavigationView;
-import android.text.TextUtils;
 import android.view.MenuItem;
 
 import com.elatesoftware.meetings.R;
-import com.elatesoftware.meetings.ui.activity.PinCodeActivity;
 import com.elatesoftware.meetings.ui.activity.base.BaseActivity;
 import com.elatesoftware.meetings.ui.fragment.SettingsFragment;
 import com.elatesoftware.meetings.ui.fragment.man.DatesManFragment;
-import com.elatesoftware.meetings.ui.fragment.man.ProfileManFragment;
 import com.elatesoftware.meetings.ui.fragment.man.WalletManFragment;
+import com.elatesoftware.meetings.ui.fragment.ProfileFragment;
 import com.elatesoftware.meetings.util.Const;
-import com.elatesoftware.meetings.util.CustomSharedPreference;
 import com.elatesoftware.meetings.util.Utils;
 
 import butterknife.BindView;
@@ -36,7 +32,7 @@ public class WorkManActivity extends BaseActivity {
         setContentView(R.layout.activity_work_man);
 
         if(savedInstanceState == null) {
-            onSwitchFragment(ProfileManFragment.getInstance(), ProfileManFragment.class.getName(), false, true, R.id.container);
+            onSwitchFragment(new ProfileFragment(), ProfileFragment.class.getName(), false, true, R.id.container);
         }
 
         bnvMenu.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -44,7 +40,7 @@ public class WorkManActivity extends BaseActivity {
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId()) {
                     case R.id.action_profile:
-                        onSwitchFragment(new ProfileManFragment(), ProfileManFragment.class.getName(), false, true, R.id.container);
+                        onSwitchFragment(new ProfileFragment(), ProfileFragment.class.getName(), false, true, R.id.container);
                         break;
 
                     case R.id.action_dales:
