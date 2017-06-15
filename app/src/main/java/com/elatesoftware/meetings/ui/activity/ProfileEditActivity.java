@@ -79,7 +79,6 @@ public class ProfileEditActivity extends BaseActivity {
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
-        setTheme();
         super.onCreate(savedInstanceState);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             requestPermissions(new String[]{ Manifest.permission.READ_EXTERNAL_STORAGE}, Const.REQUEST_PERMISSIONS);
@@ -207,14 +206,6 @@ public class ProfileEditActivity extends BaseActivity {
             rlPhotos.setBackgroundResource(R.drawable.button_blue);
             cetHeight.setVisibility(View.GONE);
             cetWeight.setVisibility(View.GONE);
-        }
-    }
-
-    private void setTheme() {
-        if(CustomSharedPreference.getIsMan(this) == Const.WOMAN_VALUE) {
-            setTheme(R.style.SplashThemeWoman);
-        } else {
-            setTheme(R.style.AppTheme);
         }
     }
 

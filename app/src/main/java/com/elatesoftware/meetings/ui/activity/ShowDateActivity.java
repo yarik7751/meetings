@@ -9,6 +9,7 @@ import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
+import android.support.v7.widget.CardView;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
@@ -55,6 +56,11 @@ public class ShowDateActivity extends BaseActivity implements OnMapReadyCallback
     public static final String TAG = "ShowDateActivity_logs";
     public static final String TITLE = "TITLE";
     public static final String IS_SHOW_MAN_INFO = "IS_SHOW_MAN_INFO";
+    public static final String TYPE = "TYPE";
+    public static final int PREVIEW = 1;
+    public static final int SHOW_MAN = 2;
+    public static final int SHOW_WOMAN = 3;
+    public static final int SEARCH = 4;
 
     @BindView(R.id.tv_title) TextView tvTitle;
     @BindView(R.id.vp_photos) ViewPager vpPhotos;
@@ -67,6 +73,10 @@ public class ShowDateActivity extends BaseActivity implements OnMapReadyCallback
     @BindView(R.id.tv_height_woman) TextView tvHeightWoman;
     @BindView(R.id.tv_weight_woman) TextView tvWeightWoman;
     @BindView(R.id.tv_hair_color) TextView tvHairColor;
+    @BindView(R.id.cv_age_woman) CardView cvAgeWoman;
+    @BindView(R.id.cv_height_woman) CardView cvHeightWoman;
+    @BindView(R.id.cv_weight_woman) CardView cvWeightWoman;
+    @BindView(R.id.cv_hair_color) CardView cvHairColor;
     @BindView(R.id.tv_start_time) TextView tvStartTime;
     @BindView(R.id.tv_end_time) TextView tvEndTime;
     @BindView(R.id.tv_present) TextView tvPresent;
@@ -78,22 +88,30 @@ public class ShowDateActivity extends BaseActivity implements OnMapReadyCallback
 
     private SupportMapFragment mapFragment;
     private GoogleMap map;
-    private List<View> photos;
     private Meeting meeting;
+    private int type;
 
     private CreateDateBroadcastReceiver createDateBroadcastReceiver;
     private GetPhotosBroadcastReceiver getPhotosBroadcastReceiver;
 
     private ButtonAnimation buttonAnimation;
 
+    public static Intent getIntent(Context context, int type) {
+        Intent intent = new Intent(context, ShowDateActivity.class);
+        intent.putExtra(TYPE, type);
+        return intent;
+    }
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_show_date);
+        type = getIntent().getIntExtra(TYPE, -1);
 
         meeting = Meeting.getInstance();
         buttonAnimation = new ButtonAnimation(this, btnPublish);
 
+        setUI();
         initMap();
         registerBroadcast();
         setSize();
@@ -116,6 +134,31 @@ public class ShowDateActivity extends BaseActivity implements OnMapReadyCallback
     @OnClick(R.id.btn_publish)
     public void clickBtnPublish() {
         requestCreateDate();
+    }
+
+    private void setUI() {
+        int visibility;
+        int textColor;
+        int buttonBackground;
+        if(CustomSharedPreference.getIsMan(this) == Const.WOMAN_VALUE) {
+            visibility = View.GONE;
+            textColor = R.color.button_blue_dark;
+            buttonBackground = R.drawable.button_red_bg;
+        } else {
+            visibility = View.VISIBLE;
+            textColor = R.color.seek_bar;
+            buttonBackground = R.drawable.button_blue_bg;
+        }
+        cvAgeWoman.setVisibility(visibility);
+        cvHeightWoman.setVisibility(visibility);
+        cvWeightWoman.setVisibility(visibility);
+        cvHairColor.setVisibility(visibility);
+        tvName.setTextColor(getResources().getColor(R.color.white));
+        tvAge.setTextColor(getResources().getColor(R.color.white));
+        tvStartTime.setTextColor(getResources().getColor(textColor));
+        tvEndTime.setTextColor(getResources().getColor(textColor));
+        tvPresent.setTextColor(getResources().getColor(textColor));
+        btnPublish.setBackgroundResource(buttonBackground);
     }
 
     private void requestCreateDate() {
@@ -166,6 +209,42 @@ public class ShowDateActivity extends BaseActivity implements OnMapReadyCallback
     }
 
     public void loadInfo() {
+        String buttonTitle = "";
+        switch (type) {
+            case PREVIEW:
+                setLocalProfileData();
+                buttonTitle = getResources().getString(R.string.preview);
+                break;
+
+            case SHOW_MAN:
+                setLocalProfileData();
+                buttonTitle = getResources().getString(R.string.cancel);
+                break;
+
+            case SHOW_WOMAN:
+
+                buttonTitle = getResources().getString(R.string.cancel);
+                break;
+
+            case SEARCH:
+
+                buttonTitle = getResources().getString(R.string.confirmed);
+                break;
+        }
+
+        btnPublish.setIdleText(buttonTitle);
+        String[] colors = getResources().getStringArray(R.array.hair_colors);
+        tvHairColor.setText(colors[meeting.getHairColor()]);
+        tvAgeWoman.setText(meeting.getPrefAgeStart() + "—" + meeting.getPrefAgeEnd());
+        tvHeightWoman.setText(meeting.getPrefHeightStart() + "—" + meeting.getPrefHeightEnd());
+        tvWeightWoman.setText(meeting.getPrefWeightStart() + "—" + meeting.getPrefWeightEnd());
+        tvStartTime.setText(DateUtils.getDateByStr(new Date(meeting.getStartTime()), DateUtils.DATE_FORMAT_OUTPUT));
+        tvEndTime.setText(DateUtils.getDateByStr(new Date(meeting.getEndTime()), DateUtils.DATE_FORMAT_OUTPUT));
+        tvPresent.setText("$" + String.valueOf(meeting.getAmount()));
+        tvPlaceTitle.setText(meeting.getPlace());
+    }
+
+    private void setLocalProfileData() {
         HumanAnswer profileMan = CustomSharedPreference.getProfileInformation(this);
         long age = 0;
         if(profileMan != null) {
@@ -180,16 +259,6 @@ public class ShowDateActivity extends BaseActivity implements OnMapReadyCallback
             tvAgeTitle.setVisibility(View.VISIBLE);
             tvAge.setVisibility(View.VISIBLE);
         }
-
-        String[] colors = getResources().getStringArray(R.array.hair_colors);
-        tvHairColor.setText(colors[meeting.getHairColor()]);
-        tvAgeWoman.setText(meeting.getPrefAgeStart() + "—" + meeting.getPrefAgeEnd());
-        tvHeightWoman.setText(meeting.getPrefHeightStart() + "—" + meeting.getPrefHeightEnd());
-        tvWeightWoman.setText(meeting.getPrefWeightStart() + "—" + meeting.getPrefWeightEnd());
-        tvStartTime.setText(DateUtils.getDateByStr(new Date(meeting.getStartTime()), DateUtils.DATE_FORMAT_OUTPUT));
-        tvEndTime.setText(DateUtils.getDateByStr(new Date(meeting.getEndTime()), DateUtils.DATE_FORMAT_OUTPUT));
-        tvPresent.setText("$" + String.valueOf(meeting.getAmount()));
-        tvPlaceTitle.setText(meeting.getPlace());
     }
 
     @Override

@@ -138,7 +138,7 @@ public class ProfileFragment extends BaseFragment {
         } else {
             rlPhotos.setBackgroundResource(R.drawable.button_blue);
             llInfo.setBackgroundResource(R.drawable.button_blue);
-            imgDatesFunc.setImageResource(R.drawable.ic_add);
+            imgDatesFunc.setImageResource(R.drawable.ic_add_white_24dp);
             tvDatesFunc.setText(R.string.add_date);
             tvName.setTextColor(getResources().getColor(R.color.button_blue_light));
             tvAge.setTextColor(getResources().getColor(R.color.button_blue_light));

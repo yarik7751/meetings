@@ -11,7 +11,10 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.Toast;
 
+import com.elatesoftware.meetings.R;
 import com.elatesoftware.meetings.util.AndroidUtils;
+import com.elatesoftware.meetings.util.Const;
+import com.elatesoftware.meetings.util.CustomSharedPreference;
 
 import butterknife.ButterKnife;
 
@@ -21,6 +24,7 @@ public class BaseActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
+        setTheme();
         super.onCreate(savedInstanceState);
         progressDialog = new ProgressDialog(this);
     }
@@ -36,6 +40,14 @@ public class BaseActivity extends AppCompatActivity {
     protected void onDestroy() {
         super.onDestroy();
         progressDialog.dismiss();
+    }
+
+    private void setTheme() {
+        if(CustomSharedPreference.getIsMan(this) == Const.WOMAN_VALUE) {
+            setTheme(R.style.SplashThemeWoman);
+        } else {
+            setTheme(R.style.AppTheme);
+        }
     }
 
     /**

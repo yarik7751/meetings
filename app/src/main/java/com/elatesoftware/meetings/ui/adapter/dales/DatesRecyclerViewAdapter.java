@@ -6,9 +6,11 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.elatesoftware.meetings.R;
+import com.elatesoftware.meetings.ui.activity.ShowDateActivity;
 import com.elatesoftware.meetings.util.DateUtils;
 import com.elatesoftware.meetings.util.StringUtils;
 import com.elatesoftware.meetings.util.api.pojo.Result;
@@ -29,13 +31,15 @@ public class DatesRecyclerViewAdapter extends RecyclerView.Adapter<DatesRecycler
     private boolean isCreator = false;
     private int defaultIcon;
     private int defaultTint;
+    private View.OnClickListener clickListener;
 
-    public DatesRecyclerViewAdapter(Context context, List<Result> dates, boolean isCreator, int defaultIcon, int defaultTint) {
+    public DatesRecyclerViewAdapter(Context context, List<Result> dates, boolean isCreator, int defaultIcon, int defaultTint, View.OnClickListener clickListener) {
         this.context = context;
         this.dates = dates;
         this.isCreator = isCreator;
         this.defaultIcon = defaultIcon;
         this.defaultTint = defaultTint;
+        this.clickListener = clickListener;
     }
 
     public DalesViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -79,11 +83,21 @@ public class DatesRecyclerViewAdapter extends RecyclerView.Adapter<DatesRecycler
             holder.pbProgress.setVisibility(View.GONE);
         }
         holder.pbProgress.setIndicatorColor(context.getResources().getColor(defaultTint));
+
+        holder.rlDate.setOnClickListener(clickListener);
     }
 
     @Override
     public int getItemCount() {
         return dates == null ? 0 : dates.size();
+    }
+
+    public View.OnClickListener getClickListener() {
+        return clickListener;
+    }
+
+    public void setClickListener(View.OnClickListener clickListener) {
+        this.clickListener = clickListener;
     }
 
     public class DalesViewHolder extends RecyclerView.ViewHolder {
@@ -92,6 +106,7 @@ public class DatesRecyclerViewAdapter extends RecyclerView.Adapter<DatesRecycler
         public TextView tvPlace, tvTime, tvAmount, tvName;
         public CircleImageView imgPhoto;
         public AVLoadingIndicatorView pbProgress;
+        public RelativeLayout rlDate;
 
         public DalesViewHolder(View itemView) {
             super(itemView);
@@ -103,6 +118,7 @@ public class DatesRecyclerViewAdapter extends RecyclerView.Adapter<DatesRecycler
             tvName = (TextView) itemView.findViewById(R.id.tv_name);
             imgPhoto = (CircleImageView) itemView.findViewById(R.id.img_photo);
             pbProgress = (AVLoadingIndicatorView) itemView.findViewById(R.id.pb_progress);
+            rlDate = (RelativeLayout) itemView.findViewById(R.id.rl_date);
         }
     }
 }

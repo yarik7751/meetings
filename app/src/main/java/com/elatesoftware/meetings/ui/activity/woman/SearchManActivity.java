@@ -20,6 +20,7 @@ import android.widget.Toast;
 
 import com.elatesoftware.meetings.R;
 import com.elatesoftware.meetings.service.SearchDatesService;
+import com.elatesoftware.meetings.ui.activity.ShowDateActivity;
 import com.elatesoftware.meetings.ui.activity.base.BaseActivity;
 import com.elatesoftware.meetings.ui.adapter.dales.DatesRecyclerViewAdapter;
 import com.elatesoftware.meetings.util.AndroidUtils;
@@ -126,7 +127,14 @@ public class SearchManActivity extends BaseActivity implements OnMapReadyCallbac
 
         rvDales = new RecyclerView(this);
         rvDales.setLayoutManager(new LinearLayoutManager(this));
-        rvDales.setAdapter(new DatesRecyclerViewAdapter(this, SearchDatesAnswer.getInstance().getResult(), true, R.drawable.ic_person_white_24dp, R.color.button_red_dark));
+        rvDales.setAdapter(new DatesRecyclerViewAdapter(this, SearchDatesAnswer.getInstance().getResult(), true, R.drawable.ic_person_white_24dp, R.color.button_red_dark, new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+
+                startActivity(ShowDateActivity.getIntent(SearchManActivity.this, ShowDateActivity.SEARCH));
+            }
+        }));
         rvDales.setPadding(0, llTool.getHeight() + AndroidUtils.dp(16), 0, 0);
         flContent.addView(rvDales, params);
     }
@@ -166,7 +174,7 @@ public class SearchManActivity extends BaseActivity implements OnMapReadyCallbac
                 final LatLng position = new LatLng(result.getDate().getLatitude(), result.getDate().getLongitude());
                 final View v = LayoutInflater.from(SearchManActivity.this).inflate(R.layout.incl_marker, null);
                 CircleImageView imgMarker = (CircleImageView) v.findViewById(R.id.img_marker);
-                if(result.getCreatorId() != null || result.getCreatorPhotoId() != null) {
+                if(result.getCreatorId() != null && result.getCreatorPhotoId() != null) {
                     String url = StringUtils.getPhotoUrl(result.getCreatorId().intValue(), result.getCreatorPhotoId().intValue());
                     Picasso.with(SearchManActivity.this)
                             .load(url)
