@@ -32,17 +32,20 @@ import cz.msebera.android.httpclient.Header;
 public class PhotoFragment extends BaseFragment {
 
     public static final String TAG = "PhotoFragment_logs";
+    public static final String USER_ID = "USER_ID";
     public static final String PHOTO_ID = "PHOTO_ID";
 
     @BindView(R.id.img_photo) ImageView imgPhoto;
     @BindView(R.id.pb_progress) AVLoadingIndicatorView pbProgress;
 
     private long photoId = -1;
+    private long userId = -1;
 
-    public static PhotoFragment getInstance(long photoId) {
+    public static PhotoFragment getInstance(long userId, long photoId) {
         PhotoFragment photoFragment = new PhotoFragment();
         Bundle bundle = new Bundle();
         bundle.putLong(PHOTO_ID, photoId);
+        bundle.putLong(USER_ID, userId);
         photoFragment.setArguments(bundle);
         return photoFragment;
     }
@@ -51,6 +54,7 @@ public class PhotoFragment extends BaseFragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         photoId = getArguments().getLong(PHOTO_ID);
+        userId = getArguments().getLong(USER_ID);
     }
 
     @Nullable
@@ -78,7 +82,7 @@ public class PhotoFragment extends BaseFragment {
     }
 
     private void requestGetPhoto() {
-        long userId = CustomSharedPreference.getProfileInformation(getContext()).getId();
+        //long userId = CustomSharedPreference.getProfileInformation(getContext()).getId();
         String photoUrl = StringUtils.getPhotoUrl((int) userId, (int) photoId);
         int photoWidth = AndroidUtils.getWindowsSizeParams(getContext())[0];
         int photoHeight = (int) (AndroidUtils.getWindowsSizeParams(getContext())[1] * Const.PHOTOS_HEIGHT_PERCENT);

@@ -41,6 +41,7 @@ import com.elatesoftware.meetings.util.api.pojo.MessageAnswer;
 import com.elatesoftware.meetings.util.api.pojo.Photo;
 import com.wang.avi.AVLoadingIndicatorView;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.List;
@@ -110,8 +111,7 @@ public class ProfileEditActivity extends BaseActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == RESULT_LOAD_IMG && resultCode == RESULT_OK
-                && null != data) {
+        if (requestCode == RESULT_LOAD_IMG && resultCode == RESULT_OK && null != data) {
             Uri selectedImage = data.getData();
             String[] filePathColumn = { MediaStore.Images.Media.DATA };
 
@@ -307,8 +307,12 @@ public class ProfileEditActivity extends BaseActivity {
         }
     }
 
-    private void loadPhoto(List<Photo> photo) {
-        adapter = new PhotoFragmentPageAdapter(getSupportFragmentManager(), photo);
+    private void loadPhoto(List<Photo> photos) {
+        List<Integer> photoInteger = new ArrayList<>();
+        for(Photo photo : photos) {
+            photoInteger.add(photo.getId());
+        }
+        adapter = new PhotoFragmentPageAdapter(getSupportFragmentManager(), photoInteger, CustomSharedPreference.getProfileInformation(this).getId());
         vpPhotos.setAdapter(adapter);
         inkIndicator.setViewPager(vpPhotos);
         vpPhotos.setOffscreenPageLimit(adapter.getCount());
@@ -329,7 +333,7 @@ public class ProfileEditActivity extends BaseActivity {
 
     private void setCurrentPhotoId(int position) {
         if(adapter.getPhotos().size() > 0) {
-            currPhotoId = adapter.getPhotos().get(position).getId();
+            currPhotoId = adapter.getPhotos().get(position);
         } else {
             currPhotoId = -1;
         }

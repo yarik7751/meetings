@@ -248,10 +248,7 @@ public class AddDateActivity extends BaseActivity implements OnMapReadyCallback 
     public void clickBtnPreview() {
         if(checkInfo()) {
             saveInfoMeeting();
-            Intent intent = new Intent(this, ShowDateActivity.class);
-            intent.putExtra(ShowDateActivity.TITLE, getString(R.string.preview));
-            //intent.putExtra(ShowDateActivity.IS_SHOW_MAN_INFO, false);
-            startActivityForResult(intent, CLOSE);
+            startActivityForResult(ShowDateActivity.getIntent(this, getString(R.string.preview), ShowDateActivity.PREVIEW), CLOSE);
         }
     }
 

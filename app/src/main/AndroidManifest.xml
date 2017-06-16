@@ -112,6 +112,7 @@
         <service android:name=".service.GetDatesListService"/>
         <service android:name=".service.ExitService"/>
         <service android:name=".service.SearchDatesService"/>
+        <service android:name=".service.GetProfileInfoService"/>
         <service
             android:name=".service.DatesMessagingService">
             <intent-filter>

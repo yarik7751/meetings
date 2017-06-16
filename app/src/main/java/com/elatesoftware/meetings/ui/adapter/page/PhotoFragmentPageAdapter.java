@@ -13,18 +13,20 @@ import java.util.List;
 
 public class PhotoFragmentPageAdapter extends FragmentPagerAdapter {
 
-    List<Photo> photos;
+    List<Integer> photosInteger;
     List<PhotoFragment> fragments;
+    private long userId;
 
-    public PhotoFragmentPageAdapter(FragmentManager fm, List<Photo> photos) {
+    public PhotoFragmentPageAdapter(FragmentManager fm, List<Integer> photos, long userId) {
         super(fm);
-        this.photos = photos;
+        this.photosInteger = photos;
+        this.userId = userId;
         fragments = new ArrayList<>();
     }
 
     @Override
     public Fragment getItem(int position) {
-        PhotoFragment fragment = PhotoFragment.getInstance(photos.get(position).getId());
+        PhotoFragment fragment = PhotoFragment.getInstance(userId, photosInteger.get(position));
         fragments.add(fragment);
         return fragment;
     }
@@ -33,13 +35,13 @@ public class PhotoFragmentPageAdapter extends FragmentPagerAdapter {
         return fragments;
     }
 
-    public List<Photo> getPhotos() {
-        return photos;
+    public List<Integer> getPhotos() {
+        return photosInteger;
     }
 
     @Override
     public int getCount() {
-        return photos == null ? 0 : photos.size();
+        return photosInteger == null ? 0 : photosInteger.size();
     }
 
 }

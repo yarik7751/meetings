@@ -120,13 +120,7 @@ public class DatesManFragment extends BaseFragment {
             if(response != null && response.equals(String.valueOf(Const.CODE_SUCCESS)) && GetDatesManAnswer.getInstance() != null) {
                 if(GetDatesManAnswer.getInstance().getSuccess()) {
                     rvScheduledDales.setAdapter(new DalesRecyclerScheduleViewAdapter(getActivity(), getContext(), getScheduledDates()));
-                    rvPendingDales.setAdapter(new DatesRecyclerViewAdapter(getContext(), getPendingDates(), false, R.drawable.ic_girl, R.color.button_blue_light, new View.OnClickListener() {
-
-                        @Override
-                        public void onClick(View v) {
-
-                        }
-                    }));
+                    rvPendingDales.setAdapter(new DatesRecyclerViewAdapter(getContext(), getPendingDates(), false, R.drawable.ic_girl, R.color.button_blue_light));
                 } else {
                     showMessage(R.string.something_wrong);
                 }

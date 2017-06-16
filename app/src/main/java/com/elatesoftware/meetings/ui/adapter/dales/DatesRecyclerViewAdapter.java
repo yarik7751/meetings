@@ -11,8 +11,10 @@ import android.widget.TextView;
 
 import com.elatesoftware.meetings.R;
 import com.elatesoftware.meetings.ui.activity.ShowDateActivity;
+import com.elatesoftware.meetings.ui.activity.woman.SearchManActivity;
 import com.elatesoftware.meetings.util.DateUtils;
 import com.elatesoftware.meetings.util.StringUtils;
+import com.elatesoftware.meetings.util.api.pojo.Meeting;
 import com.elatesoftware.meetings.util.api.pojo.Result;
 import com.squareup.picasso.Picasso;
 import com.wang.avi.AVLoadingIndicatorView;
@@ -33,13 +35,12 @@ public class DatesRecyclerViewAdapter extends RecyclerView.Adapter<DatesRecycler
     private int defaultTint;
     private View.OnClickListener clickListener;
 
-    public DatesRecyclerViewAdapter(Context context, List<Result> dates, boolean isCreator, int defaultIcon, int defaultTint, View.OnClickListener clickListener) {
+    public DatesRecyclerViewAdapter(Context context, List<Result> dates, boolean isCreator, int defaultIcon, int defaultTint) {
         this.context = context;
         this.dates = dates;
         this.isCreator = isCreator;
         this.defaultIcon = defaultIcon;
         this.defaultTint = defaultTint;
-        this.clickListener = clickListener;
     }
 
     public DalesViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -84,7 +85,13 @@ public class DatesRecyclerViewAdapter extends RecyclerView.Adapter<DatesRecycler
         }
         holder.pbProgress.setIndicatorColor(context.getResources().getColor(defaultTint));
 
-        holder.rlDate.setOnClickListener(clickListener);
+        holder.rlDate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Meeting.setInstance(dates.get(position).getDate());
+                context.startActivity(ShowDateActivity.getIntent(context, context.getResources().getString(R.string.view_details), ShowDateActivity.SEARCH, dates.get(position).getCreatorId().intValue()));
+            }
+        });
     }
 
     @Override

@@ -127,14 +127,7 @@ public class SearchManActivity extends BaseActivity implements OnMapReadyCallbac
 
         rvDales = new RecyclerView(this);
         rvDales.setLayoutManager(new LinearLayoutManager(this));
-        rvDales.setAdapter(new DatesRecyclerViewAdapter(this, SearchDatesAnswer.getInstance().getResult(), true, R.drawable.ic_person_white_24dp, R.color.button_red_dark, new View.OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-
-                startActivity(ShowDateActivity.getIntent(SearchManActivity.this, ShowDateActivity.SEARCH));
-            }
-        }));
+        rvDales.setAdapter(new DatesRecyclerViewAdapter(this, SearchDatesAnswer.getInstance().getResult(), true, R.drawable.ic_person_white_24dp, R.color.button_red_dark));
         rvDales.setPadding(0, llTool.getHeight() + AndroidUtils.dp(16), 0, 0);
         flContent.addView(rvDales, params);
     }

@@ -6,6 +6,7 @@ import android.util.Log;
 
 import com.elatesoftware.meetings.util.Const;
 import com.elatesoftware.meetings.util.api.Api;
+import com.google.firebase.iid.FirebaseInstanceId;
 
 public class RegisterService extends IntentService {
 
@@ -26,7 +27,7 @@ public class RegisterService extends IntentService {
         String userName = intent.getStringExtra(USER_NAME);
         String password = intent.getStringExtra(PASSWORD);
         int gender = intent.getIntExtra(GENDER, -1);
-        String response = Api.register(userName, password, gender);
+        String response = Api.register(userName, password, gender, FirebaseInstanceId.getInstance().getToken());
         Intent responseIntent = new Intent();
         responseIntent.setAction(ACTION);
         responseIntent.addCategory(Intent.CATEGORY_DEFAULT);

@@ -20,6 +20,7 @@ import android.widget.TextView;
 
 import com.dd.CircularProgressButton;
 import com.elatesoftware.meetings.R;
+import com.elatesoftware.meetings.service.GetProfileInfoService;
 import com.elatesoftware.meetings.ui.activity.base.BaseActivity;
 import com.elatesoftware.meetings.ui.adapter.page.PhotoFragmentPageAdapter;
 import com.elatesoftware.meetings.service.CreateDateService;
@@ -30,6 +31,7 @@ import com.elatesoftware.meetings.util.CustomSharedPreference;
 import com.elatesoftware.meetings.util.DateUtils;
 import com.elatesoftware.meetings.util.Utils;
 import com.elatesoftware.meetings.util.api.pojo.GetPhotosAnswer;
+import com.elatesoftware.meetings.util.api.pojo.GetProfileInfoAnswer;
 import com.elatesoftware.meetings.util.api.pojo.HumanAnswer;
 import com.elatesoftware.meetings.util.api.pojo.Meeting;
 import com.elatesoftware.meetings.util.api.pojo.MessageAnswer;
@@ -44,6 +46,7 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.wang.avi.AVLoadingIndicatorView;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -55,6 +58,7 @@ public class ShowDateActivity extends BaseActivity implements OnMapReadyCallback
 
     public static final String TAG = "ShowDateActivity_logs";
     public static final String TITLE = "TITLE";
+    public static final String CREATOR_ID = "CREATOR_ID";
     public static final String IS_SHOW_MAN_INFO = "IS_SHOW_MAN_INFO";
     public static final String TYPE = "TYPE";
     public static final int PREVIEW = 1;
@@ -84,21 +88,33 @@ public class ShowDateActivity extends BaseActivity implements OnMapReadyCallback
     @BindView(R.id.ll_main_info) LinearLayout llManInfo;
     @BindView(R.id.map) FrameLayout flMap;
     @BindView(R.id.btn_publish) CircularProgressButton btnPublish;
+    @BindView(R.id.btn_confirmed) CircularProgressButton btnConfirm;
     @BindView(R.id.pb_progress) AVLoadingIndicatorView pbProgress;
 
     private SupportMapFragment mapFragment;
     private GoogleMap map;
     private Meeting meeting;
     private int type;
+    private int creatorId = -1;
 
     private CreateDateBroadcastReceiver createDateBroadcastReceiver;
     private GetPhotosBroadcastReceiver getPhotosBroadcastReceiver;
+    private GetProfileInfoReceiver getProfileInfoReceiver;
 
     private ButtonAnimation buttonAnimation;
 
-    public static Intent getIntent(Context context, int type) {
+    public static Intent getIntent(Context context, String title,  int type) {
         Intent intent = new Intent(context, ShowDateActivity.class);
+        intent.putExtra(TITLE, title);
         intent.putExtra(TYPE, type);
+        return intent;
+    }
+
+    public static Intent getIntent(Context context, String title,  int type, int creatorId) {
+        Intent intent = new Intent(context, ShowDateActivity.class);
+        intent.putExtra(TITLE, title);
+        intent.putExtra(TYPE, type);
+        intent.putExtra(CREATOR_ID, creatorId);
         return intent;
     }
 
@@ -107,6 +123,7 @@ public class ShowDateActivity extends BaseActivity implements OnMapReadyCallback
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_show_date);
         type = getIntent().getIntExtra(TYPE, -1);
+        creatorId = getIntent().getIntExtra(CREATOR_ID, -1);
 
         meeting = Meeting.getInstance();
         buttonAnimation = new ButtonAnimation(this, btnPublish);
@@ -117,7 +134,6 @@ public class ShowDateActivity extends BaseActivity implements OnMapReadyCallback
         setSize();
         setTitle();
         loadInfo();
-        requestGetPhotos();
     }
 
     @Override
@@ -139,15 +155,15 @@ public class ShowDateActivity extends BaseActivity implements OnMapReadyCallback
     private void setUI() {
         int visibility;
         int textColor;
-        int buttonBackground;
+        int gradient;
         if(CustomSharedPreference.getIsMan(this) == Const.WOMAN_VALUE) {
             visibility = View.GONE;
-            textColor = R.color.button_blue_dark;
-            buttonBackground = R.drawable.button_red_bg;
+            textColor = R.color.button_red_dark;
+            gradient = R.drawable.button_red;
         } else {
             visibility = View.VISIBLE;
             textColor = R.color.seek_bar;
-            buttonBackground = R.drawable.button_blue_bg;
+            gradient = R.drawable.button_blue;
         }
         cvAgeWoman.setVisibility(visibility);
         cvHeightWoman.setVisibility(visibility);
@@ -158,7 +174,33 @@ public class ShowDateActivity extends BaseActivity implements OnMapReadyCallback
         tvStartTime.setTextColor(getResources().getColor(textColor));
         tvEndTime.setTextColor(getResources().getColor(textColor));
         tvPresent.setTextColor(getResources().getColor(textColor));
-        btnPublish.setBackgroundResource(buttonBackground);
+        rlPhotos.setBackgroundResource(gradient);
+
+        switch (type) {
+            case PREVIEW:
+                btnPublish.setVisibility(View.VISIBLE);
+                btnConfirm.setVisibility(View.GONE);
+                break;
+
+            case SHOW_MAN:
+
+                break;
+
+            case SHOW_WOMAN:
+
+                break;
+
+            case SEARCH:
+                btnPublish.setVisibility(View.GONE);
+                btnConfirm.setVisibility(View.VISIBLE);
+                break;
+        }
+    }
+
+    private void requestGetProfileInfo(long userId) {
+        setProgressDialogMessage(getString(R.string.loading_info) + " ...");
+        showProgressDialog();
+        startService(GetProfileInfoService.getIntent(this, userId));
     }
 
     private void requestCreateDate() {
@@ -179,15 +221,29 @@ public class ShowDateActivity extends BaseActivity implements OnMapReadyCallback
         registerReceiver(getPhotosBroadcastReceiver, Utils.getIntentFilter(GetPhotosService.ACTION));
         createDateBroadcastReceiver = new CreateDateBroadcastReceiver();
         registerReceiver(createDateBroadcastReceiver, Utils.getIntentFilter(CreateDateService.ACTION));
+        getProfileInfoReceiver = new GetProfileInfoReceiver();
+        registerReceiver(getProfileInfoReceiver, Utils.getIntentFilter(GetProfileInfoService.ACTION));
     }
 
     private void unregisterBroadcast() {
         unregisterReceiver(getPhotosBroadcastReceiver);
         unregisterReceiver(createDateBroadcastReceiver);
+        unregisterReceiver(getProfileInfoReceiver);
     }
 
-    private void loadPhoto(List<Photo> photo) {
-        PhotoFragmentPageAdapter adapter = new PhotoFragmentPageAdapter(getSupportFragmentManager(), photo);
+    private void loadPhoto(List<Photo> photos) {
+        List<Integer> photoInteger = new ArrayList<>();
+        for(Photo photo : photos) {
+            photoInteger.add(photo.getId());
+        }
+        PhotoFragmentPageAdapter adapter = new PhotoFragmentPageAdapter(getSupportFragmentManager(), photoInteger, CustomSharedPreference.getProfileInformation(this).getId());
+        vpPhotos.setAdapter(adapter);
+        inkIndicator.setViewPager(vpPhotos);
+        vpPhotos.setOffscreenPageLimit(adapter.getCount());
+    }
+
+    private void loadPhotoInteger(long userId, List<Integer> photo) {
+        PhotoFragmentPageAdapter adapter = new PhotoFragmentPageAdapter(getSupportFragmentManager(), photo, userId);
         vpPhotos.setAdapter(adapter);
         inkIndicator.setViewPager(vpPhotos);
         vpPhotos.setOffscreenPageLimit(adapter.getCount());
@@ -209,32 +265,31 @@ public class ShowDateActivity extends BaseActivity implements OnMapReadyCallback
     }
 
     public void loadInfo() {
-        String buttonTitle = "";
+
         switch (type) {
             case PREVIEW:
+                requestGetPhotos();
                 setLocalProfileData();
-                buttonTitle = getResources().getString(R.string.preview);
                 break;
 
             case SHOW_MAN:
                 setLocalProfileData();
-                buttonTitle = getResources().getString(R.string.cancel);
                 break;
 
             case SHOW_WOMAN:
 
-                buttonTitle = getResources().getString(R.string.cancel);
                 break;
 
             case SEARCH:
-
-                buttonTitle = getResources().getString(R.string.confirmed);
+                requestGetProfileInfo(creatorId);
                 break;
         }
 
-        btnPublish.setIdleText(buttonTitle);
         String[] colors = getResources().getStringArray(R.array.hair_colors);
-        tvHairColor.setText(colors[meeting.getHairColor()]);
+        Integer hairColor = meeting.getHairColor();
+        if(hairColor != null) {
+            tvHairColor.setText(colors[hairColor]);
+        }
         tvAgeWoman.setText(meeting.getPrefAgeStart() + "—" + meeting.getPrefAgeEnd());
         tvHeightWoman.setText(meeting.getPrefHeightStart() + "—" + meeting.getPrefHeightEnd());
         tvWeightWoman.setText(meeting.getPrefWeightStart() + "—" + meeting.getPrefWeightEnd());
@@ -281,14 +336,50 @@ public class ShowDateActivity extends BaseActivity implements OnMapReadyCallback
         finish();
     }
 
+    public class GetProfileInfoReceiver extends BroadcastReceiver {
+
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            String response = intent.getStringExtra(Const.RESPONSE);
+            hideProgressDialog();
+            if(response != null && response.equals(String.valueOf(Const.CODE_SUCCESS)) && GetProfileInfoAnswer.getInstance() != null)  {
+                Log.d(TAG, "GetProfileInfo 200");
+                if(GetProfileInfoAnswer.getInstance().getSuccess()) {
+                    Log.d(TAG, "GetProfileInfo TRUE");
+                    String name = GetProfileInfoAnswer.getInstance().getResult().getFirstName();
+                    long age = 0;
+                    age = GetProfileInfoAnswer.getInstance().getResult().getDateOfBirthByCalendar() == null ? 0 : DateUtils.getAge(GetProfileInfoAnswer.getInstance().getResult().getDateOfBirthByCalendar().getTimeInMillis());
+                    tvName.setText(name);
+                    tvAge.setText(String.valueOf(age));
+                    loadPhotoInteger(GetProfileInfoAnswer.getInstance().getResult().getId(), GetProfileInfoAnswer.getInstance().getResult().getPhotosId());
+                    if(TextUtils.isEmpty(tvAge.getText().toString()) || age <= 0) {
+                        tvAgeTitle.setVisibility(View.GONE);
+                        tvAge.setVisibility(View.GONE);
+                    } else {
+                        tvAgeTitle.setVisibility(View.VISIBLE);
+                        tvAge.setVisibility(View.VISIBLE);
+                    }
+                } else {
+                    showMessage(R.string.something_wrong);
+                    Log.d(TAG, "GetProfileInfo FALSE");
+                }
+            } else {
+                showMessage(R.string.request_error);
+                Log.d(TAG, "GetProfileInfo error");
+            }
+        }
+    }
+
     public class CreateDateBroadcastReceiver extends BroadcastReceiver {
 
         @Override
         public void onReceive(Context context, final Intent intent) {
+            //todo удалить хендлер
             new Handler().postDelayed(new Runnable() {
                 @Override
                 public void run() {
                     String response = intent.getStringExtra(Const.RESPONSE);
+                    buttonAnimation.stop();
                     if(response != null && response.equals(String.valueOf(Const.CODE_SUCCESS)) && MessageAnswer.getInstance() != null) {
                         Log.d(TAG, "CreateDate 200");
                         if(MessageAnswer.getInstance().getSuccess()) {
@@ -296,12 +387,10 @@ public class ShowDateActivity extends BaseActivity implements OnMapReadyCallback
                             showMessage(R.string.date_created_successfully);
                             closeActivitySuccess();
                         } else {
-                            buttonAnimation.stop();
                             showMessage(R.string.something_wrong);
                             Log.d(TAG, "CreateDate FALSE");
                         }
                     } else {
-                        buttonAnimation.stop();
                         showMessage(R.string.request_error);
                         Log.d(TAG, "CreateDate error");
                     }

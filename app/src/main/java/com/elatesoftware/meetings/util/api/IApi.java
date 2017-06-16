@@ -15,6 +15,8 @@ import retrofit2.http.Query;
 
 public interface IApi {
 
+    //todo загрузка фотографій не через base64 а через multipart
+
     @POST("api/account/register")
     Call<ResponseBody> register(@Body RequestBody params);
 
@@ -57,4 +59,7 @@ public interface IApi {
             @Query("startTime") Long startTime,
             @Query("page") Integer page
     );
+
+    @GET("api/account/getprofileinfo")
+    Call<ResponseBody> getProfileInfo(@Query("sessionKey") String sessionKey, @Query("id") long id);
 }

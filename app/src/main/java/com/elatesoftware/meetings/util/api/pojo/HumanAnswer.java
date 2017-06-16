@@ -4,6 +4,7 @@ import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 import java.util.GregorianCalendar;
+import java.util.List;
 
 public class HumanAnswer {
 
@@ -50,6 +51,10 @@ public class HumanAnswer {
     @SerializedName("AboutMe")
     @Expose
     protected String aboutMe;
+
+    @SerializedName("PhotosId")
+    @Expose
+    private List<Integer> photosId = null;
 
     public HumanAnswer(String firstName, Long dateOfBirth, String aboutMe) {
         this.firstName = firstName;
@@ -168,5 +173,13 @@ public class HumanAnswer {
 
     public void setAboutMe(String aboutMe) {
         this.aboutMe = aboutMe;
+    }
+
+    public List<Integer> getPhotosId() {
+        return photosId;
+    }
+
+    public void setPhotosId(List<Integer> photosId) {
+        this.photosId = photosId;
     }
 }

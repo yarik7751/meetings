@@ -7,6 +7,7 @@ import com.elatesoftware.meetings.util.api.pojo.GetDatesManAnswer;
 import com.elatesoftware.meetings.util.api.pojo.GetInfoAccAnswer;
 import com.elatesoftware.meetings.util.api.pojo.GetPhotoAnswer;
 import com.elatesoftware.meetings.util.api.pojo.GetPhotosAnswer;
+import com.elatesoftware.meetings.util.api.pojo.GetProfileInfoAnswer;
 import com.elatesoftware.meetings.util.api.pojo.HumanAnswer;
 import com.elatesoftware.meetings.util.api.pojo.LoginAnswer;
 import com.elatesoftware.meetings.util.api.pojo.Meeting;
@@ -38,7 +39,7 @@ public class Api {
     private static IApi iApi = null;
 
     public static final String BASE_URL = "http://dateportal.elatesof.w07.hoster.by/";
-    //public static final String BASE_URL = "http://192.168.100.6:3000/";
+    //public static final String BASE_URL = "http://192.168.100.7:3000/";
 
     public static IApi getApi() {
         if(iApi == null) {
@@ -62,12 +63,13 @@ public class Api {
         }
     }
 
-    public static String register(String userName, String password, int gender) {
+    public static String register(String userName, String password, int gender, String token) {
         JSONObject object = new JSONObject();
         try {
             object.put("Username", userName);
             object.put("Password", password);
             object.put("Gender", gender);
+            //object.put("Token", token);
             RequestBody body = RequestBody.create(okhttp3.MediaType.parse("application/json; charset=utf-8"), object.toString());
 
             Log.d(TAG, "object.toString: " + object.toString());
@@ -78,10 +80,14 @@ public class Api {
             String rawJson = null;
             try {
                 response = call.execute();
-                rawJson = response.body().string();
-                rawJson = rawJson.replace("\\", "");
-                //rawJson = rawJson.substring(1, rawJson.length() - 1);
-                Log.d(TAG, "register: " + rawJson);
+                if(response != null && response.body() != null) {
+                    rawJson = response.body().string();
+                    rawJson = rawJson.replace("\\", "");
+                    //rawJson = rawJson.substring(1, rawJson.length() - 1);
+                    Log.d(TAG, "register: " + rawJson);
+                } else {
+                    Log.d(TAG, "register: null");
+                }
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -100,11 +106,12 @@ public class Api {
         }
     }
 
-    public static String login(String userName, String password) {
+    public static String login(String userName, String password, String token) {
         JSONObject object = new JSONObject();
         try {
             object.put("Username", userName);
             object.put("Password", password);
+            object.put("Token", token);
             RequestBody body = RequestBody.create(okhttp3.MediaType.parse("application/json; charset=utf-8"), object.toString());
 
             Log.d(TAG, "object.toString: " + object.toString());
@@ -429,6 +436,35 @@ public class Api {
             if(response.code() == Const.CODE_SUCCESS) {
                 SearchDatesAnswer messageAnswer = gson.fromJson(rawJson, SearchDatesAnswer.class);
                 SearchDatesAnswer.setInstance(messageAnswer);
+            }
+            result = String.valueOf(response.code());
+        }
+        return result;
+    }
+
+    public static String getProfileInfo(String sessionKey, long id) {
+        Log.d(TAG, "getProfileInfo");
+        Call<ResponseBody> call = getApi().getProfileInfo(sessionKey, id);
+        Response<ResponseBody> response = null;
+        String result = null;
+        String rawJson = null;
+        try {
+            response = call.execute();
+            if(response != null && response.body() != null) {
+                rawJson = response.body().string();
+                rawJson = rawJson.replace("\\", "");
+                Log.d(TAG, "response: " + rawJson);
+            } else {
+                Log.d(TAG, "response: null");
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        if(response != null && rawJson != null){
+            if(response.code() == Const.CODE_SUCCESS) {
+                Gson gson = new Gson();
+                GetProfileInfoAnswer answer = gson.fromJson(rawJson, GetProfileInfoAnswer .class);
+                GetProfileInfoAnswer .setInstance(answer);
             }
             result = String.valueOf(response.code());
         }

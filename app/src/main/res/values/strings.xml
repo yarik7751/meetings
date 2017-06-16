@@ -117,6 +117,8 @@
     <string name="delete_photo">Delete photo</string>
     <string name="dates_loading">Dates loading</string>
     <string name="confirmed">Confirmed</string>
+    <string name="view_details">View details</string>
+    <string name="loading_info">Loading info</string>
 
     <string-array name="hair_colors">
         <item>Doesn\'t matter</item>

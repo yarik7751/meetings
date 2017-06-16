@@ -34,6 +34,7 @@ import com.elatesoftware.meetings.util.api.pojo.HumanAnswer;
 import com.elatesoftware.meetings.util.api.pojo.Photo;
 import com.wang.avi.AVLoadingIndicatorView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
@@ -175,8 +176,12 @@ public class ProfileFragment extends BaseFragment {
         rlPhotos.getLayoutParams().height = (int) (AndroidUtils.getWindowsSizeParams(getContext())[1] * Const.PHOTOS_HEIGHT_PERCENT);
     }
 
-    private void loadPhoto(List<Photo> photo) {
-        PhotoFragmentPageAdapter adapter = new PhotoFragmentPageAdapter(getChildFragmentManager(), photo);
+    private void loadPhoto(List<Photo> photos) {
+        List<Integer> photoInteger = new ArrayList<>();
+        for(Photo photo : photos) {
+            photoInteger.add(photo.getId());
+        }
+        PhotoFragmentPageAdapter adapter = new PhotoFragmentPageAdapter(getChildFragmentManager(), photoInteger, CustomSharedPreference.getProfileInformation(getContext()).getId());
         vpPhotos.setAdapter(adapter);
         inkIndicator.setViewPager(vpPhotos);
         vpPhotos.setOffscreenPageLimit(adapter.getCount());
