@@ -16,7 +16,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.elatesoftware.meetings.R;
-import com.elatesoftware.meetings.ui.activity.AddDateActivity;
+import com.elatesoftware.meetings.ui.activity.man.AddDateActivity;
 import com.elatesoftware.meetings.ui.activity.ProfileEditActivity;
 import com.elatesoftware.meetings.ui.activity.woman.SearchManActivity;
 import com.elatesoftware.meetings.ui.adapter.page.PhotoFragmentPageAdapter;

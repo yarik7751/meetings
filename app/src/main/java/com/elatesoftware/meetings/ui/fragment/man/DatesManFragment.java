@@ -12,7 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.elatesoftware.meetings.R;
-import com.elatesoftware.meetings.ui.activity.AddDateActivity;
+import com.elatesoftware.meetings.ui.activity.man.AddDateActivity;
 import com.elatesoftware.meetings.ui.adapter.dales.DatesRecyclerViewAdapter;
 import com.elatesoftware.meetings.ui.adapter.dales.DalesRecyclerScheduleViewAdapter;
 import com.elatesoftware.meetings.ui.fragment.base.BaseFragment;

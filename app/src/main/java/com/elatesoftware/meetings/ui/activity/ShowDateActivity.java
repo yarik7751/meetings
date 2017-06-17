@@ -22,6 +22,7 @@ import com.dd.CircularProgressButton;
 import com.elatesoftware.meetings.R;
 import com.elatesoftware.meetings.service.GetProfileInfoService;
 import com.elatesoftware.meetings.ui.activity.base.BaseActivity;
+import com.elatesoftware.meetings.ui.activity.man.AddDateActivity;
 import com.elatesoftware.meetings.ui.adapter.page.PhotoFragmentPageAdapter;
 import com.elatesoftware.meetings.service.CreateDateService;
 import com.elatesoftware.meetings.service.GetPhotosService;

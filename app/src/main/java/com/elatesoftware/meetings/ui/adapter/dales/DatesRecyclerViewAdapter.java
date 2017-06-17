@@ -99,6 +99,11 @@ public class DatesRecyclerViewAdapter extends RecyclerView.Adapter<DatesRecycler
         return dates == null ? 0 : dates.size();
     }
 
+    public void update(List<Result> dates) {
+        this.dates = dates;
+        notifyDataSetChanged();
+    }
+
     public View.OnClickListener getClickListener() {
         return clickListener;
     }

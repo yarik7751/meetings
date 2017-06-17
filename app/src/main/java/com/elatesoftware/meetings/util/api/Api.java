@@ -415,6 +415,7 @@ public class Api {
 
     public static String searchDates(String sessionKey, SearchDatesFilter searchDatesFilterParams) {
         Log.d(TAG, "searchDatesStr");
+        Log.d(TAG, "request: " + new Gson().toJson(searchDatesFilterParams, SearchDatesFilter.class));
         Gson gson = new Gson();
         Call<ResponseBody> call = getApi().searchDates(sessionKey, searchDatesFilterParams.getAmountStart(), searchDatesFilterParams.getStartTime(), searchDatesFilterParams.getPage());
         Response<ResponseBody> response = null;

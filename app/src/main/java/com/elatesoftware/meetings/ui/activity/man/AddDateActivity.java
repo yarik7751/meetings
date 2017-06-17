@@ -1,4 +1,4 @@
-package com.elatesoftware.meetings.ui.activity;
+package com.elatesoftware.meetings.ui.activity.man;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
@@ -31,6 +31,7 @@ import android.widget.TextView;
 import com.crystal.crystalrangeseekbar.interfaces.OnRangeSeekbarChangeListener;
 import com.crystal.crystalrangeseekbar.widgets.CrystalRangeSeekbar;
 import com.elatesoftware.meetings.R;
+import com.elatesoftware.meetings.ui.activity.ShowDateActivity;
 import com.elatesoftware.meetings.ui.activity.base.BaseActivity;
 import com.elatesoftware.meetings.ui.adapter.view_pager.ViewPagerAdapter;
 import com.elatesoftware.meetings.ui.view.CustomEditText;

@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.design.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:custom="http://schemas.android.com/apk/res-auto"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/rl_main"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -8,6 +12,11 @@
 
     <FrameLayout
         android:id="@+id/fl_content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
+    <FrameLayout
+        android:id="@+id/fl_list_content"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
 
@@ -65,4 +74,88 @@
             custom:separatorColor="@color/gray_very_light"
             custom:toggleWidth="104dp"/>
     </LinearLayout>
-</RelativeLayout>
+
+    <android.support.v4.widget.NestedScrollView
+        android:id="@+id/bottom_sheet"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/filter_layout_height"
+        android:clipToPadding="true"
+        android:background="@color/button_red_light"
+        app:layout_behavior="android.support.design.widget.BottomSheetBehavior"
+        >
+
+        <LinearLayout
+            android:id="@+id/ll_filters"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/filter_layout_height"
+            android:layout_marginBottom="-150dp"
+            android:layout_alignParentBottom="true"
+            android:paddingRight="16dp"
+            android:paddingLeft="16dp"
+            android:background="@color/button_red_light">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="8dp"
+                android:textSize="16sp"
+                android:textColor="@color/white"
+                android:text="@string/filters"
+                android:textStyle="bold"/>
+
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:layout_marginTop="8dp"
+                card_view:cardCornerRadius="5dp"
+                card_view:cardBackgroundColor="@color/white">
+
+                <RelativeLayout
+                    android:id="@+id/rl_start_time"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:padding="8dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentLeft="true"
+                        android:textSize="14sp"
+                        android:textColor="@color/text_dark"
+                        android:text="@string/start_time"/>
+
+                    <TextView
+                        android:id="@+id/tv_start_time"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:textSize="14sp"
+                        android:textColor="@color/seek_bar"
+                        android:text="---"/>
+                </RelativeLayout>
+            </android.support.v7.widget.CardView>
+
+            <com.elatesoftware.meetings.ui.view.CustomEditText
+                android:id="@+id/cet_present"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:layout_marginTop="8dp"
+                android:gravity="left|center_vertical"
+                android:inputType="number"
+                android:maxLength="10"
+                android:hint="$"/>
+        </LinearLayout>
+    </android.support.v4.widget.NestedScrollView>
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fab_filters"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_filter"
+        android:layout_margin="16dp"
+        app:layout_anchor="@+id/bottom_sheet"
+        app:layout_anchorGravity="top|end"/>
+</android.support.design.widget.CoordinatorLayout>
