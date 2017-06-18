@@ -10,7 +10,6 @@ import android.support.design.widget.BottomSheetBehavior;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
-import android.support.v4.text.TextUtilsCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
@@ -19,18 +18,14 @@ import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.animation.Animation;
-import android.view.animation.TranslateAnimation;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.dd.CircularProgressButton;
 import com.elatesoftware.meetings.R;
 import com.elatesoftware.meetings.service.SearchDatesService;
-import com.elatesoftware.meetings.ui.activity.ShowDateActivity;
 import com.elatesoftware.meetings.ui.activity.base.BaseActivity;
 import com.elatesoftware.meetings.ui.adapter.dales.DatesRecyclerViewAdapter;
 import com.elatesoftware.meetings.ui.view.CustomEditText;
@@ -55,7 +50,6 @@ import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
-import com.google.firebase.iid.FirebaseInstanceId;
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 
@@ -288,7 +282,7 @@ public class SearchManActivity extends BaseActivity implements OnMapReadyCallbac
                 public boolean onMarkerClick(Marker marker) {
                     Result result = ((Result) marker.getTag());
                     Meeting.setInstance(result.getDate());
-                    startActivity(ShowDateActivity.getIntent(SearchManActivity.this, getResources().getString(R.string.view_details), ShowDateActivity.SEARCH, result.getCreatorId().intValue()));
+                    startActivity(ShowSearchDateActivity.getIntent(SearchManActivity.this, result.getCreatorId().intValue()));
                     return false;
                 }
             });

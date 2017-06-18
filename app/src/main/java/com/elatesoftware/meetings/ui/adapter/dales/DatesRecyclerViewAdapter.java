@@ -10,8 +10,8 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.elatesoftware.meetings.R;
-import com.elatesoftware.meetings.ui.activity.ShowDateActivity;
 import com.elatesoftware.meetings.ui.activity.woman.SearchManActivity;
+import com.elatesoftware.meetings.ui.activity.woman.ShowSearchDateActivity;
 import com.elatesoftware.meetings.util.DateUtils;
 import com.elatesoftware.meetings.util.StringUtils;
 import com.elatesoftware.meetings.util.api.pojo.Meeting;
@@ -89,7 +89,7 @@ public class DatesRecyclerViewAdapter extends RecyclerView.Adapter<DatesRecycler
             @Override
             public void onClick(View v) {
                 Meeting.setInstance(dates.get(position).getDate());
-                context.startActivity(ShowDateActivity.getIntent(context, context.getResources().getString(R.string.view_details), ShowDateActivity.SEARCH, dates.get(position).getCreatorId().intValue()));
+                context.startActivity(ShowSearchDateActivity.getIntent(context, dates.get(position).getCreatorId().longValue()));
             }
         });
     }

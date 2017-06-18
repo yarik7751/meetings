@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.dd.CircularProgressButton
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/btn_confirmed"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:textColor="@color/white"
+    android:textSize="14sp"
+    app:cpb_textIdle="@string/confirmed"
+    app:cpb_selectorIdle="@drawable/button_red_bg"
+    app:cpb_cornerRadius="5dp"/>

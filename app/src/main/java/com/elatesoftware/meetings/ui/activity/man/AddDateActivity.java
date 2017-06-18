@@ -1,11 +1,7 @@
 package com.elatesoftware.meetings.ui.activity.man;
 
-import android.animation.Animator;
-import android.animation.AnimatorListenerAdapter;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.Interpolator;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentTransaction;
@@ -18,20 +14,13 @@ import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
-import android.view.animation.AccelerateDecelerateInterpolator;
-import android.widget.Button;
-import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.crystal.crystalrangeseekbar.interfaces.OnRangeSeekbarChangeListener;
-import com.crystal.crystalrangeseekbar.widgets.CrystalRangeSeekbar;
 import com.elatesoftware.meetings.R;
-import com.elatesoftware.meetings.ui.activity.ShowDateActivity;
 import com.elatesoftware.meetings.ui.activity.base.BaseActivity;
 import com.elatesoftware.meetings.ui.adapter.view_pager.ViewPagerAdapter;
 import com.elatesoftware.meetings.ui.view.CustomEditText;
@@ -41,24 +30,16 @@ import com.elatesoftware.meetings.util.StringUtils;
 import com.elatesoftware.meetings.util.api.pojo.Meeting;
 import com.github.aakira.expandablelayout.ExpandableRelativeLayout;
 import com.github.jjobes.slidedatetimepicker.SlideDateTimeListener;
-import com.github.jjobes.slidedatetimepicker.SlideDateTimePicker;
 import com.google.android.gms.common.GooglePlayServicesNotAvailableException;
 import com.google.android.gms.common.GooglePlayServicesRepairableException;
-import com.google.android.gms.common.api.Status;
 import com.google.android.gms.location.places.Place;
-import com.google.android.gms.location.places.ui.PlaceAutocomplete;
 import com.google.android.gms.location.places.ui.PlacePicker;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.CameraPosition;
-import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
-import com.unnamed.b.atv.model.TreeNode;
-import com.unnamed.b.atv.view.AndroidTreeView;
-import com.unnamed.b.atv.view.TreeNodeWrapperView;
 
 import net.yslibrary.android.keyboardvisibilityevent.KeyboardVisibilityEvent;
 import net.yslibrary.android.keyboardvisibilityevent.KeyboardVisibilityEventListener;
@@ -249,7 +230,7 @@ public class AddDateActivity extends BaseActivity implements OnMapReadyCallback 
     public void clickBtnPreview() {
         if(checkInfo()) {
             saveInfoMeeting();
-            startActivityForResult(ShowDateActivity.getIntent(this, getString(R.string.preview), ShowDateActivity.PREVIEW), CLOSE);
+            startActivityForResult(PreviewActivity.getIntent(this), CLOSE);
         }
     }
 

@@ -49,6 +49,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="8dp"
+                        android:layout_marginBottom="16dp"
                         android:gravity="center">
 
                         <TextView
@@ -81,7 +82,6 @@
                         android:id="@+id/cv_age_woman"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="16dp"
                         card_view:cardCornerRadius="5dp"
                         card_view:cardBackgroundColor="@color/white">
 
@@ -294,6 +294,7 @@
                                 android:background="@drawable/map_bg"/>
 
                             <LinearLayout
+                                android:id="@+id/ll_place"
                                 android:orientation="horizontal"
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent">
@@ -355,32 +356,12 @@
         </ScrollView>
 
         <RelativeLayout
+            android:id="@+id/rl_bottom"
             android:layout_width="match_parent"
             android:layout_height="43dp"
             android:layout_marginBottom="8dp"
             android:layout_marginRight="16dp"
-            android:layout_marginLeft="16dp"
-            android:layout_alignParentBottom="true">
-
-            <com.dd.CircularProgressButton
-                android:id="@+id/btn_publish"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:textColor="@color/white"
-                android:textSize="14sp"
-                app:cpb_textIdle="@string/publish"
-                app:cpb_selectorIdle="@drawable/button_blue_bg"
-                app:cpb_cornerRadius="5dp"/>
-
-            <com.dd.CircularProgressButton
-                android:id="@+id/btn_confirmed"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:textColor="@color/white"
-                android:textSize="14sp"
-                app:cpb_textIdle="@string/confirmed"
-                app:cpb_selectorIdle="@drawable/button_red_bg"
-                app:cpb_cornerRadius="5dp"/>
+            android:layout_marginLeft="16dp">
         </RelativeLayout>
     </LinearLayout>
 
