@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -106,13 +107,27 @@ public class SignInFragment extends BaseFragment {
     public void requestLogin() {
         String username = cetEmail.getEditText().getText().toString();
         String pass = cetPass.getEditText().getText().toString();
-        if(Utils.checkAutInfo(getContext(), cetEmail, cetPass)) {
+        if(checkAutInfo(getContext(), cetEmail, cetPass)) {
             Intent intent = new Intent(getContext(), LoginService.class);
             intent.putExtra(LoginService.USER_NAME, username);
             intent.putExtra(LoginService.PASSWORD, pass);
             getActivity().startService(intent);
             buttonAnimation.start();
         }
+    }
+
+    public static boolean checkAutInfo(Context context, CustomEditText cetEmail, CustomEditText cetPass) {
+        String userName = cetEmail.getEditText().getText().toString();
+        String password = cetPass.getEditText().getText().toString();
+        if(TextUtils.isEmpty(userName) && TextUtils.isEmpty(password)) {
+            Utils.showErrorDialog(context, context.getString(R.string.empty_data));
+            return  false;
+        }
+        if(!Utils.isEmailValid(userName)) {
+            Utils.showErrorDialog(context, context.getString(R.string.invalid_email));
+            return  false;
+        }
+        return true;
     }
 
     private void setLoginInfo() {

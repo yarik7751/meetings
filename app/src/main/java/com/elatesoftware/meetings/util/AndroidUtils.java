@@ -7,6 +7,7 @@ import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.res.Resources;
 import android.net.ConnectivityManager;
+import android.net.Network;
 import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Environment;
@@ -60,26 +61,20 @@ public class AndroidUtils {
      * @return - true/false
      */
     public static boolean isNetworkOnline(Context context) {
-        try {
-            ConnectivityManager cm = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
-            NetworkInfo netInfo = cm.getActiveNetworkInfo();
-            if (netInfo != null && (netInfo.isConnectedOrConnecting() || netInfo.isAvailable())) {
-                return true;
-            }
-            //TODO 26 REMOVE DEPRECATED METHODs
-            netInfo = cm.getNetworkInfo(ConnectivityManager.TYPE_MOBILE);
+        ConnectivityManager cm = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo netInfo = cm.getActiveNetworkInfo();
+        if (netInfo != null && (netInfo.isConnectedOrConnecting() || netInfo.isAvailable())) {
+            return true;
+        }
+        netInfo = cm.getNetworkInfo(ConnectivityManager.TYPE_MOBILE);
 
+        if (netInfo != null && netInfo.isConnectedOrConnecting()) {
+            return true;
+        } else {
+            netInfo = cm.getNetworkInfo(ConnectivityManager.TYPE_WIFI);
             if (netInfo != null && netInfo.isConnectedOrConnecting()) {
                 return true;
-            } else {
-                netInfo = cm.getNetworkInfo(ConnectivityManager.TYPE_WIFI);
-                if (netInfo != null && netInfo.isConnectedOrConnecting()) {
-                    return true;
-                }
             }
-        } catch (Exception e) {
-            e.printStackTrace();
-            return true;
         }
         return false;
     }

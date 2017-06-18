@@ -87,6 +87,7 @@ public class PreviewActivity extends BaseShowDateActivity {
 
     @Override
     public void onMapReady(GoogleMap googleMap) {
+        super.onMapReady(googleMap);
         LatLng latLng = new LatLng(meeting.getLatitude(), meeting.getLongitude());
         CameraPosition cameraPosition = new CameraPosition.Builder()
                 .target(latLng)
@@ -187,28 +188,22 @@ public class PreviewActivity extends BaseShowDateActivity {
 
         @Override
         public void onReceive(Context context, final Intent intent) {
-            //todo удалить хендлер
-            new Handler().postDelayed(new Runnable() {
-                @Override
-                public void run() {
-                    String response = intent.getStringExtra(Const.RESPONSE);
-                    buttonAnimation.stop();
-                    if(response != null && response.equals(String.valueOf(Const.CODE_SUCCESS)) && MessageAnswer.getInstance() != null) {
-                        Log.d(TAG, "CreateDate 200");
-                        if(MessageAnswer.getInstance().getSuccess()) {
-                            Log.d(TAG, "CreateDate TRUE");
-                            showMessage(R.string.date_created_successfully);
-                            closeActivitySuccess();
-                        } else {
-                            showMessage(R.string.something_wrong);
-                            Log.d(TAG, "CreateDate FALSE");
-                        }
-                    } else {
-                        showMessage(R.string.request_error);
-                        Log.d(TAG, "CreateDate error");
-                    }
+            String response = intent.getStringExtra(Const.RESPONSE);
+            buttonAnimation.stop();
+            if(response != null && response.equals(String.valueOf(Const.CODE_SUCCESS)) && MessageAnswer.getInstance() != null) {
+                Log.d(TAG, "CreateDate 200");
+                if(MessageAnswer.getInstance().getSuccess()) {
+                    Log.d(TAG, "CreateDate TRUE");
+                    showMessage(R.string.date_created_successfully);
+                    closeActivitySuccess();
+                } else {
+                    showMessage(R.string.something_wrong);
+                    Log.d(TAG, "CreateDate FALSE");
                 }
-            }, 300);
+            } else {
+                showMessage(R.string.request_error);
+                Log.d(TAG, "CreateDate error");
+            }
         }
     }
 

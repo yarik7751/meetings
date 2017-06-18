@@ -20,6 +20,11 @@ import com.elatesoftware.meetings.util.DateUtils;
 import com.elatesoftware.meetings.util.Utils;
 import com.elatesoftware.meetings.util.api.pojo.GetProfileInfoAnswer;
 import com.elatesoftware.meetings.util.model.ButtonAnimation;
+import com.google.android.gms.maps.CameraUpdateFactory;
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.model.CameraPosition;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
 
 import java.util.Date;
 import java.util.List;
@@ -73,6 +78,19 @@ public class ShowSearchDateActivity extends BaseShowDateActivity {
     protected void onStop() {
         super.onStop();
         unregisterBroadcast();
+    }
+
+    @Override
+    public void onMapReady(GoogleMap googleMap) {
+        super.onMapReady(googleMap);
+        LatLng latLng = new LatLng(meeting.getLatitude(), meeting.getLongitude());
+        CameraPosition cameraPosition = new CameraPosition.Builder()
+                .target(latLng)
+                .zoom(16.0f)
+                .build();
+        map.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
+        map.addMarker(new MarkerOptions()
+                .position(latLng));
     }
 
     private void setUI() {

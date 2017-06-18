@@ -28,7 +28,7 @@ public class MainActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        if(Utils.isToken(this)) {
+        if(CustomSharedPreference.isToken(this)) {
             FragmentManager fm = getSupportFragmentManager();
             for(int i = 0; i < fm.getBackStackEntryCount(); i++) {
                 fm.popBackStack();
@@ -49,7 +49,7 @@ public class MainActivity extends BaseActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        if(Utils.isToken(this)) {
+        if(CustomSharedPreference.isToken(this)) {
             finish();
         }
     }

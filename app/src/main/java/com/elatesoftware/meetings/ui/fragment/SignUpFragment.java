@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -116,7 +117,7 @@ public class SignUpFragment extends BaseFragment {
         String userName = cetEmail.getEditText().getText().toString();
         String password = cetPass.getEditText().getText().toString();
         //String repPassword = cetRepPass.getEditText().getText().toString();
-        if(Utils.checkRegInfo(getContext(), cetEmail, cetPass, null)) {
+        if(checkRegInfo(getContext(), cetEmail, cetPass, null)) {
             Intent intent = new Intent(getContext(), RegisterService.class);
             intent.putExtra(RegisterService.USER_NAME, userName);
             intent.putExtra(RegisterService.PASSWORD, password);
@@ -124,6 +125,29 @@ public class SignUpFragment extends BaseFragment {
             getActivity().startService(intent);
             buttonAnimation.start();
         }
+    }
+
+    public boolean checkRegInfo(Context context, CustomEditText cetEmail, CustomEditText cetPass, CustomEditText cetRepPass) {
+        String userName = cetEmail.getEditText().getText().toString();
+        String password = cetPass.getEditText().getText().toString();
+        String repPassword = cetRepPass != null ? cetRepPass.getEditText().getText().toString() : null;
+        if(TextUtils.isEmpty(userName) && TextUtils.isEmpty(password)) {
+            Utils.showErrorDialog(context, context.getString(R.string.empty_data));
+            return  false;
+        }
+        if(!Utils.isEmailValid(userName)) {
+            Utils.showErrorDialog(context, context.getString(R.string.invalid_email));
+            return  false;
+        }
+        if(password.length() < 6) {
+            Utils.showErrorDialog(context, context.getString(R.string.short_password) + "(6)");
+            return  false;
+        }
+        if(cetRepPass != null && !repPassword.equals(password)) {
+            Utils.showErrorDialog(context, context.getString(R.string.passwords_is_not_equals));
+            return  false;
+        }
+        return true;
     }
 
     private void setLoginInfo() {

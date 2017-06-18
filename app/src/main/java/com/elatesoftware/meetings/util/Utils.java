@@ -105,16 +105,6 @@ public class Utils {
         }
     }
 
-    //todo 20 move to base activity
-    public static boolean isPermissionsGranted(int[] permissions) {
-        for(int permission : permissions) {
-            if(permission != PackageManager.PERMISSION_GRANTED) {
-                return false;
-            }
-        }
-        return true;
-    }
-
     public static List<DataSnapshot> iteratorToList(Iterator<DataSnapshot> iterator) {
         List<DataSnapshot> messages = new ArrayList<>();
         while (iterator.hasNext()) {
@@ -123,69 +113,13 @@ public class Utils {
         return messages;
     }
 
-    //todo 5
-    public static boolean isToken(Context context) {
-        String token = CustomSharedPreference.getToken(context);
-        return !TextUtils.isEmpty(token) && !token.equals(Const.NULL_TOKEN);
-    }
-
-    //todo 21 remove this method
-    public static void setMarkerInMap(GoogleMap map, LatLng latLng) {
-        CameraPosition cameraPosition = new CameraPosition.Builder()
-                .target(latLng)
-                .zoom(17.0f)
-                .build();
-        map.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
-        map.addMarker(new MarkerOptions()
-                .position(latLng));
-    }
-
     public static IntentFilter getIntentFilter(String action) {
         IntentFilter intentFilter = new IntentFilter(action);
         intentFilter.addCategory(Intent.CATEGORY_DEFAULT);
         return intentFilter;
     }
 
-    //todo 17 move to fragments
-    public static boolean checkRegInfo(Context context, CustomEditText cetEmail, CustomEditText cetPass, CustomEditText cetRepPass) {
-        String userName = cetEmail.getEditText().getText().toString();
-        String password = cetPass.getEditText().getText().toString();
-        String repPassword = cetRepPass != null ? cetRepPass.getEditText().getText().toString() : null;
-        if(TextUtils.isEmpty(userName) && TextUtils.isEmpty(password)) {
-            showErrorDialog(context, context.getString(R.string.empty_data));
-            return  false;
-        }
-        if(!Utils.isEmailValid(userName)) {
-            showErrorDialog(context, context.getString(R.string.invalid_email));
-            return  false;
-        }
-        if(password.length() < 6) {
-            showErrorDialog(context, context.getString(R.string.short_password) + "(6)");
-            return  false;
-        }
-        if(cetRepPass != null && !repPassword.equals(password)) {
-            showErrorDialog(context, context.getString(R.string.passwords_is_not_equals));
-            return  false;
-        }
-        return true;
-    }
-
-    //todo 18 move to fragments
-    public static boolean checkAutInfo(Context context, CustomEditText cetEmail, CustomEditText cetPass) {
-        String userName = cetEmail.getEditText().getText().toString();
-        String password = cetPass.getEditText().getText().toString();
-        if(TextUtils.isEmpty(userName) && TextUtils.isEmpty(password)) {
-            showErrorDialog(context, context.getString(R.string.empty_data));
-            return  false;
-        }
-        if(!Utils.isEmailValid(userName)) {
-            showErrorDialog(context, context.getString(R.string.invalid_email));
-            return  false;
-        }
-        return true;
-    }
-
-    private static void showErrorDialog(Context context, String msgError) {
+    public static void showErrorDialog(Context context, String msgError) {
         new AlertDialog.Builder(context)
                 .setTitle(R.string.error_add_date)
                 .setMessage(msgError)

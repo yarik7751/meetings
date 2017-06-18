@@ -56,6 +56,11 @@ public class CustomSharedPreference {
         return getSharedPreferences(context).getString(Const.SP_TOKEN, null);
     }
 
+    public static boolean isToken(Context context) {
+        String token = CustomSharedPreference.getToken(context);
+        return !TextUtils.isEmpty(token);
+    }
+
     public static void setProfileInformation(Context context, HumanAnswer infoMan) {
         Gson gson = new Gson();
         String info = gson.toJson(infoMan);

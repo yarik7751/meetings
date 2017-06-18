@@ -1,6 +1,7 @@
 package com.elatesoftware.meetings.ui.activity.base;
 
 import android.app.ProgressDialog;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.support.annotation.LayoutRes;
 import android.support.annotation.Nullable;
@@ -48,6 +49,15 @@ public class BaseActivity extends AppCompatActivity {
         } else {
             setTheme(R.style.AppTheme);
         }
+    }
+
+    public boolean isPermissionsGranted(int[] permissions) {
+        for(int permission : permissions) {
+            if(permission != PackageManager.PERMISSION_GRANTED) {
+                return false;
+            }
+        }
+        return true;
     }
 
     /**
