@@ -13,11 +13,18 @@
         <item name="android:windowBackground">@drawable/preview_bg</item>
     </style>
 
-    <style name="SplashThemeWoman" parent="AppTheme">
+    <style name="ThemeWoman" parent="AppTheme">
         <item name="colorPrimary">@color/button_red_dark</item>
         <item name="colorPrimaryDark">@color/button_red_light</item>
         <item name="colorAccent">@color/button_red_light</item>
         <item name="android:windowBackground">@color/bg_woman</item>
+    </style>
+
+    <style name="ThemeDefault" parent="AppTheme">
+        <item name="colorPrimary">@color/black</item>
+        <item name="colorPrimaryDark">@color/black</item>
+        <item name="colorAccent">@color/black</item>
+        <item name="android:windowBackground">@drawable/bg</item>
     </style>
 
     <style name="AVLoadingIndicatorView">

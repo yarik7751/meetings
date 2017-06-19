@@ -130,7 +130,7 @@ public class ProfileEditActivity extends BaseActivity {
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        if(requestCode == Const.REQUEST_PERMISSIONS && Utils.isPermissionsGranted(grantResults)) {
+        if(requestCode == Const.REQUEST_PERMISSIONS && isPermissionsGranted(grantResults)) {
             isPermissionsAddPhoto = true;
         }
     }
@@ -198,7 +198,7 @@ public class ProfileEditActivity extends BaseActivity {
             }
         });
         if(CustomSharedPreference.getIsMan(this) == Const.WOMAN_VALUE) {
-            setTheme(R.style.SplashThemeWoman);
+            setTheme(R.style.ThemeWoman);
             rlPhotos.setBackgroundResource(R.drawable.button_red);
             cetHeight.setVisibility(View.VISIBLE);
             cetWeight.setVisibility(View.VISIBLE);

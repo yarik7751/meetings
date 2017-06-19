@@ -51,7 +51,7 @@
             android:configChanges="keyboardHidden|orientation|screenSize" />
         <activity
             android:name=".ui.activity.woman.WorkWomanActivity"
-            android:theme="@style/SplashThemeWoman"
+            android:theme="@style/ThemeWoman"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateAlwaysHidden"
             android:configChanges="keyboardHidden|orientation|screenSize"/>
@@ -83,13 +83,13 @@
             android:configChanges="keyboardHidden|orientation|screenSize"/>
         <activity
             android:name=".ui.activity.ProfileEditActivity"
-            android:theme="@style/SplashThemeWoman"
+            android:theme="@style/ThemeWoman"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateAlwaysHidden"
             android:configChanges="keyboardHidden|orientation|screenSize"/>
         <activity
             android:name=".ui.activity.woman.SearchManActivity"
-            android:theme="@style/SplashThemeWoman"
+            android:theme="@style/ThemeWoman"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateAlwaysHidden"
             android:configChanges="keyboardHidden|orientation|screenSize"/>
@@ -100,7 +100,12 @@
             android:configChanges="keyboardHidden|orientation|screenSize"/>
         <activity
             android:name=".ui.activity.woman.ShowSearchDateActivity"
-            android:theme="@style/SplashThemeWoman"
+            android:theme="@style/ThemeWoman"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateAlwaysHidden"
+            android:configChanges="keyboardHidden|orientation|screenSize"/>
+        <activity
+            android:name=".ui.activity.man.ShowPendingWomenActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateAlwaysHidden"
             android:configChanges="keyboardHidden|orientation|screenSize"/>
@@ -119,6 +124,9 @@
         <service android:name=".service.ExitService"/>
         <service android:name=".service.SearchDatesService"/>
         <service android:name=".service.GetProfileInfoService"/>
+        <service android:name=".service.LocationService"/>
+        <service android:name=".service.AddPartnerService"/>
+        <service android:name=".service.GetPendingWomenService"/>
         <service
             android:name=".service.DatesMessagingService">
             <intent-filter>

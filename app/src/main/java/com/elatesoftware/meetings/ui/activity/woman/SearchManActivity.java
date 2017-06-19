@@ -19,6 +19,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.FrameLayout;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -27,12 +28,14 @@ import android.widget.Toast;
 import com.elatesoftware.meetings.R;
 import com.elatesoftware.meetings.service.SearchDatesService;
 import com.elatesoftware.meetings.ui.activity.base.BaseActivity;
-import com.elatesoftware.meetings.ui.adapter.dales.DatesRecyclerViewAdapter;
+import com.elatesoftware.meetings.ui.adapter.dales.BaseDatesRecyclerViewAdapter;
+import com.elatesoftware.meetings.ui.adapter.dales.SearchDatesAdapter;
 import com.elatesoftware.meetings.ui.view.CustomEditText;
 import com.elatesoftware.meetings.util.AndroidUtils;
 import com.elatesoftware.meetings.util.Const;
 import com.elatesoftware.meetings.util.DateUtils;
 import com.elatesoftware.meetings.util.ImageHelper;
+import com.elatesoftware.meetings.util.LocationUtils;
 import com.elatesoftware.meetings.util.StringUtils;
 import com.elatesoftware.meetings.util.Utils;
 import com.elatesoftware.meetings.util.api.pojo.Meeting;
@@ -77,6 +80,7 @@ public class SearchManActivity extends BaseActivity implements OnMapReadyCallbac
     @BindView(R.id.tv_start_time) TextView tvStartTime;
     @BindView(R.id.ll_filters) LinearLayout llFilters;
     @BindView(R.id.rl_main) CoordinatorLayout rlMain;
+    @BindView(R.id.img_back) ImageView imgBack;
     private RecyclerView rvDales;
     private BottomSheetBehavior mBottomSheetBehavior;
 
@@ -84,7 +88,7 @@ public class SearchManActivity extends BaseActivity implements OnMapReadyCallbac
 
     private GoogleMap map;
     private SupportMapFragment mapFragment;
-    private DatesRecyclerViewAdapter adapter;
+    private BaseDatesRecyclerViewAdapter adapter;
     private boolean isPresentIterator = true;
     private boolean isShowFilter = false;
     private Date dateStart;
@@ -168,6 +172,7 @@ public class SearchManActivity extends BaseActivity implements OnMapReadyCallbac
     }
 
     private void loadMap() {
+        imgBack.setVisibility(View.GONE);
         flContent.setVisibility(View.VISIBLE);
         flListContent.setVisibility(View.GONE);
         if(map == null) {
@@ -182,6 +187,7 @@ public class SearchManActivity extends BaseActivity implements OnMapReadyCallbac
     }
 
     private void loadList() {
+        imgBack.setVisibility(View.VISIBLE);
         flContent.setVisibility(View.GONE);
         flListContent.setVisibility(View.VISIBLE);
         setDatesInList();
@@ -190,21 +196,6 @@ public class SearchManActivity extends BaseActivity implements OnMapReadyCallbac
     @Override
     public void onMapReady(GoogleMap googleMap) {
         map = googleMap;
-        map.clear();
-        LatLng myPosition = Utils.getLastLocation(this);
-        CameraPosition cameraPosition = new CameraPosition.Builder()
-                .target(myPosition)
-                .zoom(14.0f)
-                .build();
-        map.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
-        View v = LayoutInflater.from(SearchManActivity.this).inflate(R.layout.incl_marker, null);
-        CircleImageView imgMarker = (CircleImageView) v.findViewById(R.id.img_marker);
-        imgMarker.setImageResource(R.drawable.marker_myself);
-        imgMarker.setBorderWidth(0);
-        map.addMarker(new MarkerOptions()
-                .position(myPosition)
-                .icon(BitmapDescriptorFactory.fromBitmap(ImageHelper.loadBitmapFromView(v)))
-        );
         if(SearchDatesAnswer.getInstance() != null) {
             setDatesInMap();
         }
@@ -249,9 +240,27 @@ public class SearchManActivity extends BaseActivity implements OnMapReadyCallbac
         });
     }
 
+    private void setMyLocation() {
+        LatLng myPosition = LocationUtils.getLastLocation(this);
+        CameraPosition cameraPosition = new CameraPosition.Builder()
+                .target(myPosition)
+                .zoom(14.0f)
+                .build();
+        map.moveCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
+        View v = LayoutInflater.from(SearchManActivity.this).inflate(R.layout.incl_marker, null);
+        CircleImageView imgMarker = (CircleImageView) v.findViewById(R.id.img_marker);
+        imgMarker.setImageResource(R.drawable.marker_myself);
+        imgMarker.setBorderWidth(0);
+        map.addMarker(new MarkerOptions()
+                .position(myPosition)
+                .icon(BitmapDescriptorFactory.fromBitmap(ImageHelper.loadBitmapFromView(v)))
+        );
+    }
+
     private void setDatesInMap() {
         if(map != null) {
             map.clear();
+            setMyLocation();
             for (int i = 0; i < SearchDatesAnswer.getInstance().getResult().size(); i++) {
                 final Result result = SearchDatesAnswer.getInstance().getResult().get(i);
                 final LatLng position = new LatLng(result.getDate().getLatitude(), result.getDate().getLongitude());
@@ -300,7 +309,7 @@ public class SearchManActivity extends BaseActivity implements OnMapReadyCallbac
 
             rvDales = new RecyclerView(this);
             rvDales.setLayoutManager(new LinearLayoutManager(this));
-            adapter = new DatesRecyclerViewAdapter(this, SearchDatesAnswer.getInstance().getResult(), true, R.drawable.ic_person_white_24dp, R.color.button_red_dark);
+            adapter = new SearchDatesAdapter(this, SearchDatesAnswer.getInstance().getResult());
             rvDales.setAdapter(adapter);
             rvDales.setPadding(0, llTool.getHeight() + AndroidUtils.dp(16), 0, 0);
             flListContent.addView(rvDales, params);

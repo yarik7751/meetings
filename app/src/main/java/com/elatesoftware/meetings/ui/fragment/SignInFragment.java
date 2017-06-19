@@ -19,6 +19,8 @@ import com.elatesoftware.meetings.ui.fragment.base.BaseFragment;
 import com.elatesoftware.meetings.receiver.AutarizationBroadcastReceiver;
 import com.elatesoftware.meetings.service.LoginService;
 import com.elatesoftware.meetings.ui.view.CustomEditText;
+import com.elatesoftware.meetings.util.DialogUtils;
+import com.elatesoftware.meetings.util.StringUtils;
 import com.elatesoftware.meetings.util.Utils;
 import com.elatesoftware.meetings.util.model.ButtonAnimation;
 import com.elatesoftware.meetings.util.model.LoginInfo;
@@ -120,11 +122,11 @@ public class SignInFragment extends BaseFragment {
         String userName = cetEmail.getEditText().getText().toString();
         String password = cetPass.getEditText().getText().toString();
         if(TextUtils.isEmpty(userName) && TextUtils.isEmpty(password)) {
-            Utils.showErrorDialog(context, context.getString(R.string.empty_data));
+            DialogUtils.showErrorDialog(context, context.getString(R.string.empty_data));
             return  false;
         }
-        if(!Utils.isEmailValid(userName)) {
-            Utils.showErrorDialog(context, context.getString(R.string.invalid_email));
+        if(!StringUtils.isEmailValid(userName)) {
+            DialogUtils.showErrorDialog(context, context.getString(R.string.invalid_email));
             return  false;
         }
         return true;

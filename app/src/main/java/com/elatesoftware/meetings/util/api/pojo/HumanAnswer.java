@@ -1,12 +1,16 @@
 package com.elatesoftware.meetings.util.api.pojo;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import java.util.ArrayList;
 import java.util.GregorianCalendar;
 import java.util.List;
 
-public class HumanAnswer {
+public class HumanAnswer implements Parcelable {
 
     @SerializedName("Username")
     @Expose
@@ -22,7 +26,7 @@ public class HumanAnswer {
 
     @SerializedName("Gender")
     @Expose
-    protected String gender;
+    protected Integer gender;
 
     @SerializedName("Height")
     @Expose
@@ -111,11 +115,11 @@ public class HumanAnswer {
         this.firstName = firstName;
     }
 
-    public String getGender() {
+    public Integer getGender() {
         return gender;
     }
 
-    public void setGender(String gender) {
+    public void setGender(Integer gender) {
         this.gender = gender;
     }
 
@@ -182,4 +186,54 @@ public class HumanAnswer {
     public void setPhotosId(List<Integer> photosId) {
         this.photosId = photosId;
     }
+
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(this.username);
+        dest.writeString(this.password);
+        dest.writeString(this.firstName);
+        dest.writeValue(this.gender);
+        dest.writeValue(this.height);
+        dest.writeValue(this.weight);
+        dest.writeValue(this.hairColor);
+        dest.writeValue(this.dateOfBirth);
+        dest.writeValue(this.id);
+        dest.writeString(this.city);
+        dest.writeString(this.aboutMe);
+        dest.writeList(this.photosId);
+    }
+
+    protected HumanAnswer(Parcel in) {
+        this.username = in.readString();
+        this.password = in.readString();
+        this.firstName = in.readString();
+        this.gender = (Integer) in.readValue(Integer.class.getClassLoader());
+        this.height = (Double) in.readValue(Double.class.getClassLoader());
+        this.weight = (Double) in.readValue(Double.class.getClassLoader());
+        this.hairColor = (Integer) in.readValue(Integer.class.getClassLoader());
+        this.dateOfBirth = (Long) in.readValue(Long.class.getClassLoader());
+        this.id = (Long) in.readValue(Long.class.getClassLoader());
+        this.city = in.readString();
+        this.aboutMe = in.readString();
+        this.photosId = new ArrayList<Integer>();
+        in.readList(this.photosId, Integer.class.getClassLoader());
+    }
+
+    public static final Parcelable.Creator<HumanAnswer> CREATOR = new Parcelable.Creator<HumanAnswer>() {
+        @Override
+        public HumanAnswer createFromParcel(Parcel source) {
+            return new HumanAnswer(source);
+        }
+
+        @Override
+        public HumanAnswer[] newArray(int size) {
+            return new HumanAnswer[size];
+        }
+    };
 }

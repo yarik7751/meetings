@@ -12,6 +12,8 @@ import android.view.View;
 
 import com.dd.CircularProgressButton;
 import com.elatesoftware.meetings.R;
+import com.elatesoftware.meetings.service.AddPartnerService;
+import com.elatesoftware.meetings.service.AddPhotoService;
 import com.elatesoftware.meetings.service.GetProfileInfoService;
 import com.elatesoftware.meetings.ui.activity.BaseShowDateActivity;
 import com.elatesoftware.meetings.ui.adapter.page.PhotoFragmentPageAdapter;
@@ -19,6 +21,7 @@ import com.elatesoftware.meetings.util.Const;
 import com.elatesoftware.meetings.util.DateUtils;
 import com.elatesoftware.meetings.util.Utils;
 import com.elatesoftware.meetings.util.api.pojo.GetProfileInfoAnswer;
+import com.elatesoftware.meetings.util.api.pojo.MessageAnswer;
 import com.elatesoftware.meetings.util.model.ButtonAnimation;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -38,13 +41,14 @@ public class ShowSearchDateActivity extends BaseShowDateActivity {
     private ButtonAnimation buttonAnimation;
 
     private GetProfileInfoReceiver getProfileInfoReceiver;
+    private AddPartnerReceiver addPartnerReceiver;
 
     long creatorId;
 
     private View.OnClickListener confirmedListener = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
-
+            requestAddPartner();
         }
     };
 
@@ -57,7 +61,6 @@ public class ShowSearchDateActivity extends BaseShowDateActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        buttonAnimation = new ButtonAnimation(this, (CircularProgressButton) vConfirmed);
         creatorId = getIntent().getLongExtra(CREATOR_ID, -1);
 
         setUI();
@@ -66,6 +69,7 @@ public class ShowSearchDateActivity extends BaseShowDateActivity {
         vConfirmed = LayoutInflater.from(this).inflate(R.layout.incl_btn_confirmed, rlBottom, false);
         rlBottom.addView(vConfirmed);
         vConfirmed.setOnClickListener(confirmedListener);
+        buttonAnimation = new ButtonAnimation(this, (CircularProgressButton) vConfirmed);
     }
 
     @Override
@@ -112,16 +116,24 @@ public class ShowSearchDateActivity extends BaseShowDateActivity {
     private void registerBroadcast() {
         getProfileInfoReceiver = new GetProfileInfoReceiver();
         registerReceiver(getProfileInfoReceiver, Utils.getIntentFilter(GetProfileInfoService.ACTION));
+        addPartnerReceiver = new AddPartnerReceiver();
+        registerReceiver(addPartnerReceiver, Utils.getIntentFilter(AddPartnerService.ACTION));
     }
 
     private void unregisterBroadcast() {
         unregisterReceiver(getProfileInfoReceiver);
+        unregisterReceiver(addPartnerReceiver);
     }
 
     private void requestGetProfileInfo(long userId) {
         setProgressDialogMessage(getString(R.string.loading_info) + " ...");
         showProgressDialog();
         startService(GetProfileInfoService.getIntent(this, userId));
+    }
+
+    private void requestAddPartner() {
+        buttonAnimation.start();
+        startService(AddPartnerService.getIntent(this, meeting.getId()));
     }
 
     private void loadPhotoInteger(long userId, List<Integer> photo) {
@@ -170,6 +182,25 @@ public class ShowSearchDateActivity extends BaseShowDateActivity {
             } else {
                 showMessage(R.string.request_error);
                 Log.d(TAG, "GetProfileInfo error");
+            }
+        }
+    }
+
+    public class AddPartnerReceiver extends BroadcastReceiver {
+
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            MessageAnswer response = intent.getParcelableExtra(Const.RESPONSE);
+            buttonAnimation.stop();
+            if(response != null) {
+                if(response.getSuccess()) {
+                    showMessage(R.string.add_to_date_success);
+                    finish();
+                } else {
+                    showMessage(R.string.something_wrong);
+                }
+            } else {
+                showMessage(R.string.request_error);
             }
         }
     }

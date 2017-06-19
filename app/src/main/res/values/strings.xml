@@ -119,6 +119,10 @@
     <string name="confirmed">Confirmed</string>
     <string name="view_details">View details</string>
     <string name="loading_info">Loading info</string>
+    <string name="add_to_date_success">You were added to the meeting successfully</string>
+    <string name="wrong_gender">Wrong gender!</string>
+    <string name="pending_women">Pending women</string>
+    <string name="women_loading">Women loading</string>
 
     <string-array name="hair_colors">
         <item>Doesn\'t matter</item>

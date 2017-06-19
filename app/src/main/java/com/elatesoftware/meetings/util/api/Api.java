@@ -5,6 +5,7 @@ import android.util.Log;
 import com.elatesoftware.meetings.util.Const;
 import com.elatesoftware.meetings.util.api.pojo.GetDatesManAnswer;
 import com.elatesoftware.meetings.util.api.pojo.GetInfoAccAnswer;
+import com.elatesoftware.meetings.util.api.pojo.GetPendingWomenAnswer;
 import com.elatesoftware.meetings.util.api.pojo.GetPhotoAnswer;
 import com.elatesoftware.meetings.util.api.pojo.GetPhotosAnswer;
 import com.elatesoftware.meetings.util.api.pojo.GetProfileInfoAnswer;
@@ -69,7 +70,7 @@ public class Api {
             object.put("Username", userName);
             object.put("Password", password);
             object.put("Gender", gender);
-            //object.put("Token", token);
+            object.put("Token", token);
             RequestBody body = RequestBody.create(okhttp3.MediaType.parse("application/json; charset=utf-8"), object.toString());
 
             Log.d(TAG, "object.toString: " + object.toString());
@@ -465,10 +466,64 @@ public class Api {
             if(response.code() == Const.CODE_SUCCESS) {
                 Gson gson = new Gson();
                 GetProfileInfoAnswer answer = gson.fromJson(rawJson, GetProfileInfoAnswer .class);
-                GetProfileInfoAnswer .setInstance(answer);
+                GetProfileInfoAnswer.setInstance(answer);
             }
             result = String.valueOf(response.code());
         }
         return result;
+    }
+
+    public static MessageAnswer addPartner(String sessionKey, long dateId) {
+        Log.d(TAG, "addPartner");
+        Call<ResponseBody> call = getApi().addPartner(sessionKey, dateId);
+        Response<ResponseBody> response = null;
+        String rawJson = null;
+        try {
+            response = call.execute();
+            if(response != null && response.body() != null) {
+                rawJson = response.body().string();
+                rawJson = rawJson.replace("\\", "");
+                Log.d(TAG, "response: " + rawJson);
+            } else {
+                Log.d(TAG, "response: null");
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        if(response != null && rawJson != null){
+            if(response.code() == Const.CODE_SUCCESS) {
+                Gson gson = new Gson();
+                MessageAnswer answer = gson.fromJson(rawJson, MessageAnswer.class);
+                return answer;
+            }
+        }
+        return null;
+    }
+
+    public static GetPendingWomenAnswer getDatePartners(String sessionKey, long dateId) {
+        Log.d(TAG, "getDatePartners");
+        Call<ResponseBody> call = getApi().getDatePartners(sessionKey, dateId);
+        Response<ResponseBody> response = null;
+        String rawJson = null;
+        try {
+            response = call.execute();
+            if(response != null && response.body() != null) {
+                rawJson = response.body().string();
+                rawJson = rawJson.replace("\\", "");
+                Log.d(TAG, "response: " + rawJson);
+            } else {
+                Log.d(TAG, "response: null");
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        if(response != null && rawJson != null){
+            if(response.code() == Const.CODE_SUCCESS) {
+                Gson gson = new Gson();
+                GetPendingWomenAnswer answer = gson.fromJson(rawJson, GetPendingWomenAnswer.class);
+                return answer;
+            }
+        }
+        return null;
     }
 }

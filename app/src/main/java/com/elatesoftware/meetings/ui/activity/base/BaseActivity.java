@@ -38,14 +38,19 @@ public class BaseActivity extends AppCompatActivity {
     }
 
     @Override
+    protected void onResume() {
+        super.onResume();
+    }
+
+    @Override
     protected void onDestroy() {
         super.onDestroy();
         progressDialog.dismiss();
     }
 
-    private void setTheme() {
+    protected void setTheme() {
         if(CustomSharedPreference.getIsMan(this) == Const.WOMAN_VALUE) {
-            setTheme(R.style.SplashThemeWoman);
+            setTheme(R.style.ThemeWoman);
         } else {
             setTheme(R.style.AppTheme);
         }

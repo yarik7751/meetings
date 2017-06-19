@@ -35,10 +35,14 @@ public class AutarizationBroadcastReceiver extends BroadcastReceiver {
             CustomSharedPreference.setPin(context, null);
         }
         String response = intent.getStringExtra(Const.RESPONSE);
-        if(response != null && response.equals(String.valueOf(Const.CODE_SUCCESS))) {
+        if(response != null && response.equals(String.valueOf(Const.CODE_SUCCESS)) && LoginAnswer.getInstance() != null) {
             Log.d(TAG, "registration 200");
             boolean success = LoginAnswer.getInstance().getSuccess();
             if(success) {
+                if(CustomSharedPreference.getIsMan(context) != LoginAnswer.getInstance().getResult().getAccount().getGender()) {
+                    Toast.makeText(context, R.string.wrong_gender, Toast.LENGTH_SHORT).show();
+                    return;
+                }
                 CustomSharedPreference.setProfileInformation(context, LoginAnswer.getInstance().getResult().getAccount());
                 String token = LoginAnswer.getInstance().getResult().getSessionKey();
                 CustomSharedPreference.setToken(context, token);

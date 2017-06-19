@@ -54,6 +54,12 @@ public class MainActivity extends BaseActivity {
         }
     }
 
+    @Override
+    protected void setTheme() {
+        super.setTheme();
+        setTheme(R.style.ThemeDefault);
+    }
+
     public void setSignUpFragment() {
         changeBackground();
         getSupportFragmentManager().popBackStack();
@@ -73,9 +79,7 @@ public class MainActivity extends BaseActivity {
 
     private void changeBackground() {
         int isMan = CustomSharedPreference.getIsMan(this);
-        if(isMan == Const.MAN_VALUE) {
-            llMain.setBackgroundResource(R.drawable.bg);
-        } else if(isMan == Const.WOMAN_VALUE) {
+        if(isMan == Const.WOMAN_VALUE) {
             llMain.setBackgroundResource(R.drawable.bg_woman);
         } else {
             llMain.setBackgroundResource(R.drawable.bg);

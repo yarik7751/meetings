@@ -22,6 +22,7 @@ import com.elatesoftware.meetings.ui.fragment.base.BaseFragment;
 import com.elatesoftware.meetings.service.ExitService;
 import com.elatesoftware.meetings.util.Const;
 import com.elatesoftware.meetings.util.CustomSharedPreference;
+import com.elatesoftware.meetings.util.DialogUtils;
 import com.elatesoftware.meetings.util.Utils;
 import com.elatesoftware.meetings.util.api.pojo.MessageAnswer;
 import com.elatesoftware.meetings.util.model.ButtonAnimation;
@@ -94,7 +95,7 @@ public class SettingsFragment extends BaseFragment {
 
     @OnClick(R.id.img_change_email)
     public void clickImgChangeEmail() {
-        Utils.showEditDialog(getContext(), getString(R.string.change) + " " + getString(R.string.mail), "", InputType.TYPE_TEXT_VARIATION_EMAIL_ADDRESS, new DialogInterface.OnClickListener() {
+        DialogUtils.showEditDialog(getContext(), getString(R.string.change) + " " + getString(R.string.mail), "", InputType.TYPE_TEXT_VARIATION_EMAIL_ADDRESS, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
 
@@ -104,7 +105,7 @@ public class SettingsFragment extends BaseFragment {
 
     @OnClick(R.id.img_change_phone)
     public void clickImgChangePhone() {
-        Utils.showEditDialog(getContext(), getString(R.string.change) + " " + getString(R.string.phone), "", InputType.TYPE_CLASS_PHONE, new DialogInterface.OnClickListener() {
+        DialogUtils.showEditDialog(getContext(), getString(R.string.change) + " " + getString(R.string.phone), "", InputType.TYPE_CLASS_PHONE, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
 

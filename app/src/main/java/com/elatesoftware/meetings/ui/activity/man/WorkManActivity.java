@@ -1,14 +1,18 @@
 package com.elatesoftware.meetings.ui.activity.man;
 
 import android.Manifest;
+import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.BottomNavigationView;
+import android.support.v4.app.ActivityCompat;
 import android.view.MenuItem;
 
 import com.elatesoftware.meetings.R;
+import com.elatesoftware.meetings.service.LocationService;
 import com.elatesoftware.meetings.ui.activity.base.BaseActivity;
 import com.elatesoftware.meetings.ui.fragment.SettingsFragment;
 import com.elatesoftware.meetings.ui.fragment.man.DatesManFragment;
@@ -61,8 +65,12 @@ public class WorkManActivity extends BaseActivity {
             }
         });
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            //todo 6
-            requestPermissions(new String[]{ Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION }, Const.REQUEST_PERMISSIONS);
+            if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED &&
+                    ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+                requestPermissions(new String[]{Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION}, Const.REQUEST_PERMISSIONS);
+            } else {
+                startService(new Intent(this, LocationService.class));
+            }
         }
     }
 
@@ -70,8 +78,8 @@ public class WorkManActivity extends BaseActivity {
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        if(requestCode == Const.REQUEST_PERMISSIONS && Utils.isPermissionsGranted(grantResults)) {
-
+        if(requestCode == Const.REQUEST_PERMISSIONS && isPermissionsGranted(grantResults)) {
+            startService(new Intent(this, LocationService.class));
         }
     }
 }

@@ -27,6 +27,7 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import com.wang.avi.AVLoadingIndicatorView;
 
 import butterknife.BindView;
+import butterknife.OnClick;
 import me.relex.circleindicator.CircleIndicator;
 
 public class BaseShowDateActivity extends BaseActivity implements OnMapReadyCallback {
@@ -89,6 +90,11 @@ public class BaseShowDateActivity extends BaseActivity implements OnMapReadyCall
         if(mapFragment != null) {
             mapFragment.getMapAsync(this);
         }
+    }
+
+    @OnClick(R.id.rl_back)
+    public void back() {
+        onBackPressed();
     }
 
     protected void setSize() {

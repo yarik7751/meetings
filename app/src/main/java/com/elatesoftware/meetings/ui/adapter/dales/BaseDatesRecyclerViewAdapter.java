@@ -10,7 +10,6 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.elatesoftware.meetings.R;
-import com.elatesoftware.meetings.ui.activity.woman.SearchManActivity;
 import com.elatesoftware.meetings.ui.activity.woman.ShowSearchDateActivity;
 import com.elatesoftware.meetings.util.DateUtils;
 import com.elatesoftware.meetings.util.StringUtils;
@@ -24,18 +23,18 @@ import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
-public class DatesRecyclerViewAdapter extends RecyclerView.Adapter<DatesRecyclerViewAdapter.DalesViewHolder> {
+public class BaseDatesRecyclerViewAdapter extends RecyclerView.Adapter<BaseDatesRecyclerViewAdapter.DalesViewHolder> {
 
     public static final String TAG = "DalesRVAdapter_logs";
 
-    private Context context;
-    private List<Result> dates;
-    private boolean isCreator = false;
-    private int defaultIcon;
-    private int defaultTint;
-    private View.OnClickListener clickListener;
+    protected Context context;
+    protected List<Result> dates;
+    protected boolean isCreator = false;
+    protected int defaultIcon;
+    protected int defaultTint;
+    protected View.OnClickListener clickListener;
 
-    public DatesRecyclerViewAdapter(Context context, List<Result> dates, boolean isCreator, int defaultIcon, int defaultTint) {
+    public BaseDatesRecyclerViewAdapter(Context context, List<Result> dates, boolean isCreator, int defaultIcon, int defaultTint) {
         this.context = context;
         this.dates = dates;
         this.isCreator = isCreator;
@@ -84,14 +83,6 @@ public class DatesRecyclerViewAdapter extends RecyclerView.Adapter<DatesRecycler
             holder.pbProgress.setVisibility(View.GONE);
         }
         holder.pbProgress.setIndicatorColor(context.getResources().getColor(defaultTint));
-
-        holder.rlDate.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Meeting.setInstance(dates.get(position).getDate());
-                context.startActivity(ShowSearchDateActivity.getIntent(context, dates.get(position).getCreatorId().longValue()));
-            }
-        });
     }
 
     @Override

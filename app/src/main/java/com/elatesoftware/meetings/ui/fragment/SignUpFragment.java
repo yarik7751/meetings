@@ -20,6 +20,8 @@ import com.elatesoftware.meetings.receiver.AutarizationBroadcastReceiver;
 import com.elatesoftware.meetings.service.RegisterService;
 import com.elatesoftware.meetings.ui.view.CustomEditText;
 import com.elatesoftware.meetings.util.CustomSharedPreference;
+import com.elatesoftware.meetings.util.DialogUtils;
+import com.elatesoftware.meetings.util.StringUtils;
 import com.elatesoftware.meetings.util.Utils;
 import com.elatesoftware.meetings.util.model.ButtonAnimation;
 import com.elatesoftware.meetings.util.model.LoginInfo;
@@ -132,19 +134,19 @@ public class SignUpFragment extends BaseFragment {
         String password = cetPass.getEditText().getText().toString();
         String repPassword = cetRepPass != null ? cetRepPass.getEditText().getText().toString() : null;
         if(TextUtils.isEmpty(userName) && TextUtils.isEmpty(password)) {
-            Utils.showErrorDialog(context, context.getString(R.string.empty_data));
+            DialogUtils.showErrorDialog(context, context.getString(R.string.empty_data));
             return  false;
         }
-        if(!Utils.isEmailValid(userName)) {
-            Utils.showErrorDialog(context, context.getString(R.string.invalid_email));
+        if(!StringUtils.isEmailValid(userName)) {
+            DialogUtils.showErrorDialog(context, context.getString(R.string.invalid_email));
             return  false;
         }
         if(password.length() < 6) {
-            Utils.showErrorDialog(context, context.getString(R.string.short_password) + "(6)");
+            DialogUtils.showErrorDialog(context, context.getString(R.string.short_password) + "(6)");
             return  false;
         }
         if(cetRepPass != null && !repPassword.equals(password)) {
-            Utils.showErrorDialog(context, context.getString(R.string.passwords_is_not_equals));
+            DialogUtils.showErrorDialog(context, context.getString(R.string.passwords_is_not_equals));
             return  false;
         }
         return true;

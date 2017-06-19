@@ -62,4 +62,12 @@ public interface IApi {
 
     @GET("api/account/getprofileinfo")
     Call<ResponseBody> getProfileInfo(@Query("sessionKey") String sessionKey, @Query("id") long id);
+
+    @GET("api/dates/addpartner")
+    Call<ResponseBody> addPartner(@Query("sessionKey") String sessionKey,
+                                  @Query("dateid") Long dateId);
+
+    @GET("api/dates/getdatepartners")
+    Call<ResponseBody> getDatePartners(@Query("sessionKey") String sessionKey,
+                                  @Query("dateid") Long dateId);
 }

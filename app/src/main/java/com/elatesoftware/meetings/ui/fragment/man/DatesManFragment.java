@@ -13,8 +13,8 @@ import android.view.ViewGroup;
 
 import com.elatesoftware.meetings.R;
 import com.elatesoftware.meetings.ui.activity.man.AddDateActivity;
-import com.elatesoftware.meetings.ui.adapter.dales.DatesRecyclerViewAdapter;
-import com.elatesoftware.meetings.ui.adapter.dales.DalesRecyclerScheduleViewAdapter;
+import com.elatesoftware.meetings.ui.adapter.dales.BaseDatesRecyclerViewAdapter;
+import com.elatesoftware.meetings.ui.adapter.dales.PendingDatesAdapter;
 import com.elatesoftware.meetings.ui.fragment.base.BaseFragment;
 import com.elatesoftware.meetings.service.GetDatesListService;
 import com.elatesoftware.meetings.util.Const;
@@ -119,8 +119,8 @@ public class DatesManFragment extends BaseFragment {
             String response = intent.getStringExtra(Const.RESPONSE);
             if(response != null && response.equals(String.valueOf(Const.CODE_SUCCESS)) && GetDatesManAnswer.getInstance() != null) {
                 if(GetDatesManAnswer.getInstance().getSuccess()) {
-                    rvScheduledDales.setAdapter(new DalesRecyclerScheduleViewAdapter(getActivity(), getContext(), getScheduledDates()));
-                    rvPendingDales.setAdapter(new DatesRecyclerViewAdapter(getContext(), getPendingDates(), false, R.drawable.ic_girl, R.color.button_blue_light));
+                    rvScheduledDales.setAdapter(new BaseDatesRecyclerViewAdapter(getContext(), getScheduledDates(), false, R.drawable.ic_girl, R.color.button_blue_light));
+                    rvPendingDales.setAdapter(new PendingDatesAdapter(getContext(), getPendingDates()));
                 } else {
                     showMessage(R.string.something_wrong);
                 }

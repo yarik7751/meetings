@@ -9,7 +9,6 @@ import com.elatesoftware.meetings.util.api.Api;
 import com.elatesoftware.meetings.util.api.pojo.HumanAnswer;
 import com.elatesoftware.meetings.util.api.pojo.Meeting;
 
-//todo 24 remove this class!
 public class StringUtils {
 
     public static boolean isValidEmail(CharSequence target) {
@@ -48,5 +47,9 @@ public class StringUtils {
 
     public static String getPhotoUrl(int userId, int photoId) {
         return Api.BASE_URL + "Content/UserPictures/" + userId + "/" + photoId + ".jpeg";
+    }
+
+    public static boolean isEmailValid(CharSequence email) {
+        return android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches();
     }
 }
