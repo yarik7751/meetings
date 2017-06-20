@@ -1,5 +1,6 @@
 package com.elatesoftware.meetings.ui.adapter;
 
+import android.app.Activity;
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -11,6 +12,7 @@ import android.widget.TextView;
 
 import com.elatesoftware.meetings.R;
 import com.elatesoftware.meetings.ui.activity.ShowProfileActivity;
+import com.elatesoftware.meetings.ui.activity.man.ShowPendingWomenActivity;
 import com.elatesoftware.meetings.util.StringUtils;
 import com.elatesoftware.meetings.util.api.pojo.GetPendingWomenAnswer;
 import com.elatesoftware.meetings.util.api.pojo.HumanAnswer;
@@ -56,7 +58,7 @@ public class PendingWomenAdapter extends RecyclerView.Adapter<PendingWomenAdapte
         holder.llProfile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                context.startActivity(ShowProfileActivity.getIntent(context, pendingWomen.getResult().get(position).getAccount(), dateId));
+                ((Activity) context).startActivityForResult(ShowProfileActivity.getIntent(context, pendingWomen.getResult().get(position).getAccount(), dateId), ShowPendingWomenActivity.CLOSE);
             }
         });
     }

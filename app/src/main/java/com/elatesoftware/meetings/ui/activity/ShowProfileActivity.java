@@ -1,5 +1,6 @@
 package com.elatesoftware.meetings.ui.activity;
 
+import android.app.Activity;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -20,6 +21,7 @@ import com.elatesoftware.meetings.service.AddPartnerService;
 import com.elatesoftware.meetings.service.GetProfileInfoService;
 import com.elatesoftware.meetings.service.SelectPartnerService;
 import com.elatesoftware.meetings.ui.activity.base.BaseActivity;
+import com.elatesoftware.meetings.ui.activity.man.AddDateActivity;
 import com.elatesoftware.meetings.ui.activity.woman.ShowSearchDateActivity;
 import com.elatesoftware.meetings.ui.adapter.page.PhotoFragmentPageAdapter;
 import com.elatesoftware.meetings.util.AndroidUtils;
@@ -198,6 +200,13 @@ public class ShowProfileActivity extends BaseActivity {
         unregisterReceiver(selectPartnerReceiver);
     }
 
+    private void closeActivitySuccess() {
+        Intent resultIntent = new Intent();
+        resultIntent.putExtra(AddDateActivity.IS_CLOSE, true);
+        setResult(Activity.RESULT_OK, resultIntent);
+        finish();
+    }
+
     public class GetProfileInfoReceiver extends BroadcastReceiver {
 
         @Override
@@ -231,7 +240,7 @@ public class ShowProfileActivity extends BaseActivity {
             if(response != null)  {
                 if(GetProfileInfoAnswer.getInstance().getSuccess()) {
                     showMessage(R.string.you_select_woman);
-
+                    closeActivitySuccess();
                 } else {
                     showMessage(R.string.something_wrong);
                 }

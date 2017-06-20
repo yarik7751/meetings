@@ -1,5 +1,6 @@
 package com.elatesoftware.meetings.ui.fragment.man;
 
+import android.app.Activity;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -29,6 +30,9 @@ import butterknife.BindView;
 import butterknife.OnClick;
 
 public class DatesManFragment extends BaseFragment {
+
+    public static final int UPDATE = 105;
+    public static final String IS_UPDATE = "IS_UPDATE";
 
     @BindView(R.id.rv_scheduled_dales) RecyclerView rvScheduledDales;
     @BindView(R.id.rv_pending_dales) RecyclerView rvPendingDales;
@@ -81,6 +85,14 @@ public class DatesManFragment extends BaseFragment {
     public void onStop() {
         super.onStop();
         getActivity().unregisterReceiver(getDatesListReceiver);
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(resultCode == Activity.RESULT_OK && requestCode == UPDATE && data != null) {
+            requestGetDatesList();
+        }
     }
 
     @OnClick(R.id.img_add_date)

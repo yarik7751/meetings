@@ -1,5 +1,6 @@
 package com.elatesoftware.meetings.ui.activity.man;
 
+import android.app.Activity;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -8,6 +9,7 @@ import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.View;
 
 import com.elatesoftware.meetings.R;
 import com.elatesoftware.meetings.service.AddPartnerService;
@@ -16,9 +18,14 @@ import com.elatesoftware.meetings.service.GetPendingWomenService;
 import com.elatesoftware.meetings.service.GetPhotosService;
 import com.elatesoftware.meetings.ui.activity.base.BaseActivity;
 import com.elatesoftware.meetings.ui.adapter.PendingWomenAdapter;
+import com.elatesoftware.meetings.ui.fragment.man.DatesManFragment;
 import com.elatesoftware.meetings.util.Const;
 import com.elatesoftware.meetings.util.Utils;
 import com.elatesoftware.meetings.util.api.pojo.GetPendingWomenAnswer;
+import com.google.android.gms.location.places.ui.PlacePicker;
+import com.google.android.gms.maps.CameraUpdateFactory;
+import com.google.android.gms.maps.model.CameraPosition;
+import com.google.android.gms.maps.model.MarkerOptions;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -26,6 +33,8 @@ import butterknife.OnClick;
 public class ShowPendingWomenActivity extends BaseActivity {
 
     public static final String DATE_ID = "DATE_ID";
+    public static final int CLOSE = 105;
+    public static final String IS_CLOSE = "IS_CLOSE";
 
     @BindView(R.id.rv_pending_women) RecyclerView rvPendingWomen;
 
@@ -61,9 +70,33 @@ public class ShowPendingWomenActivity extends BaseActivity {
         unregisterBroadcast();
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+
+        if(resultCode == RESULT_OK) {
+            switch(requestCode) {
+
+                case CLOSE:
+                    if(data.getBooleanExtra(IS_CLOSE, false)) {
+                        updateActivitySuccess();
+                    }
+                    break;
+            }
+        } else {
+            super.onActivityResult(requestCode, resultCode, data);
+        }
+    }
+
     @OnClick(R.id.rl_back)
     public void back() {
         onBackPressed();
+    }
+
+    private void updateActivitySuccess() {
+        Intent resultIntent = new Intent();
+        resultIntent.putExtra(DatesManFragment.IS_UPDATE, true);
+        setResult(Activity.RESULT_OK, resultIntent);
+        finish();
     }
 
     private void requestGetPendingWoman() {
