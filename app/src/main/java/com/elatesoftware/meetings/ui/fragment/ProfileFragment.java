@@ -63,8 +63,8 @@ public class ProfileFragment extends BaseFragment {
     @BindView(R.id.tv_dates_func) TextView tvDatesFunc;
     @BindView(R.id.img_dates_func) ImageView imgDatesFunc;
     @BindView(R.id.line) View line;
-    @BindView(R.id.pb_progress)
-    AVLoadingIndicatorView pbProgress;
+    @BindView(R.id.pb_progress) AVLoadingIndicatorView pbProgress;
+    @BindView(R.id.rl_back) RelativeLayout rlBack;
 
     private GetAccountInfoBroadcastReceiver getAccountInfoBroadcastReceiver;
     private GetPhotosBroadcastReceiver getPhotosBroadcastReceiver;
@@ -126,6 +126,7 @@ public class ProfileFragment extends BaseFragment {
     }
 
     private void setUI() {
+        rlBack.setVisibility(View.GONE);
         if(CustomSharedPreference.getIsMan(getContext()) == Const.WOMAN_VALUE) {
             rlPhotos.setBackgroundResource(R.drawable.button_red);
             llInfo.setBackgroundResource(R.drawable.button_red);

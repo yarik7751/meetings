@@ -17,6 +17,7 @@ import com.elatesoftware.meetings.service.AddPhotoService;
 import com.elatesoftware.meetings.service.GetProfileInfoService;
 import com.elatesoftware.meetings.ui.activity.BaseShowDateActivity;
 import com.elatesoftware.meetings.ui.adapter.page.PhotoFragmentPageAdapter;
+import com.elatesoftware.meetings.util.AndroidUtils;
 import com.elatesoftware.meetings.util.Const;
 import com.elatesoftware.meetings.util.DateUtils;
 import com.elatesoftware.meetings.util.Utils;

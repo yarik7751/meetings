@@ -6,4 +6,5 @@
     <dimen name="item_image_size">48dp</dimen>
     <dimen name="marker_size">48dp</dimen>
     <dimen name="filter_layout_height">150dp</dimen>
+    <dimen name="pending_girl_image_size">200dp</dimen>
 </resources>

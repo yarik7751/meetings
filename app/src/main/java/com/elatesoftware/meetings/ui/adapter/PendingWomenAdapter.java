@@ -5,10 +5,12 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.elatesoftware.meetings.R;
+import com.elatesoftware.meetings.ui.activity.ShowProfileActivity;
 import com.elatesoftware.meetings.util.StringUtils;
 import com.elatesoftware.meetings.util.api.pojo.GetPendingWomenAnswer;
 import com.elatesoftware.meetings.util.api.pojo.HumanAnswer;
@@ -39,17 +41,26 @@ public class PendingWomenAdapter extends RecyclerView.Adapter<PendingWomenAdapte
     }
 
     @Override
-    public void onBindViewHolder(PendingWomenViewHolder holder, int position) {
+    public void onBindViewHolder(PendingWomenViewHolder holder, final int position) {
         holder.tvName.setText(pendingWomen.getResult().get(position).getAccount().getFirstName());
         Integer userId = pendingWomen.getResult().get(position).getAccountId();
         Integer photoId = pendingWomen.getResult().get(position).getPhotoId();
         if(userId != null && photoId != null){
             Picasso.with(context)
                     .load(StringUtils.getPhotoUrl(userId.intValue(), photoId.intValue()))
-                    .resize(context.getResources().getDimensionPixelSize(R.dimen.item_image_size), context.getResources().getDimensionPixelSize(R.dimen.item_image_size))
+                    .resize(context.getResources().getDimensionPixelSize(R.dimen.pending_girl_image_size), context.getResources().getDimensionPixelSize(R.dimen.pending_girl_image_size))
                     .centerCrop()
                     .into(holder.imgPhoto);
+        } else {
+            holder.imgPhoto.setImageResource(R.drawable.ic_girl);
+            holder.imgPhoto.setColorFilter(context.getResources().getColor(R.color.button_blue_light));
         }
+        holder.llProfile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                context.startActivity(ShowProfileActivity.getIntent(context, pendingWomen.getResult().get(position).getAccount()));
+            }
+        });
     }
 
     @Override
@@ -62,7 +73,7 @@ public class PendingWomenAdapter extends RecyclerView.Adapter<PendingWomenAdapte
         public View itemView;
         public TextView tvName;
         public CircleImageView imgPhoto;
-        public RelativeLayout rlDate;
+        public LinearLayout llProfile;
 
         public PendingWomenViewHolder(View itemView) {
             super(itemView);
@@ -70,7 +81,7 @@ public class PendingWomenAdapter extends RecyclerView.Adapter<PendingWomenAdapte
 
             tvName = (TextView) itemView.findViewById(R.id.tv_name);
             imgPhoto = (CircleImageView) itemView.findViewById(R.id.img_photo);
-            rlDate = (RelativeLayout) itemView.findViewById(R.id.rl_date);
+            llProfile = (LinearLayout) itemView.findViewById(R.id.ll_profile);
         }
     }
 }
