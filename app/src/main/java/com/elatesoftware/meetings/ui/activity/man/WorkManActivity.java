@@ -80,7 +80,7 @@ public class WorkManActivity extends BaseActivity {
 
     }
 
-    //todo 6
+    //todo 6 обработать ситуации когда пользователь не дал разрешения
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);

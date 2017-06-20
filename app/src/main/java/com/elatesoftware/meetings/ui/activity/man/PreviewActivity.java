@@ -5,7 +5,6 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.text.TextUtils;
 import android.util.Log;
@@ -17,16 +16,16 @@ import com.elatesoftware.meetings.R;
 import com.elatesoftware.meetings.service.CreateDateService;
 import com.elatesoftware.meetings.service.GetPhotosService;
 import com.elatesoftware.meetings.ui.activity.BaseShowDateActivity;
-import com.elatesoftware.meetings.ui.adapter.page.PhotoFragmentPageAdapter;
+import com.elatesoftware.meetings.ui.adapter.view_pager.page_photo.PhotoFragmentPageAdapter;
 import com.elatesoftware.meetings.util.Const;
 import com.elatesoftware.meetings.util.CustomSharedPreference;
 import com.elatesoftware.meetings.util.DateUtils;
 import com.elatesoftware.meetings.util.Utils;
-import com.elatesoftware.meetings.util.api.pojo.GetPhotosAnswer;
-import com.elatesoftware.meetings.util.api.pojo.HumanAnswer;
-import com.elatesoftware.meetings.util.api.pojo.MessageAnswer;
-import com.elatesoftware.meetings.util.api.pojo.Photo;
-import com.elatesoftware.meetings.util.model.ButtonAnimation;
+import com.elatesoftware.meetings.api.pojo.GetPhotosAnswer;
+import com.elatesoftware.meetings.api.pojo.HumanAnswer;
+import com.elatesoftware.meetings.api.pojo.MessageAnswer;
+import com.elatesoftware.meetings.api.pojo.Photo;
+import com.elatesoftware.meetings.ui.view.animation.ButtonAnimation;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.model.CameraPosition;
@@ -122,6 +121,7 @@ public class PreviewActivity extends BaseShowDateActivity {
         tvWeightWoman.setText(meeting.getPrefWeightStart() + "—" + meeting.getPrefWeightEnd());
         tvStartTime.setText(DateUtils.getDateByStr(new Date(meeting.getStartTime()), DateUtils.DATE_FORMAT_OUTPUT));
         tvEndTime.setText(DateUtils.getDateByStr(new Date(meeting.getEndTime()), DateUtils.DATE_FORMAT_OUTPUT));
+        //TODO вынести в ресурсы
         tvPresent.setText("$" + String.valueOf(meeting.getAmount()));
         tvPlaceTitle.setText(meeting.getPlace());
     }

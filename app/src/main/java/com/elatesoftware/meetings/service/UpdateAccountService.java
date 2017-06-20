@@ -7,9 +7,8 @@ import android.util.Log;
 import com.elatesoftware.meetings.util.Const;
 import com.elatesoftware.meetings.util.CustomSharedPreference;
 import com.elatesoftware.meetings.util.LocationUtils;
-import com.elatesoftware.meetings.util.Utils;
-import com.elatesoftware.meetings.util.api.Api;
-import com.elatesoftware.meetings.util.api.pojo.HumanAnswer;
+import com.elatesoftware.meetings.api.Api;
+import com.elatesoftware.meetings.api.pojo.HumanAnswer;
 
 public class UpdateAccountService extends IntentService {
 

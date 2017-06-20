@@ -8,24 +8,15 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
-import android.view.View;
 
 import com.elatesoftware.meetings.R;
-import com.elatesoftware.meetings.service.AddPartnerService;
-import com.elatesoftware.meetings.service.CreateDateService;
 import com.elatesoftware.meetings.service.GetPendingWomenService;
-import com.elatesoftware.meetings.service.GetPhotosService;
 import com.elatesoftware.meetings.ui.activity.base.BaseActivity;
-import com.elatesoftware.meetings.ui.adapter.PendingWomenAdapter;
+import com.elatesoftware.meetings.ui.adapter.recycler_view.PendingWomenAdapter;
 import com.elatesoftware.meetings.ui.fragment.man.DatesManFragment;
 import com.elatesoftware.meetings.util.Const;
 import com.elatesoftware.meetings.util.Utils;
-import com.elatesoftware.meetings.util.api.pojo.GetPendingWomenAnswer;
-import com.google.android.gms.location.places.ui.PlacePicker;
-import com.google.android.gms.maps.CameraUpdateFactory;
-import com.google.android.gms.maps.model.CameraPosition;
-import com.google.android.gms.maps.model.MarkerOptions;
+import com.elatesoftware.meetings.api.pojo.GetPendingWomenAnswer;
 
 import butterknife.BindView;
 import butterknife.OnClick;

@@ -7,9 +7,9 @@ import android.util.Log;
 
 import com.elatesoftware.meetings.util.Const;
 import com.elatesoftware.meetings.util.CustomSharedPreference;
-import com.elatesoftware.meetings.util.api.Api;
-import com.elatesoftware.meetings.util.api.pojo.MessageAnswer;
-import com.elatesoftware.meetings.util.model.params.SelectPartnerParams;
+import com.elatesoftware.meetings.api.Api;
+import com.elatesoftware.meetings.api.pojo.MessageAnswer;
+import com.elatesoftware.meetings.model.params.SelectPartnerParams;
 
 public class SelectPartnerService extends IntentService {
 

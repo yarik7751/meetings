@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 
 import java.util.List;
 
+//todo удалить
 public class ViewPagerAdapter extends PagerAdapter {
 
     List<View> pages = null;

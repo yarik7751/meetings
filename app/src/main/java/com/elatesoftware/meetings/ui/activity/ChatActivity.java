@@ -1,7 +1,6 @@
 package com.elatesoftware.meetings.ui.activity;
 
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -10,7 +9,7 @@ import android.widget.EditText;
 
 import com.elatesoftware.meetings.R;
 import com.elatesoftware.meetings.ui.activity.base.BaseActivity;
-import com.elatesoftware.meetings.ui.adapter.chat.ChatRecyclerViewAdapter;
+import com.elatesoftware.meetings.ui.adapter.recycler_view.chat.ChatRecyclerViewAdapter;
 import com.elatesoftware.meetings.util.CustomSharedPreference;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -18,12 +17,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import org.json.JSONArray;
-
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.Iterator;
-import java.util.List;
 import java.util.Map;
 
 import butterknife.BindView;

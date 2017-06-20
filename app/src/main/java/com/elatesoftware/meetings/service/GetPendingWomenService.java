@@ -7,9 +7,8 @@ import android.util.Log;
 
 import com.elatesoftware.meetings.util.Const;
 import com.elatesoftware.meetings.util.CustomSharedPreference;
-import com.elatesoftware.meetings.util.api.Api;
-import com.elatesoftware.meetings.util.api.pojo.GetPendingWomenAnswer;
-import com.elatesoftware.meetings.util.api.pojo.MessageAnswer;
+import com.elatesoftware.meetings.api.Api;
+import com.elatesoftware.meetings.api.pojo.GetPendingWomenAnswer;
 
 public class GetPendingWomenService extends IntentService {
 

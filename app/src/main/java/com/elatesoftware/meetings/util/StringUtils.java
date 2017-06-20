@@ -1,13 +1,11 @@
 package com.elatesoftware.meetings.util;
 
-import android.content.Context;
 import android.text.TextUtils;
 import android.widget.EditText;
 
-import com.elatesoftware.meetings.R;
-import com.elatesoftware.meetings.util.api.Api;
-import com.elatesoftware.meetings.util.api.pojo.HumanAnswer;
-import com.elatesoftware.meetings.util.api.pojo.Meeting;
+import com.elatesoftware.meetings.api.Api;
+import com.elatesoftware.meetings.api.pojo.HumanAnswer;
+import com.elatesoftware.meetings.api.pojo.Meeting;
 
 public class StringUtils {
 

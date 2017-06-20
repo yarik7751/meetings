@@ -5,7 +5,7 @@ import android.content.SharedPreferences;
 import android.text.TextUtils;
 import android.util.Log;
 
-import com.elatesoftware.meetings.util.api.pojo.HumanAnswer;
+import com.elatesoftware.meetings.api.pojo.HumanAnswer;
 import com.google.gson.Gson;
 
 public class CustomSharedPreference {

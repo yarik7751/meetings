@@ -11,19 +11,14 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.dd.CircularProgressButton;
 import com.elatesoftware.meetings.R;
 import com.elatesoftware.meetings.ui.activity.base.BaseActivity;
 import com.elatesoftware.meetings.util.AndroidUtils;
 import com.elatesoftware.meetings.util.Const;
-import com.elatesoftware.meetings.util.api.pojo.Meeting;
-import com.google.android.gms.maps.CameraUpdateFactory;
+import com.elatesoftware.meetings.api.pojo.Meeting;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
-import com.google.android.gms.maps.model.CameraPosition;
-import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.MarkerOptions;
 import com.wang.avi.AVLoadingIndicatorView;
 
 import butterknife.BindView;

@@ -5,7 +5,7 @@ import android.content.Intent;
 import android.util.Log;
 
 import com.elatesoftware.meetings.util.Const;
-import com.elatesoftware.meetings.util.api.Api;
+import com.elatesoftware.meetings.api.Api;
 import com.google.firebase.iid.FirebaseInstanceId;
 
 public class LoginService extends IntentService {

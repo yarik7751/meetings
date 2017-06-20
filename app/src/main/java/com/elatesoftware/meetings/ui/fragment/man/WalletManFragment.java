@@ -7,18 +7,12 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.TextView;
 
 import com.elatesoftware.meetings.R;
-import com.elatesoftware.meetings.ui.adapter.wallet.LastOperationAdapter;
+import com.elatesoftware.meetings.ui.adapter.recycler_view.wallet.LastOperationAdapter;
 import com.elatesoftware.meetings.ui.fragment.base.BaseFragment;
-import com.elatesoftware.meetings.util.AndroidUtils;
-import com.squareup.picasso.Callback;
-import com.squareup.picasso.Picasso;
 
 import butterknife.BindView;
-import de.hdodenhof.circleimageview.CircleImageView;
 
 public class WalletManFragment extends BaseFragment {
 

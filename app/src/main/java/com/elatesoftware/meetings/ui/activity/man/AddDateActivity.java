@@ -27,7 +27,7 @@ import com.elatesoftware.meetings.ui.view.CustomEditText;
 import com.elatesoftware.meetings.util.AndroidUtils;
 import com.elatesoftware.meetings.util.DateUtils;
 import com.elatesoftware.meetings.util.StringUtils;
-import com.elatesoftware.meetings.util.api.pojo.Meeting;
+import com.elatesoftware.meetings.api.pojo.Meeting;
 import com.github.aakira.expandablelayout.ExpandableRelativeLayout;
 import com.github.jjobes.slidedatetimepicker.SlideDateTimeListener;
 import com.google.android.gms.common.GooglePlayServicesNotAvailableException;

@@ -7,7 +7,7 @@ import android.util.Log;
 
 import com.elatesoftware.meetings.util.Const;
 import com.elatesoftware.meetings.util.CustomSharedPreference;
-import com.elatesoftware.meetings.util.api.Api;
+import com.elatesoftware.meetings.api.Api;
 
 public class GetPhotoService extends IntentService {
 

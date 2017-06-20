@@ -22,9 +22,8 @@ import com.elatesoftware.meetings.ui.view.CustomEditText;
 import com.elatesoftware.meetings.util.CustomSharedPreference;
 import com.elatesoftware.meetings.util.DialogUtils;
 import com.elatesoftware.meetings.util.StringUtils;
-import com.elatesoftware.meetings.util.Utils;
-import com.elatesoftware.meetings.util.model.ButtonAnimation;
-import com.elatesoftware.meetings.util.model.LoginInfo;
+import com.elatesoftware.meetings.ui.view.animation.ButtonAnimation;
+import com.elatesoftware.meetings.model.LoginInfo;
 
 import butterknife.BindView;
 import butterknife.OnClick;

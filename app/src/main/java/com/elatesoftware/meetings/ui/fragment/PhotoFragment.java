@@ -1,6 +1,5 @@
 package com.elatesoftware.meetings.ui.fragment;
 
-import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.util.Log;
@@ -13,21 +12,12 @@ import com.elatesoftware.meetings.R;
 import com.elatesoftware.meetings.ui.fragment.base.BaseFragment;
 import com.elatesoftware.meetings.util.AndroidUtils;
 import com.elatesoftware.meetings.util.Const;
-import com.elatesoftware.meetings.util.CustomSharedPreference;
-import com.elatesoftware.meetings.util.ImageHelper;
 import com.elatesoftware.meetings.util.StringUtils;
-import com.elatesoftware.meetings.util.api.Api;
-import com.elatesoftware.meetings.util.api.pojo.GetPhotoAnswer;
-import com.google.gson.Gson;
-import com.loopj.android.http.AsyncHttpClient;
-import com.loopj.android.http.AsyncHttpResponseHandler;
-import com.loopj.android.http.RequestParams;
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 import com.wang.avi.AVLoadingIndicatorView;
 
 import butterknife.BindView;
-import cz.msebera.android.httpclient.Header;
 
 public class PhotoFragment extends BaseFragment {
 
@@ -99,42 +89,5 @@ public class PhotoFragment extends BaseFragment {
 
             }
         });
-        /*pbProgress.setVisibility(View.VISIBLE);
-        AsyncHttpClient client = new AsyncHttpClient();
-        RequestParams params = new RequestParams();
-        params.add("sessionKey", CustomSharedPreference.getToken(getContext()));
-        params.add("photoId", String.valueOf(photoId));
-        client.get(Api.BASE_URL + "api/account/photoContent", params, new AsyncHttpResponseHandler() {
-            @Override
-            public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
-                if(isAdded() && imgPhoto != null) {
-                    Gson gson = new Gson();
-                    String responseBodyStr = new String(responseBody);
-                    Log.d(TAG, "responseBodyStr: " + responseBodyStr);
-                    Log.d(TAG, "sessionKey: " + CustomSharedPreference.getToken(getContext()));
-                    GetPhotoAnswer answer = gson.fromJson(responseBodyStr, GetPhotoAnswer.class);
-                    if (answer.getSuccess()) {
-                        Bitmap bitmap = ImageHelper.base64ToBitmap(answer.getResult().getContent());
-                        imgPhoto.setImageBitmap(bitmap);
-                        imgPhoto.setScaleType(ImageView.ScaleType.CENTER_CROP);
-                    }
-                } else {
-                    //requestGetPhoto();
-                }
-            }
-
-            @Override
-            public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
-
-            }
-
-            @Override
-            public void onFinish() {
-                super.onFinish();
-                if(pbProgress != null) {
-                    pbProgress.setVisibility(View.GONE);
-                }
-            }
-        });*/
     }
 }

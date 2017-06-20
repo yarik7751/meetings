@@ -24,7 +24,7 @@ import android.widget.RelativeLayout;
 
 import com.elatesoftware.meetings.R;
 import com.elatesoftware.meetings.ui.activity.base.BaseActivity;
-import com.elatesoftware.meetings.ui.adapter.page.PhotoFragmentPageAdapter;
+import com.elatesoftware.meetings.ui.adapter.view_pager.page_photo.PhotoFragmentPageAdapter;
 import com.elatesoftware.meetings.service.AddPhotoService;
 import com.elatesoftware.meetings.service.DeletePhotoService;
 import com.elatesoftware.meetings.service.GetPhotosService;
@@ -35,10 +35,10 @@ import com.elatesoftware.meetings.util.Const;
 import com.elatesoftware.meetings.util.CustomSharedPreference;
 import com.elatesoftware.meetings.util.DateUtils;
 import com.elatesoftware.meetings.util.Utils;
-import com.elatesoftware.meetings.util.api.pojo.GetPhotosAnswer;
-import com.elatesoftware.meetings.util.api.pojo.HumanAnswer;
-import com.elatesoftware.meetings.util.api.pojo.MessageAnswer;
-import com.elatesoftware.meetings.util.api.pojo.Photo;
+import com.elatesoftware.meetings.api.pojo.GetPhotosAnswer;
+import com.elatesoftware.meetings.api.pojo.HumanAnswer;
+import com.elatesoftware.meetings.api.pojo.MessageAnswer;
+import com.elatesoftware.meetings.api.pojo.Photo;
 import com.wang.avi.AVLoadingIndicatorView;
 
 import java.util.ArrayList;

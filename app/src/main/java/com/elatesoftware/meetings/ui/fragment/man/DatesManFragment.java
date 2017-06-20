@@ -14,14 +14,14 @@ import android.view.ViewGroup;
 
 import com.elatesoftware.meetings.R;
 import com.elatesoftware.meetings.ui.activity.man.AddDateActivity;
-import com.elatesoftware.meetings.ui.adapter.dales.BaseDatesRecyclerViewAdapter;
-import com.elatesoftware.meetings.ui.adapter.dales.PendingDatesAdapter;
+import com.elatesoftware.meetings.ui.adapter.recycler_view.dates.BaseDatesRecyclerViewAdapter;
+import com.elatesoftware.meetings.ui.adapter.recycler_view.dates.PendingDatesAdapter;
 import com.elatesoftware.meetings.ui.fragment.base.BaseFragment;
 import com.elatesoftware.meetings.service.GetDatesListService;
 import com.elatesoftware.meetings.util.Const;
 import com.elatesoftware.meetings.util.Utils;
-import com.elatesoftware.meetings.util.api.pojo.GetDatesManAnswer;
-import com.elatesoftware.meetings.util.api.pojo.Result;
+import com.elatesoftware.meetings.api.pojo.GetDatesManAnswer;
+import com.elatesoftware.meetings.api.pojo.Result;
 
 import java.util.ArrayList;
 import java.util.List;
