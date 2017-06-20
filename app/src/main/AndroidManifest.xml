@@ -132,6 +132,7 @@
         <service android:name=".service.LocationService"/>
         <service android:name=".service.AddPartnerService"/>
         <service android:name=".service.GetPendingWomenService"/>
+        <service android:name=".service.SelectPartnerService"/>
         <service
             android:name=".service.DatesMessagingService">
             <intent-filter>

@@ -15,6 +15,7 @@ import com.elatesoftware.meetings.util.api.pojo.Meeting;
 import com.elatesoftware.meetings.util.api.pojo.MessageAnswer;
 import com.elatesoftware.meetings.util.api.pojo.SearchDatesAnswer;
 import com.elatesoftware.meetings.util.model.params.SearchDatesFilter;
+import com.elatesoftware.meetings.util.model.params.SelectPartnerParams;
 import com.google.gson.Gson;
 
 import org.json.JSONArray;
@@ -521,6 +522,36 @@ public class Api {
             if(response.code() == Const.CODE_SUCCESS) {
                 Gson gson = new Gson();
                 GetPendingWomenAnswer answer = gson.fromJson(rawJson, GetPendingWomenAnswer.class);
+                return answer;
+            }
+        }
+        return null;
+    }
+
+    public static MessageAnswer selectPartner(String sessionKey, SelectPartnerParams selectPartnerParams) {
+        Log.d(TAG, "searchDatesStr");
+        Gson gson = new Gson();
+        String paramsStr = gson.toJson(selectPartnerParams, SelectPartnerParams.class);
+        RequestBody body = RequestBody.create(okhttp3.MediaType.parse("application/json; charset=utf-8"), paramsStr );
+        Log.d(TAG, "request: " + paramsStr );
+        Call<ResponseBody> call = getApi().selectPartner(sessionKey, body);
+        Response<ResponseBody> response = null;
+        String rawJson = null;
+        try {
+            response = call.execute();
+            if(response != null && response.body() != null) {
+                rawJson = response.body().string();
+                rawJson = rawJson.replace("\\", "");
+                Log.d(TAG, "response: " + rawJson);
+            } else {
+                Log.d(TAG, "response: null");
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        if(response != null && rawJson != null){
+            if(response.code() == Const.CODE_SUCCESS) {
+                MessageAnswer answer = gson.fromJson(rawJson, MessageAnswer.class);
                 return answer;
             }
         }

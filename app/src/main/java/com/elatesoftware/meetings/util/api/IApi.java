@@ -70,4 +70,7 @@ public interface IApi {
     @GET("api/dates/getdatepartners")
     Call<ResponseBody> getDatePartners(@Query("sessionKey") String sessionKey,
                                   @Query("dateid") Long dateId);
+
+    @POST("api/dates/selectpartner")
+    Call<ResponseBody> selectPartner(@Query("sessionKey") String sessionKey, @Body RequestBody params);
 }

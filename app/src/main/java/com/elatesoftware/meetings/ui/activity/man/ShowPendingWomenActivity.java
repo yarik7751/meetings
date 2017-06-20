@@ -89,7 +89,7 @@ public class ShowPendingWomenActivity extends BaseActivity {
             hideProgressDialog();
             if(answer != null) {
                 if(answer.getSuccess()) {
-                    PendingWomenAdapter adapter = new PendingWomenAdapter(context, answer);
+                    PendingWomenAdapter adapter = new PendingWomenAdapter(context, answer, (int) dateId);
                     rvPendingWomen.setAdapter(adapter);
                 } else {
                     showMessage(R.string.something_wrong);

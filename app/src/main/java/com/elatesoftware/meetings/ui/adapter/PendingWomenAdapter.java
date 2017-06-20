@@ -20,18 +20,16 @@ import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
-/**
- * Created by user on 19.06.2017.
- */
-
 public class PendingWomenAdapter extends RecyclerView.Adapter<PendingWomenAdapter.PendingWomenViewHolder> {
 
     private Context context;
     private GetPendingWomenAnswer pendingWomen;
+    private int dateId;
 
-    public PendingWomenAdapter(Context context, GetPendingWomenAnswer pendingWomen) {
+    public PendingWomenAdapter(Context context, GetPendingWomenAnswer pendingWomen, int dateId) {
         this.context = context;
         this.pendingWomen = pendingWomen;
+        this.dateId = dateId;
     }
 
     @Override
@@ -58,7 +56,7 @@ public class PendingWomenAdapter extends RecyclerView.Adapter<PendingWomenAdapte
         holder.llProfile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                context.startActivity(ShowProfileActivity.getIntent(context, pendingWomen.getResult().get(position).getAccount()));
+                context.startActivity(ShowProfileActivity.getIntent(context, pendingWomen.getResult().get(position).getAccount(), dateId));
             }
         });
     }
