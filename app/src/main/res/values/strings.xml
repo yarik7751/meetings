@@ -125,6 +125,8 @@
     <string name="women_loading">Women loading</string>
     <string name="select_woman">Select woman</string>
     <string name="you_select_woman">You select woman!</string>
+    <string name="update_success">The update was successful</string>
+    <string name="data_updating">Data updating</string>
 
     <string-array name="hair_colors">
         <item>Doesn\'t matter</item>

@@ -20,6 +20,10 @@ public class HumanAnswer implements Parcelable {
     @Expose
     protected String password;
 
+    @SerializedName("Phone")
+    @Expose
+    protected String phone;
+
     @SerializedName("Name")
     @Expose
     protected String firstName;
@@ -187,6 +191,14 @@ public class HumanAnswer implements Parcelable {
         this.photosId = photosId;
     }
 
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
 
     @Override
     public int describeContents() {
@@ -197,6 +209,7 @@ public class HumanAnswer implements Parcelable {
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeString(this.username);
         dest.writeString(this.password);
+        dest.writeString(this.phone);
         dest.writeString(this.firstName);
         dest.writeValue(this.gender);
         dest.writeValue(this.height);
@@ -212,6 +225,7 @@ public class HumanAnswer implements Parcelable {
     protected HumanAnswer(Parcel in) {
         this.username = in.readString();
         this.password = in.readString();
+        this.phone = in.readString();
         this.firstName = in.readString();
         this.gender = (Integer) in.readValue(Integer.class.getClassLoader());
         this.height = (Double) in.readValue(Double.class.getClassLoader());
@@ -225,7 +239,7 @@ public class HumanAnswer implements Parcelable {
         in.readList(this.photosId, Integer.class.getClassLoader());
     }
 
-    public static final Parcelable.Creator<HumanAnswer> CREATOR = new Parcelable.Creator<HumanAnswer>() {
+    public static final Creator<HumanAnswer> CREATOR = new Creator<HumanAnswer>() {
         @Override
         public HumanAnswer createFromParcel(Parcel source) {
             return new HumanAnswer(source);

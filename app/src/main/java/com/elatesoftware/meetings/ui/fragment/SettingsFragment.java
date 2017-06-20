@@ -17,13 +17,17 @@ import android.widget.TextView;
 
 import com.dd.CircularProgressButton;
 import com.elatesoftware.meetings.R;
+import com.elatesoftware.meetings.service.UpdateAccountService;
 import com.elatesoftware.meetings.ui.activity.MainActivity;
+import com.elatesoftware.meetings.ui.activity.ProfileEditActivity;
 import com.elatesoftware.meetings.ui.fragment.base.BaseFragment;
 import com.elatesoftware.meetings.service.ExitService;
+import com.elatesoftware.meetings.util.AndroidUtils;
 import com.elatesoftware.meetings.util.Const;
 import com.elatesoftware.meetings.util.CustomSharedPreference;
 import com.elatesoftware.meetings.util.DialogUtils;
 import com.elatesoftware.meetings.util.Utils;
+import com.elatesoftware.meetings.util.api.pojo.HumanAnswer;
 import com.elatesoftware.meetings.util.api.pojo.MessageAnswer;
 import com.elatesoftware.meetings.util.model.ButtonAnimation;
 import com.elatesoftware.meetings.util.model.LoginInfo;
@@ -46,6 +50,8 @@ public class SettingsFragment extends BaseFragment {
     @BindView(R.id.img_change_email) ImageView imgChangeEmail;
     @BindView(R.id.img_change_phone) ImageView imgChangePhone;
     @BindView(R.id.fl_change_password) FrameLayout flChangePassword;
+    @BindView(R.id.fl_change_phone) FrameLayout flChangePhone;
+    @BindView(R.id.fl_change_email) FrameLayout flChangeEmail;
     @BindView(R.id.fl_change_pin_code) FrameLayout flChangePinCode;
 
     ButtonAnimation buttonAnimation;
@@ -58,7 +64,10 @@ public class SettingsFragment extends BaseFragment {
         return fragment;
     }
 
-    public SignOutReceiver signOutReceiver;
+    private UpdateAccountInfoBroadcastReceiver updateAccountInfoBroadcastReceiver;
+    private SignOutReceiver signOutReceiver;
+
+    private HumanAnswer changeProfile;
 
     @Override
     public void onStart() {
@@ -78,7 +87,9 @@ public class SettingsFragment extends BaseFragment {
         super.onViewCreated(view, savedInstanceState);
 
         buttonAnimation = new ButtonAnimation(getContext(), btnSignOut);
+        changeProfile = CustomSharedPreference.getProfileInformation(getContext());
         setStyleColor();
+        loadInfo();
     }
 
     @Override
@@ -93,24 +104,41 @@ public class SettingsFragment extends BaseFragment {
         buttonAnimation.start();
     }
 
-    @OnClick(R.id.img_change_email)
+    @OnClick(R.id.fl_change_email)
     public void clickImgChangeEmail() {
-        DialogUtils.showEditDialog(getContext(), getString(R.string.change) + " " + getString(R.string.mail), "", InputType.TYPE_TEXT_VARIATION_EMAIL_ADDRESS, new DialogInterface.OnClickListener() {
+        DialogUtils.showEditDialog(
+                getContext(),
+                getString(R.string.change) + " " + getString(R.string.mail),
+                changeProfile.getUsername() == null ? "" : changeProfile.getUsername(),
+                InputType.TYPE_TEXT_VARIATION_EMAIL_ADDRESS, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
+                changeProfile.setUsername(DialogUtils.getDialogMessage());
+                requestUpdateInfo();
 
             }
         });
     }
 
-    @OnClick(R.id.img_change_phone)
+    @OnClick(R.id.fl_change_phone)
     public void clickImgChangePhone() {
-        DialogUtils.showEditDialog(getContext(), getString(R.string.change) + " " + getString(R.string.phone), "", InputType.TYPE_CLASS_PHONE, new DialogInterface.OnClickListener() {
+        DialogUtils.showEditDialog(
+                getContext(),
+                getString(R.string.change) + " " + getString(R.string.phone),
+                changeProfile.getPhone() == null ? "" : changeProfile.getPhone(),
+                InputType.TYPE_CLASS_PHONE, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-
+                changeProfile.setPhone(DialogUtils.getDialogMessage());
+                requestUpdateInfo();
             }
         });
+    }
+
+    private void loadInfo() {
+        HumanAnswer profile = CustomSharedPreference.getProfileInformation(getContext());
+        tvEmail.setText(profile.getUsername());
+        tvPhone.setText(profile.getPhone() == null ? "---" : profile.getPhone());
     }
 
     private void setStyleColor() {
@@ -129,6 +157,14 @@ public class SettingsFragment extends BaseFragment {
         }
     }
 
+    private void requestUpdateInfo() {
+        AndroidUtils.hideKeyboard(getActivity());
+        setProgressDialogMessage(getString(R.string.data_updating));
+        showProgressDialog();
+        HumanAnswer.setInstance(changeProfile);
+        getActivity().startService(new Intent(getContext(), UpdateAccountService.class));
+    }
+
     private void requestSignOut() {
         getActivity().startService(ExitService.getIntent(getContext()));
     }
@@ -136,10 +172,37 @@ public class SettingsFragment extends BaseFragment {
     private void registerReceivers() {
         signOutReceiver = new SignOutReceiver();
         getActivity().registerReceiver(signOutReceiver, Utils.getIntentFilter(ExitService.ACTION));
+        updateAccountInfoBroadcastReceiver = new UpdateAccountInfoBroadcastReceiver();
+        getActivity().registerReceiver(updateAccountInfoBroadcastReceiver, Utils.getIntentFilter(UpdateAccountService.ACTION));
     }
 
     private void unregisterReceivers() {
+        getActivity().unregisterReceiver(updateAccountInfoBroadcastReceiver);
         getActivity().unregisterReceiver(signOutReceiver);
+    }
+
+    public class UpdateAccountInfoBroadcastReceiver extends BroadcastReceiver {
+
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            String response = intent.getStringExtra(Const.RESPONSE);
+            hideProgressDialog();
+            if(response != null && response.equals(String.valueOf(Const.CODE_SUCCESS)) && MessageAnswer.getInstance() != null) {
+                Log.d(TAG, "UpdateAccount 200");
+                if(MessageAnswer.getInstance().getSuccess()) {
+                    CustomSharedPreference.setProfileInformation(getContext(), HumanAnswer.getInstance());
+                    loadInfo();
+                    showMessage(R.string.update_success);
+                    Log.d(TAG, "UpdateAccount TRUE");
+                } else {
+                    showMessage(R.string.wrong_data);
+                    Log.d(TAG, "UpdateAccount FALSE");
+                }
+            } else {
+                showMessage(R.string.request_error);
+                Log.d(TAG, "UpdateAccount error");
+            }
+        }
     }
 
     public class SignOutReceiver extends BroadcastReceiver {

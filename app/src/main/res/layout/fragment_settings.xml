@@ -119,7 +119,9 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:gravity="center_vertical"
-                    android:layout_margin="8dp">
+                    android:layout_marginTop="8dp"
+                    android:layout_marginBottom="8dp"
+                    android:layout_marginLeft="8dp">
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -133,7 +135,6 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:layout_marginRight="16dp"
                         android:layout_marginLeft="8dp"
                         android:gravity="right"
                         android:textSize="18sp"
@@ -141,12 +142,20 @@
                         android:text="tom@mail.ru"
                         android:id="@+id/tv_email"/>
 
-                    <ImageView
-                        android:id="@+id/img_change_email"
+                    <FrameLayout
+                        android:id="@+id/fl_change_email"
+                        style="?attr/actionButtonStyle"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:src="@drawable/ic_edit"
-                        android:tint="@color/seek_bar"/>
+                        android:layout_height="wrap_content">
+
+                        <ImageView
+                            android:id="@+id/img_change_email"
+                            android:layout_width="18dp"
+                            android:layout_height="18dp"
+                            android:layout_gravity="center"
+                            android:src="@drawable/ic_edit"
+                            android:tint="@color/seek_bar"/>
+                    </FrameLayout>
                 </LinearLayout>
             </android.support.v7.widget.CardView>
 
@@ -162,7 +171,10 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:gravity="center_vertical"
-                    android:layout_margin="8dp">
+                    android:layout_marginTop="8dp"
+                    android:layout_marginBottom="8dp"
+                    android:layout_marginLeft="8dp"
+                    >
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -176,7 +188,6 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:layout_marginRight="16dp"
                         android:layout_marginLeft="8dp"
                         android:gravity="right"
                         android:textSize="18sp"
@@ -184,12 +195,20 @@
                         android:text="+375 29 845 74 78"
                         android:id="@+id/tv_phone"/>
 
-                    <ImageView
-                        android:id="@+id/img_change_phone"
+                    <FrameLayout
+                        android:id="@+id/fl_change_phone"
+                        style="?attr/actionButtonStyle"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:src="@drawable/ic_edit"
-                        android:tint="@color/seek_bar"/>
+                        android:layout_height="wrap_content">
+
+                        <ImageView
+                            android:id="@+id/img_change_phone"
+                            android:layout_width="18dp"
+                            android:layout_height="18dp"
+                            android:layout_gravity="center"
+                            android:src="@drawable/ic_edit"
+                            android:tint="@color/seek_bar"/>
+                    </FrameLayout>
                 </LinearLayout>
             </android.support.v7.widget.CardView>
 
