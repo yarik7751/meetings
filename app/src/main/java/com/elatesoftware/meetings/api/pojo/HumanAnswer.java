@@ -78,13 +78,13 @@ public class HumanAnswer implements Parcelable {
         this.weight = weight;
     }
 
-    public static HumanAnswer answersInstance = null;
+    /*public static HumanAnswer answersInstance = null;
     public static HumanAnswer getInstance() {
         return answersInstance;
     }
     public static void setInstance(HumanAnswer answers) {
         answersInstance = answers;
-    }
+    }*/
 
     public String getCity() {
         return city;

@@ -70,7 +70,7 @@ public class Api {
         }
     }
 
-    public static String register(String userName, String password, int gender, String token) {
+    public static LoginAnswer register(String userName, String password, int gender, String token) {
         JSONObject object = new JSONObject();
         try {
             object.put("Username", userName);
@@ -102,18 +102,17 @@ public class Api {
                 if(response.code() == Const.CODE_SUCCESS) {
                     Gson gson = new Gson();
                     LoginAnswer messageAnswer = gson.fromJson(rawJson, LoginAnswer.class);
-                    LoginAnswer.setInstance(messageAnswer);
+                    return messageAnswer;
                 }
-                result = String.valueOf(response.code());
             }
-            return result;
+            return null;
         } catch (JSONException e) {
             e.printStackTrace();
             return null;
         }
     }
 
-    public static String login(String userName, String password, String token) {
+    public static LoginAnswer login(String userName, String password, String token) {
         JSONObject object = new JSONObject();
         try {
             object.put("Username", userName);
@@ -132,7 +131,6 @@ public class Api {
                 if(response != null && response.body() != null) {
                     rawJson = response.body().string();
                     rawJson = rawJson.replace("\\", "");
-                    //rawJson = rawJson.substring(1, rawJson.length() - 1);
                     Log.d(TAG, "login: " + rawJson);
                 } else {
                     Log.d(TAG, "login: null");
@@ -144,18 +142,17 @@ public class Api {
                 if(response.code() == Const.CODE_SUCCESS) {
                     Gson gson = new Gson();
                     LoginAnswer messageAnswer = gson.fromJson(rawJson, LoginAnswer.class);
-                    LoginAnswer.setInstance(messageAnswer);
+                    return messageAnswer;
                 }
-                result = String.valueOf(response.code());
             }
-            return result;
+            return null;
         } catch (JSONException e) {
             e.printStackTrace();
             return null;
         }
     }
 
-    public static String updateAccountInfo(String sessionKey, HumanAnswer profile) {
+    public static MessageAnswer updateAccountInfo(String sessionKey, HumanAnswer profile) {
         Gson gson = new Gson();
         String profileStr = gson.toJson(profile, HumanAnswer.class);
         RequestBody body = RequestBody.create(okhttp3.MediaType.parse("application/json; charset=utf-8"), profileStr);
@@ -164,7 +161,6 @@ public class Api {
 
         Call<ResponseBody> call = getApi().updateAccountInfo(sessionKey, body);
         Response<ResponseBody> response = null;
-        String result = null;
         String rawJson = null;
         try {
             response = call.execute();
@@ -181,11 +177,10 @@ public class Api {
         if(response != null && rawJson != null){
             if(response.code() == Const.CODE_SUCCESS) {
                 MessageAnswer messageAnswer = gson.fromJson(rawJson, MessageAnswer.class);
-                MessageAnswer.setInstance(messageAnswer);
+                return messageAnswer;
             }
-            result = String.valueOf(response.code());
         }
-        return result;
+        return null;
     }
 
     public static String getAccountInfo(String sessionKey) {
@@ -212,14 +207,13 @@ public class Api {
         return result;
     }
 
-    public static String createDate(String sessionKey, Meeting meeting) {
+    public static MessageAnswer createDate(String sessionKey, Meeting meeting) {
         Gson gson = new Gson();
         String meetingStr = gson.toJson(meeting, Meeting.class);
         Log.d(TAG, "meetingStr: " + meetingStr);
         RequestBody body = RequestBody.create(okhttp3.MediaType.parse("application/json; charset=utf-8"), meetingStr);
         Call<ResponseBody> call = getApi().createDate(sessionKey, body);
         Response<ResponseBody> response = null;
-        String result = null;
         String rawJson = null;
         try {
             response = call.execute();
@@ -236,51 +230,10 @@ public class Api {
         if(response != null && rawJson != null){
             if(response.code() == Const.CODE_SUCCESS) {
                 MessageAnswer messageAnswer = gson.fromJson(rawJson, MessageAnswer.class);
-                MessageAnswer.setInstance(messageAnswer);
+                return messageAnswer;
             }
-            result = String.valueOf(response.code());
         }
-        return result;
-    }
-
-    public static String addPhoto(String sessionKey, String base64) {
-        Log.d(TAG, "addPhoto");
-        JSONArray array = new JSONArray();
-        JSONObject object = new JSONObject();
-        try {
-            object.put("content", base64);
-            array.put(object);
-            RequestBody body = RequestBody.create(okhttp3.MediaType.parse("application/json; charset=utf-8"), array.toString());
-
-            Log.d(TAG, "array.toString: " + array.toString());
-
-            Call<ResponseBody> call = getApi().addPhoto(sessionKey, body);
-            Response<ResponseBody> response = null;
-            String result = null;
-            String rawJson = null;
-            try {
-                response = call.execute();
-                if(response != null && response.body() != null) {
-                    rawJson = response.body().string();
-                    Log.d(TAG, "addPhoto: " + rawJson);
-                }
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            if(response != null){
-                if(response.code() == Const.CODE_SUCCESS) {
-                    Gson gson = new Gson();
-                    MessageAnswer messageAnswer = gson.fromJson(rawJson, MessageAnswer.class);
-                    MessageAnswer.setInstance(messageAnswer);
-                }
-                result = String.valueOf(response.code());
-            }
-            Log.d(TAG, "addPhoto result: " + result);
-            return result;
-        } catch (JSONException e) {
-            e.printStackTrace();
-            return null;
-        }
+        return null;
     }
 
     public static String getPhotos(String sessionKey) {
@@ -335,12 +288,11 @@ public class Api {
         return result;
     }
 
-    public static String deletePhoto(String sessionKey, long photoId) {
+    public static MessageAnswer deletePhoto(String sessionKey, long photoId) {
         String bodyStr = "{\"Id\":" + photoId + "}";
         RequestBody body = RequestBody.create(okhttp3.MediaType.parse("application/json; charset=utf-8"), bodyStr);
         Call<ResponseBody> call = getApi().deletePhoto(sessionKey, body);
         Response<ResponseBody> response = null;
-        String result = null;
         String rawJson = null;
         try {
             response = call.execute();
@@ -354,11 +306,10 @@ public class Api {
             if(response.code() == Const.CODE_SUCCESS) {
                 Gson gson = new Gson();
                 MessageAnswer answer = gson.fromJson(rawJson, MessageAnswer.class);
-                MessageAnswer.setInstance(answer);
+                return answer;
             }
-            result = String.valueOf(response.code());
         }
-        return result;
+        return null;
     }
 
     public static String getDatesList(String sessionKey) {
@@ -390,11 +341,10 @@ public class Api {
         return result;
     }
 
-    public static String exit(String sessionKey) {
+    public static MessageAnswer exit(String sessionKey) {
         Log.d(TAG, "exit");
         Call<ResponseBody> call = getApi().exit(sessionKey);
         Response<ResponseBody> response = null;
-        String result = null;
         String rawJson = null;
         try {
             response = call.execute();
@@ -411,13 +361,11 @@ public class Api {
         if(response != null && rawJson != null){
             if(response.code() == Const.CODE_SUCCESS) {
                 Gson gson = new Gson();
-                //todo 29 Плохо. Поговорить с Дашей
                 MessageAnswer answer = gson.fromJson(rawJson, MessageAnswer.class);
-                MessageAnswer.setInstance(answer);
+                return answer;
             }
-            result = String.valueOf(response.code());
         }
-        return result;
+        return null;
     }
 
     public static String searchDates(String sessionKey, SearchDatesFilter searchDatesFilterParams) {

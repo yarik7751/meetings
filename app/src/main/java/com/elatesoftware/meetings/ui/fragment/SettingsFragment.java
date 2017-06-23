@@ -160,8 +160,7 @@ public class SettingsFragment extends BaseFragment {
         AndroidUtils.hideKeyboard(getActivity());
         setProgressDialogMessage(getString(R.string.data_updating));
         showProgressDialog();
-        HumanAnswer.setInstance(changeProfile);
-        getActivity().startService(new Intent(getContext(), UpdateAccountService.class));
+        getActivity().startService(UpdateAccountService.getIntent(getContext(), changeProfile));
     }
 
     private void requestSignOut() {
@@ -184,12 +183,12 @@ public class SettingsFragment extends BaseFragment {
 
         @Override
         public void onReceive(Context context, Intent intent) {
-            String response = intent.getStringExtra(Const.RESPONSE);
+            MessageAnswer response = intent.getParcelableExtra(Const.RESPONSE);
             hideProgressDialog();
-            if(response != null && response.equals(String.valueOf(Const.CODE_SUCCESS)) && MessageAnswer.getInstance() != null) {
+            if(response != null) {
                 Log.d(TAG, "UpdateAccount 200");
-                if(MessageAnswer.getInstance().getSuccess()) {
-                    CustomSharedPreference.setProfileInformation(getContext(), HumanAnswer.getInstance());
+                if(response.getSuccess()) {
+                    CustomSharedPreference.setProfileInformation(getContext(), changeProfile);
                     loadInfo();
                     showMessage(R.string.update_success);
                     Log.d(TAG, "UpdateAccount TRUE");
@@ -209,10 +208,10 @@ public class SettingsFragment extends BaseFragment {
         @Override
         public void onReceive(Context context, Intent intent) {
             buttonAnimation.stop();
-            String response = intent.getStringExtra(Const.RESPONSE);
-            if(response != null && response.equals(String.valueOf(Const.CODE_SUCCESS)) && MessageAnswer.getInstance() != null) {
+            MessageAnswer response = intent.getParcelableExtra(Const.RESPONSE);
+            if(response != null) {
                 Log.d(TAG, "SignOut 200");
-                if(MessageAnswer.getInstance().getSuccess()) {
+                if(response.getSuccess()) {
                     Log.d(TAG, "SignOut TRUE");
                     CustomSharedPreference.setToken(getContext(), null);
                     Intent mainIntent = new Intent(getContext(), MainActivity.class);

@@ -4,6 +4,7 @@ import android.app.IntentService;
 import android.content.Intent;
 import android.util.Log;
 
+import com.elatesoftware.meetings.api.pojo.MessageAnswer;
 import com.elatesoftware.meetings.util.Const;
 import com.elatesoftware.meetings.util.CustomSharedPreference;
 import com.elatesoftware.meetings.api.Api;
@@ -21,7 +22,7 @@ public class CreateDateService extends IntentService {
 
     @Override
     protected void onHandleIntent(Intent intent) {
-        String response = Api.createDate(CustomSharedPreference.getToken(this), Meeting.getInstance());
+        MessageAnswer response = Api.createDate(CustomSharedPreference.getToken(this), Meeting.getInstance());
         Intent responseIntent = new Intent();
         responseIntent.setAction(ACTION);
         responseIntent.addCategory(Intent.CATEGORY_DEFAULT);

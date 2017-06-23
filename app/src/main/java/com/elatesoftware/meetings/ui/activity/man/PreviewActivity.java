@@ -188,11 +188,11 @@ public class PreviewActivity extends BaseShowDateActivity {
 
         @Override
         public void onReceive(Context context, final Intent intent) {
-            String response = intent.getStringExtra(Const.RESPONSE);
+            MessageAnswer response = intent.getParcelableExtra(Const.RESPONSE);
             buttonAnimation.stop();
-            if(response != null && response.equals(String.valueOf(Const.CODE_SUCCESS)) && MessageAnswer.getInstance() != null) {
+            if(response != null) {
                 Log.d(TAG, "CreateDate 200");
-                if(MessageAnswer.getInstance().getSuccess()) {
+                if(response.getSuccess()) {
                     Log.d(TAG, "CreateDate TRUE");
                     showMessage(R.string.date_created_successfully);
                     closeActivitySuccess();

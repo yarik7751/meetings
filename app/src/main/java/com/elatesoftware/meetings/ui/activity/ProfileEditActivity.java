@@ -25,6 +25,7 @@ import android.widget.DatePicker;
 import android.widget.RelativeLayout;
 
 import com.elatesoftware.meetings.R;
+import com.elatesoftware.meetings.model.Message;
 import com.elatesoftware.meetings.ui.activity.base.BaseActivity;
 import com.elatesoftware.meetings.ui.adapter.view_pager.page_photo.PhotoFragmentPageAdapter;
 import com.elatesoftware.meetings.service.AddPhotoService;
@@ -235,8 +236,7 @@ public class ProfileEditActivity extends BaseActivity {
 
     private void requestUpdateInfo() {
         updateLocalInfo();
-        HumanAnswer.setInstance(profileMan);
-        startService(new Intent(this, UpdateAccountService.class));
+        startService(UpdateAccountService.getIntent(this, profileMan));
     }
 
     private void requestAddPhoto(String path) {
@@ -357,14 +357,14 @@ public class ProfileEditActivity extends BaseActivity {
 
         @Override
         public void onReceive(Context context, Intent intent) {
-            String response = intent.getStringExtra(Const.RESPONSE);
-            ProfileEditActivity.super.onBackPressed();
-            if(response != null && response.equals(String.valueOf(Const.CODE_SUCCESS)) && MessageAnswer.getInstance() != null) {
+            MessageAnswer response = intent.getParcelableExtra(Const.RESPONSE);
+            if(response != null) {
                 Log.d(TAG, "UpdateAccount 200");
-                if(MessageAnswer.getInstance().getSuccess()) {
+                if(response.getSuccess()) {
                     updateLocalInfo();
                     CustomSharedPreference.setProfileInformation(ProfileEditActivity.this, profileMan);
                     Log.d(TAG, "UpdateAccount TRUE");
+                    ProfileEditActivity.super.onBackPressed();
                 } else {
                     showMessage(R.string.wrong_data);
                     Log.d(TAG, "UpdateAccount FALSE");
@@ -417,10 +417,10 @@ public class ProfileEditActivity extends BaseActivity {
 
         @Override
         public void onReceive(Context context, Intent intent) {
-            String response = intent.getStringExtra(Const.RESPONSE);
+            MessageAnswer response = intent.getParcelableExtra(Const.RESPONSE);
             hideProgressDialog();
-            if(response != null && response.equals(String.valueOf(Const.CODE_SUCCESS)) && MessageAnswer.getInstance() != null) {
-                if(MessageAnswer.getInstance().getSuccess()) {
+            if(response != null) {
+                if(response.getSuccess()) {
                     requestGetPhotos();
                     Log.d(TAG, "DeletePhoto TRUE");
                 }

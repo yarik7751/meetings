@@ -33,17 +33,17 @@ public class AutarizationBroadcastReceiver extends BroadcastReceiver {
             CustomSharedPreference.setProfileInformation(context, null);
             CustomSharedPreference.setPin(context, null);
         }
-        String response = intent.getStringExtra(Const.RESPONSE);
-        if(response != null && response.equals(String.valueOf(Const.CODE_SUCCESS)) && LoginAnswer.getInstance() != null) {
+        LoginAnswer response = intent.getParcelableExtra(Const.RESPONSE);
+        if(response != null) {
             Log.d(TAG, "registration 200");
-            boolean success = LoginAnswer.getInstance().getSuccess();
+            boolean success = response.getSuccess();
             if(success) {
-                if(CustomSharedPreference.getIsMan(context) != LoginAnswer.getInstance().getResult().getAccount().getGender()) {
+                if(CustomSharedPreference.getIsMan(context) != response.getResult().getAccount().getGender()) {
                     Toast.makeText(context, R.string.wrong_gender, Toast.LENGTH_SHORT).show();
                     return;
                 }
-                CustomSharedPreference.setProfileInformation(context, LoginAnswer.getInstance().getResult().getAccount());
-                String token = LoginAnswer.getInstance().getResult().getSessionKey();
+                CustomSharedPreference.setProfileInformation(context, response.getResult().getAccount());
+                String token = response.getResult().getSessionKey();
                 CustomSharedPreference.setToken(context, token);
                 context.startActivity(new Intent(context, PinCodeActivity.class));
                 Log.d(TAG, "registration TRUE");
