@@ -14,6 +14,7 @@ import android.view.ViewGroup;
 
 import com.elatesoftware.meetings.R;
 import com.elatesoftware.meetings.ui.activity.man.AddDateActivity;
+import com.elatesoftware.meetings.ui.adapter.ScheduledDatesAdapter;
 import com.elatesoftware.meetings.ui.adapter.recycler_view.dates.BaseDatesRecyclerViewAdapter;
 import com.elatesoftware.meetings.ui.adapter.recycler_view.dates.PendingDatesAdapter;
 import com.elatesoftware.meetings.ui.fragment.base.BaseFragment;
@@ -131,7 +132,7 @@ public class DatesManFragment extends BaseFragment {
             String response = intent.getStringExtra(Const.RESPONSE);
             if(response != null && response.equals(String.valueOf(Const.CODE_SUCCESS)) && GetDatesManAnswer.getInstance() != null) {
                 if(GetDatesManAnswer.getInstance().getSuccess()) {
-                    rvScheduledDales.setAdapter(new BaseDatesRecyclerViewAdapter(getContext(), getScheduledDates(), false, R.drawable.ic_girl, R.color.button_blue_light));
+                    rvScheduledDales.setAdapter(new ScheduledDatesAdapter(getContext(), getScheduledDates()));
                     rvPendingDales.setAdapter(new PendingDatesAdapter(getContext(), getPendingDates()));
                 } else {
                     showMessage(R.string.something_wrong);

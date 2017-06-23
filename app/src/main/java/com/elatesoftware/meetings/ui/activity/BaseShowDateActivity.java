@@ -30,6 +30,7 @@ public class BaseShowDateActivity extends BaseActivity implements OnMapReadyCall
     @BindView(R.id.tv_title) protected TextView tvTitle;
     @BindView(R.id.vp_photos) protected ViewPager vpPhotos;
     @BindView(R.id.rl_photos) protected RelativeLayout rlPhotos;
+    @BindView(R.id.rl_show_date_mail) protected RelativeLayout rlMain;
     @BindView(R.id.ink_indicator) protected CircleIndicator inkIndicator;
     @BindView(R.id.tv_age_woman) protected TextView tvAgeWoman;
     @BindView(R.id.tv_name) protected TextView tvName;

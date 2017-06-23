@@ -25,6 +25,10 @@ public class Meeting {
     @Expose
     protected String place;
 
+    @SerializedName("About")
+    @Expose
+    protected String about;
+
     @SerializedName("Lat")
     @Expose
     protected Double latitude;
@@ -203,5 +207,13 @@ public class Meeting {
 
     public void setStatus(Integer status) {
         this.status = status;
+    }
+
+    public String getAbout() {
+        return about;
+    }
+
+    public void setAbout(String about) {
+        this.about = about;
     }
 }

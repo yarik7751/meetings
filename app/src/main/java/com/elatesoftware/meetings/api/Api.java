@@ -1,5 +1,7 @@
 package com.elatesoftware.meetings.api;
 
+import android.content.Context;
+import android.net.Uri;
 import android.util.Log;
 
 import com.elatesoftware.meetings.util.Const;
@@ -22,9 +24,12 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 
+import okhttp3.MediaType;
+import okhttp3.MultipartBody;
 import okhttp3.OkHttpClient;
 import okhttp3.RequestBody;
 import okhttp3.ResponseBody;
@@ -551,6 +556,35 @@ public class Api {
         }
         if(response != null && rawJson != null){
             if(response.code() == Const.CODE_SUCCESS) {
+                MessageAnswer answer = gson.fromJson(rawJson, MessageAnswer.class);
+                return answer;
+            }
+        }
+        return null;
+    }
+
+    public static MessageAnswer uploadFile(String sessionKey, String path) {
+        Log.d(TAG, "uploadFile");
+        File file = new File(path);
+        MultipartBody.Part filePart = MultipartBody.Part.createFormData("file", file.getName(), RequestBody.create(MediaType.parse("image/*"), file));
+        Call<ResponseBody> call = getApi().uploadAttachment(sessionKey, filePart);
+        Response<ResponseBody> response = null;
+        String rawJson = null;
+        try {
+            response = call.execute();
+            if(response != null && response.body() != null) {
+                rawJson = response.body().string();
+                rawJson = rawJson.replace("\\", "");
+                Log.d(TAG, "response: " + rawJson);
+            } else {
+                Log.d(TAG, "response: null");
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        if(response != null && rawJson != null){
+            if(response.code() == Const.CODE_SUCCESS) {
+                Gson gson = new Gson();
                 MessageAnswer answer = gson.fromJson(rawJson, MessageAnswer.class);
                 return answer;
             }

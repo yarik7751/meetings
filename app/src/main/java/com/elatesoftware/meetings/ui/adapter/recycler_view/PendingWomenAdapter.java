@@ -54,7 +54,7 @@ public class PendingWomenAdapter extends RecyclerView.Adapter<PendingWomenAdapte
         holder.llProfile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ((Activity) context).startActivityForResult(ShowProfileActivity.getIntent(context, pendingWomen.getResult().get(position).getAccount(), dateId), ShowPendingWomenActivity.CLOSE);
+                ((Activity) context).startActivityForResult(ShowProfileActivity.getIntent(context, pendingWomen.getResult().get(position).getAccount(), dateId, pendingWomen.getResult().get(position).getId()), ShowPendingWomenActivity.CLOSE);
             }
         });
     }

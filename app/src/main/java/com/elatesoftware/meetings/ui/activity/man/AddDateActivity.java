@@ -171,8 +171,8 @@ public class AddDateActivity extends BaseActivity implements OnMapReadyCallback 
                     if (attributions == null) {
                         attributions = "";
                     }
-                    String placeStr = name + "\n" + address;
-                    placeStr = placeStr.replace("\"", " ");
+                    String placeStr = name.toString() + address.toString();
+                    placeStr = placeStr.replace("\"", "");
                     tvPlaceTitle.setText(placeStr);
 
                     map.clear();
@@ -347,7 +347,7 @@ public class AddDateActivity extends BaseActivity implements OnMapReadyCallback 
         meeting.setHairColor(vpHairColor.getCurrentItem());
         meeting.setLatitude(place.getLatLng().latitude);
         meeting.setLongitude(place.getLatLng().longitude);
-        meeting.setPlace(place.getName() + "\n" + place.getAddress());
+        meeting.setPlace(tvPlaceTitle.getText().toString());
 
         meeting.setPrefAgeStart(rsbAge.getSelectedMinValue().intValue());
         meeting.setPrefAgeEnd(rsbAge.getSelectedMaxValue().intValue());

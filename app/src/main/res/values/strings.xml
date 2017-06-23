@@ -127,6 +127,9 @@
     <string name="you_select_woman">You select woman!</string>
     <string name="update_success">The update was successful</string>
     <string name="data_updating">Data updating</string>
+    <string name="ask_del_photo">Do you want to delete photo?</string>
+    <string name="no">No</string>
+    <string name="yes">Yes</string>
 
     <string-array name="hair_colors">
         <item>Doesn\'t matter</item>

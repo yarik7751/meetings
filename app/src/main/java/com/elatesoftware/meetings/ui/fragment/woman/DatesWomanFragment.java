@@ -1,5 +1,9 @@
 package com.elatesoftware.meetings.ui.fragment.woman;
 
+import android.app.Activity;
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
@@ -10,29 +14,47 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.elatesoftware.meetings.R;
+import com.elatesoftware.meetings.api.pojo.GetDatesManAnswer;
+import com.elatesoftware.meetings.service.GetDatesListService;
+import com.elatesoftware.meetings.ui.activity.man.AddDateActivity;
+import com.elatesoftware.meetings.ui.adapter.recycler_view.dates.BaseDatesRecyclerViewAdapter;
+import com.elatesoftware.meetings.ui.adapter.recycler_view.dates.WomanPendingDatesAdapter;
+import com.elatesoftware.meetings.ui.adapter.recycler_view.dates.WomanScheduledDatesAdapter;
 import com.elatesoftware.meetings.ui.fragment.base.BaseFragment;
+import com.elatesoftware.meetings.util.Const;
+import com.elatesoftware.meetings.util.Utils;
+import com.elatesoftware.meetings.api.pojo.Result;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.BindView;
+import butterknife.OnClick;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class DatesWomanFragment extends BaseFragment {
 
-    @BindView(R.id.img_avatar) CircleImageView imgAvatar;
-    @BindView(R.id.tv_name) TextView tvName;
+    public static final int UPDATE = 105;
+    public static final String IS_UPDATE = "IS_UPDATE";
+
     @BindView(R.id.rv_scheduled_dales) RecyclerView rvScheduledDales;
     @BindView(R.id.rv_pending_dales) RecyclerView rvPendingDales;
 
-    private static DatesWomanFragment dalesWomanFragment;
+    public GetDatesListReceiver getDatesListReceiver;
+
+    private static DatesWomanFragment dalesManFragment;
     public static DatesWomanFragment getInstance() {
-        if(dalesWomanFragment == null) {
-            dalesWomanFragment = new DatesWomanFragment();
+        if(dalesManFragment == null) {
+            dalesManFragment = new DatesWomanFragment();
         }
-        return dalesWomanFragment;
+        return dalesManFragment;
     }
 
     @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    public void onStart() {
+        super.onStart();
+        getDatesListReceiver = new GetDatesListReceiver();
+        getActivity().registerReceiver(getDatesListReceiver, Utils.getIntentFilter(GetDatesListService.ACTION));
     }
 
     @Nullable
@@ -59,7 +81,62 @@ public class DatesWomanFragment extends BaseFragment {
             }
         });
 
-        /*rvScheduledDales.setAdapter(new DalesRecyclerViewAdapter(getContext()));
-        rvPendingDales.setAdapter(new DalesRecyclerViewAdapter(getContext()));*/
+        requestGetDatesList();
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        getActivity().unregisterReceiver(getDatesListReceiver);
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(resultCode == Activity.RESULT_OK && requestCode == UPDATE && data != null) {
+            requestGetDatesList();
+        }
+    }
+
+    private void requestGetDatesList() {
+        getActivity().startService(GetDatesListService.getIntent(getContext()));
+    }
+
+    private List<Result> getPendingDates() {
+        List<Result> dates = new ArrayList<>();
+        for(int i = 0; i < GetDatesManAnswer.getInstance().getResult().size(); i++) {
+            if(GetDatesManAnswer.getInstance().getResult().get(i).getDate().getStatus() == Const.PENDING) {
+                dates.add(GetDatesManAnswer.getInstance().getResult().get(i));
+            }
+        }
+        return dates;
+    }
+
+    private List<Result> getScheduledDates() {
+        List<Result> dates = new ArrayList<>();
+        for(int i = 0; i < GetDatesManAnswer.getInstance().getResult().size(); i++) {
+            if(GetDatesManAnswer.getInstance().getResult().get(i).getDate().getStatus() == Const.SCHEDULED) {
+                dates.add(GetDatesManAnswer.getInstance().getResult().get(i));
+            }
+        }
+        return dates;
+    }
+
+    public class GetDatesListReceiver extends BroadcastReceiver {
+
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            String response = intent.getStringExtra(Const.RESPONSE);
+            if(response != null && response.equals(String.valueOf(Const.CODE_SUCCESS)) && GetDatesManAnswer.getInstance() != null) {
+                if(GetDatesManAnswer.getInstance().getSuccess()) {
+                    rvScheduledDales.setAdapter(new WomanScheduledDatesAdapter(getContext(), getScheduledDates()));
+                    rvPendingDales.setAdapter(new WomanPendingDatesAdapter(getContext(), getPendingDates()));
+                } else {
+                    showMessage(R.string.something_wrong);
+                }
+            } else {
+                showMessage(R.string.request_error);
+            }
+        }
     }
 }

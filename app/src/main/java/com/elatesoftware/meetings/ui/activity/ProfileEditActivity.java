@@ -4,6 +4,7 @@ import android.Manifest;
 import android.app.DatePickerDialog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
@@ -15,6 +16,7 @@ import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.view.ViewPager;
+import android.support.v7.app.AlertDialog;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.MotionEvent;
@@ -114,16 +116,13 @@ public class ProfileEditActivity extends BaseActivity {
         if (requestCode == RESULT_LOAD_IMG && resultCode == RESULT_OK && null != data) {
             Uri selectedImage = data.getData();
             String[] filePathColumn = { MediaStore.Images.Media.DATA };
-
             Cursor cursor = getContentResolver().query(selectedImage,
                     filePathColumn, null, null, null);
             cursor.moveToFirst();
             int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
             String imgDecodableString = cursor.getString(columnIndex);
             cursor.close();
-            Bitmap bitmapPhoto = BitmapFactory.decodeFile(imgDecodableString);
-            AddPhotoService.bitmap = bitmapPhoto;
-            requestAddPhoto(bitmapPhoto);
+            requestAddPhoto(imgDecodableString);
         }
     }
 
@@ -240,12 +239,11 @@ public class ProfileEditActivity extends BaseActivity {
         startService(new Intent(this, UpdateAccountService.class));
     }
 
-    private void requestAddPhoto(Bitmap bitmap) {
+    private void requestAddPhoto(String path) {
         setProgressDialogMessage(getString(R.string.loading_photo) + " ...");
         showProgressDialog();
         Log.d(TAG, "requestAddPhoto");
-        //boolean isFirstPhoto = GetPhotosAnswer.getInstance() == null ? false : GetPhotosAnswer.getInstance().getResult().size() > 0;
-        startService(AddPhotoService.getIntent(this));
+        startService(AddPhotoService.getIntent(this, path));
     }
 
     private void requestGetPhotos() {
@@ -253,11 +251,26 @@ public class ProfileEditActivity extends BaseActivity {
     }
 
     private void requestDeletePhoto() {
-        if(adapter != null && adapter.getPhotos() != null && adapter.getPhotos().size() > 0) {
-            setProgressDialogMessage(getString(R.string.delete_photo) + " ...");
-            showProgressDialog();
-            startService(DeletePhotoService.getIntent(this, currPhotoId));
-        }
+        new AlertDialog.Builder(this)
+                .setTitle(R.string.delete_photo)
+                .setMessage(R.string.ask_del_photo)
+                .setNegativeButton(getString(R.string.no), new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.cancel();
+                    }
+                })
+                .setPositiveButton(getString(R.string.yes), new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        if(adapter != null && adapter.getPhotos() != null && adapter.getPhotos().size() > 0) {
+                            setProgressDialogMessage(getString(R.string.delete_photo) + " ...");
+                            showProgressDialog();
+                            startService(DeletePhotoService.getIntent(ProfileEditActivity.this, currPhotoId));
+                        }
+                    }
+                })
+                .show();
     }
 
     private void setSize() {
@@ -367,11 +380,11 @@ public class ProfileEditActivity extends BaseActivity {
 
         @Override
         public void onReceive(Context context, Intent intent) {
-            String response = intent.getStringExtra(Const.RESPONSE);
+            MessageAnswer response = intent.getParcelableExtra(Const.RESPONSE);
             hideProgressDialog();
-            if(response != null && response.equals(String.valueOf(Const.CODE_SUCCESS)) && MessageAnswer.getInstance() != null) {
+            if(response != null) {
                 Log.d(TAG, "AddPhoto 200");
-                if(MessageAnswer.getInstance().getSuccess()) {
+                if(response.getSuccess()) {
                     showMessage("Photo loaded successfully");
                     requestGetPhotos();
                     Log.d(TAG, "AddPhoto TRUE");

@@ -20,7 +20,7 @@
             android:layout_centerVertical="true"
             android:textSize="16sp"
             android:textColor="@color/white"
-            android:text="@string/profile"
+            android:text="@string/date"
             android:textStyle="bold"/>
 
         <RelativeLayout

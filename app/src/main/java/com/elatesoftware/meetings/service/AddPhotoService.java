@@ -4,8 +4,10 @@ import android.app.IntentService;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.net.Uri;
 import android.util.Log;
 
+import com.elatesoftware.meetings.api.pojo.MessageAnswer;
 import com.elatesoftware.meetings.util.Const;
 import com.elatesoftware.meetings.util.CustomSharedPreference;
 import com.elatesoftware.meetings.util.ImageHelper;
@@ -15,6 +17,7 @@ public class AddPhotoService extends IntentService {
 
     public static final String TAG = "AddPhotoS_log";
     public static final String ACTION = "com.elatesoftware.meetings.service.AddPhotoService";
+    public static final String PATH = "PATH";
 
     public static Bitmap bitmap = null;
 
@@ -26,9 +29,7 @@ public class AddPhotoService extends IntentService {
     @Override
     protected void onHandleIntent(Intent intent) {
         Log.d(TAG, "onHandleIntent");
-        String base64 = ImageHelper.convertToBase64(bitmap);
-        Log.d(TAG, "base64 : " + base64.length());
-        String response = Api.addPhoto(CustomSharedPreference.getToken(this), base64);
+        MessageAnswer response = Api.uploadFile(CustomSharedPreference.getToken(this), intent.getStringExtra(PATH));
         Intent responseIntent = new Intent();
         responseIntent.setAction(ACTION);
         responseIntent.addCategory(Intent.CATEGORY_DEFAULT);
@@ -36,8 +37,9 @@ public class AddPhotoService extends IntentService {
         sendBroadcast(responseIntent);
     }
 
-    public static Intent getIntent(Context context) {
+    public static Intent getIntent(Context context, String path) {
         Intent intent = new Intent(context, AddPhotoService.class);
+        intent.putExtra(PATH, path);
         return intent;
     }
 }

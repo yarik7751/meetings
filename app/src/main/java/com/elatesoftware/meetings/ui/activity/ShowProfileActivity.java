@@ -45,6 +45,7 @@ public class ShowProfileActivity extends BaseActivity {
     private static final String TAG = "ShowProfileActivity_log";
     private static final String PROFILE_INFO = "PROFILE_INFO";
     private static final String DATE_ID = "DATE_ID";
+    public static final String PARTNER_TABLE_ID = "PARTNER_TABLE_ID";
 
     @BindView(R.id.vp_photos) ViewPager vpPhotos;
     @BindView(R.id.rl_photos) RelativeLayout rlPhotos;
@@ -73,14 +74,16 @@ public class ShowProfileActivity extends BaseActivity {
     
     private HumanAnswer profile;
     private int dateId;
+    private long partnerTableId;
 
     private GetProfileInfoReceiver getProfileInfoReceiver;
     private SelectPartnerReceiver selectPartnerReceiver;
 
-    public static Intent getIntent(Context context, HumanAnswer humanAnswer, int dateId) {
+    public static Intent getIntent(Context context, HumanAnswer humanAnswer, int dateId, long partnerTableId) {
         Intent intent = new Intent(context, ShowProfileActivity.class);
         intent.putExtra(PROFILE_INFO, humanAnswer);
         intent.putExtra(DATE_ID, dateId);
+        intent.putExtra(PARTNER_TABLE_ID, partnerTableId);
         return intent;
     }
 
@@ -90,6 +93,7 @@ public class ShowProfileActivity extends BaseActivity {
         setContentView(R.layout.activity_show_profile);
         profile = getIntent().getParcelableExtra(PROFILE_INFO);
         dateId = getIntent().getIntExtra(DATE_ID, -1);
+        partnerTableId = getIntent().getLongExtra(PARTNER_TABLE_ID, -1);
         buttonAnimation = new ButtonAnimation(this, btnSelectWoman);
 
         llInfo.setVisibility(View.GONE);
@@ -132,7 +136,7 @@ public class ShowProfileActivity extends BaseActivity {
 
     private void requestSelectPartner() {
         buttonAnimation.start();
-        SelectPartnerParams selectPartnerParams = new SelectPartnerParams(CustomSharedPreference.getProfileInformation(this).getId().intValue(), profile.getId().intValue(), dateId);
+        SelectPartnerParams selectPartnerParams = new SelectPartnerParams((int) partnerTableId, profile.getId().intValue(), dateId);
         startService(SelectPartnerService.getIntent(this, selectPartnerParams));
     }
 
