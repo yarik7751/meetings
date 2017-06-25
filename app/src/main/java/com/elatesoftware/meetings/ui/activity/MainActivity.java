@@ -7,6 +7,7 @@ import android.support.v4.app.FragmentManager;
 import android.widget.LinearLayout;
 
 import com.elatesoftware.meetings.R;
+import com.elatesoftware.meetings.api.Api;
 import com.elatesoftware.meetings.ui.activity.base.BaseActivity;
 import com.elatesoftware.meetings.ui.activity.man.WorkManActivity;
 import com.elatesoftware.meetings.ui.activity.woman.WorkWomanActivity;
@@ -33,9 +34,9 @@ public class MainActivity extends BaseActivity {
             for(int i = 0; i < fm.getBackStackEntryCount(); i++) {
                 fm.popBackStack();
             }
-            if(CustomSharedPreference.getIsMan(this) == Const.MAN_VALUE) {
+            if(CustomSharedPreference.getIsMan(this) == Api.MAN_VALUE) {
                 startActivity(new Intent(this, WorkManActivity.class));
-            } else if(CustomSharedPreference.getIsMan(this) == Const.WOMAN_VALUE) {
+            } else if(CustomSharedPreference.getIsMan(this) == Api.WOMAN_VALUE) {
                 startActivity(new Intent(this, WorkWomanActivity.class));
             }
             finish();
@@ -79,7 +80,7 @@ public class MainActivity extends BaseActivity {
 
     private void changeBackground() {
         int isMan = CustomSharedPreference.getIsMan(this);
-        if(isMan == Const.WOMAN_VALUE) {
+        if(isMan == Api.WOMAN_VALUE) {
             llMain.setBackgroundResource(R.drawable.bg_woman);
         } else {
             llMain.setBackgroundResource(R.drawable.bg);

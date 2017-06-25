@@ -13,6 +13,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.widget.Toast;
 
 import com.elatesoftware.meetings.R;
+import com.elatesoftware.meetings.api.Api;
 import com.elatesoftware.meetings.util.AndroidUtils;
 import com.elatesoftware.meetings.util.Const;
 import com.elatesoftware.meetings.util.CustomSharedPreference;
@@ -49,7 +50,7 @@ public class BaseActivity extends AppCompatActivity {
     }
 
     protected void setTheme() {
-        if(CustomSharedPreference.getIsMan(this) == Const.WOMAN_VALUE) {
+        if(CustomSharedPreference.getIsMan(this) == Api.WOMAN_VALUE) {
             setTheme(R.style.ThemeWoman);
         } else {
             setTheme(R.style.AppTheme);

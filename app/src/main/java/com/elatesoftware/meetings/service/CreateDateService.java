@@ -26,7 +26,7 @@ public class CreateDateService extends IntentService {
         Intent responseIntent = new Intent();
         responseIntent.setAction(ACTION);
         responseIntent.addCategory(Intent.CATEGORY_DEFAULT);
-        responseIntent.putExtra(Const.RESPONSE, response);
+        responseIntent.putExtra(Api.RESPONSE, response);
         sendBroadcast(responseIntent);
     }
 }

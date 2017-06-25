@@ -42,6 +42,14 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class Api {
 
     public static final String TAG = "Api_logs";
+    public static final String RESPONSE = "response";
+    public static final int MAN_VALUE = 1;
+    public static final int WOMAN_VALUE = 2;
+    public static final int CODE_SUCCESS = 200;
+    
+    //date status
+    public static final int PENDING = 1;
+    public static final int SCHEDULED = 2;
 
     private static IApi iApi = null;
 
@@ -99,7 +107,7 @@ public class Api {
                 e.printStackTrace();
             }
             if(response != null && rawJson != null){
-                if(response.code() == Const.CODE_SUCCESS) {
+                if(response.code() == CODE_SUCCESS) {
                     Gson gson = new Gson();
                     LoginAnswer messageAnswer = gson.fromJson(rawJson, LoginAnswer.class);
                     return messageAnswer;
@@ -139,7 +147,7 @@ public class Api {
                 e.printStackTrace();
             }
             if(response != null && rawJson != null){
-                if(response.code() == Const.CODE_SUCCESS) {
+                if(response.code() == CODE_SUCCESS) {
                     Gson gson = new Gson();
                     LoginAnswer messageAnswer = gson.fromJson(rawJson, LoginAnswer.class);
                     return messageAnswer;
@@ -175,7 +183,7 @@ public class Api {
             e.printStackTrace();
         }
         if(response != null && rawJson != null){
-            if(response.code() == Const.CODE_SUCCESS) {
+            if(response.code() == CODE_SUCCESS) {
                 MessageAnswer messageAnswer = gson.fromJson(rawJson, MessageAnswer.class);
                 return messageAnswer;
             }
@@ -196,7 +204,7 @@ public class Api {
             e.printStackTrace();
         }
         if(response != null && rawJson != null){
-            if(response.code() == Const.CODE_SUCCESS) {
+            if(response.code() == CODE_SUCCESS) {
                 Gson gson = new Gson();
                 GetInfoAccAnswer answer = gson.fromJson(rawJson, GetInfoAccAnswer.class);
                 return answer;
@@ -226,7 +234,7 @@ public class Api {
             e.printStackTrace();
         }
         if(response != null && rawJson != null){
-            if(response.code() == Const.CODE_SUCCESS) {
+            if(response.code() == CODE_SUCCESS) {
                 MessageAnswer messageAnswer = gson.fromJson(rawJson, MessageAnswer.class);
                 return messageAnswer;
             }
@@ -251,7 +259,7 @@ public class Api {
             e.printStackTrace();
         }
         if(response != null && rawJson != null){
-            if(response.code() == Const.CODE_SUCCESS) {
+            if(response.code() == CODE_SUCCESS) {
                 Gson gson = new Gson();
                 GetPhotosAnswer answer = gson.fromJson(rawJson, GetPhotosAnswer.class);
                 return answer;
@@ -275,7 +283,7 @@ public class Api {
             e.printStackTrace();
         }
         if(response != null && rawJson != null){
-            if(response.code() == Const.CODE_SUCCESS) {
+            if(response.code() == CODE_SUCCESS) {
                 Gson gson = new Gson();
                 GetPhotoAnswer answer = gson.fromJson(rawJson, GetPhotoAnswer.class);
                 GetPhotoAnswer.setInstance(answer);
@@ -301,7 +309,7 @@ public class Api {
             e.printStackTrace();
         }
         if(response != null && rawJson != null){
-            if(response.code() == Const.CODE_SUCCESS) {
+            if(response.code() == CODE_SUCCESS) {
                 Gson gson = new Gson();
                 MessageAnswer answer = gson.fromJson(rawJson, MessageAnswer.class);
                 return answer;
@@ -328,7 +336,7 @@ public class Api {
             e.printStackTrace();
         }
         if(response != null && rawJson != null){
-            if(response.code() == Const.CODE_SUCCESS) {
+            if(response.code() == CODE_SUCCESS) {
                 Gson gson = new Gson();
                 GetDatesManAnswer answer = gson.fromJson(rawJson, GetDatesManAnswer.class);
                 return answer;
@@ -355,7 +363,7 @@ public class Api {
             e.printStackTrace();
         }
         if(response != null && rawJson != null){
-            if(response.code() == Const.CODE_SUCCESS) {
+            if(response.code() == CODE_SUCCESS) {
                 Gson gson = new Gson();
                 MessageAnswer answer = gson.fromJson(rawJson, MessageAnswer.class);
                 return answer;
@@ -384,7 +392,7 @@ public class Api {
             e.printStackTrace();
         }
         if(response != null && rawJson != null){
-            if(response.code() == Const.CODE_SUCCESS) {
+            if(response.code() == CODE_SUCCESS) {
                 SearchDatesAnswer messageAnswer = gson.fromJson(rawJson, SearchDatesAnswer.class);
                 return messageAnswer;
             }
@@ -410,7 +418,7 @@ public class Api {
             e.printStackTrace();
         }
         if(response != null && rawJson != null){
-            if(response.code() == Const.CODE_SUCCESS) {
+            if(response.code() == CODE_SUCCESS) {
                 Gson gson = new Gson();
                 GetProfileInfoAnswer answer = gson.fromJson(rawJson, GetProfileInfoAnswer .class);
                 return answer;
@@ -437,7 +445,7 @@ public class Api {
             e.printStackTrace();
         }
         if(response != null && rawJson != null){
-            if(response.code() == Const.CODE_SUCCESS) {
+            if(response.code() == CODE_SUCCESS) {
                 Gson gson = new Gson();
                 MessageAnswer answer = gson.fromJson(rawJson, MessageAnswer.class);
                 return answer;
@@ -464,7 +472,7 @@ public class Api {
             e.printStackTrace();
         }
         if(response != null && rawJson != null){
-            if(response.code() == Const.CODE_SUCCESS) {
+            if(response.code() == CODE_SUCCESS) {
                 Gson gson = new Gson();
                 GetPendingWomenAnswer answer = gson.fromJson(rawJson, GetPendingWomenAnswer.class);
                 return answer;
@@ -495,7 +503,7 @@ public class Api {
             e.printStackTrace();
         }
         if(response != null && rawJson != null){
-            if(response.code() == Const.CODE_SUCCESS) {
+            if(response.code() == CODE_SUCCESS) {
                 MessageAnswer answer = gson.fromJson(rawJson, MessageAnswer.class);
                 return answer;
             }
@@ -523,7 +531,7 @@ public class Api {
             e.printStackTrace();
         }
         if(response != null && rawJson != null){
-            if(response.code() == Const.CODE_SUCCESS) {
+            if(response.code() == CODE_SUCCESS) {
                 Gson gson = new Gson();
                 MessageAnswer answer = gson.fromJson(rawJson, MessageAnswer.class);
                 return answer;

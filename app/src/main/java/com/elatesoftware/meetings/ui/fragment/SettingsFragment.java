@@ -17,6 +17,7 @@ import android.widget.TextView;
 
 import com.dd.CircularProgressButton;
 import com.elatesoftware.meetings.R;
+import com.elatesoftware.meetings.api.Api;
 import com.elatesoftware.meetings.service.UpdateAccountService;
 import com.elatesoftware.meetings.ui.activity.MainActivity;
 import com.elatesoftware.meetings.ui.fragment.base.BaseFragment;
@@ -141,7 +142,7 @@ public class SettingsFragment extends BaseFragment {
     }
 
     private void setStyleColor() {
-        if(CustomSharedPreference.getIsMan(getContext()) == Const.WOMAN_VALUE) {
+        if(CustomSharedPreference.getIsMan(getContext()) == Api.WOMAN_VALUE) {
             sbPushUp.setBackDrawableRes(R.drawable.switch_bg_woman);
             sbMailNotifications.setBackDrawableRes(R.drawable.switch_bg_woman);
             int color = getColor(R.color.button_red_dark);
@@ -183,7 +184,7 @@ public class SettingsFragment extends BaseFragment {
 
         @Override
         public void onReceive(Context context, Intent intent) {
-            MessageAnswer response = intent.getParcelableExtra(Const.RESPONSE);
+            MessageAnswer response = intent.getParcelableExtra(Api.RESPONSE);
             hideProgressDialog();
             if(response != null) {
                 Log.d(TAG, "UpdateAccount 200");
@@ -208,7 +209,7 @@ public class SettingsFragment extends BaseFragment {
         @Override
         public void onReceive(Context context, Intent intent) {
             buttonAnimation.stop();
-            MessageAnswer response = intent.getParcelableExtra(Const.RESPONSE);
+            MessageAnswer response = intent.getParcelableExtra(Api.RESPONSE);
             if(response != null) {
                 Log.d(TAG, "SignOut 200");
                 if(response.getSuccess()) {

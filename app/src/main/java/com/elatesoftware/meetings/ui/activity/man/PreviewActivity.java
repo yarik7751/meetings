@@ -13,6 +13,7 @@ import android.view.View;
 
 import com.dd.CircularProgressButton;
 import com.elatesoftware.meetings.R;
+import com.elatesoftware.meetings.api.Api;
 import com.elatesoftware.meetings.service.CreateDateService;
 import com.elatesoftware.meetings.service.GetPhotosService;
 import com.elatesoftware.meetings.ui.activity.BaseShowDateActivity;
@@ -188,7 +189,7 @@ public class PreviewActivity extends BaseShowDateActivity {
 
         @Override
         public void onReceive(Context context, final Intent intent) {
-            MessageAnswer response = intent.getParcelableExtra(Const.RESPONSE);
+            MessageAnswer response = intent.getParcelableExtra(Api.RESPONSE);
             buttonAnimation.stop();
             if(response != null) {
                 Log.d(TAG, "CreateDate 200");
@@ -211,7 +212,7 @@ public class PreviewActivity extends BaseShowDateActivity {
 
         @Override
         public void onReceive(Context context, Intent intent) {
-            GetPhotosAnswer response = intent.getParcelableExtra(Const.RESPONSE);
+            GetPhotosAnswer response = intent.getParcelableExtra(Api.RESPONSE);
             pbProgress.setVisibility(View.GONE);
             if(response != null) {
                 if(response.getSuccess()) {

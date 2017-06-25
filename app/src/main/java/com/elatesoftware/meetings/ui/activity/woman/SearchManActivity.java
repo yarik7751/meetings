@@ -26,6 +26,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.elatesoftware.meetings.R;
+import com.elatesoftware.meetings.api.Api;
 import com.elatesoftware.meetings.service.SearchDatesService;
 import com.elatesoftware.meetings.ui.activity.base.BaseActivity;
 import com.elatesoftware.meetings.ui.adapter.recycler_view.dates.BaseDatesRecyclerViewAdapter;
@@ -334,7 +335,7 @@ public class SearchManActivity extends BaseActivity implements OnMapReadyCallbac
 
         @Override
         public void onReceive(Context context, Intent intent) {
-            SearchDatesAnswer response = intent.getParcelableExtra(Const.RESPONSE);
+            SearchDatesAnswer response = intent.getParcelableExtra(Api.RESPONSE);
             hideProgressDialog();
             if(response != null) {
                 Log.d(TAG, "registration 200");

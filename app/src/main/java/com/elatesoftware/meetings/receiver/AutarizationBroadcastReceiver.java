@@ -7,6 +7,7 @@ import android.util.Log;
 import android.widget.Toast;
 
 import com.elatesoftware.meetings.R;
+import com.elatesoftware.meetings.api.Api;
 import com.elatesoftware.meetings.ui.activity.PinCodeActivity;
 import com.elatesoftware.meetings.util.Const;
 import com.elatesoftware.meetings.util.CustomSharedPreference;
@@ -33,7 +34,7 @@ public class AutarizationBroadcastReceiver extends BroadcastReceiver {
             CustomSharedPreference.setProfileInformation(context, null);
             CustomSharedPreference.setPin(context, null);
         }
-        LoginAnswer response = intent.getParcelableExtra(Const.RESPONSE);
+        LoginAnswer response = intent.getParcelableExtra(Api.RESPONSE);
         if(response != null) {
             Log.d(TAG, "registration 200");
             boolean success = response.getSuccess();

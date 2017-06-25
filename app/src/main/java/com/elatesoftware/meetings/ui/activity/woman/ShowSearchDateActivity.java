@@ -12,6 +12,7 @@ import android.view.View;
 
 import com.dd.CircularProgressButton;
 import com.elatesoftware.meetings.R;
+import com.elatesoftware.meetings.api.Api;
 import com.elatesoftware.meetings.service.AddPartnerService;
 import com.elatesoftware.meetings.service.GetProfileInfoService;
 import com.elatesoftware.meetings.ui.activity.BaseShowDateActivity;
@@ -155,7 +156,7 @@ public class ShowSearchDateActivity extends BaseShowDateActivity {
 
         @Override
         public void onReceive(Context context, Intent intent) {
-            GetProfileInfoAnswer response = intent.getParcelableExtra(Const.RESPONSE);
+            GetProfileInfoAnswer response = intent.getParcelableExtra(Api.RESPONSE);
             hideProgressDialog();
             if(response != null)  {
                 Log.d(TAG, "GetProfileInfo 200");
@@ -189,7 +190,7 @@ public class ShowSearchDateActivity extends BaseShowDateActivity {
 
         @Override
         public void onReceive(Context context, Intent intent) {
-            MessageAnswer response = intent.getParcelableExtra(Const.RESPONSE);
+            MessageAnswer response = intent.getParcelableExtra(Api.RESPONSE);
             buttonAnimation.stop();
             if(response != null) {
                 if(response.getSuccess()) {

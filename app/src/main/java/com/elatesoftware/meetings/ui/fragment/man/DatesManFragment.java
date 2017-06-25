@@ -13,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.elatesoftware.meetings.R;
+import com.elatesoftware.meetings.api.Api;
 import com.elatesoftware.meetings.ui.activity.man.AddDateActivity;
 import com.elatesoftware.meetings.ui.adapter.ScheduledDatesAdapter;
 import com.elatesoftware.meetings.ui.adapter.recycler_view.dates.BaseDatesRecyclerViewAdapter;
@@ -108,7 +109,7 @@ public class DatesManFragment extends BaseFragment {
     private List<Result> getPendingDates(List<Result> result) {
         List<Result> dates = new ArrayList<>();
         for(int i = 0; i < result.size(); i++) {
-            if(result.get(i).getDate().getStatus() == Const.PENDING) {
+            if(result.get(i).getDate().getStatus() == Api.PENDING) {
                 dates.add(result.get(i));
             }
         }
@@ -118,7 +119,7 @@ public class DatesManFragment extends BaseFragment {
     private List<Result> getScheduledDates(List<Result> result) {
         List<Result> dates = new ArrayList<>();
         for(int i = 0; i < result.size(); i++) {
-            if(result.get(i).getDate().getStatus() == Const.SCHEDULED) {
+            if(result.get(i).getDate().getStatus() == Api.SCHEDULED) {
                 dates.add(result.get(i));
             }
         }
@@ -129,7 +130,7 @@ public class DatesManFragment extends BaseFragment {
 
         @Override
         public void onReceive(Context context, Intent intent) {
-            GetDatesManAnswer response = intent.getParcelableExtra(Const.RESPONSE);
+            GetDatesManAnswer response = intent.getParcelableExtra(Api.RESPONSE);
             if(response != null) {
                 if(response.getSuccess()) {
                     rvScheduledDales.setAdapter(new ScheduledDatesAdapter(getContext(), getScheduledDates(response.getResult())));

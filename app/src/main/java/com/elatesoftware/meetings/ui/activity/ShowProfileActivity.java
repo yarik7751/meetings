@@ -17,6 +17,7 @@ import android.widget.TextView;
 
 import com.dd.CircularProgressButton;
 import com.elatesoftware.meetings.R;
+import com.elatesoftware.meetings.api.Api;
 import com.elatesoftware.meetings.service.GetProfileInfoService;
 import com.elatesoftware.meetings.service.SelectPartnerService;
 import com.elatesoftware.meetings.ui.activity.base.BaseActivity;
@@ -212,7 +213,7 @@ public class ShowProfileActivity extends BaseActivity {
 
         @Override
         public void onReceive(Context context, Intent intent) {
-            GetProfileInfoAnswer response = intent.getParcelableExtra(Const.RESPONSE);
+            GetProfileInfoAnswer response = intent.getParcelableExtra(Api.RESPONSE);
             hideProgressDialog();
             if(response != null)  {
                 Log.d(TAG, "GetProfileInfo 200");
@@ -237,7 +238,7 @@ public class ShowProfileActivity extends BaseActivity {
         @Override
         public void onReceive(Context context, Intent intent) {
             buttonAnimation.stop();
-            MessageAnswer response = intent.getParcelableExtra(Const.RESPONSE);
+            MessageAnswer response = intent.getParcelableExtra(Api.RESPONSE);
             if(response != null)  {
                 if(response.getSuccess()) {
                     showMessage(R.string.you_select_woman);

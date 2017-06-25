@@ -25,6 +25,7 @@ import android.widget.DatePicker;
 import android.widget.RelativeLayout;
 
 import com.elatesoftware.meetings.R;
+import com.elatesoftware.meetings.api.Api;
 import com.elatesoftware.meetings.model.Message;
 import com.elatesoftware.meetings.ui.activity.base.BaseActivity;
 import com.elatesoftware.meetings.ui.adapter.view_pager.page_photo.PhotoFragmentPageAdapter;
@@ -197,7 +198,7 @@ public class ProfileEditActivity extends BaseActivity {
                 return false;
             }
         });
-        if(CustomSharedPreference.getIsMan(this) == Const.WOMAN_VALUE) {
+        if(CustomSharedPreference.getIsMan(this) == Api.WOMAN_VALUE) {
             setTheme(R.style.ThemeWoman);
             rlPhotos.setBackgroundResource(R.drawable.button_red);
             cetHeight.setVisibility(View.VISIBLE);
@@ -357,7 +358,7 @@ public class ProfileEditActivity extends BaseActivity {
 
         @Override
         public void onReceive(Context context, Intent intent) {
-            MessageAnswer response = intent.getParcelableExtra(Const.RESPONSE);
+            MessageAnswer response = intent.getParcelableExtra(Api.RESPONSE);
             if(response != null) {
                 Log.d(TAG, "UpdateAccount 200");
                 if(response.getSuccess()) {
@@ -380,7 +381,7 @@ public class ProfileEditActivity extends BaseActivity {
 
         @Override
         public void onReceive(Context context, Intent intent) {
-            MessageAnswer response = intent.getParcelableExtra(Const.RESPONSE);
+            MessageAnswer response = intent.getParcelableExtra(Api.RESPONSE);
             hideProgressDialog();
             if(response != null) {
                 Log.d(TAG, "AddPhoto 200");
@@ -403,7 +404,7 @@ public class ProfileEditActivity extends BaseActivity {
 
         @Override
         public void onReceive(Context context, Intent intent) {
-            GetPhotosAnswer response = intent.getParcelableExtra(Const.RESPONSE);
+            GetPhotosAnswer response = intent.getParcelableExtra(Api.RESPONSE);
             pbProgress.setVisibility(View.GONE);
             if(response != null) {
                 if(response.getSuccess()) {
@@ -417,7 +418,7 @@ public class ProfileEditActivity extends BaseActivity {
 
         @Override
         public void onReceive(Context context, Intent intent) {
-            MessageAnswer response = intent.getParcelableExtra(Const.RESPONSE);
+            MessageAnswer response = intent.getParcelableExtra(Api.RESPONSE);
             hideProgressDialog();
             if(response != null) {
                 if(response.getSuccess()) {

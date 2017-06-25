@@ -16,6 +16,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.elatesoftware.meetings.R;
+import com.elatesoftware.meetings.api.Api;
 import com.elatesoftware.meetings.ui.activity.man.AddDateActivity;
 import com.elatesoftware.meetings.ui.activity.ProfileEditActivity;
 import com.elatesoftware.meetings.ui.activity.woman.SearchManActivity;
@@ -118,7 +119,7 @@ public class ProfileFragment extends BaseFragment {
 
     @OnClick(R.id.ll_search)
     public void clickLlAddDate() {
-        if(CustomSharedPreference.getIsMan(getContext()) == Const.WOMAN_VALUE) {
+        if(CustomSharedPreference.getIsMan(getContext()) == Api.WOMAN_VALUE) {
             startActivity(new Intent(getContext(), SearchManActivity.class));
         } else {
             startActivity(new Intent(getContext(), AddDateActivity.class));
@@ -127,7 +128,7 @@ public class ProfileFragment extends BaseFragment {
 
     private void setUI() {
         rlBack.setVisibility(View.GONE);
-        if(CustomSharedPreference.getIsMan(getContext()) == Const.WOMAN_VALUE) {
+        if(CustomSharedPreference.getIsMan(getContext()) == Api.WOMAN_VALUE) {
             rlPhotos.setBackgroundResource(R.drawable.button_red);
             llInfo.setBackgroundResource(R.drawable.button_red);
             imgDatesFunc.setImageResource(R.drawable.ic_search_white_24dp);
@@ -234,7 +235,7 @@ public class ProfileFragment extends BaseFragment {
 
         @Override
         public void onReceive(Context context, Intent intent) {
-            GetInfoAccAnswer response = intent.getParcelableExtra(Const.RESPONSE);
+            GetInfoAccAnswer response = intent.getParcelableExtra(Api.RESPONSE);
             if(response != null) {
                 if(response.getSuccess()) {
                     CustomSharedPreference.setProfileInformation(context, response.getHumanAnswer());
@@ -249,7 +250,7 @@ public class ProfileFragment extends BaseFragment {
 
         @Override
         public void onReceive(Context context, Intent intent) {
-            GetPhotosAnswer response = intent.getParcelableExtra(Const.RESPONSE);
+            GetPhotosAnswer response = intent.getParcelableExtra(Api.RESPONSE);
             pbProgress.setVisibility(View.GONE);
             if(response != null) {
                 if(response.getSuccess()) {

@@ -8,6 +8,7 @@ import android.support.design.widget.FloatingActionButton;
 import android.view.View;
 
 import com.elatesoftware.meetings.R;
+import com.elatesoftware.meetings.api.Api;
 import com.elatesoftware.meetings.util.Const;
 import com.elatesoftware.meetings.util.CustomSharedPreference;
 
@@ -40,7 +41,7 @@ public class ShowScheduledDateActivity extends ShowDateActivity {
 
     @Override
     protected void setUI() {
-        if(CustomSharedPreference.getIsMan(this) == Const.WOMAN_VALUE) {
+        if(CustomSharedPreference.getIsMan(this) == Api.WOMAN_VALUE) {
             super.setUI();
         } else {
             int textColor = R.color.seek_bar;

@@ -12,6 +12,7 @@ import android.view.View;
 
 import com.dd.CircularProgressButton;
 import com.elatesoftware.meetings.R;
+import com.elatesoftware.meetings.api.Api;
 import com.elatesoftware.meetings.api.pojo.GetProfileInfoAnswer;
 import com.elatesoftware.meetings.service.GetProfileInfoService;
 import com.elatesoftware.meetings.ui.adapter.view_pager.page_photo.PhotoFragmentPageAdapter;
@@ -139,7 +140,7 @@ public class ShowDateActivity extends BaseShowDateActivity {
 
         @Override
         public void onReceive(Context context, Intent intent) {
-            GetProfileInfoAnswer response = intent.getParcelableExtra(Const.RESPONSE);
+            GetProfileInfoAnswer response = intent.getParcelableExtra(Api.RESPONSE);
             hideProgressDialog();
             if(response != null)  {
                 Log.d(TAG, "GetProfileInfo 200");

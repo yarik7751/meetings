@@ -10,6 +10,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
 import com.elatesoftware.meetings.R;
+import com.elatesoftware.meetings.api.Api;
 import com.elatesoftware.meetings.service.GetPendingWomenService;
 import com.elatesoftware.meetings.ui.activity.base.BaseActivity;
 import com.elatesoftware.meetings.ui.adapter.recycler_view.PendingWomenAdapter;
@@ -109,7 +110,7 @@ public class ShowPendingWomenActivity extends BaseActivity {
 
         @Override
         public void onReceive(Context context, Intent intent) {
-            GetPendingWomenAnswer answer = intent.getParcelableExtra(Const.RESPONSE);
+            GetPendingWomenAnswer answer = intent.getParcelableExtra(Api.RESPONSE);
             hideProgressDialog();
             if(answer != null) {
                 if(answer.getSuccess()) {

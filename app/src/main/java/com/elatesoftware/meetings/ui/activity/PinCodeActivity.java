@@ -12,6 +12,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.elatesoftware.meetings.R;
+import com.elatesoftware.meetings.api.Api;
 import com.elatesoftware.meetings.ui.activity.base.BaseActivity;
 import com.elatesoftware.meetings.util.Const;
 import com.elatesoftware.meetings.util.CustomSharedPreference;
@@ -116,9 +117,9 @@ public class PinCodeActivity extends BaseActivity {
 
     private void changeBackground() {
         int isMan = CustomSharedPreference.getIsMan(this);
-        if(isMan == Const.MAN_VALUE) {
+        if(isMan == Api.MAN_VALUE) {
             llMain.setBackgroundResource(R.drawable.bg);
-        } else if(isMan == Const.WOMAN_VALUE) {
+        } else if(isMan == Api.WOMAN_VALUE) {
             llMain.setBackgroundResource(R.drawable.bg_woman);
         } else {
             llMain.setBackgroundResource(R.drawable.bg);
