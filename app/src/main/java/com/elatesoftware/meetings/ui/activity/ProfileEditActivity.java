@@ -403,11 +403,11 @@ public class ProfileEditActivity extends BaseActivity {
 
         @Override
         public void onReceive(Context context, Intent intent) {
-            String response = intent.getStringExtra(Const.RESPONSE);
+            GetPhotosAnswer response = intent.getParcelableExtra(Const.RESPONSE);
             pbProgress.setVisibility(View.GONE);
-            if(response != null && response.equals(String.valueOf(Const.CODE_SUCCESS)) && GetPhotosAnswer.getInstance() != null) {
-                if(GetPhotosAnswer.getInstance().getSuccess()) {
-                    loadPhoto(GetPhotosAnswer.getInstance().getResult());
+            if(response != null) {
+                if(response.getSuccess()) {
+                    loadPhoto(response.getResult());
                 }
             }
         }

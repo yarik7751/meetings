@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
 
+import com.elatesoftware.meetings.api.pojo.GetPhotosAnswer;
 import com.elatesoftware.meetings.util.Const;
 import com.elatesoftware.meetings.util.CustomSharedPreference;
 import com.elatesoftware.meetings.api.Api;
@@ -21,7 +22,7 @@ public class GetPhotosService extends IntentService {
 
     @Override
     protected void onHandleIntent(Intent intent) {
-        String response = Api.getPhotos(CustomSharedPreference.getToken(this));
+        GetPhotosAnswer response = Api.getPhotos(CustomSharedPreference.getToken(this));
         Intent responseIntent = new Intent();
         responseIntent.setAction(ACTION);
         responseIntent.addCategory(Intent.CATEGORY_DEFAULT);

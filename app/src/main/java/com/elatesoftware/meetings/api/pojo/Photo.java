@@ -1,9 +1,12 @@
 package com.elatesoftware.meetings.api.pojo;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class Photo {
+public class Photo implements Parcelable {
 
     @SerializedName("AccountId")
     @Expose
@@ -84,4 +87,44 @@ public class Photo {
     public void setPosition(Integer position) {
         this.position = position;
     }
+
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeValue(this.accountId);
+        dest.writeString(this.name);
+        dest.writeValue(this.position);
+        dest.writeString(this.content);
+        dest.writeValue(this.isMain);
+        dest.writeValue(this.id);
+    }
+
+    public Photo() {
+    }
+
+    protected Photo(Parcel in) {
+        this.accountId = (Integer) in.readValue(Integer.class.getClassLoader());
+        this.name = in.readString();
+        this.position = (Integer) in.readValue(Integer.class.getClassLoader());
+        this.content = in.readString();
+        this.isMain = (Boolean) in.readValue(Boolean.class.getClassLoader());
+        this.id = (Integer) in.readValue(Integer.class.getClassLoader());
+    }
+
+    public static final Parcelable.Creator<Photo> CREATOR = new Parcelable.Creator<Photo>() {
+        @Override
+        public Photo createFromParcel(Parcel source) {
+            return new Photo(source);
+        }
+
+        @Override
+        public Photo[] newArray(int size) {
+            return new Photo[size];
+        }
+    };
 }

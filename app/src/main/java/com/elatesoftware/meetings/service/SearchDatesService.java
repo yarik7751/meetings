@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
 
+import com.elatesoftware.meetings.api.pojo.SearchDatesAnswer;
 import com.elatesoftware.meetings.util.Const;
 import com.elatesoftware.meetings.util.CustomSharedPreference;
 import com.elatesoftware.meetings.api.Api;
@@ -25,7 +26,7 @@ public class SearchDatesService extends IntentService {
     @Override
     protected void onHandleIntent(Intent intent) {
         SearchDatesFilter searchDatesFilter = intent.getParcelableExtra(FILTERS);
-        String response = Api.searchDates(CustomSharedPreference.getToken(this), searchDatesFilter);
+        SearchDatesAnswer response = Api.searchDates(CustomSharedPreference.getToken(this), searchDatesFilter);
         Intent responseIntent = new Intent();
         responseIntent.setAction(ACTION);
         responseIntent.addCategory(Intent.CATEGORY_DEFAULT);

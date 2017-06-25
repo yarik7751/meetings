@@ -16,18 +16,6 @@ public class MessageAnswer implements Parcelable {
     @Expose
     protected String message;
 
-    public static final Creator<MessageAnswer> CREATOR = new Creator<MessageAnswer>() {
-        @Override
-        public MessageAnswer createFromParcel(Parcel in) {
-            return new MessageAnswer(in);
-        }
-
-        @Override
-        public MessageAnswer[] newArray(int size) {
-            return new MessageAnswer[size];
-        }
-    };
-
     public String getMessage() {
         return message;
     }

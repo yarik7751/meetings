@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
 
+import com.elatesoftware.meetings.api.pojo.GetDatesManAnswer;
 import com.elatesoftware.meetings.util.Const;
 import com.elatesoftware.meetings.util.CustomSharedPreference;
 import com.elatesoftware.meetings.api.Api;
@@ -21,7 +22,7 @@ public class GetDatesListService extends IntentService {
 
     @Override
     protected void onHandleIntent(Intent intent) {
-        String response = Api.getDatesList(CustomSharedPreference.getToken(this));
+        GetDatesManAnswer response = Api.getDatesList(CustomSharedPreference.getToken(this));
         Intent responseIntent = new Intent();
         responseIntent.setAction(ACTION);
         responseIntent.addCategory(Intent.CATEGORY_DEFAULT);

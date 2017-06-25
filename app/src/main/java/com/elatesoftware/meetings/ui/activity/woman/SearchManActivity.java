@@ -80,11 +80,11 @@ public class SearchManActivity extends BaseActivity implements OnMapReadyCallbac
     @BindView(R.id.tv_start_time) TextView tvStartTime;
     @BindView(R.id.ll_filters) LinearLayout llFilters;
     @BindView(R.id.rl_main) CoordinatorLayout rlMain;
-    @BindView(R.id.img_back) ImageView imgBack;
-    private RecyclerView rvDales;
+    @BindView(R.id.img_back) ImageView imgBack;private RecyclerView rvDales;
     private BottomSheetBehavior mBottomSheetBehavior;
 
     private SearchDateReceiver searchDateReceiver;
+    private SearchDatesAnswer searchDatesAnswer;
 
     private GoogleMap map;
     private SupportMapFragment mapFragment;
@@ -196,7 +196,7 @@ public class SearchManActivity extends BaseActivity implements OnMapReadyCallbac
     @Override
     public void onMapReady(GoogleMap googleMap) {
         map = googleMap;
-        if(SearchDatesAnswer.getInstance() != null) {
+        if(searchDatesAnswer != null) {
             setDatesInMap();
         }
     }
@@ -261,8 +261,8 @@ public class SearchManActivity extends BaseActivity implements OnMapReadyCallbac
         if(map != null) {
             map.clear();
             setMyLocation();
-            for (int i = 0; i < SearchDatesAnswer.getInstance().getResult().size(); i++) {
-                final Result result = SearchDatesAnswer.getInstance().getResult().get(i);
+            for (int i = 0; i < searchDatesAnswer.getResult().size(); i++) {
+                final Result result = searchDatesAnswer.getResult().get(i);
                 final LatLng position = new LatLng(result.getDate().getLatitude(), result.getDate().getLongitude());
                 final View v = LayoutInflater.from(SearchManActivity.this).inflate(R.layout.incl_marker, null);
                 CircleImageView imgMarker = (CircleImageView) v.findViewById(R.id.img_marker);
@@ -290,8 +290,10 @@ public class SearchManActivity extends BaseActivity implements OnMapReadyCallbac
                 @Override
                 public boolean onMarkerClick(Marker marker) {
                     Result result = ((Result) marker.getTag());
-                    Meeting.setInstance(result.getDate());
-                    startActivity(ShowSearchDateActivity.getIntent(SearchManActivity.this, result.getCreatorId().intValue()));
+                    if(result != null) {
+                        Meeting.setInstance(result.getDate());
+                        startActivity(ShowSearchDateActivity.getIntent(SearchManActivity.this, result.getCreatorId().intValue()));
+                    }
                     return false;
                 }
             });
@@ -309,12 +311,12 @@ public class SearchManActivity extends BaseActivity implements OnMapReadyCallbac
 
             rvDales = new RecyclerView(this);
             rvDales.setLayoutManager(new LinearLayoutManager(this));
-            adapter = new SearchDatesAdapter(this, SearchDatesAnswer.getInstance().getResult());
+            adapter = new SearchDatesAdapter(this, searchDatesAnswer.getResult());
             rvDales.setAdapter(adapter);
             rvDales.setPadding(0, llTool.getHeight() + AndroidUtils.dp(16), 0, 0);
             flListContent.addView(rvDales, params);
         } else {
-            adapter.update(SearchDatesAnswer.getInstance().getResult());
+            adapter.update(searchDatesAnswer.getResult());
         }
     }
 
@@ -332,18 +334,15 @@ public class SearchManActivity extends BaseActivity implements OnMapReadyCallbac
 
         @Override
         public void onReceive(Context context, Intent intent) {
-            String response = intent.getStringExtra(Const.RESPONSE);
+            SearchDatesAnswer response = intent.getParcelableExtra(Const.RESPONSE);
             hideProgressDialog();
-            if(response != null && response.equals(String.valueOf(Const.CODE_SUCCESS)) && SearchDatesAnswer.getInstance() != null) {
+            if(response != null) {
                 Log.d(TAG, "registration 200");
-                boolean success = SearchDatesAnswer.getInstance().getSuccess();
+                boolean success = response.getSuccess();
                 if(success) {
-                    //if(datesView == 0) {
-                        setDatesInMap();
-                        setDatesInList();
-                    //} else if(datesView == 1) {
-                        //loadList();
-                    //}
+                    searchDatesAnswer = response;
+                    setDatesInMap();
+                    setDatesInList();
                 } else {
                     Toast.makeText(context, R.string.something_wrong, Toast.LENGTH_SHORT).show();
                     Log.d(TAG, "registration FALSE " + response);

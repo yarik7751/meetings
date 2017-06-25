@@ -105,21 +105,21 @@ public class DatesManFragment extends BaseFragment {
         getActivity().startService(GetDatesListService.getIntent(getContext()));
     }
 
-    private List<Result> getPendingDates() {
+    private List<Result> getPendingDates(List<Result> result) {
         List<Result> dates = new ArrayList<>();
-        for(int i = 0; i < GetDatesManAnswer.getInstance().getResult().size(); i++) {
-            if(GetDatesManAnswer.getInstance().getResult().get(i).getDate().getStatus() == Const.PENDING) {
-                dates.add(GetDatesManAnswer.getInstance().getResult().get(i));
+        for(int i = 0; i < result.size(); i++) {
+            if(result.get(i).getDate().getStatus() == Const.PENDING) {
+                dates.add(result.get(i));
             }
         }
         return dates;
     }
 
-    private List<Result> getScheduledDates() {
+    private List<Result> getScheduledDates(List<Result> result) {
         List<Result> dates = new ArrayList<>();
-        for(int i = 0; i < GetDatesManAnswer.getInstance().getResult().size(); i++) {
-            if(GetDatesManAnswer.getInstance().getResult().get(i).getDate().getStatus() == Const.SCHEDULED) {
-                dates.add(GetDatesManAnswer.getInstance().getResult().get(i));
+        for(int i = 0; i < result.size(); i++) {
+            if(result.get(i).getDate().getStatus() == Const.SCHEDULED) {
+                dates.add(result.get(i));
             }
         }
         return dates;
@@ -129,11 +129,11 @@ public class DatesManFragment extends BaseFragment {
 
         @Override
         public void onReceive(Context context, Intent intent) {
-            String response = intent.getStringExtra(Const.RESPONSE);
-            if(response != null && response.equals(String.valueOf(Const.CODE_SUCCESS)) && GetDatesManAnswer.getInstance() != null) {
-                if(GetDatesManAnswer.getInstance().getSuccess()) {
-                    rvScheduledDales.setAdapter(new ScheduledDatesAdapter(getContext(), getScheduledDates()));
-                    rvPendingDales.setAdapter(new PendingDatesAdapter(getContext(), getPendingDates()));
+            GetDatesManAnswer response = intent.getParcelableExtra(Const.RESPONSE);
+            if(response != null) {
+                if(response.getSuccess()) {
+                    rvScheduledDales.setAdapter(new ScheduledDatesAdapter(getContext(), getScheduledDates(response.getResult())));
+                    rvPendingDales.setAdapter(new PendingDatesAdapter(getContext(), getPendingDates(response.getResult())));
                 } else {
                     showMessage(R.string.something_wrong);
                 }

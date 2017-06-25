@@ -1,9 +1,12 @@
 package com.elatesoftware.meetings.api.pojo;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class Meeting {
+public class Meeting implements Parcelable {
 
     @SerializedName("Id")
     @Expose
@@ -216,4 +219,66 @@ public class Meeting {
     public void setAbout(String about) {
         this.about = about;
     }
+
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeValue(this.id);
+        dest.writeValue(this.startTime);
+        dest.writeValue(this.status);
+        dest.writeValue(this.endTime);
+        dest.writeString(this.place);
+        dest.writeString(this.about);
+        dest.writeValue(this.latitude);
+        dest.writeValue(this.longitude);
+        dest.writeValue(this.amount);
+        dest.writeValue(this.prefAgeStart);
+        dest.writeValue(this.prefAgeEnd);
+        dest.writeValue(this.prefHeightStart);
+        dest.writeValue(this.prefHeightEnd);
+        dest.writeValue(this.prefWeightStart);
+        dest.writeValue(this.prefWeightEnd);
+        dest.writeValue(this.hairColor);
+        dest.writeValue(this.withPhoto);
+    }
+
+    public Meeting() {
+    }
+
+    protected Meeting(Parcel in) {
+        this.id = (Long) in.readValue(Long.class.getClassLoader());
+        this.startTime = (Long) in.readValue(Long.class.getClassLoader());
+        this.status = (Integer) in.readValue(Integer.class.getClassLoader());
+        this.endTime = (Long) in.readValue(Long.class.getClassLoader());
+        this.place = in.readString();
+        this.about = in.readString();
+        this.latitude = (Double) in.readValue(Double.class.getClassLoader());
+        this.longitude = (Double) in.readValue(Double.class.getClassLoader());
+        this.amount = (Integer) in.readValue(Integer.class.getClassLoader());
+        this.prefAgeStart = (Integer) in.readValue(Integer.class.getClassLoader());
+        this.prefAgeEnd = (Integer) in.readValue(Integer.class.getClassLoader());
+        this.prefHeightStart = (Integer) in.readValue(Integer.class.getClassLoader());
+        this.prefHeightEnd = (Integer) in.readValue(Integer.class.getClassLoader());
+        this.prefWeightStart = (Integer) in.readValue(Integer.class.getClassLoader());
+        this.prefWeightEnd = (Integer) in.readValue(Integer.class.getClassLoader());
+        this.hairColor = (Integer) in.readValue(Integer.class.getClassLoader());
+        this.withPhoto = (Boolean) in.readValue(Boolean.class.getClassLoader());
+    }
+
+    public static final Parcelable.Creator<Meeting> CREATOR = new Parcelable.Creator<Meeting>() {
+        @Override
+        public Meeting createFromParcel(Parcel source) {
+            return new Meeting(source);
+        }
+
+        @Override
+        public Meeting[] newArray(int size) {
+            return new Meeting[size];
+        }
+    };
 }

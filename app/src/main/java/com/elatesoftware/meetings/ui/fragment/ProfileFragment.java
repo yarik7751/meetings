@@ -234,10 +234,10 @@ public class ProfileFragment extends BaseFragment {
 
         @Override
         public void onReceive(Context context, Intent intent) {
-            String response = intent.getStringExtra(Const.RESPONSE);
-            if(response != null && response.equals(String.valueOf(Const.CODE_SUCCESS)) && GetInfoAccAnswer.getInstance() != null) {
-                if(GetInfoAccAnswer.getInstance().getSuccess()) {
-                    CustomSharedPreference.setProfileInformation(context, GetInfoAccAnswer.getInstance().getHumanAnswer());
+            GetInfoAccAnswer response = intent.getParcelableExtra(Const.RESPONSE);
+            if(response != null) {
+                if(response.getSuccess()) {
+                    CustomSharedPreference.setProfileInformation(context, response.getHumanAnswer());
                     loadInfo();
                 }
                 clickImgEdit();
@@ -249,11 +249,11 @@ public class ProfileFragment extends BaseFragment {
 
         @Override
         public void onReceive(Context context, Intent intent) {
-            String response = intent.getStringExtra(Const.RESPONSE);
+            GetPhotosAnswer response = intent.getParcelableExtra(Const.RESPONSE);
             pbProgress.setVisibility(View.GONE);
-            if(response != null && response.equals(String.valueOf(Const.CODE_SUCCESS)) && GetPhotosAnswer.getInstance() != null) {
-                if(GetPhotosAnswer.getInstance().getSuccess()) {
-                    loadPhoto(GetPhotosAnswer.getInstance().getResult());
+            if(response != null) {
+                if(response.getSuccess()) {
+                    loadPhoto(response.getResult());
                 }
             }
         }

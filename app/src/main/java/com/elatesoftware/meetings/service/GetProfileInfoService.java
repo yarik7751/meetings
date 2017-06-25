@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
 
+import com.elatesoftware.meetings.api.pojo.GetProfileInfoAnswer;
 import com.elatesoftware.meetings.util.Const;
 import com.elatesoftware.meetings.util.CustomSharedPreference;
 import com.elatesoftware.meetings.api.Api;
@@ -22,7 +23,7 @@ public class GetProfileInfoService extends IntentService {
 
     @Override
     protected void onHandleIntent(Intent intent) {
-        String response = Api.getProfileInfo(CustomSharedPreference.getToken(this), intent.getLongExtra(ID, -1));
+        GetProfileInfoAnswer response = Api.getProfileInfo(CustomSharedPreference.getToken(this), intent.getLongExtra(ID, -1));
         Intent responseIntent = new Intent();
         responseIntent.setAction(ACTION);
         responseIntent.addCategory(Intent.CATEGORY_DEFAULT);

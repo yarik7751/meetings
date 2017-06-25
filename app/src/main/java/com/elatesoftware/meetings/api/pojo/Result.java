@@ -1,5 +1,8 @@
 package com.elatesoftware.meetings.api.pojo;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
@@ -7,7 +10,7 @@ import com.google.gson.annotations.SerializedName;
  * Created by user on 13.06.2017.
  */
 
-public class Result {
+public class Result implements Parcelable {
 
     @SerializedName("Date")
     @Expose
@@ -105,4 +108,48 @@ public class Result {
     public void setPartnerPhotoId(Long partnerPhotoId) {
         this.partnerPhotoId = partnerPhotoId;
     }
+
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeParcelable(this.date, flags);
+        dest.writeString(this.creatorName);
+        dest.writeValue(this.creatorId);
+        dest.writeValue(this.creatorPhotoId);
+        dest.writeString(this.partnerName);
+        dest.writeValue(this.partnerId);
+        dest.writeValue(this.partnerPhotoId);
+        dest.writeValue(this.id);
+    }
+
+    public Result() {
+    }
+
+    protected Result(Parcel in) {
+        this.date = in.readParcelable(Meeting.class.getClassLoader());
+        this.creatorName = in.readString();
+        this.creatorId = (Long) in.readValue(Long.class.getClassLoader());
+        this.creatorPhotoId = (Long) in.readValue(Long.class.getClassLoader());
+        this.partnerName = in.readString();
+        this.partnerId = (Long) in.readValue(Long.class.getClassLoader());
+        this.partnerPhotoId = (Long) in.readValue(Long.class.getClassLoader());
+        this.id = (Integer) in.readValue(Integer.class.getClassLoader());
+    }
+
+    public static final Parcelable.Creator<Result> CREATOR = new Parcelable.Creator<Result>() {
+        @Override
+        public Result createFromParcel(Parcel source) {
+            return new Result(source);
+        }
+
+        @Override
+        public Result[] newArray(int size) {
+            return new Result[size];
+        }
+    };
 }

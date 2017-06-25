@@ -183,10 +183,9 @@ public class Api {
         return null;
     }
 
-    public static String getAccountInfo(String sessionKey) {
+    public static GetInfoAccAnswer getAccountInfo(String sessionKey) {
         Call<ResponseBody> call = getApi().getAccountInfo(sessionKey);
         Response<ResponseBody> response = null;
-        String result = null;
         String rawJson = null;
         try {
             response = call.execute();
@@ -200,11 +199,10 @@ public class Api {
             if(response.code() == Const.CODE_SUCCESS) {
                 Gson gson = new Gson();
                 GetInfoAccAnswer answer = gson.fromJson(rawJson, GetInfoAccAnswer.class);
-                GetInfoAccAnswer.setInstance(answer);
+                return answer;
             }
-            result = String.valueOf(response.code());
         }
-        return result;
+        return null;
     }
 
     public static MessageAnswer createDate(String sessionKey, Meeting meeting) {
@@ -236,10 +234,9 @@ public class Api {
         return null;
     }
 
-    public static String getPhotos(String sessionKey) {
+    public static GetPhotosAnswer getPhotos(String sessionKey) {
         Call<ResponseBody> call = getApi().getPhotos(sessionKey);
         Response<ResponseBody> response = null;
-        String result = null;
         String rawJson = null;
         try {
             response = call.execute();
@@ -257,13 +254,13 @@ public class Api {
             if(response.code() == Const.CODE_SUCCESS) {
                 Gson gson = new Gson();
                 GetPhotosAnswer answer = gson.fromJson(rawJson, GetPhotosAnswer.class);
-                GetPhotosAnswer.setInstance(answer);
+                return answer;
             }
-            result = String.valueOf(response.code());
         }
-        return result;
+        return null;
     }
 
+    //todo The method have not use
     public static String getPhoto(String sessionKey, long photoId) {
         Call<ResponseBody> call = getApi().getPhoto(sessionKey, photoId);
         Response<ResponseBody> response = null;
@@ -287,6 +284,7 @@ public class Api {
         }
         return result;
     }
+    //
 
     public static MessageAnswer deletePhoto(String sessionKey, long photoId) {
         String bodyStr = "{\"Id\":" + photoId + "}";
@@ -312,11 +310,10 @@ public class Api {
         return null;
     }
 
-    public static String getDatesList(String sessionKey) {
+    public static GetDatesManAnswer getDatesList(String sessionKey) {
         Log.d(TAG, "getDatesList");
         Call<ResponseBody> call = getApi().getDatesList(sessionKey);
         Response<ResponseBody> response = null;
-        String result = null;
         String rawJson = null;
         try {
             response = call.execute();
@@ -334,11 +331,10 @@ public class Api {
             if(response.code() == Const.CODE_SUCCESS) {
                 Gson gson = new Gson();
                 GetDatesManAnswer answer = gson.fromJson(rawJson, GetDatesManAnswer.class);
-                GetDatesManAnswer.setInstance(answer);
+                return answer;
             }
-            result = String.valueOf(response.code());
         }
-        return result;
+        return null;
     }
 
     public static MessageAnswer exit(String sessionKey) {
@@ -368,13 +364,12 @@ public class Api {
         return null;
     }
 
-    public static String searchDates(String sessionKey, SearchDatesFilter searchDatesFilterParams) {
+    public static SearchDatesAnswer searchDates(String sessionKey, SearchDatesFilter searchDatesFilterParams) {
         Log.d(TAG, "searchDatesStr");
         Log.d(TAG, "request: " + new Gson().toJson(searchDatesFilterParams, SearchDatesFilter.class));
         Gson gson = new Gson();
         Call<ResponseBody> call = getApi().searchDates(sessionKey, searchDatesFilterParams.getAmountStart(), searchDatesFilterParams.getStartTime(), searchDatesFilterParams.getPage());
         Response<ResponseBody> response = null;
-        String result = null;
         String rawJson = null;
         try {
             response = call.execute();
@@ -391,18 +386,16 @@ public class Api {
         if(response != null && rawJson != null){
             if(response.code() == Const.CODE_SUCCESS) {
                 SearchDatesAnswer messageAnswer = gson.fromJson(rawJson, SearchDatesAnswer.class);
-                SearchDatesAnswer.setInstance(messageAnswer);
+                return messageAnswer;
             }
-            result = String.valueOf(response.code());
         }
-        return result;
+        return null;
     }
 
-    public static String getProfileInfo(String sessionKey, long id) {
+    public static GetProfileInfoAnswer getProfileInfo(String sessionKey, long id) {
         Log.d(TAG, "getProfileInfo");
         Call<ResponseBody> call = getApi().getProfileInfo(sessionKey, id);
         Response<ResponseBody> response = null;
-        String result = null;
         String rawJson = null;
         try {
             response = call.execute();
@@ -420,11 +413,10 @@ public class Api {
             if(response.code() == Const.CODE_SUCCESS) {
                 Gson gson = new Gson();
                 GetProfileInfoAnswer answer = gson.fromJson(rawJson, GetProfileInfoAnswer .class);
-                GetProfileInfoAnswer.setInstance(answer);
+                return answer;
             }
-            result = String.valueOf(response.code());
         }
-        return result;
+        return null;
     }
 
     public static MessageAnswer addPartner(String sessionKey, long dateId) {

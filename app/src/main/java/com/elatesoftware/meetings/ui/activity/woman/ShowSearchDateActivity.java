@@ -155,18 +155,18 @@ public class ShowSearchDateActivity extends BaseShowDateActivity {
 
         @Override
         public void onReceive(Context context, Intent intent) {
-            String response = intent.getStringExtra(Const.RESPONSE);
+            GetProfileInfoAnswer response = intent.getParcelableExtra(Const.RESPONSE);
             hideProgressDialog();
-            if(response != null && response.equals(String.valueOf(Const.CODE_SUCCESS)) && GetProfileInfoAnswer.getInstance() != null)  {
+            if(response != null)  {
                 Log.d(TAG, "GetProfileInfo 200");
-                if(GetProfileInfoAnswer.getInstance().getSuccess()) {
+                if(response.getSuccess()) {
                     Log.d(TAG, "GetProfileInfo TRUE");
-                    String name = GetProfileInfoAnswer.getInstance().getResult().getFirstName();
+                    String name = response.getResult().getFirstName();
                     long age = 0;
-                    age = GetProfileInfoAnswer.getInstance().getResult().getDateOfBirthByCalendar() == null ? 0 : DateUtils.getAge(GetProfileInfoAnswer.getInstance().getResult().getDateOfBirthByCalendar().getTimeInMillis());
+                    age = response.getResult().getDateOfBirthByCalendar() == null ? 0 : DateUtils.getAge(response.getResult().getDateOfBirthByCalendar().getTimeInMillis());
                     tvName.setText(name);
                     tvAge.setText(String.valueOf(age));
-                    loadPhotoInteger(GetProfileInfoAnswer.getInstance().getResult().getId(), GetProfileInfoAnswer.getInstance().getResult().getPhotosId());
+                    loadPhotoInteger(response.getResult().getId(), response.getResult().getPhotosId());
                     if(TextUtils.isEmpty(tvAge.getText().toString()) || age <= 0) {
                         tvAgeTitle.setVisibility(View.GONE);
                         tvAge.setVisibility(View.GONE);

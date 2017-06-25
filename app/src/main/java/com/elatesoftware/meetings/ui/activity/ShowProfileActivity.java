@@ -212,13 +212,13 @@ public class ShowProfileActivity extends BaseActivity {
 
         @Override
         public void onReceive(Context context, Intent intent) {
-            String response = intent.getStringExtra(Const.RESPONSE);
+            GetProfileInfoAnswer response = intent.getParcelableExtra(Const.RESPONSE);
             hideProgressDialog();
-            if(response != null && response.equals(String.valueOf(Const.CODE_SUCCESS)) && GetProfileInfoAnswer.getInstance() != null)  {
+            if(response != null)  {
                 Log.d(TAG, "GetProfileInfo 200");
-                if(GetProfileInfoAnswer.getInstance().getSuccess()) {
+                if(response.getSuccess()) {
                     Log.d(TAG, "GetProfileInfo TRUE");
-                    profile = GetProfileInfoAnswer.getInstance().getResult();
+                    profile = response.getResult();
                     loadInfo();
                     loadPhotoInteger(profile.getId(), profile.getPhotosId());
                 } else {
@@ -239,7 +239,7 @@ public class ShowProfileActivity extends BaseActivity {
             buttonAnimation.stop();
             MessageAnswer response = intent.getParcelableExtra(Const.RESPONSE);
             if(response != null)  {
-                if(GetProfileInfoAnswer.getInstance().getSuccess()) {
+                if(response.getSuccess()) {
                     showMessage(R.string.you_select_woman);
                     closeActivitySuccess();
                 } else {

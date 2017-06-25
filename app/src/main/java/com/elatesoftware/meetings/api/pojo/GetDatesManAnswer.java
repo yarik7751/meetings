@@ -1,6 +1,9 @@
 
 package com.elatesoftware.meetings.api.pojo;
 
+import android.os.Parcel;
+
+import java.util.ArrayList;
 import java.util.List;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
@@ -19,103 +22,44 @@ public class GetDatesManAnswer extends MessageAnswer {
         this.result = result;
     }
 
-    public static GetDatesManAnswer answersInstance = null;
+    /*public static GetDatesManAnswer answersInstance = null;
     public static GetDatesManAnswer getInstance() {
         return answersInstance;
     }
     public static void setInstance(GetDatesManAnswer answers) {
         answersInstance = answers;
+    }*/
+
+
+    @Override
+    public int describeContents() {
+        return 0;
     }
 
-    /*public static class Result {
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        super.writeToParcel(dest, flags);
+        dest.writeList(this.result);
+    }
 
-        @SerializedName("Date")
-        @Expose
-        private Meeting date;
-        @SerializedName("CreatorName")
-        @Expose
-        private String creatorName;
-        @SerializedName("CreatorId")
-        @Expose
-        private Integer creatorId;
-        @SerializedName("CreatorPhotoId")
-        @Expose
-        private Integer creatorPhotoId;
-        @SerializedName("PartnerName")
-        @Expose
-        private String partnerName;
-        @SerializedName("PartnerId")
-        @Expose
-        private Integer partnerId;
-        @SerializedName("PartnerPhotoId")
-        @Expose
-        private Integer partnerPhotoId;
-        @SerializedName("Id")
-        @Expose
-        private Integer id;
+    public GetDatesManAnswer() {
+    }
 
-        public Integer getCreatorId() {
-            return creatorId;
+    protected GetDatesManAnswer(Parcel in) {
+        super(in);
+        this.result = new ArrayList<Result>();
+        in.readList(this.result, Result.class.getClassLoader());
+    }
+
+    public static final Creator<GetDatesManAnswer> CREATOR = new Creator<GetDatesManAnswer>() {
+        @Override
+        public GetDatesManAnswer createFromParcel(Parcel source) {
+            return new GetDatesManAnswer(source);
         }
 
-        public void setCreatorId(Integer creatorId) {
-            this.creatorId = creatorId;
+        @Override
+        public GetDatesManAnswer[] newArray(int size) {
+            return new GetDatesManAnswer[size];
         }
-
-        public String getCreatorName() {
-            return creatorName;
-        }
-
-        public void setCreatorName(String creatorName) {
-            this.creatorName = creatorName;
-        }
-
-        public Integer getCreatorPhotoId() {
-            return creatorPhotoId;
-        }
-
-        public void setCreatorPhotoId(Integer creatorPhotoId) {
-            this.creatorPhotoId = creatorPhotoId;
-        }
-
-        public Meeting getDate() {
-            return date;
-        }
-
-        public void setDate(Meeting date) {
-            this.date = date;
-        }
-
-        public Integer getId() {
-            return id;
-        }
-
-        public void setId(Integer id) {
-            this.id = id;
-        }
-
-        public Integer getPartnerId() {
-            return partnerId;
-        }
-
-        public void setPartnerId(Integer partnerId) {
-            this.partnerId = partnerId;
-        }
-
-        public String getPartnerName() {
-            return partnerName;
-        }
-
-        public void setPartnerName(String partnerName) {
-            this.partnerName = partnerName;
-        }
-
-        public Integer getPartnerPhotoId() {
-            return partnerPhotoId;
-        }
-
-        public void setPartnerPhotoId(Integer partnerPhotoId) {
-            this.partnerPhotoId = partnerPhotoId;
-        }
-    }*/
+    };
 }
