@@ -1,4 +1,4 @@
-package com.elatesoftware.meetings.ui.fragment;
+package com.elatesoftware.meetings.ui.fragment.all;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -128,11 +128,14 @@ public class ProfileFragment extends BaseFragment {
 
     private void setUI() {
         rlBack.setVisibility(View.GONE);
+        tvAge.setText(tvAge.getText().toString() + ": ");
+        tvHeight.setText(tvHeight.getText().toString() + ": ");
+        tvWeight.setText(tvWeight.getText().toString() + ": ");
         if(CustomSharedPreference.getIsMan(getContext()) == Api.WOMAN_VALUE) {
             rlPhotos.setBackgroundResource(R.drawable.button_red);
             llInfo.setBackgroundResource(R.drawable.button_red);
             imgDatesFunc.setImageResource(R.drawable.ic_search_white_24dp);
-            tvDatesFunc.setText(R.string.search);
+            tvDatesFunc.setText(R.string.profile_main_btn_title_woman);
             tvName.setTextColor(getResources().getColor(R.color.white));
             tvAge.setTextColor(getResources().getColor(R.color.white));
             tvHeight.setTextColor(getResources().getColor(R.color.white));
@@ -142,7 +145,7 @@ public class ProfileFragment extends BaseFragment {
             rlPhotos.setBackgroundResource(R.drawable.button_blue);
             llInfo.setBackgroundResource(R.drawable.button_blue);
             imgDatesFunc.setImageResource(R.drawable.ic_add_white_24dp);
-            tvDatesFunc.setText(R.string.add_date);
+            tvDatesFunc.setText(R.string.profile_main_btn_title_man);
             tvName.setTextColor(getResources().getColor(R.color.button_blue_light));
             tvAge.setTextColor(getResources().getColor(R.color.button_blue_light));
             tvHeightTitle.setVisibility(View.GONE);

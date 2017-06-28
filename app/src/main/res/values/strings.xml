@@ -1,6 +1,8 @@
 <resources>
     <!--todo 14 указываем где используется строка-->
     <string name="app_name">YES</string>
+
+    <!--vocabulary-->
     <string name="email">Email</string>
     <string name="password">Password</string>
     <string name="weight">Weight</string>
@@ -88,9 +90,6 @@
     <string name="i_m_looking_for">I\'m Looking For</string>
     <string name="when">When</string>
     <string name="change">Change</string>
-
-    <string name="demo_min_label"></string>
-    <string name="demo_max_label"></string>
     <string name="etc">Etc</string>
     <string name="invalid_email">Email is invalid!</string>
     <string name="empty_data">Empty data!</string>
@@ -130,6 +129,38 @@
     <string name="ask_del_photo">Do you want to delete photo?</string>
     <string name="no">No</string>
     <string name="yes">Yes</string>
+
+    <!--Bottom menu-->
+    <string name="bottom_menu_action_profile">@string/profile</string>
+    <string name="bottom_menu_action_dates">@string/dates</string>
+    <string name="bottom_menu_action_wallet">@string/wallet</string>
+    <string name="bottom_menu_action_settings">@string/settings</string>
+
+    <!--Profile-->
+    <string name="profile_title">@string/profile</string>
+    <string name="profile_main_btn_title_man">@string/add_date</string>
+    <string name="profile_main_btn_title_woman">@string/search</string>
+    <string name="profile_age">@string/age</string>
+    <string name="profile_height">@string/height</string>
+    <string name="profile_weight">@string/weight</string>
+
+    <!--Dates-->
+    <string name="dates_title">@string/dates</string>
+    <string name="dates_pending">@string/pending</string>
+    <string name="dates_scheduled">@string/scheduled</string>
+
+    <!--Settings-->
+    <string name="settings_push_up">@string/push_up</string>
+    <string name="settings_mail_notification">@string/mail_notification</string>
+    <string name="settings_mail">@string/mail</string>
+    <string name="settings_phone">@string/phone</string>
+    <string name="settings_change_password">@string/change_password</string>
+    <string name="settings_change_pin_code">@string/change_pin_code</string>
+    <string name="settings_tell_friends">@string/tell_friends</string>
+    <string name="settings_feedback">@string/feedback</string>
+    <string name="settings_about">@string/about</string>
+    <string name="settings_delete_profile">@string/delete_profile</string>
+    <string name="settings_sign_out">@string/sign_out</string>
 
     <string-array name="hair_colors">
         <item>Doesn\'t matter</item>

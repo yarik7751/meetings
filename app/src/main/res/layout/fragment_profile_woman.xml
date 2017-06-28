@@ -93,7 +93,7 @@
                     android:layout_height="wrap_content"
                     android:textSize="14sp"
                     android:textColor="@color/text_white_op"
-                    android:text="Age: "/>
+                    android:text="@string/profile_age"/>
 
                 <TextView
                     android:id="@+id/tv_age"
@@ -116,7 +116,7 @@
                     android:layout_height="wrap_content"
                     android:textSize="14sp"
                     android:textColor="@color/text_white_op"
-                    android:text="Height: "/>
+                    android:text="@string/profile_height"/>
 
                 <TextView
                     android:id="@+id/tv_height"
@@ -140,7 +140,7 @@
                     android:layout_height="wrap_content"
                     android:textSize="14sp"
                     android:textColor="@color/text_white_op"
-                    android:text="Weight: "/>
+                    android:text="@string/profile_weight"/>
 
                 <TextView
                     android:id="@+id/tv_weight"
@@ -200,7 +200,7 @@
             android:layout_centerVertical="true"
             android:textSize="16sp"
             android:textColor="@color/white"
-            android:text="@string/profile"
+            android:text="@string/profile_title"
             android:textStyle="bold"/>
 
         <RelativeLayout

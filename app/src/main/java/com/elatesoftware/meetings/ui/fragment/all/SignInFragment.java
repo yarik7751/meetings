@@ -1,4 +1,4 @@
-package com.elatesoftware.meetings.ui.fragment;
+package com.elatesoftware.meetings.ui.fragment.all;
 
 import android.content.Context;
 import android.content.Intent;

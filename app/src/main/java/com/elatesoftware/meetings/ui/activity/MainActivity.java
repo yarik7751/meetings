@@ -1,7 +1,6 @@
 package com.elatesoftware.meetings.ui.activity;
 
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.widget.LinearLayout;
@@ -11,12 +10,10 @@ import com.elatesoftware.meetings.api.Api;
 import com.elatesoftware.meetings.ui.activity.base.BaseActivity;
 import com.elatesoftware.meetings.ui.activity.man.WorkManActivity;
 import com.elatesoftware.meetings.ui.activity.woman.WorkWomanActivity;
-import com.elatesoftware.meetings.ui.fragment.GenderFragment;
-import com.elatesoftware.meetings.ui.fragment.SignInFragment;
-import com.elatesoftware.meetings.ui.fragment.SignUpFragment;
-import com.elatesoftware.meetings.util.Const;
+import com.elatesoftware.meetings.ui.fragment.all.GenderFragment;
+import com.elatesoftware.meetings.ui.fragment.all.SignInFragment;
+import com.elatesoftware.meetings.ui.fragment.all.SignUpFragment;
 import com.elatesoftware.meetings.util.CustomSharedPreference;
-import com.elatesoftware.meetings.util.Utils;
 
 import butterknife.BindView;
 

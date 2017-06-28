@@ -14,13 +14,12 @@ import android.view.MenuItem;
 import com.elatesoftware.meetings.R;
 import com.elatesoftware.meetings.service.LocationService;
 import com.elatesoftware.meetings.ui.activity.base.BaseActivity;
-import com.elatesoftware.meetings.ui.fragment.SettingsFragment;
+import com.elatesoftware.meetings.ui.fragment.all.SettingsFragment;
 import com.elatesoftware.meetings.ui.fragment.woman.DatesWomanFragment;
-import com.elatesoftware.meetings.ui.fragment.ProfileFragment;
+import com.elatesoftware.meetings.ui.fragment.all.ProfileFragment;
 import com.elatesoftware.meetings.ui.fragment.woman.WalletWomanFragment;
 import com.elatesoftware.meetings.util.AndroidUtils;
 import com.elatesoftware.meetings.util.Const;
-import com.elatesoftware.meetings.util.Utils;
 
 import butterknife.BindView;
 

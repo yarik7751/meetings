@@ -1,4 +1,4 @@
-package com.elatesoftware.meetings.ui.fragment;
+package com.elatesoftware.meetings.ui.fragment.all;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;

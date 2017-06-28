@@ -4,7 +4,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
-import com.elatesoftware.meetings.ui.fragment.PhotoFragment;
+import com.elatesoftware.meetings.ui.fragment.all.PhotoFragment;
 
 import java.util.ArrayList;
 import java.util.List;

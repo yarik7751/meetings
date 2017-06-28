@@ -65,4 +65,15 @@ public class MessageAnswer implements Parcelable {
         this.message = in.readString();
     }
 
+    public static final Parcelable.Creator<MessageAnswer> CREATOR = new Parcelable.Creator<MessageAnswer>() {
+        @Override
+        public MessageAnswer createFromParcel(Parcel source) {
+            return new MessageAnswer(source);
+        }
+
+        @Override
+        public MessageAnswer[] newArray(int size) {
+            return new MessageAnswer[size];
+        }
+    };
 }

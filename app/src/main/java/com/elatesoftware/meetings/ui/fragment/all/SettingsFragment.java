@@ -1,4 +1,4 @@
-package com.elatesoftware.meetings.ui.fragment;
+package com.elatesoftware.meetings.ui.fragment.all;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -23,7 +23,6 @@ import com.elatesoftware.meetings.ui.activity.MainActivity;
 import com.elatesoftware.meetings.ui.fragment.base.BaseFragment;
 import com.elatesoftware.meetings.service.ExitService;
 import com.elatesoftware.meetings.util.AndroidUtils;
-import com.elatesoftware.meetings.util.Const;
 import com.elatesoftware.meetings.util.CustomSharedPreference;
 import com.elatesoftware.meetings.util.DialogUtils;
 import com.elatesoftware.meetings.util.Utils;

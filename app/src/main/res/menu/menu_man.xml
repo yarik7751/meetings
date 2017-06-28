@@ -4,20 +4,20 @@
     <item
         android:id="@+id/action_profile"
         android:icon="@drawable/ic_profileactive"
-        android:title="@string/profile"/>
+        android:title="@string/bottom_menu_action_profile"/>
 
     <item
         android:id="@+id/action_dales"
         android:icon="@drawable/ic_date"
-        android:title="@string/dates" />
+        android:title="@string/bottom_menu_action_dates" />
 
     <item
         android:id="@+id/action_wallet"
         android:icon="@drawable/ic_wallet"
-        android:title="@string/wallet" />
+        android:title="@string/bottom_menu_action_wallet" />
 
     <item
         android:id="@+id/action_settings"
         android:icon="@drawable/settings"
-        android:title="@string/settings" />
+        android:title="@string/bottom_menu_action_settings" />
 </menu>
