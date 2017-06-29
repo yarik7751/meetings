@@ -56,6 +56,12 @@ public class DatesManFragment extends BaseFragment {
         getActivity().registerReceiver(getDatesListReceiver, Utils.getIntentFilter(GetDatesListService.ACTION));
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        requestGetDatesList();
+    }
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {

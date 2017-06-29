@@ -48,6 +48,7 @@ public class BaseDatesRecyclerViewAdapter extends RecyclerView.Adapter<BaseDates
     @Override
     public void onBindViewHolder(DalesViewHolder holder, final int position) {
         holder.tvAmount.setText("$" + dates.get(position).getDate().getAmount().intValue());
+        holder.tvNumWomen.setVisibility(View.GONE);
         Long startTime = dates.get(position).getDate().getStartTime();
         Long endTime = dates.get(position).getDate().getEndTime();
         holder.tvTime.setText(
@@ -105,6 +106,7 @@ public class BaseDatesRecyclerViewAdapter extends RecyclerView.Adapter<BaseDates
 
         public View itemView;
         public TextView tvPlace, tvTime, tvAmount, tvName;
+        public TextView tvNumWomen;
         public CircleImageView imgPhoto;
         public AVLoadingIndicatorView pbProgress;
         public RelativeLayout rlDate;
@@ -120,6 +122,7 @@ public class BaseDatesRecyclerViewAdapter extends RecyclerView.Adapter<BaseDates
             imgPhoto = (CircleImageView) itemView.findViewById(R.id.img_photo);
             pbProgress = (AVLoadingIndicatorView) itemView.findViewById(R.id.pb_progress);
             rlDate = (RelativeLayout) itemView.findViewById(R.id.rl_date);
+            tvNumWomen = (TextView) itemView.findViewById(R.id.tv_num_women);
         }
     }
 }

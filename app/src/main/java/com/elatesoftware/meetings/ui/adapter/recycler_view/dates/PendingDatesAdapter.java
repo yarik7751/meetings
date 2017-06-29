@@ -19,11 +19,17 @@ public class PendingDatesAdapter extends BaseDatesRecyclerViewAdapter {
     public void onBindViewHolder(DalesViewHolder holder, final int position) {
         super.onBindViewHolder(holder, position);
 
-        holder.rlDate.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                context.startActivity(ShowPendingWomenActivity.getIntent(context, dates.get(position).getDate().getId()));
-            }
-        });
+        Integer partnerCount = dates.get(position).getPartnerCount();
+        if(partnerCount != null && partnerCount.intValue() > 0) {
+            holder.tvNumWomen.setVisibility(View.VISIBLE);
+            holder.tvNumWomen.setText(partnerCount.toString());
+
+            holder.rlDate.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    context.startActivity(ShowPendingWomenActivity.getIntent(context, dates.get(position).getDate().getId()));
+                }
+            });
+        }
     }
 }

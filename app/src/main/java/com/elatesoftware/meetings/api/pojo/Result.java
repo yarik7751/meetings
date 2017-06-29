@@ -40,6 +40,10 @@ public class Result implements Parcelable {
     @Expose
     private Long partnerPhotoId;
 
+    @SerializedName("PartnerCount")
+    @Expose
+    private Integer partnerCount;
+
     @SerializedName("Id")
     @Expose
     private Integer id;
@@ -109,6 +113,14 @@ public class Result implements Parcelable {
         this.partnerPhotoId = partnerPhotoId;
     }
 
+    public Integer getPartnerCount() {
+        return partnerCount;
+    }
+
+    public void setPartnerCount(Integer partnerCount) {
+        this.partnerCount = partnerCount;
+    }
+
 
     @Override
     public int describeContents() {
@@ -124,6 +136,7 @@ public class Result implements Parcelable {
         dest.writeString(this.partnerName);
         dest.writeValue(this.partnerId);
         dest.writeValue(this.partnerPhotoId);
+        dest.writeValue(this.partnerCount);
         dest.writeValue(this.id);
     }
 
@@ -138,10 +151,11 @@ public class Result implements Parcelable {
         this.partnerName = in.readString();
         this.partnerId = (Long) in.readValue(Long.class.getClassLoader());
         this.partnerPhotoId = (Long) in.readValue(Long.class.getClassLoader());
+        this.partnerCount = (Integer) in.readValue(Integer.class.getClassLoader());
         this.id = (Integer) in.readValue(Integer.class.getClassLoader());
     }
 
-    public static final Parcelable.Creator<Result> CREATOR = new Parcelable.Creator<Result>() {
+    public static final Creator<Result> CREATOR = new Creator<Result>() {
         @Override
         public Result createFromParcel(Parcel source) {
             return new Result(source);

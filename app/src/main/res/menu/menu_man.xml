@@ -1,23 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
+<menu
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res/android">
 
     <item
         android:id="@+id/action_profile"
         android:icon="@drawable/ic_profileactive"
-        android:title="@string/bottom_menu_action_profile"/>
+        android:title="@string/bottom_menu_action_profile"
+        app:showAsAction="ifRoom"/>
 
     <item
         android:id="@+id/action_dales"
         android:icon="@drawable/ic_date"
-        android:title="@string/bottom_menu_action_dates" />
+        android:title="@string/bottom_menu_action_dates"
+        app:showAsAction="ifRoom"/>
 
     <item
         android:id="@+id/action_wallet"
         android:icon="@drawable/ic_wallet"
-        android:title="@string/bottom_menu_action_wallet" />
+        android:title="@string/bottom_menu_action_wallet"
+        app:showAsAction="ifRoom"/>
 
     <item
         android:id="@+id/action_settings"
         android:icon="@drawable/settings"
-        android:title="@string/bottom_menu_action_settings" />
+        android:title="@string/bottom_menu_action_settings"
+        app:showAsAction="ifRoom"/>
 </menu>
