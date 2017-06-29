@@ -81,9 +81,11 @@ public class SearchManActivity extends BaseActivity implements OnMapReadyCallbac
     @BindView(R.id.tv_start_time) TextView tvStartTime;
     @BindView(R.id.ll_filters) LinearLayout llFilters;
     @BindView(R.id.rl_main) CoordinatorLayout rlMain;
-    @BindView(R.id.img_back) ImageView imgBack;private RecyclerView rvDales;
+    @BindView(R.id.img_back) ImageView imgBack;
+    @BindView(R.id.rl_back) RelativeLayout rlBack;
     private BottomSheetBehavior mBottomSheetBehavior;
 
+    private RecyclerView rvDales;
     private SearchDateReceiver searchDateReceiver;
     private SearchDatesAnswer searchDatesAnswer;
 
@@ -174,6 +176,7 @@ public class SearchManActivity extends BaseActivity implements OnMapReadyCallbac
 
     private void loadMap() {
         imgBack.setVisibility(View.GONE);
+        rlBack.setOnClickListener(null);
         flContent.setVisibility(View.VISIBLE);
         flListContent.setVisibility(View.GONE);
         if(map == null) {
@@ -189,6 +192,12 @@ public class SearchManActivity extends BaseActivity implements OnMapReadyCallbac
 
     private void loadList() {
         imgBack.setVisibility(View.VISIBLE);
+        rlBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
         flContent.setVisibility(View.GONE);
         flListContent.setVisibility(View.VISIBLE);
         if(searchDatesAnswer != null) {
@@ -204,10 +213,10 @@ public class SearchManActivity extends BaseActivity implements OnMapReadyCallbac
         }
     }
 
-    @OnClick(R.id.rl_back)
+    /*@OnClick(R.id.rl_back)
     public void clickImgBack() {
         onBackPressed();
-    }
+    }*/
 
     @OnClick(R.id.fab_filters)
     public void clickFabFilters() {
