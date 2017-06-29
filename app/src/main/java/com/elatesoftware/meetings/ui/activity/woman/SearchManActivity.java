@@ -191,7 +191,9 @@ public class SearchManActivity extends BaseActivity implements OnMapReadyCallbac
         imgBack.setVisibility(View.VISIBLE);
         flContent.setVisibility(View.GONE);
         flListContent.setVisibility(View.VISIBLE);
-        setDatesInList();
+        if(searchDatesAnswer != null) {
+            setDatesInList();
+        }
     }
 
     @Override

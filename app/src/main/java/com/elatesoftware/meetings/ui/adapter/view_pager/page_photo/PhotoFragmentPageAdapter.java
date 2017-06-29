@@ -3,13 +3,14 @@ package com.elatesoftware.meetings.ui.adapter.view_pager.page_photo;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.app.FragmentStatePagerAdapter;
 
 import com.elatesoftware.meetings.ui.fragment.all.PhotoFragment;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class PhotoFragmentPageAdapter extends FragmentPagerAdapter {
+public class PhotoFragmentPageAdapter extends FragmentStatePagerAdapter {
 
     List<Integer> photosInteger;
     List<PhotoFragment> fragments;

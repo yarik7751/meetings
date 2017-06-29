@@ -97,20 +97,9 @@ public class ShowSearchDateActivity extends BaseShowDateActivity {
                 .position(latLng));
     }
 
-    private void setUI() {
-        int visibility = View.GONE;
-        int textColor = R.color.button_red_dark;
-        int gradient = R.drawable.button_red;
-        cvAgeWoman.setVisibility(visibility);
-        cvHeightWoman.setVisibility(visibility);
-        cvWeightWoman.setVisibility(visibility);
-        cvHairColor.setVisibility(visibility);
-        tvName.setTextColor(getResources().getColor(R.color.white));
-        tvAge.setTextColor(getResources().getColor(R.color.white));
-        tvStartTime.setTextColor(getResources().getColor(textColor));
-        tvEndTime.setTextColor(getResources().getColor(textColor));
-        tvPresent.setTextColor(getResources().getColor(textColor));
-        rlPhotos.setBackgroundResource(gradient);
+    @Override
+    protected void setUI() {
+        super.setUI();
     }
 
     private void registerBroadcast() {

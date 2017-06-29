@@ -38,11 +38,13 @@ import com.elatesoftware.meetings.util.AndroidUtils;
 import com.elatesoftware.meetings.util.Const;
 import com.elatesoftware.meetings.util.CustomSharedPreference;
 import com.elatesoftware.meetings.util.DateUtils;
+import com.elatesoftware.meetings.util.DialogUtils;
 import com.elatesoftware.meetings.util.Utils;
 import com.elatesoftware.meetings.api.pojo.GetPhotosAnswer;
 import com.elatesoftware.meetings.api.pojo.HumanAnswer;
 import com.elatesoftware.meetings.api.pojo.MessageAnswer;
 import com.elatesoftware.meetings.api.pojo.Photo;
+import com.squareup.picasso.Picasso;
 import com.wang.avi.AVLoadingIndicatorView;
 
 import java.util.ArrayList;
@@ -72,7 +74,6 @@ public class ProfileEditActivity extends BaseActivity {
 
     private Calendar birthDate;
     private HumanAnswer profileMan;
-    private boolean isPermissionsAddPhoto = false;
 
     private UpdateAccountInfoBroadcastReceiver updateAccountInfoBroadcastReceiver;
     private AddPhotoBroadcastReceiver addPhotoBroadcastReceiver;
@@ -85,11 +86,6 @@ public class ProfileEditActivity extends BaseActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            requestPermissions(new String[]{ Manifest.permission.READ_EXTERNAL_STORAGE}, Const.REQUEST_PERMISSIONS);
-        } else {
-            isPermissionsAddPhoto = true;
-        }
 
         registerBroadcast();
         setContentView(R.layout.activity_profile_edit_woman);
@@ -132,8 +128,16 @@ public class ProfileEditActivity extends BaseActivity {
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         if(requestCode == Const.REQUEST_PERMISSIONS && isPermissionsGranted(grantResults)) {
-            isPermissionsAddPhoto = true;
+            openGallery();
+        } else {
+            DialogUtils.showErrorDialog(this, getString(R.string.permission_not_found));
         }
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        updateLocalInfo();
     }
 
     @Override
@@ -143,17 +147,21 @@ public class ProfileEditActivity extends BaseActivity {
 
     @OnClick(R.id.rl_add)
     public void clickAddPhoto() {
-        if(isPermissionsAddPhoto) {
-            Intent galleryIntent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-            startActivityForResult(galleryIntent, RESULT_LOAD_IMG);
-        } else {
-            showMessage(R.string.permission_not_found);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            requestPermissions(new String[]{ Manifest.permission.READ_EXTERNAL_STORAGE}, Const.REQUEST_PERMISSIONS);
         }
+    }
+
+    private void openGallery() {
+        Intent galleryIntent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+        startActivityForResult(galleryIntent, RESULT_LOAD_IMG);
     }
 
     @OnClick(R.id.rl_delete)
     public void clickDeletePhoto() {
-        requestDeletePhoto();
+        if(currPhotoId > 0) {
+            requestDeletePhoto();
+        }
     }
 
     @OnClick(R.id.rl_back)
@@ -237,6 +245,8 @@ public class ProfileEditActivity extends BaseActivity {
 
     private void requestUpdateInfo() {
         updateLocalInfo();
+        setProgressDialogMessage(getString(R.string.update_info) + " ...");
+        showProgressDialog();
         startService(UpdateAccountService.getIntent(this, profileMan));
     }
 
@@ -302,22 +312,23 @@ public class ProfileEditActivity extends BaseActivity {
     }
 
     private void loadInfo() {
-        HumanAnswer profileWoman = CustomSharedPreference.getProfileInformation(this);
-        if(profileWoman != null) {
-            if(profileWoman.getDateOfBirthByCalendar() != null) {
-                birthDate = profileWoman.getDateOfBirthByCalendar();
+        HumanAnswer profileInfo = CustomSharedPreference.getProfileInformation(this);
+        if(profileMan != null) {
+            profileInfo = profileMan;
+        }
+        if(profileInfo != null) {
+            if(profileInfo.getDateOfBirthByCalendar() != null) {
+                birthDate = profileInfo.getDateOfBirthByCalendar();
             }
-            cetName.getEditText().setText(profileWoman.getFirstName());
-            cetAbout.getEditText().setText(profileWoman.getAboutMe());
-            Double height = profileWoman.getHeight();
+            cetName.getEditText().setText(profileInfo.getFirstName());
+            cetAbout.getEditText().setText(profileInfo.getAboutMe());
+            Double height = profileInfo.getHeight();
             cetHeight.getEditText().setText(height == null ? "" : String.valueOf(height.intValue()));
-            Double weight = profileWoman.getWeight();
+            Double weight = profileInfo.getWeight();
             cetWeight.getEditText().setText(weight == null ? "" : String.valueOf(weight.intValue()));
-            if(profileWoman.getDateOfBirthByCalendar() != null) {
-                cetBirthDay.getEditText().setText(DateUtils.getDateToString(ProfileEditActivity.this, profileWoman.getDateOfBirthByCalendar()));
+            if(profileInfo.getDateOfBirthByCalendar() != null) {
+                cetBirthDay.getEditText().setText(DateUtils.getDateToString(ProfileEditActivity.this, profileInfo.getDateOfBirthByCalendar()));
             }
-        } else {
-
         }
     }
 
@@ -326,6 +337,7 @@ public class ProfileEditActivity extends BaseActivity {
         for(Photo photo : photos) {
             photoInteger.add(photo.getId());
         }
+        Log.d(TAG, "photoInteger: " + photoInteger.toString());
         adapter = new PhotoFragmentPageAdapter(getSupportFragmentManager(), photoInteger, CustomSharedPreference.getProfileInformation(this).getId());
         vpPhotos.setAdapter(adapter);
         inkIndicator.setViewPager(vpPhotos);
@@ -358,6 +370,7 @@ public class ProfileEditActivity extends BaseActivity {
 
         @Override
         public void onReceive(Context context, Intent intent) {
+            hideProgressDialog();
             MessageAnswer response = intent.getParcelableExtra(Api.RESPONSE);
             if(response != null) {
                 Log.d(TAG, "UpdateAccount 200");

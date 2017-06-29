@@ -24,7 +24,7 @@ public class ShowScheduledDateActivity extends ShowDateActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        vFabChat.setOnClickListener(new View.OnClickListener() {
+        fabChat.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
@@ -37,27 +37,5 @@ public class ShowScheduledDateActivity extends ShowDateActivity {
 
             }
         });
-    }
-
-    @Override
-    protected void setUI() {
-        if(CustomSharedPreference.getIsMan(this) == Api.WOMAN_VALUE) {
-            super.setUI();
-        } else {
-            int textColor = R.color.seek_bar;
-            int gradient = R.drawable.button_blue;
-            tvName.setTextColor(getResources().getColor(textColor));
-            tvAge.setTextColor(getResources().getColor(textColor));
-            tvStartTime.setTextColor(getResources().getColor(textColor));
-            tvEndTime.setTextColor(getResources().getColor(textColor));
-            tvPresent.setTextColor(getResources().getColor(textColor));
-            rlPhotos.setBackgroundResource(gradient);
-            int visibility = View.GONE;
-            cvAgeWoman.setVisibility(visibility);
-            cvHeightWoman.setVisibility(visibility);
-            cvWeightWoman.setVisibility(visibility);
-            cvHairColor.setVisibility(visibility);
-            //((FloatingActionButton) vFabChat).setColorFilter(getResources().getColor(textColor));
-        }
     }
 }

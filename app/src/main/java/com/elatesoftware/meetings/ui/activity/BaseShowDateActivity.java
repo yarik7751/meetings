@@ -7,15 +7,18 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.widget.CardView;
 import android.view.View;
 import android.widget.FrameLayout;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.elatesoftware.meetings.R;
+import com.elatesoftware.meetings.api.Api;
 import com.elatesoftware.meetings.ui.activity.base.BaseActivity;
 import com.elatesoftware.meetings.util.AndroidUtils;
 import com.elatesoftware.meetings.util.Const;
 import com.elatesoftware.meetings.api.pojo.Meeting;
+import com.elatesoftware.meetings.util.CustomSharedPreference;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
@@ -36,6 +39,12 @@ public class BaseShowDateActivity extends BaseActivity implements OnMapReadyCall
     @BindView(R.id.tv_name) protected TextView tvName;
     @BindView(R.id.tv_age_title) protected TextView tvAgeTitle;
     @BindView(R.id.tv_age) protected TextView tvAge;
+    @BindView(R.id.tv_height) protected TextView tvHeight;
+    @BindView(R.id.tv_height_title) protected TextView tvHeightTitle;
+    @BindView(R.id.tv_weight) protected TextView tvWeight;
+    @BindView(R.id.tv_weight_title) protected TextView tvWeightTitle;
+    @BindView(R.id.img_point1) protected ImageView imgPoint1;
+    @BindView(R.id.img_point2) protected ImageView imgPoint2;
     @BindView(R.id.tv_height_woman) protected TextView tvHeightWoman;
     @BindView(R.id.tv_weight_woman) protected TextView tvWeightWoman;
     @BindView(R.id.tv_hair_color) protected TextView tvHairColor;
@@ -58,14 +67,26 @@ public class BaseShowDateActivity extends BaseActivity implements OnMapReadyCall
 
     protected Meeting meeting;
 
+    protected int visibility;
+    protected int visibilityPersonInfo;
+    protected int textColor;
+    protected int textColorPersonInfo;
+    protected int gradient;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_show_date);
         meeting = Meeting.getInstance();
+        visibility = View.GONE;
+        visibilityPersonInfo = View.GONE;
+        textColor = R.color.button_red_dark;
+        textColorPersonInfo = R.color.white;
+        gradient = R.drawable.button_red;
 
         initMap();
         setSize();
+        setUI();
 
         llPlace.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -95,5 +116,41 @@ public class BaseShowDateActivity extends BaseActivity implements OnMapReadyCall
 
     protected void setSize() {
         rlPhotos.getLayoutParams().height = (int) (AndroidUtils.getWindowsSizeParams(this)[1] * Const.PHOTOS_HEIGHT_PERCENT);
+    }
+
+    protected void setUI() {
+        tvAgeTitle.setText(tvAgeTitle.getText().toString() + ": ");
+        tvHeightTitle.setText(tvHeightTitle.getText().toString() + ": ");
+        tvWeightTitle.setText(tvWeightTitle.getText().toString() + ": ");
+
+        if(CustomSharedPreference.getIsMan(this) != Api.WOMAN_VALUE) {
+            visibilityPersonInfo = View.VISIBLE;
+            textColor = R.color.seek_bar;
+            gradient = R.drawable.button_blue;
+            textColorPersonInfo = R.color.button_blue_light;
+        }
+
+        cvAgeWoman.setVisibility(visibility);
+        cvHeightWoman.setVisibility(visibility);
+        cvWeightWoman.setVisibility(visibility);
+        cvHairColor.setVisibility(visibility);
+
+        tvName.setTextColor(getResources().getColor(textColorPersonInfo));
+        tvAge.setTextColor(getResources().getColor(textColorPersonInfo));
+        tvHeight.setTextColor(getResources().getColor(textColorPersonInfo));
+        tvWeight.setTextColor(getResources().getColor(textColorPersonInfo));
+
+        tvStartTime.setTextColor(getResources().getColor(textColor));
+        tvEndTime.setTextColor(getResources().getColor(textColor));
+        tvPresent.setTextColor(getResources().getColor(textColor));
+        rlPhotos.setBackgroundResource(gradient);
+
+        tvHeightTitle.setVisibility(visibilityPersonInfo);
+        tvHeight.setVisibility(visibilityPersonInfo);
+        imgPoint1.setVisibility(visibilityPersonInfo);
+
+        tvWeightTitle.setVisibility(visibilityPersonInfo);
+        tvWeight.setVisibility(visibilityPersonInfo);
+        imgPoint2.setVisibility(visibilityPersonInfo);
     }
 }

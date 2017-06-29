@@ -81,7 +81,7 @@
     <string name="something_wrong">Something wrong</string>
     <string name="date_created_successfully">Date created successfully!</string>
     <string name="please_login">Please Login</string>
-    <string name="permission_not_found">Resolution not found</string>
+    <string name="permission_not_found">Permission not found</string>
     <string name="loading_photo">Loading photo</string>
     <string name="forgot_pincode">Forgot pincode</string>
     <string name="enter_pin">Enter PIN</string>
@@ -161,6 +161,7 @@
     <string name="settings_about">@string/about</string>
     <string name="settings_delete_profile">@string/delete_profile</string>
     <string name="settings_sign_out">@string/sign_out</string>
+    <string name="update_info">Update info</string>
 
     <string-array name="hair_colors">
         <item>Doesn\'t matter</item>

@@ -1,10 +1,15 @@
 package com.elatesoftware.meetings.ui.fragment.all;
 
+import android.Manifest;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.view.ViewPager;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
@@ -17,6 +22,8 @@ import android.widget.TextView;
 
 import com.elatesoftware.meetings.R;
 import com.elatesoftware.meetings.api.Api;
+import com.elatesoftware.meetings.service.LocationService;
+import com.elatesoftware.meetings.ui.activity.base.BaseActivity;
 import com.elatesoftware.meetings.ui.activity.man.AddDateActivity;
 import com.elatesoftware.meetings.ui.activity.ProfileEditActivity;
 import com.elatesoftware.meetings.ui.activity.woman.SearchManActivity;
@@ -28,6 +35,7 @@ import com.elatesoftware.meetings.util.AndroidUtils;
 import com.elatesoftware.meetings.util.Const;
 import com.elatesoftware.meetings.util.CustomSharedPreference;
 import com.elatesoftware.meetings.util.DateUtils;
+import com.elatesoftware.meetings.util.DialogUtils;
 import com.elatesoftware.meetings.util.Utils;
 import com.elatesoftware.meetings.api.pojo.GetInfoAccAnswer;
 import com.elatesoftware.meetings.api.pojo.GetPhotosAnswer;
@@ -44,6 +52,9 @@ import me.relex.circleindicator.CircleIndicator;
 
 public class ProfileFragment extends BaseFragment {
 
+    public static final int PERMISSION_EDIT_PROFILE = 100;
+    public static final int PERMISSION_DATES = 101;
+
     @BindView(R.id.vp_photos) ViewPager vpPhotos;
     @BindView(R.id.rl_photos) RelativeLayout rlPhotos;
     @BindView(R.id.ink_indicator) CircleIndicator inkIndicator;
@@ -51,7 +62,7 @@ public class ProfileFragment extends BaseFragment {
     @BindView(R.id.tv_height) TextView tvHeight;
     @BindView(R.id.tv_height_title) TextView tvHeightTitle;
     @BindView(R.id.tv_weight) TextView tvWeight;
-    @BindView(R.id.tv_weight_title) TextView tvWeightTile;
+    @BindView(R.id.tv_weight_title) TextView tvWeightTitle;
     @BindView(R.id.tv_about) TextView tvAbout;
     @BindView(R.id.tv_age_title) TextView tvAgeTitle;
     @BindView(R.id.tv_age) TextView tvAge;
@@ -87,7 +98,7 @@ public class ProfileFragment extends BaseFragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View v = inflater.inflate(R.layout.fragment_profile_woman, null);
+        View v = inflater.inflate(R.layout.fragment_profile, null);
         return v;
     }
 
@@ -112,25 +123,43 @@ public class ProfileFragment extends BaseFragment {
         unregisterReceivers();
     }
 
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if(((BaseActivity) getActivity()).isPermissionsGranted(grantResults)) {
+            switch (requestCode) {
+                case PERMISSION_EDIT_PROFILE:
+                    startActivity(new Intent(getContext(), ProfileEditActivity.class));
+                    break;
+
+                case PERMISSION_DATES:
+                    if(CustomSharedPreference.getIsMan(getContext()) == Api.WOMAN_VALUE) {
+                        startActivity(new Intent(getContext(), SearchManActivity.class));
+                    } else {
+                        startActivity(new Intent(getContext(), AddDateActivity.class));
+                    }
+                    break;
+            }
+        } else {
+            DialogUtils.showErrorDialog(getContext(), getString(R.string.permission_not_found));
+        }
+    }
+
     @OnClick(R.id.rl_edit)
     public void clickImgEdit() {
-        startActivity(new Intent(getContext(), ProfileEditActivity.class));
+        requestPermissions(new String[]{Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION}, PERMISSION_EDIT_PROFILE);
     }
 
     @OnClick(R.id.ll_search)
     public void clickLlAddDate() {
-        if(CustomSharedPreference.getIsMan(getContext()) == Api.WOMAN_VALUE) {
-            startActivity(new Intent(getContext(), SearchManActivity.class));
-        } else {
-            startActivity(new Intent(getContext(), AddDateActivity.class));
-        }
+        requestPermissions(new String[]{Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION}, PERMISSION_DATES);
     }
 
     private void setUI() {
         rlBack.setVisibility(View.GONE);
-        tvAge.setText(tvAge.getText().toString() + ": ");
-        tvHeight.setText(tvHeight.getText().toString() + ": ");
-        tvWeight.setText(tvWeight.getText().toString() + ": ");
+        tvAgeTitle.setText(tvAgeTitle.getText().toString() + ": ");
+        tvHeightTitle.setText(tvHeightTitle.getText().toString() + ": ");
+        tvWeightTitle.setText(tvWeightTitle.getText().toString() + ": ");
         if(CustomSharedPreference.getIsMan(getContext()) == Api.WOMAN_VALUE) {
             rlPhotos.setBackgroundResource(R.drawable.button_red);
             llInfo.setBackgroundResource(R.drawable.button_red);
@@ -151,7 +180,7 @@ public class ProfileFragment extends BaseFragment {
             tvHeightTitle.setVisibility(View.GONE);
             tvHeight.setVisibility(View.GONE);
             imgPoint1.setVisibility(View.GONE);
-            tvWeightTile.setVisibility(View.GONE);
+            tvWeightTitle.setVisibility(View.GONE);
             tvWeight.setVisibility(View.GONE);
             imgPoint2.setVisibility(View.GONE);
         }
@@ -224,7 +253,7 @@ public class ProfileFragment extends BaseFragment {
 
             Double weight = profileWoman.getWeight();
             if(weight == null || weight.intValue() <= 0) {
-                tvWeightTile.setVisibility(View.GONE);
+                tvWeightTitle.setVisibility(View.GONE);
                 tvWeight.setVisibility(View.GONE);
                 imgPoint2.setVisibility(View.GONE);
             } else {

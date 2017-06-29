@@ -100,6 +100,8 @@ public class DatesWomanFragment extends BaseFragment {
     }
 
     private void requestGetDatesList() {
+        setProgressDialogMessage(getString(R.string.dates_loading) + " ...");
+        showProgressDialog();
         getActivity().startService(GetDatesListService.getIntent(getContext()));
     }
 
@@ -128,6 +130,7 @@ public class DatesWomanFragment extends BaseFragment {
         @Override
         public void onReceive(Context context, Intent intent) {
             GetDatesManAnswer response = intent.getParcelableExtra(Api.RESPONSE);
+            hideProgressDialog();
             if(response != null) {
                 if(response.getSuccess()) {
                     rvScheduledDales.setAdapter(new WomanScheduledDatesAdapter(getContext(), getScheduledDates(response.getResult())));

@@ -156,15 +156,18 @@ public class PreviewActivity extends BaseShowDateActivity {
         unregisterReceiver(createDateBroadcastReceiver);
     }
 
-    private void setUI() {
-        int textColor = R.color.seek_bar;
-        int gradient = R.drawable.button_blue;
-        tvName.setTextColor(getResources().getColor(textColor));
-        tvAge.setTextColor(getResources().getColor(textColor));
-        tvStartTime.setTextColor(getResources().getColor(textColor));
-        tvEndTime.setTextColor(getResources().getColor(textColor));
-        tvPresent.setTextColor(getResources().getColor(textColor));
-        rlPhotos.setBackgroundResource(gradient);
+    @Override
+    protected void setUI() {
+        visibility = View.VISIBLE;
+        super.setUI();
+        visibilityPersonInfo = View.GONE;
+        tvHeightTitle.setVisibility(visibilityPersonInfo);
+        tvHeight.setVisibility(visibilityPersonInfo);
+        imgPoint1.setVisibility(visibilityPersonInfo);
+
+        tvWeightTitle.setVisibility(visibilityPersonInfo);
+        tvWeight.setVisibility(visibilityPersonInfo);
+        imgPoint2.setVisibility(visibilityPersonInfo);
     }
 
     private void loadPhoto(List<Photo> photos) {

@@ -8,6 +8,23 @@
     android:layout_height="match_parent"
     tools:background="@drawable/bg">
 
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="36dp"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:textSize="16sp"
+            android:textColor="@color/white"
+            android:text="@string/settings"
+            android:textStyle="bold"/>
+    </RelativeLayout>
+
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -359,22 +376,4 @@
                 app:cpb_cornerRadius="5dp"/>
         </LinearLayout>
     </ScrollView>
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="36dp"
-            android:layout_centerHorizontal="true"
-            android:layout_centerVertical="true"
-            android:textSize="16sp"
-            android:textColor="@color/white"
-            android:text="@string/settings"
-            android:textStyle="bold"/>
-    </RelativeLayout>
-
 </LinearLayout>

@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.FloatingActionButton;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -18,6 +19,7 @@ import com.elatesoftware.meetings.service.GetProfileInfoService;
 import com.elatesoftware.meetings.ui.adapter.view_pager.page_photo.PhotoFragmentPageAdapter;
 import com.elatesoftware.meetings.ui.view.animation.ButtonAnimation;
 import com.elatesoftware.meetings.util.Const;
+import com.elatesoftware.meetings.util.CustomSharedPreference;
 import com.elatesoftware.meetings.util.DateUtils;
 import com.elatesoftware.meetings.util.Utils;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -36,6 +38,7 @@ public class ShowDateActivity extends BaseShowDateActivity {
 
     protected View vCancel;
     protected View vFabChat;
+    protected FloatingActionButton fabChat;
     protected ButtonAnimation buttonAnimation;
 
     protected GetProfileInfoReceiver getProfileInfoReceiver;
@@ -53,15 +56,16 @@ public class ShowDateActivity extends BaseShowDateActivity {
         super.onCreate(savedInstanceState);
         creatorId = getIntent().getLongExtra(CREATOR_ID, -1);
 
-        setUI();
-        loadInfo();
-
         vCancel = LayoutInflater.from(this).inflate(R.layout.incl_btn_cancel, rlBottom, false);
         rlBottom.addView(vCancel);
         buttonAnimation = new ButtonAnimation(this, (CircularProgressButton) vCancel);
 
         vFabChat = LayoutInflater.from(this).inflate(R.layout.incl_fab_chat, rlMain, false);
+        fabChat = (FloatingActionButton) vFabChat.findViewById(R.id.fab_chat);
+        fabChat.setColorFilter(getResources().getColor(textColor));
         rlMain.addView(vFabChat);
+
+        loadInfo();
     }
 
     @Override
@@ -87,22 +91,6 @@ public class ShowDateActivity extends BaseShowDateActivity {
         map.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
         map.addMarker(new MarkerOptions()
                 .position(latLng));
-    }
-
-    protected void setUI() {
-        int visibility = View.GONE;
-        int textColor = R.color.button_red_dark;
-        int gradient = R.drawable.button_red;
-        cvAgeWoman.setVisibility(visibility);
-        cvHeightWoman.setVisibility(visibility);
-        cvWeightWoman.setVisibility(visibility);
-        cvHairColor.setVisibility(visibility);
-        tvName.setTextColor(getResources().getColor(R.color.white));
-        tvAge.setTextColor(getResources().getColor(R.color.white));
-        tvStartTime.setTextColor(getResources().getColor(textColor));
-        tvEndTime.setTextColor(getResources().getColor(textColor));
-        tvPresent.setTextColor(getResources().getColor(textColor));
-        rlPhotos.setBackgroundResource(gradient);
     }
 
     protected void registerBroadcast() {
@@ -158,6 +146,24 @@ public class ShowDateActivity extends BaseShowDateActivity {
                     } else {
                         tvAgeTitle.setVisibility(View.VISIBLE);
                         tvAge.setVisibility(View.VISIBLE);
+                    }
+
+                    Double height = response.getResult().getHeight();
+                    if(height == null || height.intValue() <= 0) {
+                        tvHeightTitle.setVisibility(View.GONE);
+                        tvHeight.setVisibility(View.GONE);
+                        imgPoint1.setVisibility(View.GONE);
+                    } else {
+                        tvHeight.setText(String.valueOf(height.intValue()));
+                    }
+
+                    Double weight = response.getResult().getWeight();
+                    if(weight == null || weight.intValue() <= 0) {
+                        tvWeightTitle.setVisibility(View.GONE);
+                        tvWeight.setVisibility(View.GONE);
+                        imgPoint2.setVisibility(View.GONE);
+                    } else {
+                        tvWeight.setText(String.valueOf(weight.intValue()));
                     }
                 } else {
                     showMessage(R.string.something_wrong);

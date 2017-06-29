@@ -29,7 +29,7 @@ public class DialogUtils {
         input.setHint(title);
         input.setInputType(inputType);
         input.setSelection(input.getText().length());
-        input.setTextColor(context.getResources().getColor(R.color.seek_bar));
+        input.setTextColor(context.getResources().getColor(R.color.colorPrimary));
         builder.setView(input);
         input.addTextChangedListener(new TextWatcher() {
             @Override

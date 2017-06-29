@@ -10,7 +10,7 @@
         android:layout_height="match_parent"
         android:paddingBottom="66dp">
 
-        <include layout="@layout/fragment_profile_woman" />
+        <include layout="@layout/fragment_profile" />
     </FrameLayout>
 
     <com.dd.CircularProgressButton

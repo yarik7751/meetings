@@ -25,4 +25,5 @@
     <color name="fab_delete">#d65448</color>
     <color name="bg_woman">#a27874</color>
     <color name="edit_text_unselect">#66ffffff</color>
+    <color name="cancel_bg">#a9b0b8</color>
 </resources>

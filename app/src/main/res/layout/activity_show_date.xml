@@ -59,16 +59,63 @@
                             android:layout_height="wrap_content"
                             android:textSize="14sp"
                             android:textColor="@color/text_white_op"
-                            android:text="Age: "/>
+                            android:text="@string/profile_age"/>
 
                         <TextView
                             android:id="@+id/tv_age"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:textSize="14sp"
-                            android:textColor="@color/button_blue_light"
-                            android:textStyle="bold"
-                            android:text="32"/>
+                            android:textColor="@color/white"
+                            android:textStyle="bold"/>
+
+                        <ImageView
+                            android:id="@+id/img_point1"
+                            android:layout_width="4dp"
+                            android:layout_height="4dp"
+                            android:layout_margin="8dp"
+                            android:src="@drawable/indicator"/>
+
+                        <TextView
+                            android:id="@+id/tv_height_title"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textSize="14sp"
+                            android:textColor="@color/text_white_op"
+                            android:text="@string/profile_height"/>
+
+                        <TextView
+                            android:id="@+id/tv_height"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textSize="14sp"
+                            android:textColor="@color/white"
+                            android:text="185"
+                            android:textStyle="bold"/>
+
+                        <ImageView
+                            android:id="@+id/img_point2"
+                            android:layout_width="4dp"
+                            android:layout_height="4dp"
+                            android:layout_margin="8dp"
+                            android:src="@drawable/indicator"/>
+
+                        <TextView
+                            android:id="@+id/tv_weight_title"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textSize="14sp"
+                            android:textColor="@color/text_white_op"
+                            android:text="@string/profile_weight"/>
+
+                        <TextView
+                            android:id="@+id/tv_weight"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textSize="14sp"
+                            android:textColor="@color/white"
+                            android:text="000"
+                            android:textStyle="bold"/>
                     </LinearLayout>
                 </LinearLayout>
 

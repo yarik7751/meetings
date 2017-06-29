@@ -103,6 +103,8 @@ public class DatesManFragment extends BaseFragment {
     }
 
     private void requestGetDatesList() {
+        setProgressDialogMessage(getString(R.string.dates_loading) + " ...");
+        showProgressDialog();
         getActivity().startService(GetDatesListService.getIntent(getContext()));
     }
 
@@ -131,6 +133,7 @@ public class DatesManFragment extends BaseFragment {
         @Override
         public void onReceive(Context context, Intent intent) {
             GetDatesManAnswer response = intent.getParcelableExtra(Api.RESPONSE);
+            hideProgressDialog();
             if(response != null) {
                 if(response.getSuccess()) {
                     rvScheduledDales.setAdapter(new ScheduledDatesAdapter(getContext(), getScheduledDates(response.getResult())));

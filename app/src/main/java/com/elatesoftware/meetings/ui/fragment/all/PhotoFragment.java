@@ -14,6 +14,7 @@ import com.elatesoftware.meetings.util.AndroidUtils;
 import com.elatesoftware.meetings.util.Const;
 import com.elatesoftware.meetings.util.StringUtils;
 import com.squareup.picasso.Callback;
+import com.squareup.picasso.MemoryPolicy;
 import com.squareup.picasso.Picasso;
 import com.wang.avi.AVLoadingIndicatorView;
 
@@ -74,9 +75,14 @@ public class PhotoFragment extends BaseFragment {
     private void requestGetPhoto() {
         //long userId = CustomSharedPreference.getProfileInformation(getContext()).getId();
         String photoUrl = StringUtils.getPhotoUrl((int) userId, (int) photoId);
+        Log.d(TAG, "photoUrl: " + photoUrl);
         int photoWidth = AndroidUtils.getWindowsSizeParams(getContext())[0];
         int photoHeight = (int) (AndroidUtils.getWindowsSizeParams(getContext())[1] * Const.PHOTOS_HEIGHT_PERCENT);
-        Picasso.with(getContext()).load(photoUrl).resize(photoWidth, photoHeight).centerCrop().into(imgPhoto, new Callback() {
+        Picasso.with(getContext())
+                .load(photoUrl)
+                .resize(photoWidth, photoHeight)
+                .centerCrop()
+                .into(imgPhoto, new Callback() {
             @Override
             public void onSuccess() {
                 if(pbProgress != null) {
