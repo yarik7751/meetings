@@ -149,6 +149,8 @@ public class ProfileEditActivity extends BaseActivity {
     public void clickAddPhoto() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             requestPermissions(new String[]{ Manifest.permission.READ_EXTERNAL_STORAGE}, Const.REQUEST_PERMISSIONS);
+        } else {
+            openGallery();
         }
     }
 

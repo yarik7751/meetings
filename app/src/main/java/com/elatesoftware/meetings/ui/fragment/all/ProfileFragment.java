@@ -129,15 +129,11 @@ public class ProfileFragment extends BaseFragment {
         if(((BaseActivity) getActivity()).isPermissionsGranted(grantResults)) {
             switch (requestCode) {
                 case PERMISSION_EDIT_PROFILE:
-                    startActivity(new Intent(getContext(), ProfileEditActivity.class));
+                    openProfileEdit();
                     break;
 
                 case PERMISSION_DATES:
-                    if(CustomSharedPreference.getIsMan(getContext()) == Api.WOMAN_VALUE) {
-                        startActivity(new Intent(getContext(), SearchManActivity.class));
-                    } else {
-                        startActivity(new Intent(getContext(), AddDateActivity.class));
-                    }
+                    operationWithDates();
                     break;
             }
         } else {
@@ -147,12 +143,32 @@ public class ProfileFragment extends BaseFragment {
 
     @OnClick(R.id.rl_edit)
     public void clickImgEdit() {
-        requestPermissions(new String[]{Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION}, PERMISSION_EDIT_PROFILE);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            requestPermissions(new String[]{Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION}, PERMISSION_EDIT_PROFILE);
+        } else {
+            openProfileEdit();
+        }
     }
 
     @OnClick(R.id.ll_search)
     public void clickLlAddDate() {
-        requestPermissions(new String[]{Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION}, PERMISSION_DATES);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            requestPermissions(new String[]{Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION}, PERMISSION_DATES);
+        } else {
+            operationWithDates();
+        }
+    }
+
+    private void openProfileEdit() {
+        startActivity(new Intent(getContext(), ProfileEditActivity.class));
+    }
+
+    private void operationWithDates() {
+        if(CustomSharedPreference.getIsMan(getContext()) == Api.WOMAN_VALUE) {
+            startActivity(new Intent(getContext(), SearchManActivity.class));
+        } else {
+            startActivity(new Intent(getContext(), AddDateActivity.class));
+        }
     }
 
     private void setUI() {
