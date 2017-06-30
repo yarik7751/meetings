@@ -35,7 +35,7 @@
                     style="@style/AVLoadingIndicatorView"
                     android:visibility="visible"
                     app:indicatorName="BallSpinFadeLoaderIndicator"
-                    app:indicatorColor="@color/white"
+                    app:indicatorColor="@color/seek_bar"
                     />
 
                 <de.hdodenhof.circleimageview.CircleImageView
