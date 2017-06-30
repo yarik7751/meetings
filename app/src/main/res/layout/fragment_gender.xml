@@ -1,40 +1,47 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingRight="16dp"
-    android:paddingLeft="16dp"
     >
 
-    <TextView
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginBottom="16dp"
-        android:text="@string/please_select_your_gender"
-        android:textSize="24sp"
-        android:textColor="@color/white"/>
+        android:layout_centerVertical="true"
+        android:paddingRight="16dp"
+        android:paddingLeft="16dp">
 
-    <com.dd.CircularProgressButton
-        android:id="@+id/btn_woman"
-        android:layout_width="match_parent"
-        android:layout_height="43dp"
-        android:layout_marginBottom="8dp"
-        android:textColor="@color/white"
-        android:textSize="14sp"
-        app:cpb_textIdle="@string/woman"
-        app:cpb_selectorIdle="@drawable/button_red_bg"
-        app:cpb_cornerRadius="5dp"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="16dp"
+            android:gravity="center"
+            android:text="@string/please_select_your_gender"
+            android:textSize="24sp"
+            android:textColor="@color/white"/>
 
-    <com.dd.CircularProgressButton
-        android:id="@+id/btn_man"
-        android:layout_width="match_parent"
-        android:layout_height="43dp"
-        android:textColor="@color/white"
-        android:textSize="14sp"
-        app:cpb_textIdle="@string/man"
-        app:cpb_selectorIdle="@drawable/button_blue_bg"
-        app:cpb_cornerRadius="5dp"/>
-</LinearLayout>
+        <com.dd.CircularProgressButton
+            android:id="@+id/btn_woman"
+            android:layout_width="match_parent"
+            android:layout_height="43dp"
+            android:layout_marginBottom="8dp"
+            android:textColor="@color/white"
+            android:textSize="14sp"
+            app:cpb_textIdle="@string/woman"
+            app:cpb_selectorIdle="@drawable/button_red_bg"
+            app:cpb_cornerRadius="5dp"/>
+
+        <com.dd.CircularProgressButton
+            android:id="@+id/btn_man"
+            android:layout_width="match_parent"
+            android:layout_height="43dp"
+            android:textColor="@color/white"
+            android:textSize="14sp"
+            app:cpb_textIdle="@string/man"
+            app:cpb_selectorIdle="@drawable/button_blue_bg"
+            app:cpb_cornerRadius="5dp"/>
+    </LinearLayout>
+</RelativeLayout>

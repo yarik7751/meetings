@@ -20,7 +20,6 @@ import com.elatesoftware.meetings.R;
 import com.elatesoftware.meetings.api.Api;
 import com.elatesoftware.meetings.service.GetProfileInfoService;
 import com.elatesoftware.meetings.service.SelectPartnerService;
-import com.elatesoftware.meetings.ui.activity.base.BaseActivity;
 import com.elatesoftware.meetings.ui.activity.man.AddDateActivity;
 import com.elatesoftware.meetings.ui.adapter.view_pager.page_photo.PhotoFragmentPageAdapter;
 import com.elatesoftware.meetings.util.AndroidUtils;

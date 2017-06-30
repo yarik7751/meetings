@@ -13,13 +13,14 @@
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true">
+        android:layout_centerVertical="true">
 
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:layout_marginBottom="16dp"
+            android:gravity="center"
             android:text="@string/sign_registration_description"
             android:textSize="24sp"
             android:textColor="@color/white"/>

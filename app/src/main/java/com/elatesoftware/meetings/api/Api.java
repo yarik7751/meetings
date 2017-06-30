@@ -84,7 +84,7 @@ public class Api {
             object.put("Username", userName);
             object.put("Password", password);
             object.put("Gender", gender);
-            //object.put("Token", token);
+            object.put("Token", token);
             RequestBody body = RequestBody.create(okhttp3.MediaType.parse("application/json; charset=utf-8"), object.toString());
 
             Log.d(TAG, "object.toString: " + object.toString());
@@ -125,7 +125,7 @@ public class Api {
         try {
             object.put("Username", userName);
             object.put("Password", password);
-            //object.put("Token", token);
+            object.put("Token", token);
             RequestBody body = RequestBody.create(okhttp3.MediaType.parse("application/json; charset=utf-8"), object.toString());
 
             Log.d(TAG, "object.toString: " + object.toString());
@@ -375,10 +375,12 @@ public class Api {
     public static SearchDatesAnswer searchDates(String sessionKey, SearchDatesFilter searchDatesFilterParams) {
         Log.d(TAG, "searchDatesStr");
         Log.d(TAG, "request: " + new Gson().toJson(searchDatesFilterParams, SearchDatesFilter.class));
+        //todo удалить лишнее гсон
         Gson gson = new Gson();
         Call<ResponseBody> call = getApi().searchDates(sessionKey, searchDatesFilterParams.getAmountStart(), searchDatesFilterParams.getStartTime(), searchDatesFilterParams.getPage());
         Response<ResponseBody> response = null;
         String rawJson = null;
+        //todo сделать аккуратнее ifЫ
         try {
             response = call.execute();
             if(response != null && response.body() != null) {
@@ -391,10 +393,10 @@ public class Api {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        //todo переместить response
         if(response != null && rawJson != null){
             if(response.code() == CODE_SUCCESS) {
-                SearchDatesAnswer messageAnswer = gson.fromJson(rawJson, SearchDatesAnswer.class);
-                return messageAnswer;
+                return gson.fromJson(rawJson, SearchDatesAnswer.class);
             }
         }
         return null;

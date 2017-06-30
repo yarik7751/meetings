@@ -15,7 +15,7 @@ import android.widget.TextView;
 
 import com.elatesoftware.meetings.R;
 import com.elatesoftware.meetings.ui.activity.all.FilterActivity;
-import com.elatesoftware.meetings.ui.fragment.base.BaseFragment;
+import com.elatesoftware.meetings.ui.fragment.all.BaseFragment;
 import com.elatesoftware.meetings.util.Utils;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;

@@ -1,4 +1,4 @@
-package com.elatesoftware.meetings.ui.activity.base;
+package com.elatesoftware.meetings.ui.activity.all;
 
 import android.app.ProgressDialog;
 import android.content.pm.PackageManager;

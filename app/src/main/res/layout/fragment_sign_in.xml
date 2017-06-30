@@ -22,7 +22,7 @@
             android:layout_marginBottom="8dp"
             android:textColor="@color/white"
             android:textSize="14sp"
-            app:cpb_textIdle="@string/sign_registration"
+            app:cpb_textIdle="@string/sign_authorization"
             app:cpb_selectorIdle="@drawable/button_blue_bg"
             app:cpb_cornerRadius="5dp"/>
     </LinearLayout>
@@ -31,15 +31,14 @@
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true">
+        android:layout_centerVertical="true">
 
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:layout_marginBottom="16dp"
+            android:gravity="center"
             android:text="@string/sign_authorization_description"
             android:textSize="24sp"
             android:textColor="@color/white"

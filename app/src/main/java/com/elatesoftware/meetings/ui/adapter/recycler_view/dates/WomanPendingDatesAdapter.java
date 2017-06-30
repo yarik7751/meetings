@@ -6,7 +6,7 @@ import android.view.View;
 import com.elatesoftware.meetings.R;
 import com.elatesoftware.meetings.api.pojo.Meeting;
 import com.elatesoftware.meetings.api.pojo.Result;
-import com.elatesoftware.meetings.ui.activity.all.ShowPendingDateActivity;
+import com.elatesoftware.meetings.ui.activity.woman.ShowPendingDateActivity;
 
 import java.util.List;
 

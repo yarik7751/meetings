@@ -20,12 +20,11 @@ import android.widget.TextView;
 
 import com.elatesoftware.meetings.R;
 import com.elatesoftware.meetings.api.Api;
-import com.elatesoftware.meetings.ui.activity.base.BaseActivity;
+import com.elatesoftware.meetings.ui.activity.all.BaseActivity;
 import com.elatesoftware.meetings.ui.activity.man.AddDateActivity;
 import com.elatesoftware.meetings.ui.activity.all.ProfileEditActivity;
 import com.elatesoftware.meetings.ui.activity.woman.SearchManActivity;
 import com.elatesoftware.meetings.ui.adapter.view_pager.page_photo.PhotoFragmentPageAdapter;
-import com.elatesoftware.meetings.ui.fragment.base.BaseFragment;
 import com.elatesoftware.meetings.service.GetAccountInfoService;
 import com.elatesoftware.meetings.service.GetPhotosService;
 import com.elatesoftware.meetings.util.AndroidUtils;

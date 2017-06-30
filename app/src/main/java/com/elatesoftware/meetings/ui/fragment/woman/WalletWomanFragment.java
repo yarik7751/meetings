@@ -8,7 +8,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.elatesoftware.meetings.R;
-import com.elatesoftware.meetings.ui.fragment.base.BaseFragment;
+import com.elatesoftware.meetings.ui.fragment.all.BaseFragment;
 
 import butterknife.BindView;
 

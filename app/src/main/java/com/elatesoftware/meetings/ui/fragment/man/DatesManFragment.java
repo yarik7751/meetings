@@ -1,6 +1,5 @@
 package com.elatesoftware.meetings.ui.fragment.man;
 
-import android.app.Activity;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -16,11 +15,9 @@ import com.elatesoftware.meetings.R;
 import com.elatesoftware.meetings.api.Api;
 import com.elatesoftware.meetings.ui.activity.man.AddDateActivity;
 import com.elatesoftware.meetings.ui.adapter.ScheduledDatesAdapter;
-import com.elatesoftware.meetings.ui.adapter.recycler_view.dates.BaseDatesRecyclerViewAdapter;
 import com.elatesoftware.meetings.ui.adapter.recycler_view.dates.PendingDatesAdapter;
-import com.elatesoftware.meetings.ui.fragment.base.BaseFragment;
+import com.elatesoftware.meetings.ui.fragment.all.BaseFragment;
 import com.elatesoftware.meetings.service.GetDatesListService;
-import com.elatesoftware.meetings.util.Const;
 import com.elatesoftware.meetings.util.Utils;
 import com.elatesoftware.meetings.api.pojo.GetDatesManAnswer;
 import com.elatesoftware.meetings.api.pojo.Result;
@@ -33,8 +30,8 @@ import butterknife.OnClick;
 
 public class DatesManFragment extends BaseFragment {
 
-    public static final int UPDATE = 105;
-    public static final String IS_UPDATE = "IS_UPDATE";
+    /*public static final int UPDATE = 105;
+    public static final String IS_UPDATE = "IS_UPDATE";*/
 
     @BindView(R.id.rv_scheduled_dales) RecyclerView rvScheduledDales;
     @BindView(R.id.rv_pending_dales) RecyclerView rvPendingDales;
@@ -95,15 +92,15 @@ public class DatesManFragment extends BaseFragment {
         getActivity().unregisterReceiver(getDatesListReceiver);
     }
 
-    @Override
+    /*@Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if(resultCode == Activity.RESULT_OK && requestCode == UPDATE && data != null) {
             requestGetDatesList();
         }
-    }
+    }*/
 
-    @OnClick(R.id.img_add_date)
+    @OnClick(R.id.rl_add_date)
     public void clickImgAddDate() {
         startActivity(new Intent(getContext(), AddDateActivity.class));
     }

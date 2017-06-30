@@ -9,7 +9,6 @@ import android.view.ViewGroup;
 import com.dd.CircularProgressButton;
 import com.elatesoftware.meetings.R;
 import com.elatesoftware.meetings.ui.activity.all.MainActivity;
-import com.elatesoftware.meetings.ui.fragment.base.BaseFragment;
 import com.elatesoftware.meetings.util.CustomSharedPreference;
 
 import butterknife.BindView;

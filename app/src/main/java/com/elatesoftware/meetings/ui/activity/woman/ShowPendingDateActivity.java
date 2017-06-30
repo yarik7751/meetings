@@ -1,10 +1,12 @@
-package com.elatesoftware.meetings.ui.activity.all;
+package com.elatesoftware.meetings.ui.activity.woman;
 
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.View;
+
+import com.elatesoftware.meetings.ui.activity.all.show_date.ShowDateActivity;
 
 public class ShowPendingDateActivity extends ShowDateActivity {
 

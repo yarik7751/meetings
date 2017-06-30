@@ -20,7 +20,6 @@ import com.elatesoftware.meetings.R;
 import com.elatesoftware.meetings.api.Api;
 import com.elatesoftware.meetings.service.UpdateAccountService;
 import com.elatesoftware.meetings.ui.activity.all.MainActivity;
-import com.elatesoftware.meetings.ui.fragment.base.BaseFragment;
 import com.elatesoftware.meetings.service.ExitService;
 import com.elatesoftware.meetings.util.AndroidUtils;
 import com.elatesoftware.meetings.util.CustomSharedPreference;

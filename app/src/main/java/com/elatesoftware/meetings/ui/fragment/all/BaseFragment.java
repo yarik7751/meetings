@@ -1,4 +1,4 @@
-package com.elatesoftware.meetings.ui.fragment.base;
+package com.elatesoftware.meetings.ui.fragment.all;
 
 import android.annotation.TargetApi;
 import android.app.ProgressDialog;

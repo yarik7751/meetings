@@ -1,6 +1,5 @@
 package com.elatesoftware.meetings.ui.fragment.woman;
 
-import android.app.Activity;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -11,18 +10,15 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
+import android.widget.RelativeLayout;
 
 import com.elatesoftware.meetings.R;
 import com.elatesoftware.meetings.api.Api;
 import com.elatesoftware.meetings.api.pojo.GetDatesManAnswer;
 import com.elatesoftware.meetings.service.GetDatesListService;
-import com.elatesoftware.meetings.ui.activity.man.AddDateActivity;
-import com.elatesoftware.meetings.ui.adapter.recycler_view.dates.BaseDatesRecyclerViewAdapter;
 import com.elatesoftware.meetings.ui.adapter.recycler_view.dates.WomanPendingDatesAdapter;
 import com.elatesoftware.meetings.ui.adapter.recycler_view.dates.WomanScheduledDatesAdapter;
-import com.elatesoftware.meetings.ui.fragment.base.BaseFragment;
-import com.elatesoftware.meetings.util.Const;
+import com.elatesoftware.meetings.ui.fragment.all.BaseFragment;
 import com.elatesoftware.meetings.util.Utils;
 import com.elatesoftware.meetings.api.pojo.Result;
 
@@ -30,16 +26,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
-import butterknife.OnClick;
-import de.hdodenhof.circleimageview.CircleImageView;
 
 public class DatesWomanFragment extends BaseFragment {
 
-    public static final int UPDATE = 105;
-    public static final String IS_UPDATE = "IS_UPDATE";
+    /*public static final int UPDATE = 105;
+    public static final String IS_UPDATE = "IS_UPDATE";*/
 
     @BindView(R.id.rv_scheduled_dales) RecyclerView rvScheduledDales;
     @BindView(R.id.rv_pending_dales) RecyclerView rvPendingDales;
+    @BindView(R.id.rl_add_date) RelativeLayout rlAddDate;
 
     public GetDatesListReceiver getDatesListReceiver;
 
@@ -67,13 +62,15 @@ public class DatesWomanFragment extends BaseFragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View v = inflater.inflate(R.layout.fragment_dales_woman, null);
+        View v = inflater.inflate(R.layout.fragment_dales_man, null);
         return v;
     }
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+        rlAddDate.setVisibility(View.INVISIBLE);
 
         rvScheduledDales.setLayoutManager(new LinearLayoutManager(getContext()) {
             @Override
@@ -97,13 +94,13 @@ public class DatesWomanFragment extends BaseFragment {
         getActivity().unregisterReceiver(getDatesListReceiver);
     }
 
-    @Override
+    /*@Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if(resultCode == Activity.RESULT_OK && requestCode == UPDATE && data != null) {
             requestGetDatesList();
         }
-    }
+    }*/
 
     private void requestGetDatesList() {
         setProgressDialogMessage(getString(R.string.dates_loading) + " ...");

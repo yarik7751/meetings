@@ -10,7 +10,7 @@ import android.view.ViewGroup;
 
 import com.elatesoftware.meetings.R;
 import com.elatesoftware.meetings.ui.adapter.recycler_view.wallet.LastOperationAdapter;
-import com.elatesoftware.meetings.ui.fragment.base.BaseFragment;
+import com.elatesoftware.meetings.ui.fragment.all.BaseFragment;
 
 import butterknife.BindView;
 

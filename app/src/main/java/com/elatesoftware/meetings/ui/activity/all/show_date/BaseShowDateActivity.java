@@ -1,4 +1,4 @@
-package com.elatesoftware.meetings.ui.activity.all;
+package com.elatesoftware.meetings.ui.activity.all.show_date;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -14,7 +14,7 @@ import android.widget.TextView;
 
 import com.elatesoftware.meetings.R;
 import com.elatesoftware.meetings.api.Api;
-import com.elatesoftware.meetings.ui.activity.base.BaseActivity;
+import com.elatesoftware.meetings.ui.activity.all.BaseActivity;
 import com.elatesoftware.meetings.util.AndroidUtils;
 import com.elatesoftware.meetings.util.Const;
 import com.elatesoftware.meetings.api.pojo.Meeting;

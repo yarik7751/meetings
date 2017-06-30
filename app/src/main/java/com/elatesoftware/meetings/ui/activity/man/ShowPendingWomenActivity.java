@@ -1,6 +1,5 @@
 package com.elatesoftware.meetings.ui.activity.man;
 
-import android.app.Activity;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -12,10 +11,8 @@ import android.support.v7.widget.RecyclerView;
 import com.elatesoftware.meetings.R;
 import com.elatesoftware.meetings.api.Api;
 import com.elatesoftware.meetings.service.GetPendingWomenService;
-import com.elatesoftware.meetings.ui.activity.base.BaseActivity;
+import com.elatesoftware.meetings.ui.activity.all.BaseActivity;
 import com.elatesoftware.meetings.ui.adapter.recycler_view.PendingWomenAdapter;
-import com.elatesoftware.meetings.ui.fragment.man.DatesManFragment;
-import com.elatesoftware.meetings.util.Const;
 import com.elatesoftware.meetings.util.Utils;
 import com.elatesoftware.meetings.api.pojo.GetPendingWomenAnswer;
 
@@ -70,7 +67,8 @@ public class ShowPendingWomenActivity extends BaseActivity {
 
                 case CLOSE:
                     if(data.getBooleanExtra(IS_CLOSE, false)) {
-                        updateActivitySuccess();
+                        //updateActivitySuccess();
+                        finish();
                     }
                     break;
             }
@@ -84,12 +82,12 @@ public class ShowPendingWomenActivity extends BaseActivity {
         onBackPressed();
     }
 
-    private void updateActivitySuccess() {
+    /*private void updateActivitySuccess() {
         Intent resultIntent = new Intent();
         resultIntent.putExtra(DatesManFragment.IS_UPDATE, true);
         setResult(Activity.RESULT_OK, resultIntent);
         finish();
-    }
+    }*/
 
     private void requestGetPendingWoman() {
         setProgressDialogMessage(getString(R.string.women_loading) + " ...");

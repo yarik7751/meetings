@@ -8,7 +8,6 @@ import android.util.Log;
 import android.widget.EditText;
 
 import com.elatesoftware.meetings.R;
-import com.elatesoftware.meetings.ui.activity.base.BaseActivity;
 import com.elatesoftware.meetings.ui.adapter.recycler_view.chat.ChatRecyclerViewAdapter;
 import com.elatesoftware.meetings.util.CustomSharedPreference;
 import com.google.firebase.database.DataSnapshot;

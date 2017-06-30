@@ -21,7 +21,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.elatesoftware.meetings.R;
-import com.elatesoftware.meetings.ui.activity.base.BaseActivity;
+import com.elatesoftware.meetings.ui.activity.all.BaseActivity;
 import com.elatesoftware.meetings.ui.adapter.view_pager.ViewPagerAdapter;
 import com.elatesoftware.meetings.ui.view.CustomEditText;
 import com.elatesoftware.meetings.util.AndroidUtils;
@@ -89,7 +89,8 @@ public class AddDateActivity extends BaseActivity implements OnMapReadyCallback 
     private SupportMapFragment mapFragment;
     private GoogleMap map;
     private Place place;
-    private Date dateStart = null, dateEnd = null;
+    private Date dateStart;
+    private Date dateEnd;
     private ViewPagerAdapter vpHairColorAdapter;
     private boolean isPresentIterator = true;
 
@@ -167,10 +168,6 @@ public class AddDateActivity extends BaseActivity implements OnMapReadyCallback 
                     place = PlacePicker.getPlace(data, this);
                     CharSequence name = place.getName();
                     CharSequence address = place.getAddress();
-                    String attributions = PlacePicker.getAttributions(data);
-                    if (attributions == null) {
-                        attributions = "";
-                    }
                     String placeStr = name.toString() + address.toString();
                     placeStr = placeStr.replace("\"", "");
                     tvPlaceTitle.setText(placeStr);
@@ -308,10 +305,8 @@ public class AddDateActivity extends BaseActivity implements OnMapReadyCallback 
             PlacePicker.IntentBuilder intentBuilder = new PlacePicker.IntentBuilder();
             Intent intent = intentBuilder.build(this);
             startActivityForResult(intent, REQUEST_PLACE_PICKER);
-        } catch (GooglePlayServicesRepairableException e) {
-            Log.d(TAG, e + "");
-        } catch (GooglePlayServicesNotAvailableException e) {
-            Log.d(TAG, e + "");
+        } catch (GooglePlayServicesRepairableException | GooglePlayServicesNotAvailableException e) {
+            e.printStackTrace();
         }
     }
 
@@ -329,9 +324,9 @@ public class AddDateActivity extends BaseActivity implements OnMapReadyCallback 
     private void setHairColors() {
         String[] colors = getResources().getStringArray(R.array.hair_colors);
         List<View> pages = new ArrayList<>();
-        for(int i = 0; i < colors.length; i++) {
+        for (String color : colors) {
             View vItem = LayoutInflater.from(this).inflate(R.layout.item_view_pager, null);
-            ((TextView) vItem.findViewById(R.id.tv_text)).setText(colors[i]);
+            ((TextView) vItem.findViewById(R.id.tv_text)).setText(color);
             pages.add(vItem);
         }
         vpHairColorAdapter = new ViewPagerAdapter(pages);

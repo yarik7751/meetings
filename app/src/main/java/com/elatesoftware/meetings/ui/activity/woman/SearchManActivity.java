@@ -28,12 +28,11 @@ import android.widget.Toast;
 import com.elatesoftware.meetings.R;
 import com.elatesoftware.meetings.api.Api;
 import com.elatesoftware.meetings.service.SearchDatesService;
-import com.elatesoftware.meetings.ui.activity.base.BaseActivity;
+import com.elatesoftware.meetings.ui.activity.all.BaseActivity;
 import com.elatesoftware.meetings.ui.adapter.recycler_view.dates.BaseDatesRecyclerViewAdapter;
 import com.elatesoftware.meetings.ui.adapter.recycler_view.dates.SearchDatesAdapter;
 import com.elatesoftware.meetings.ui.view.CustomEditText;
 import com.elatesoftware.meetings.util.AndroidUtils;
-import com.elatesoftware.meetings.util.Const;
 import com.elatesoftware.meetings.util.DateUtils;
 import com.elatesoftware.meetings.util.ImageHelper;
 import com.elatesoftware.meetings.util.LocationUtils;
@@ -350,8 +349,7 @@ public class SearchManActivity extends BaseActivity implements OnMapReadyCallbac
             hideProgressDialog();
             if(response != null) {
                 Log.d(TAG, "registration 200");
-                boolean success = response.getSuccess();
-                if(success) {
+                if(response.getSuccess()) {
                     searchDatesAnswer = response;
                     setDatesInMap();
                     setDatesInList();

@@ -1,24 +1,18 @@
 package com.elatesoftware.meetings.ui.activity.man;
 
-import android.Manifest;
 import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.BottomNavigationView;
-import android.support.v4.app.ActivityCompat;
 import android.view.MenuItem;
 
 import com.elatesoftware.meetings.R;
-import com.elatesoftware.meetings.service.LocationService;
-import com.elatesoftware.meetings.ui.activity.base.BaseActivity;
+import com.elatesoftware.meetings.ui.activity.all.BaseActivity;
 import com.elatesoftware.meetings.ui.fragment.all.SettingsFragment;
 import com.elatesoftware.meetings.ui.fragment.man.DatesManFragment;
 import com.elatesoftware.meetings.ui.fragment.man.WalletManFragment;
 import com.elatesoftware.meetings.ui.fragment.all.ProfileFragment;
-import com.elatesoftware.meetings.util.Const;
 
 import butterknife.BindView;
 

@@ -4,7 +4,6 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 
 import com.elatesoftware.meetings.R;
-import com.elatesoftware.meetings.ui.activity.base.BaseActivity;
 
 public class FilterActivity extends BaseActivity {
 

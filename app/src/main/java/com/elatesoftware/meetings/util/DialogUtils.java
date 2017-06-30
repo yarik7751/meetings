@@ -9,6 +9,7 @@ import android.view.Gravity;
 import android.widget.EditText;
 
 import com.elatesoftware.meetings.R;
+import com.elatesoftware.meetings.api.Api;
 
 public class DialogUtils {
 
@@ -29,7 +30,8 @@ public class DialogUtils {
         input.setHint(title);
         input.setInputType(inputType);
         input.setSelection(input.getText().length());
-        input.setTextColor(context.getResources().getColor(R.color.colorPrimary));
+        int colorRes = CustomSharedPreference.getIsMan(context) != Api.WOMAN_VALUE ? R.color.button_blue_light : R.color.button_red_dark;
+        input.setTextColor(context.getResources().getColor(colorRes));
         builder.setView(input);
         input.addTextChangedListener(new TextWatcher() {
             @Override

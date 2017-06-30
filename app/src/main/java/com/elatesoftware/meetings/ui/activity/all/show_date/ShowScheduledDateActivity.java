@@ -1,4 +1,4 @@
-package com.elatesoftware.meetings.ui.activity.all;
+package com.elatesoftware.meetings.ui.activity.all.show_date;
 
 import android.content.Context;
 import android.content.Intent;

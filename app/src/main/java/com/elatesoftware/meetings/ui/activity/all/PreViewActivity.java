@@ -4,8 +4,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 
-import com.elatesoftware.meetings.ui.activity.base.BaseActivity;
-
 public class PreViewActivity extends BaseActivity {
 
     @Override

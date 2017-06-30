@@ -15,7 +15,7 @@ import com.elatesoftware.meetings.R;
 import com.elatesoftware.meetings.api.Api;
 import com.elatesoftware.meetings.service.AddPartnerService;
 import com.elatesoftware.meetings.service.GetProfileInfoService;
-import com.elatesoftware.meetings.ui.activity.all.BaseShowDateActivity;
+import com.elatesoftware.meetings.ui.activity.all.show_date.BaseShowDateActivity;
 import com.elatesoftware.meetings.ui.adapter.view_pager.page_photo.PhotoFragmentPageAdapter;
 import com.elatesoftware.meetings.util.DateUtils;
 import com.elatesoftware.meetings.util.Utils;

@@ -15,7 +15,6 @@ import android.widget.TextView;
 import com.dd.CircularProgressButton;
 import com.elatesoftware.meetings.R;
 import com.elatesoftware.meetings.ui.activity.all.MainActivity;
-import com.elatesoftware.meetings.ui.fragment.base.BaseFragment;
 import com.elatesoftware.meetings.receiver.AutarizationBroadcastReceiver;
 import com.elatesoftware.meetings.service.RegisterService;
 import com.elatesoftware.meetings.ui.view.CustomEditText;

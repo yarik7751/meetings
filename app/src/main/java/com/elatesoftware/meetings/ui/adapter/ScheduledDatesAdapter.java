@@ -6,7 +6,7 @@ import android.view.View;
 import com.elatesoftware.meetings.R;
 import com.elatesoftware.meetings.api.pojo.Meeting;
 import com.elatesoftware.meetings.api.pojo.Result;
-import com.elatesoftware.meetings.ui.activity.all.ShowScheduledDateActivity;
+import com.elatesoftware.meetings.ui.activity.all.show_date.ShowScheduledDateActivity;
 import com.elatesoftware.meetings.ui.adapter.recycler_view.dates.BaseDatesRecyclerViewAdapter;
 
 import java.util.List;
