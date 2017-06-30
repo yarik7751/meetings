@@ -20,7 +20,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:layout_marginBottom="16dp"
-            android:text="@string/please_register"
+            android:text="@string/sign_registration_description"
             android:textSize="24sp"
             android:textColor="@color/white"/>
 
@@ -31,7 +31,7 @@
             android:layout_marginBottom="8dp"
             android:inputType="textEmailAddress"
             android:gravity="center"
-            android:hint="@string/email"/>
+            android:hint="@string/sign_email"/>
 
         <com.elatesoftware.meetings.ui.view.CustomEditText
             android:id="@+id/cet_up_pass"
@@ -39,7 +39,7 @@
             android:layout_height="45dp"
             android:layout_marginBottom="8dp"
             android:gravity="center"
-            android:hint="@string/password"/>
+            android:hint="@string/sign_password"/>
 
         <FrameLayout
             android:layout_width="match_parent"
@@ -53,7 +53,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:padding="8dp"
-                android:text="@string/sign_in"
+                android:text="@string/sign_authorization"
                 android:textColor="@color/white" />
         </FrameLayout>
 
@@ -78,7 +78,7 @@
             android:layout_marginBottom="8dp"
             android:textColor="@color/white"
             android:textSize="14sp"
-            app:cpb_textIdle="@string/sign_up"
+            app:cpb_textIdle="@string/sign_registration"
             app:cpb_selectorIdle="@drawable/button_blue_bg"
             app:cpb_cornerRadius="5dp"/>
 

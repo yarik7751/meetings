@@ -59,7 +59,7 @@
                             android:layout_height="wrap_content"
                             android:textSize="14sp"
                             android:textColor="@color/text_white_op"
-                            android:text="@string/profile_age"/>
+                            android:text="@string/show_date_age"/>
 
                         <TextView
                             android:id="@+id/tv_age"
@@ -82,7 +82,7 @@
                             android:layout_height="wrap_content"
                             android:textSize="14sp"
                             android:textColor="@color/text_white_op"
-                            android:text="@string/profile_height"/>
+                            android:text="@string/show_date_height"/>
 
                         <TextView
                             android:id="@+id/tv_height"
@@ -106,7 +106,7 @@
                             android:layout_height="wrap_content"
                             android:textSize="14sp"
                             android:textColor="@color/text_white_op"
-                            android:text="@string/profile_weight"/>
+                            android:text="@string/show_date_weight"/>
 
                         <TextView
                             android:id="@+id/tv_weight"
@@ -144,7 +144,7 @@
                                 android:layout_alignParentLeft="true"
                                 android:textSize="14sp"
                                 android:textColor="@color/text_dark"
-                                android:text="@string/age"/>
+                                android:text="@string/show_date_woman_age"/>
 
                             <TextView
                                 android:layout_width="wrap_content"
@@ -178,7 +178,7 @@
                                 android:layout_alignParentLeft="true"
                                 android:textSize="14sp"
                                 android:textColor="@color/text_dark"
-                                android:text="@string/height"/>
+                                android:text="@string/show_date_woman_height"/>
 
                             <TextView
                                 android:id="@+id/tv_height_woman"
@@ -218,7 +218,7 @@
                                 android:layout_height="wrap_content"
                                 android:textSize="14sp"
                                 android:textColor="@color/text_dark"
-                                android:text="@string/weight"
+                                android:text="@string/show_date_woman_weight"
                                 android:id="@+id/textView2"
                                 android:layout_alignParentTop="true"
                                 android:layout_alignParentLeft="true"
@@ -253,7 +253,7 @@
                                 android:layout_height="wrap_content"
                                 android:textSize="14sp"
                                 android:textColor="@color/text_dark"
-                                android:text="@string/hair_color"
+                                android:text="@string/show_date_hair_color"
                                 android:layout_alignParentTop="true"
                                 android:layout_alignParentLeft="true"
                                 android:layout_alignParentStart="true" />
@@ -283,7 +283,7 @@
                                     android:layout_alignParentLeft="true"
                                     android:textSize="14sp"
                                     android:textColor="@color/text_dark"
-                                    android:text="@string/start_time"/>
+                                    android:text="@string/show_date_start_time"/>
 
                                 <TextView
                                     android:id="@+id/tv_start_time"
@@ -306,7 +306,7 @@
                                     android:layout_alignParentLeft="true"
                                     android:textSize="14sp"
                                     android:textColor="@color/text_dark"
-                                    android:text="@string/end_date"/>
+                                    android:text="@string/show_date_end_time"/>
 
                                 <TextView
                                     android:id="@+id/tv_end_time"
@@ -386,7 +386,7 @@
                                 android:layout_alignParentLeft="true"
                                 android:textSize="14sp"
                                 android:textColor="@color/text_dark"
-                                android:text="@string/presents"/>
+                                android:text="@string/show_date_presents"/>
 
                             <TextView
                                 android:id="@+id/tv_present"

@@ -1,4 +1,4 @@
-package com.elatesoftware.meetings.ui.activity;
+package com.elatesoftware.meetings.ui.activity.all;
 
 import android.app.Activity;
 import android.content.BroadcastReceiver;
@@ -25,7 +25,6 @@ import com.elatesoftware.meetings.ui.activity.man.AddDateActivity;
 import com.elatesoftware.meetings.ui.adapter.view_pager.page_photo.PhotoFragmentPageAdapter;
 import com.elatesoftware.meetings.util.AndroidUtils;
 import com.elatesoftware.meetings.util.Const;
-import com.elatesoftware.meetings.util.CustomSharedPreference;
 import com.elatesoftware.meetings.util.DateUtils;
 import com.elatesoftware.meetings.util.Utils;
 import com.elatesoftware.meetings.api.pojo.GetProfileInfoAnswer;
@@ -55,7 +54,7 @@ public class ShowProfileActivity extends BaseActivity {
     @BindView(R.id.tv_height) TextView tvHeight;
     @BindView(R.id.tv_height_title) TextView tvHeightTitle;
     @BindView(R.id.tv_weight) TextView tvWeight;
-    @BindView(R.id.tv_weight_title) TextView tvWeightTile;
+    @BindView(R.id.tv_weight_title) TextView tvWeightTitle;
     @BindView(R.id.tv_about) TextView tvAbout;
     @BindView(R.id.tv_age_title) TextView tvAgeTitle;
     @BindView(R.id.tv_age) TextView tvAge;
@@ -97,6 +96,9 @@ public class ShowProfileActivity extends BaseActivity {
         partnerTableId = getIntent().getLongExtra(PARTNER_TABLE_ID, -1);
         buttonAnimation = new ButtonAnimation(this, btnSelectWoman);
 
+        tvAgeTitle.setText(tvAgeTitle.getText().toString() + ": ");
+        tvHeightTitle.setText(tvHeightTitle.getText().toString() + ": ");
+        tvWeightTitle.setText(tvWeightTitle.getText().toString() + ": ");
         llInfo.setVisibility(View.GONE);
         rlEdit.setVisibility(View.GONE);
         setSize();
@@ -172,7 +174,7 @@ public class ShowProfileActivity extends BaseActivity {
 
             Double weight = profile.getWeight();
             if(weight == null || weight.intValue() <= 0) {
-                tvWeightTile.setVisibility(View.GONE);
+                tvWeightTitle.setVisibility(View.GONE);
                 tvWeight.setVisibility(View.GONE);
                 imgPoint2.setVisibility(View.GONE);
             } else {

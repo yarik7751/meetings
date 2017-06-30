@@ -57,7 +57,7 @@
             android:layout_marginTop="12dp"
             android:textSize="14sp"
             android:textColor="@color/text_white_op"
-            android:text="@string/forgot_pincode"/>
+            android:text="@string/pin_forgot_pincode"/>
 
         <TextView
             android:id="@+id/tv_pin_status"

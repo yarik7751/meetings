@@ -1,4 +1,4 @@
-package com.elatesoftware.meetings.ui.activity;
+package com.elatesoftware.meetings.ui.activity.all;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -18,8 +18,6 @@ import com.elatesoftware.meetings.api.pojo.GetProfileInfoAnswer;
 import com.elatesoftware.meetings.service.GetProfileInfoService;
 import com.elatesoftware.meetings.ui.adapter.view_pager.page_photo.PhotoFragmentPageAdapter;
 import com.elatesoftware.meetings.ui.view.animation.ButtonAnimation;
-import com.elatesoftware.meetings.util.Const;
-import com.elatesoftware.meetings.util.CustomSharedPreference;
 import com.elatesoftware.meetings.util.DateUtils;
 import com.elatesoftware.meetings.util.Utils;
 import com.google.android.gms.maps.CameraUpdateFactory;

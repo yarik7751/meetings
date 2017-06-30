@@ -13,16 +13,37 @@
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true">
+        android:layout_alignParentBottom="true">
+
+        <com.dd.CircularProgressButton
+            android:id="@+id/btn_sign_in"
+            android:layout_width="match_parent"
+            android:layout_height="43dp"
+            android:layout_marginBottom="8dp"
+            android:textColor="@color/white"
+            android:textSize="14sp"
+            app:cpb_textIdle="@string/sign_registration"
+            app:cpb_selectorIdle="@drawable/button_blue_bg"
+            app:cpb_cornerRadius="5dp"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:layout_marginBottom="16dp"
-            android:text="@string/please_login"
+            android:text="@string/sign_authorization_description"
             android:textSize="24sp"
-            android:textColor="@color/white"/>
+            android:textColor="@color/white"
+            android:id="@+id/textView6" />
 
         <com.elatesoftware.meetings.ui.view.CustomEditText
             android:id="@+id/cet_email"
@@ -31,7 +52,7 @@
             android:layout_marginBottom="8dp"
             android:inputType="textEmailAddress"
             android:gravity="center"
-            android:hint="@string/email"/>
+            android:hint="@string/sign_email"/>
 
         <com.elatesoftware.meetings.ui.view.CustomEditText
             android:id="@+id/cet_pass"
@@ -39,7 +60,7 @@
             android:layout_height="45dp"
             android:layout_marginBottom="8dp"
             android:gravity="center"
-            android:hint="@string/password"/>
+            android:hint="@string/sign_password"/>
 
         <FrameLayout
             android:layout_width="match_parent"
@@ -53,7 +74,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="left"
                 android:padding="8dp"
-                android:text="@string/sign_up"
+                android:text="@string/sign_registration"
                 android:textColor="@color/white" />
 
             <TextView
@@ -62,26 +83,8 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="right"
                 android:padding="8dp"
-                android:text="@string/forgot_password"
+                android:text="@string/sign_forgot_password"
                 android:textColor="@color/white" />
         </FrameLayout>
-    </LinearLayout>
-
-    <LinearLayout
-        android:orientation="vertical"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true">
-
-        <com.dd.CircularProgressButton
-            android:id="@+id/btn_sign_in"
-            android:layout_width="match_parent"
-            android:layout_height="43dp"
-            android:layout_marginBottom="8dp"
-            android:textColor="@color/white"
-            android:textSize="14sp"
-            app:cpb_textIdle="@string/sign_in"
-            app:cpb_selectorIdle="@drawable/button_blue_bg"
-            app:cpb_cornerRadius="5dp"/>
     </LinearLayout>
 </RelativeLayout>

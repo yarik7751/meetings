@@ -10,7 +10,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.elatesoftware.meetings.R;
-import com.elatesoftware.meetings.ui.activity.ShowProfileActivity;
+import com.elatesoftware.meetings.ui.activity.all.ShowProfileActivity;
 import com.elatesoftware.meetings.ui.activity.man.ShowPendingWomenActivity;
 import com.elatesoftware.meetings.util.StringUtils;
 import com.elatesoftware.meetings.api.pojo.GetPendingWomenAnswer;

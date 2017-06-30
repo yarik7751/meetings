@@ -130,6 +130,21 @@
     <string name="no">No</string>
     <string name="yes">Yes</string>
 
+    <!--Sign in/out-->
+    <string name="sign_registration">@string/sign_up</string>
+    <string name="sign_authorization">@string/sign_in</string>
+    <string name="sign_registration_description">@string/please_register</string>
+    <string name="sign_authorization_description">@string/please_login</string>
+    <string name="sign_email">@string/email</string>
+    <string name="sign_password">@string/password</string>
+    <string name="sign_forgot_password">@string/forgot_password</string>
+
+    <!--Pin-->
+    <string name="pin_forgot_pincode">@string/forgot_pincode</string>
+    <string name="pin_enter_pin">@string/enter_pin</string>
+    <string name="pin_confirm_pin">@string/confirm_pin</string>
+    <string name="pin_incorrect_pin">@string/incorrect_pin</string>
+
     <!--Bottom menu-->
     <string name="bottom_menu_action_profile">@string/profile</string>
     <string name="bottom_menu_action_dates">@string/dates</string>
@@ -149,6 +164,14 @@
     <string name="dates_pending">@string/pending</string>
     <string name="dates_scheduled">@string/scheduled</string>
 
+    <!--Wallet-->
+    <string name="wallet_title">@string/wallet</string>
+    <string name="wallet_balance">@string/balance</string>
+    <string name="wallet_freeze">@string/freeze</string>
+    <string name="wallet_in">@string/cash_in</string>
+    <string name="wallet_out">@string/cash_out</string>
+    <string name="wallet_last_operation">@string/last_operation</string>
+
     <!--Settings-->
     <string name="settings_push_up">@string/push_up</string>
     <string name="settings_mail_notification">@string/mail_notification</string>
@@ -162,6 +185,39 @@
     <string name="settings_delete_profile">@string/delete_profile</string>
     <string name="settings_sign_out">@string/sign_out</string>
     <string name="update_info">Update info</string>
+
+    <!--Add date-->
+    <string name="add_date_title">@string/add_date</string>
+    <string name="add_date_girl_params">@string/i_m_looking_for</string>
+    <string name="add_date_age">@string/age</string>
+    <string name="add_date_height">@string/height</string>
+    <string name="add_date_weight">@string/weight</string>
+    <string name="add_date_hair_color">@string/hair_color</string>
+    <string name="add_date_etc">@string/etc</string>
+    <string name="add_date_time">@string/when</string>
+    <string name="add_date_start_time">@string/start_time</string>
+    <string name="add_date_end_time">@string/end_time</string>
+    <string name="add_date_place">@string/where</string>
+    <string name="add_date_choose_place">@string/choose_a_meeting_place</string>
+    <string name="add_date_presents">@string/presents</string>
+    <string name="add_date_description">@string/intro_text_about_present_amount</string>
+    <string name="add_date_preview">@string/preview</string>
+
+    <!--Show date-->
+    <string name="show_date_age">@string/age</string>
+    <string name="show_date_height">@string/height</string>
+    <string name="show_date_weight">@string/weight</string>
+    <string name="show_date_woman_age">@string/age</string>
+    <string name="show_date_woman_height">@string/height</string>
+    <string name="show_date_woman_weight">@string/weight</string>
+    <string name="show_date_hair_color">@string/hair_color</string>
+    <string name="show_date_start_time">@string/start_time</string>
+    <string name="show_date_end_time">@string/end_time</string>
+    <string name="show_date_presents">@string/presents</string>
+    
+    <!--Permissions-->
+    <string name="permissions_location_miss">You do not have permissions to determine your location!</string>
+    <string name="permissions_file_miss">You do not have permission to access the file system!</string>
 
     <string-array name="hair_colors">
         <item>Doesn\'t matter</item>

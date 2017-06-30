@@ -1,4 +1,4 @@
-package com.elatesoftware.meetings.ui.activity;
+package com.elatesoftware.meetings.ui.activity.all;
 
 import android.content.Intent;
 import android.os.Bundle;

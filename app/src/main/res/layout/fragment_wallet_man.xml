@@ -21,7 +21,7 @@
             android:layout_centerVertical="true"
             android:textSize="16sp"
             android:textColor="@color/white"
-            android:text="@string/wallet"
+            android:text="@string/wallet_title"
             android:textStyle="bold"/>
     </RelativeLayout>
 
@@ -55,7 +55,7 @@
                         android:layout_alignParentLeft="true"
                         android:textSize="16sp"
                         android:textColor="@color/text_gray"
-                        android:text="@string/balance"
+                        android:text="@string/wallet_balance"
                         android:textStyle="bold"/>
 
                     <TextView
@@ -76,7 +76,7 @@
                         android:layout_marginTop="16dp"
                         android:textColor="@color/white"
                         android:textSize="14sp"
-                        app:cpb_textIdle="@string/cash_in"
+                        app:cpb_textIdle="@string/wallet_in"
                         app:cpb_selectorIdle="@drawable/button_blue_bg"
                         app:cpb_cornerRadius="5dp"/>
                 </LinearLayout>
@@ -96,8 +96,9 @@
                         android:layout_alignParentLeft="true"
                         android:textSize="16sp"
                         android:textColor="@color/text_gray"
-                        android:text="@string/freeze"
-                        android:textStyle="bold"/>
+                        android:text="@string/wallet_freeze"
+                        android:textStyle="bold"
+                        android:id="@+id/textView5" />
 
                     <TextView
                         android:id="@+id/tv_freeze"
@@ -117,7 +118,7 @@
                         android:layout_marginTop="16dp"
                         android:textColor="@color/white"
                         android:textSize="14sp"
-                        app:cpb_textIdle="@string/cash_out"
+                        app:cpb_textIdle="@string/wallet_out"
                         app:cpb_selectorIdle="@drawable/button_blue_bg"
                         app:cpb_cornerRadius="5dp"/>
                 </LinearLayout>
@@ -131,7 +132,7 @@
                 android:layout_margin="16dp"
                 android:textSize="16sp"
                 android:textColor="@color/white"
-                android:text="@string/last_operation"
+                android:text="@string/wallet_last_operation"
                 android:textStyle="bold"/>
 
             <android.support.v7.widget.RecyclerView

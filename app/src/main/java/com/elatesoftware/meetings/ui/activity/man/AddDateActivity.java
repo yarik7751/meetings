@@ -96,7 +96,7 @@ public class AddDateActivity extends BaseActivity implements OnMapReadyCallback 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_add_dale);
+        setContentView(R.layout.activity_add_date);
 
         llFeatures.collapse();
         llTime.collapse();

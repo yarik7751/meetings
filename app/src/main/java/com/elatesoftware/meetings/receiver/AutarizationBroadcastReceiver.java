@@ -8,8 +8,7 @@ import android.widget.Toast;
 
 import com.elatesoftware.meetings.R;
 import com.elatesoftware.meetings.api.Api;
-import com.elatesoftware.meetings.ui.activity.PinCodeActivity;
-import com.elatesoftware.meetings.util.Const;
+import com.elatesoftware.meetings.ui.activity.all.PinCodeActivity;
 import com.elatesoftware.meetings.util.CustomSharedPreference;
 import com.elatesoftware.meetings.api.pojo.LoginAnswer;
 

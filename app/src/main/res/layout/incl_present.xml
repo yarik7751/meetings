@@ -21,7 +21,7 @@
             android:layout_weight="1"
             android:textSize="16sp"
             android:textColor="@color/button_blue_light"
-            android:text="@string/presents"
+            android:text="@string/add_date_presents"
             android:textStyle="bold"/>
 
         <ImageView
@@ -51,7 +51,7 @@
                 android:layout_marginBottom="8dp"
                 android:textSize="16sp"
                 android:textColor="@color/text_white_op"
-                android:text="@string/intro_text_about_present_amount"/>
+                android:text="@string/add_date_description"/>
 
             <com.elatesoftware.meetings.ui.view.CustomEditText
                 android:id="@+id/cet_present"

@@ -1,8 +1,7 @@
-package com.elatesoftware.meetings.ui.activity;
+package com.elatesoftware.meetings.ui.activity.all;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.text.TextUtils;
 import android.util.Log;
@@ -14,7 +13,6 @@ import android.widget.TextView;
 import com.elatesoftware.meetings.R;
 import com.elatesoftware.meetings.api.Api;
 import com.elatesoftware.meetings.ui.activity.base.BaseActivity;
-import com.elatesoftware.meetings.util.Const;
 import com.elatesoftware.meetings.util.CustomSharedPreference;
 
 import butterknife.BindView;
@@ -54,9 +52,9 @@ public class PinCodeActivity extends BaseActivity {
 
     public void showPinStatus() {
         if(TextUtils.isEmpty(CustomSharedPreference.getPin(this))) {
-            tvPinStatus.setText(R.string.enter_pin);
+            tvPinStatus.setText(R.string.pin_enter_pin);
         } else {
-            tvPinStatus.setText(R.string.confirm_pin);
+            tvPinStatus.setText(R.string.pin_confirm_pin);
         }
     }
 
@@ -112,7 +110,7 @@ public class PinCodeActivity extends BaseActivity {
             ImageView img = (ImageView) llIndicators.getChildAt(i);
             img.setImageResource(R.drawable.indicator_red);
         }
-        tvPinStatus.setText(R.string.incorrect_pin);
+        tvPinStatus.setText(R.string.pin_incorrect_pin);
     }
 
     private void changeBackground() {

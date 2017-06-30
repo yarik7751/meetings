@@ -4,12 +4,10 @@ import android.Manifest;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.v4.app.ActivityCompat;
 import android.support.v4.view.ViewPager;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
@@ -22,10 +20,9 @@ import android.widget.TextView;
 
 import com.elatesoftware.meetings.R;
 import com.elatesoftware.meetings.api.Api;
-import com.elatesoftware.meetings.service.LocationService;
 import com.elatesoftware.meetings.ui.activity.base.BaseActivity;
 import com.elatesoftware.meetings.ui.activity.man.AddDateActivity;
-import com.elatesoftware.meetings.ui.activity.ProfileEditActivity;
+import com.elatesoftware.meetings.ui.activity.all.ProfileEditActivity;
 import com.elatesoftware.meetings.ui.activity.woman.SearchManActivity;
 import com.elatesoftware.meetings.ui.adapter.view_pager.page_photo.PhotoFragmentPageAdapter;
 import com.elatesoftware.meetings.ui.fragment.base.BaseFragment;
@@ -137,7 +134,7 @@ public class ProfileFragment extends BaseFragment {
                     break;
             }
         } else {
-            DialogUtils.showErrorDialog(getContext(), getString(R.string.permission_not_found));
+            DialogUtils.showErrorDialog(getContext(), getString(R.string.permissions_location_miss));
         }
     }
 

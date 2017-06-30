@@ -75,7 +75,7 @@
             android:layout_alignParentBottom="true"
             android:textColor="@color/white"
             android:textSize="14sp"
-            app:cpb_textIdle="@string/preview"
+            app:cpb_textIdle="@string/add_date_preview"
             app:cpb_selectorIdle="@drawable/button_blue_bg"
             app:cpb_cornerRadius="5dp"/>
     </LinearLayout>
@@ -108,7 +108,7 @@
             android:layout_centerVertical="true"
             android:textSize="16sp"
             android:textColor="@color/white"
-            android:text="@string/add_date"
+            android:text="@string/add_date_title"
             android:textStyle="bold"/>
     </RelativeLayout>
 </RelativeLayout>

@@ -1,15 +1,10 @@
-package com.elatesoftware.meetings.ui.activity;
+package com.elatesoftware.meetings.ui.activity.all;
 
 import android.content.Intent;
-import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.annotation.StyleRes;
 
-import com.elatesoftware.meetings.R;
 import com.elatesoftware.meetings.ui.activity.base.BaseActivity;
-import com.elatesoftware.meetings.util.Const;
-import com.elatesoftware.meetings.util.CustomSharedPreference;
 
 public class PreViewActivity extends BaseActivity {
 

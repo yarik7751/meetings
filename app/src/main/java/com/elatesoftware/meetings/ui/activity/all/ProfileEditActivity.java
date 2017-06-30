@@ -1,4 +1,4 @@
-package com.elatesoftware.meetings.ui.activity;
+package com.elatesoftware.meetings.ui.activity.all;
 
 import android.Manifest;
 import android.app.DatePickerDialog;
@@ -7,8 +7,6 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -26,7 +24,6 @@ import android.widget.RelativeLayout;
 
 import com.elatesoftware.meetings.R;
 import com.elatesoftware.meetings.api.Api;
-import com.elatesoftware.meetings.model.Message;
 import com.elatesoftware.meetings.ui.activity.base.BaseActivity;
 import com.elatesoftware.meetings.ui.adapter.view_pager.page_photo.PhotoFragmentPageAdapter;
 import com.elatesoftware.meetings.service.AddPhotoService;
@@ -44,7 +41,6 @@ import com.elatesoftware.meetings.api.pojo.GetPhotosAnswer;
 import com.elatesoftware.meetings.api.pojo.HumanAnswer;
 import com.elatesoftware.meetings.api.pojo.MessageAnswer;
 import com.elatesoftware.meetings.api.pojo.Photo;
-import com.squareup.picasso.Picasso;
 import com.wang.avi.AVLoadingIndicatorView;
 
 import java.util.ArrayList;
@@ -130,7 +126,7 @@ public class ProfileEditActivity extends BaseActivity {
         if(requestCode == Const.REQUEST_PERMISSIONS && isPermissionsGranted(grantResults)) {
             openGallery();
         } else {
-            DialogUtils.showErrorDialog(this, getString(R.string.permission_not_found));
+            DialogUtils.showErrorDialog(this, getString(R.string.permissions_file_miss));
         }
     }
 

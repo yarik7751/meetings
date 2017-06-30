@@ -21,7 +21,7 @@
             android:layout_weight="1"
             android:textSize="16sp"
             android:textColor="@color/button_blue_light"
-            android:text="@string/when"
+            android:text="@string/add_date_time"
             android:textStyle="bold"/>
 
         <ImageView
@@ -63,7 +63,7 @@
                         android:layout_alignParentLeft="true"
                         android:textSize="14sp"
                         android:textColor="@color/text_dark"
-                        android:text="@string/start_time"/>
+                        android:text="@string/add_date_start_time"/>
 
                     <TextView
                         android:id="@+id/tv_start_time"
@@ -95,7 +95,7 @@
                         android:layout_alignParentLeft="true"
                         android:textSize="14sp"
                         android:textColor="@color/text_dark"
-                        android:text="@string/end_time"/>
+                        android:text="@string/add_date_end_time"/>
 
                     <TextView
                         android:id="@+id/tv_end_time"

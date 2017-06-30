@@ -20,7 +20,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:layout_weight="1"
-            android:text="@string/i_m_looking_for"
+            android:text="@string/add_date_girl_params"
             android:textColor="@color/button_blue_light"
             android:textSize="16sp"
             android:textStyle="bold" />
@@ -47,6 +47,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:visibility="gone"
                 android:layout_gravity="left"
                 android:layout_marginTop="8dp"
                 android:text="@string/girl"
@@ -72,7 +73,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="3.5"
-                        android:text="@string/age"
+                        android:text="@string/add_date_age"
                         android:textColor="@color/text_dark"
                         android:textSize="18sp"
                         android:textStyle="bold" />
@@ -118,7 +119,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="3.5"
-                        android:text="@string/height"
+                        android:text="@string/add_date_height"
                         android:textColor="@color/text_dark"
                         android:textSize="18sp"
                         android:textStyle="bold" />
@@ -164,7 +165,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="3.5"
-                        android:text="@string/weight"
+                        android:text="@string/add_date_weight"
                         android:textColor="@color/text_dark"
                         android:textSize="18sp"
                         android:textStyle="bold" />
@@ -207,7 +208,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="8dp"
                         android:gravity="center_horizontal"
-                        android:text="@string/hair_color"
+                        android:text="@string/add_date_hair_color"
                         android:textColor="@color/text_dark"
                         android:textSize="14sp"
                         android:textStyle="bold"/>
@@ -254,7 +255,7 @@
                 android:layout_marginTop="8dp"
                 android:maxLines="5"
                 android:gravity="left|top"
-                android:hint="@string/etc"/>
+                android:hint="@string/add_date_etc"/>
         </LinearLayout>
     </com.github.aakira.expandablelayout.ExpandableRelativeLayout>
 </LinearLayout>

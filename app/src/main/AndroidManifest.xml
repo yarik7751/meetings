@@ -25,7 +25,7 @@
         android:theme="@style/AppTheme">
 
         <activity
-            android:name=".ui.activity.PreViewActivity"
+            android:name=".ui.activity.all.PreViewActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateAlwaysHidden"
             android:configChanges="keyboardHidden|orientation|screenSize"
@@ -38,7 +38,7 @@
         </activity>
 
         <activity
-            android:name=".ui.activity.PinCodeActivity"
+            android:name=".ui.activity.all.PinCodeActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateAlwaysHidden"
             android:configChanges="keyboardHidden|orientation|screenSize">
@@ -56,12 +56,12 @@
             android:windowSoftInputMode="stateAlwaysHidden"
             android:configChanges="keyboardHidden|orientation|screenSize"/>
         <activity
-            android:name=".ui.activity.FilterActivity"
+            android:name=".ui.activity.all.FilterActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateAlwaysHidden"
             android:configChanges="keyboardHidden|orientation|screenSize" />
         <activity
-            android:name=".ui.activity.DaleDetailsActivity"
+            android:name=".ui.activity.all.DaleDetailsActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateAlwaysHidden"
             android:configChanges="keyboardHidden|orientation|screenSize" />
@@ -72,17 +72,17 @@
             android:windowSoftInputMode="stateAlwaysHidden"
             android:configChanges="keyboardHidden|orientation|screenSize"/>
         <activity
-            android:name=".ui.activity.ChatActivity"
+            android:name=".ui.activity.all.ChatActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateAlwaysHidden"
             android:configChanges="keyboardHidden|orientation|screenSize"/>
         <activity
-            android:name=".ui.activity.MainActivity"
+            android:name=".ui.activity.all.MainActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateAlwaysHidden"
             android:configChanges="keyboardHidden|orientation|screenSize"/>
         <activity
-            android:name=".ui.activity.ProfileEditActivity"
+            android:name=".ui.activity.all.ProfileEditActivity"
             android:theme="@style/ThemeWoman"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateAlwaysHidden"
@@ -110,22 +110,22 @@
             android:windowSoftInputMode="stateAlwaysHidden"
             android:configChanges="keyboardHidden|orientation|screenSize"/>
         <activity
-            android:name=".ui.activity.ShowProfileActivity"
+            android:name=".ui.activity.all.ShowProfileActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateAlwaysHidden"
             android:configChanges="keyboardHidden|orientation|screenSize"/>
         <activity
-            android:name=".ui.activity.ShowDateActivity"
+            android:name=".ui.activity.all.ShowDateActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateAlwaysHidden"
             android:configChanges="keyboardHidden|orientation|screenSize"/>
         <activity
-            android:name=".ui.activity.ShowPendingDateActivity"
+            android:name=".ui.activity.all.ShowPendingDateActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateAlwaysHidden"
             android:configChanges="keyboardHidden|orientation|screenSize"/>
         <activity
-            android:name=".ui.activity.ShowScheduledDateActivity"
+            android:name=".ui.activity.all.ShowScheduledDateActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateAlwaysHidden"
             android:configChanges="keyboardHidden|orientation|screenSize"/>
