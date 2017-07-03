@@ -72,6 +72,7 @@
                         android:layout_weight="1">
 
                         <TextView
+                            style="@style/FontRoman"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:layout_marginRight="12dp"
@@ -87,6 +88,7 @@
                             android:background="@color/text_gray"/>
 
                         <TextView
+                            style="@style/FontRoman"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:layout_weight="1"

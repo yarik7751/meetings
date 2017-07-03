@@ -60,19 +60,9 @@
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateAlwaysHidden"
             android:configChanges="keyboardHidden|orientation|screenSize" />
-        <activity
-            android:name=".ui.activity.all.DaleDetailsActivity"
-            android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateAlwaysHidden"
-            android:configChanges="keyboardHidden|orientation|screenSize" />
 
         <activity
             android:name=".ui.activity.man.AddDateActivity"
-            android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateAlwaysHidden"
-            android:configChanges="keyboardHidden|orientation|screenSize"/>
-        <activity
-            android:name=".ui.activity.all.ChatActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateAlwaysHidden"
             android:configChanges="keyboardHidden|orientation|screenSize"/>

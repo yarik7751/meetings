@@ -58,6 +58,7 @@ dependencies {
     compile 'net.yslibrary.keyboardvisibilityevent:keyboardvisibilityevent:2.1.0'
     compile 'com.kyleduo.switchbutton:library:1.4.6'
     compile 'us.belka:androidtoggleswitch:1.2.2'
+    compile 'uk.co.chrisjenx:calligraphy:2.3.0'
 
     compile project(':slideDateTimePicker')
 }

@@ -88,6 +88,7 @@
                 android:gravity="center">
 
                 <TextView
+                    style="@style/FontRoman"
                     android:id="@+id/tv_age_title"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -111,6 +112,7 @@
                     android:src="@drawable/indicator"/>
 
                 <TextView
+                    style="@style/FontRoman"
                     android:id="@+id/tv_height_title"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -135,6 +137,7 @@
                     android:src="@drawable/indicator"/>
 
                 <TextView
+                    style="@style/FontRoman"
                     android:id="@+id/tv_weight_title"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -160,6 +163,7 @@
                 android:background="@color/line"/>
 
             <TextView
+                style="@style/FontRoman"
                 android:id="@+id/tv_about"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -194,6 +198,7 @@
         </RelativeLayout>
 
         <TextView
+            style="@style/FontMedium"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"

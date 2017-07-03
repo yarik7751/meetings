@@ -16,6 +16,7 @@
         android:layout_centerVertical="true">
 
         <TextView
+            style="@style/FontRoman"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
@@ -49,6 +50,7 @@
             android:layout_marginLeft="8dp">
 
             <TextView
+                style="@style/FontRoman"
                 android:id="@+id/tv_sign_in"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

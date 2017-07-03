@@ -83,7 +83,7 @@ public class ProfileEditActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
 
         registerBroadcast();
-        setContentView(R.layout.activity_profile_edit_woman);
+        setContentView(R.layout.activity_profile_edit);
         setUI();
         setKeyboardListener();
         setSize();

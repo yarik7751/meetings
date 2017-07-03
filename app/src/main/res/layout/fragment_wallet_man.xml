@@ -58,6 +58,7 @@
                         android:textStyle="bold"/>
 
                     <TextView
+                        style="@style/FontLight"
                         android:id="@+id/tv_balance"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -100,6 +101,7 @@
                         android:id="@+id/textView5" />
 
                     <TextView
+                        style="@style/FontLight"
                         android:id="@+id/tv_freeze"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"

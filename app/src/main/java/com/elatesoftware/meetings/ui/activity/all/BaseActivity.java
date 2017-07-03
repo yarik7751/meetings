@@ -1,6 +1,7 @@
 package com.elatesoftware.meetings.ui.activity.all;
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.support.annotation.LayoutRes;
@@ -19,6 +20,7 @@ import com.elatesoftware.meetings.util.Const;
 import com.elatesoftware.meetings.util.CustomSharedPreference;
 
 import butterknife.ButterKnife;
+import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
 public class BaseActivity extends AppCompatActivity {
 
@@ -36,6 +38,11 @@ public class BaseActivity extends AppCompatActivity {
         super.setContentView(layoutResID);
         ButterKnife.bind(this);
         AndroidUtils.hideKeyboard(this);
+    }
+
+    @Override
+    protected void attachBaseContext(Context newBase) {
+        super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase));
     }
 
     @Override

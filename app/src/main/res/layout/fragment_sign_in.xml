@@ -34,6 +34,7 @@
         android:layout_centerVertical="true">
 
         <TextView
+            style="@style/FontRoman"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
@@ -68,21 +69,23 @@
             android:layout_marginLeft="8dp">
 
             <TextView
-                android:id="@+id/tv_sign_up"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="left"
-                android:padding="8dp"
-                android:text="@string/sign_registration"
-                android:textColor="@color/white" />
-
-            <TextView
+                style="@style/FontRoman"
                 android:id="@+id/tv_forgot_pass"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="right"
                 android:padding="8dp"
                 android:text="@string/sign_forgot_password"
+                android:textColor="@color/white" />
+
+            <TextView
+                style="@style/FontRoman"
+                android:id="@+id/tv_sign_up"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left"
+                android:padding="8dp"
+                android:text="@string/sign_registration"
                 android:textColor="@color/white" />
         </FrameLayout>
     </LinearLayout>
