@@ -6,11 +6,13 @@
     android:id="@+id/ll_main"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:clipChildren="false">
 
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_margin="8dp"
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true">
@@ -19,7 +21,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:minHeight="78dp"
-            android:layout_marginBottom="8dp"
             card_view:cardCornerRadius="5dp"
             card_view:cardBackgroundColor="@color/white">
 
@@ -131,10 +132,11 @@
         android:layout_width="wrap_content"
         android:layout_height="40dp"
         android:minWidth="40dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
         android:paddingRight="8dp"
         android:paddingLeft="8dp"
-        android:layout_marginTop="-8dp"
-        android:layout_marginLeft="-8dp"
         android:background="@drawable/man_pending_num_message"
         android:gravity="center"
         android:textColor="@color/white"

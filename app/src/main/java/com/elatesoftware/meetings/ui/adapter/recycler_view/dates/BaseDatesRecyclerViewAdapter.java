@@ -48,7 +48,7 @@ public class BaseDatesRecyclerViewAdapter extends RecyclerView.Adapter<BaseDates
     @Override
     public void onBindViewHolder(DalesViewHolder holder, final int position) {
         holder.tvAmount.setText("$" + dates.get(position).getDate().getAmount().intValue());
-        holder.tvNumWomen.setVisibility(View.GONE);
+        holder.tvNumWomen.setVisibility(View.INVISIBLE);
         Long startTime = dates.get(position).getDate().getStartTime();
         Long endTime = dates.get(position).getDate().getEndTime();
         holder.tvTime.setText(

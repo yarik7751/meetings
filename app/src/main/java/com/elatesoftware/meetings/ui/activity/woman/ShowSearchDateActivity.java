@@ -62,7 +62,6 @@ public class ShowSearchDateActivity extends BaseShowDateActivity {
         super.onCreate(savedInstanceState);
         creatorId = getIntent().getLongExtra(CREATOR_ID, -1);
 
-        setUI();
         loadInfo();
 
         vConfirmed = LayoutInflater.from(this).inflate(R.layout.incl_btn_confirmed, rlBottom, false);
@@ -94,11 +93,6 @@ public class ShowSearchDateActivity extends BaseShowDateActivity {
         map.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
         map.addMarker(new MarkerOptions()
                 .position(latLng));
-    }
-
-    @Override
-    protected void setUI() {
-        super.setUI();
     }
 
     private void registerBroadcast() {

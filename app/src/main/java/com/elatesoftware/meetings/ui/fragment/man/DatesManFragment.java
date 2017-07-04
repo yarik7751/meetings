@@ -14,7 +14,7 @@ import android.view.ViewGroup;
 import com.elatesoftware.meetings.R;
 import com.elatesoftware.meetings.api.Api;
 import com.elatesoftware.meetings.ui.activity.man.AddDateActivity;
-import com.elatesoftware.meetings.ui.adapter.ScheduledDatesAdapter;
+import com.elatesoftware.meetings.ui.adapter.recycler_view.ScheduledDatesAdapter;
 import com.elatesoftware.meetings.ui.adapter.recycler_view.dates.PendingDatesAdapter;
 import com.elatesoftware.meetings.ui.fragment.all.BaseFragment;
 import com.elatesoftware.meetings.service.GetDatesListService;

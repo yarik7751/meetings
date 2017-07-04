@@ -56,6 +56,10 @@ public class BaseActivity extends AppCompatActivity {
         progressDialog.dismiss();
     }
 
+    public ProgressDialog getProgressDialog() {
+        return progressDialog;
+    }
+
     protected void setTheme() {
         if(CustomSharedPreference.getIsMan(this) == Api.WOMAN_VALUE) {
             setTheme(R.style.ThemeWoman);

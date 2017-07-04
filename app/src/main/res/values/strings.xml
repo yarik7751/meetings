@@ -159,6 +159,9 @@
     <string name="profile_height">@string/height</string>
     <string name="profile_weight">@string/weight</string>
 
+    <!--Profile edit-->
+    <string name="profile_edit_cancel_upload_photo">@string/photo_upload_canceled</string>
+
     <!--Dates-->
     <string name="dates_title">@string/dates</string>
     <string name="dates_pending">@string/pending</string>
@@ -218,6 +221,7 @@
     <!--Permissions-->
     <string name="permissions_location_miss">You do not have permissions to determine your location!</string>
     <string name="permissions_file_miss">You do not have permission to access the file system!</string>
+    <string name="photo_upload_canceled">Photo upload canceled</string>
 
     <string-array name="hair_colors">
         <item>Doesn\'t matter</item>

@@ -45,78 +45,7 @@
                         android:textColor="@color/button_blue_light"
                         android:textStyle="bold"/>
 
-                    <LinearLayout
-                        android:orientation="horizontal"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp"
-                        android:layout_marginBottom="16dp"
-                        android:gravity="center">
-
-                        <TextView
-                            android:id="@+id/tv_age_title"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:textSize="14sp"
-                            android:textColor="@color/text_white_op"
-                            android:text="@string/show_date_age"/>
-
-                        <TextView
-                            android:id="@+id/tv_age"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:textSize="14sp"
-                            android:textColor="@color/white"
-                            android:textStyle="bold"/>
-
-                        <ImageView
-                            android:id="@+id/img_point1"
-                            android:layout_width="4dp"
-                            android:layout_height="4dp"
-                            android:layout_margin="8dp"
-                            android:src="@drawable/indicator"/>
-
-                        <TextView
-                            android:id="@+id/tv_height_title"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:textSize="14sp"
-                            android:textColor="@color/text_white_op"
-                            android:text="@string/show_date_height"/>
-
-                        <TextView
-                            android:id="@+id/tv_height"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:textSize="14sp"
-                            android:textColor="@color/white"
-                            android:text="185"
-                            android:textStyle="bold"/>
-
-                        <ImageView
-                            android:id="@+id/img_point2"
-                            android:layout_width="4dp"
-                            android:layout_height="4dp"
-                            android:layout_margin="8dp"
-                            android:src="@drawable/indicator"/>
-
-                        <TextView
-                            android:id="@+id/tv_weight_title"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:textSize="14sp"
-                            android:textColor="@color/text_white_op"
-                            android:text="@string/show_date_weight"/>
-
-                        <TextView
-                            android:id="@+id/tv_weight"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:textSize="14sp"
-                            android:textColor="@color/white"
-                            android:text="000"
-                            android:textStyle="bold"/>
-                    </LinearLayout>
+                    <include layout="@layout/incl_body_info"/>
                 </LinearLayout>
 
                 <LinearLayout

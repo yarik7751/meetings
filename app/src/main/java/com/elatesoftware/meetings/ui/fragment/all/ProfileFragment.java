@@ -1,6 +1,7 @@
 package com.elatesoftware.meetings.ui.fragment.all;
 
 import android.Manifest;
+import android.app.Activity;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -49,6 +50,7 @@ import me.relex.circleindicator.CircleIndicator;
 public class ProfileFragment extends BaseFragment {
 
     public static final int PERMISSION_EDIT_PROFILE = 100;
+    public static final int RESULT_EDIT_PROFILE = 200;
     public static final int PERMISSION_DATES = 101;
 
     @BindView(R.id.vp_photos) ViewPager vpPhotos;
@@ -104,19 +106,31 @@ public class ProfileFragment extends BaseFragment {
 
         setUI();
         setSize();
+        requestGetPhotos();
     }
 
     @Override
     public void onResume() {
         super.onResume();
         loadInfo();
-        requestGetPhotos();
     }
 
     @Override
     public void onStop() {
         super.onStop();
         unregisterReceivers();
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(resultCode == Activity.RESULT_OK) {
+            switch (requestCode) {
+                case RESULT_EDIT_PROFILE:
+                    requestGetPhotos();
+                    break;
+            }
+        }
     }
 
     @Override
@@ -156,7 +170,7 @@ public class ProfileFragment extends BaseFragment {
     }
 
     private void openProfileEdit() {
-        startActivity(new Intent(getContext(), ProfileEditActivity.class));
+        startActivityForResult(new Intent(getContext(), ProfileEditActivity.class), RESULT_EDIT_PROFILE);
     }
 
     private void operationWithDates() {

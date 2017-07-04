@@ -1,4 +1,4 @@
-package com.elatesoftware.meetings.ui.adapter;
+package com.elatesoftware.meetings.ui.adapter.recycler_view;
 
 import android.content.Context;
 import android.view.View;

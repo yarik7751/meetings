@@ -21,6 +21,8 @@
         <item name="android:windowBackground">@drawable/preview_bg</item>
     </style>
 
+    <style name="ActionButton" parent="@android:style/Widget.Holo.Light.ActionButton"></style>
+
     <style name="ThemeWoman" parent="AppTheme">
         <item name="colorPrimary">@color/button_red_dark</item>
         <item name="colorPrimaryDark">@color/button_red_light</item>

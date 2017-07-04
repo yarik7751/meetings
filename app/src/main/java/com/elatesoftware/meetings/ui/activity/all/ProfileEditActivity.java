@@ -15,6 +15,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AlertDialog;
+import android.support.v7.app.AppCompatDialogFragment;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.MotionEvent;
@@ -150,13 +151,13 @@ public class ProfileEditActivity extends BaseActivity {
     }
 
     private void openGallery() {
-        /*Intent galleryIntent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-        startActivityForResult(galleryIntent, RESULT_LOAD_IMG);*/
-        Intent intent = new Intent();
-        intent.setType("image/*");
+        Intent galleryIntent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+        startActivityForResult(galleryIntent, RESULT_LOAD_IMG);
+        /*Intent intent = new Intent();
+        intent.setType("image*//*");
         intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true);
         intent.setAction(Intent.ACTION_GET_CONTENT);
-        startActivityForResult(Intent.createChooser(intent,"Select Picture"), 1);
+        startActivityForResult(Intent.createChooser(intent,"Select Picture"), 1);*/
     }
 
     @OnClick(R.id.rl_delete)
@@ -253,6 +254,13 @@ public class ProfileEditActivity extends BaseActivity {
     }
 
     private void requestAddPhoto(String path) {
+        getProgressDialog().setOnCancelListener(new DialogInterface.OnCancelListener() {
+            @Override
+            public void onCancel(DialogInterface dialog) {
+                showMessage(R.string.profile_edit_cancel_upload_photo);
+                stopService(new Intent(ProfileEditActivity.this, AddPhotoService.class));
+            }
+        });
         setProgressDialogMessage(getString(R.string.loading_photo) + " ...");
         showProgressDialog();
         Log.d(TAG, "requestAddPhoto");
@@ -380,7 +388,6 @@ public class ProfileEditActivity extends BaseActivity {
                     updateLocalInfo();
                     CustomSharedPreference.setProfileInformation(ProfileEditActivity.this, profileMan);
                     Log.d(TAG, "UpdateAccount TRUE");
-                    ProfileEditActivity.super.onBackPressed();
                 } else {
                     showMessage(R.string.wrong_data);
                     Log.d(TAG, "UpdateAccount FALSE");
@@ -389,6 +396,8 @@ public class ProfileEditActivity extends BaseActivity {
                 showMessage(R.string.request_error);
                 Log.d(TAG, "UpdateAccount error");
             }
+            ProfileEditActivity.this.setResult(RESULT_OK);
+            finish();
         }
     }
 

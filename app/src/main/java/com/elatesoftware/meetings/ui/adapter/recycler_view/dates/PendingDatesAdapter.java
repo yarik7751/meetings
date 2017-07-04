@@ -30,6 +30,8 @@ public class PendingDatesAdapter extends BaseDatesRecyclerViewAdapter {
                     context.startActivity(ShowPendingWomenActivity.getIntent(context, dates.get(position).getDate().getId()));
                 }
             });
+        } else {
+            holder.tvNumWomen.setVisibility(View.INVISIBLE);
         }
     }
 }

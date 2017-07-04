@@ -1,13 +1,19 @@
 package com.elatesoftware.meetings.ui.activity.woman;
 
+import android.Manifest;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.BottomSheetBehavior;
 import android.support.design.widget.CoordinatorLayout;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.LinearLayoutManager;
@@ -70,6 +76,8 @@ import de.hdodenhof.circleimageview.CircleImageView;
 public class SearchManActivity extends BaseActivity implements OnMapReadyCallback {
 
     public static final String TAG = "SearchManActivity_log";
+    private static final int LOCATION_REFRESH_TIME = 1000 * 3;
+    private static final int LOCATION_REFRESH_DISTANCE = 1;
 
     @BindView(R.id.ts_switch) ToggleSwitch tsSwitch;
     @BindView(R.id.ll_tool) LinearLayout llTool;
@@ -90,11 +98,29 @@ public class SearchManActivity extends BaseActivity implements OnMapReadyCallbac
 
     private GoogleMap map;
     private SupportMapFragment mapFragment;
+    private LocationManager mLocationManager;
     private BaseDatesRecyclerViewAdapter adapter;
     private boolean isPresentIterator = true;
     private boolean isShowFilter = false;
     private Date dateStart;
     private int datesView = 0;
+
+    private LocationListener locationListener = new LocationListener() {
+        @Override
+        public void onLocationChanged(Location location) {
+            Log.d(TAG, "location: " + location);
+            setMyLocation(new LatLng(location.getLatitude(), location.getLongitude()));
+        }
+
+        @Override
+        public void onStatusChanged(String provider, int status, Bundle extras) {}
+
+        @Override
+        public void onProviderEnabled(String provider) {}
+
+        @Override
+        public void onProviderDisabled(String provider) {}
+    };
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -146,6 +172,7 @@ public class SearchManActivity extends BaseActivity implements OnMapReadyCallbac
                 isPresentIterator = true;
             }
         });
+
         requestSearchDates();
     }
 
@@ -161,6 +188,16 @@ public class SearchManActivity extends BaseActivity implements OnMapReadyCallbac
         super.onStop();
         unregisterReceiver(searchDateReceiver);
     }
+
+    /*private void setCurrentLocation() {
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED &&
+                ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            return;
+        }
+        mLocationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
+        mLocationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, LOCATION_REFRESH_TIME, LOCATION_REFRESH_DISTANCE, locationListener);
+        mLocationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, LOCATION_REFRESH_TIME, LOCATION_REFRESH_DISTANCE, locationListener);
+    }*/
 
     private void requestSearchDates() {
         setProgressDialogMessage(getString(R.string.dates_loading) + " ...");
@@ -207,6 +244,7 @@ public class SearchManActivity extends BaseActivity implements OnMapReadyCallbac
     @Override
     public void onMapReady(GoogleMap googleMap) {
         map = googleMap;
+        //setCurrentLocation();
         if(searchDatesAnswer != null) {
             setDatesInMap();
         }
@@ -251,8 +289,11 @@ public class SearchManActivity extends BaseActivity implements OnMapReadyCallbac
         });
     }
 
-    private void setMyLocation() {
-        LatLng myPosition = LocationUtils.getLastLocation(this);
+    private void setMyLocation(LatLng position) {
+        LatLng myPosition = position;
+        if(position == null) {
+            myPosition = LocationUtils.getLastLocation(this);
+        }
         CameraPosition cameraPosition = new CameraPosition.Builder()
                 .target(myPosition)
                 .zoom(14.0f)
@@ -271,7 +312,7 @@ public class SearchManActivity extends BaseActivity implements OnMapReadyCallbac
     private void setDatesInMap() {
         if(map != null) {
             map.clear();
-            setMyLocation();
+            setMyLocation(null);
             for (int i = 0; i < searchDatesAnswer.getResult().size(); i++) {
                 final Result result = searchDatesAnswer.getResult().get(i);
                 final LatLng position = new LatLng(result.getDate().getLatitude(), result.getDate().getLongitude());
