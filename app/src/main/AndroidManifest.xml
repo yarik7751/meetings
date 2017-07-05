@@ -119,6 +119,11 @@
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateAlwaysHidden"
             android:configChanges="keyboardHidden|orientation|screenSize"/>
+        <activity
+            android:name=".ui.activity.all.ChatActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateAlwaysHidden"
+            android:configChanges="keyboardHidden|orientation|screenSize"/>
 
 
         <service android:name=".service.RegisterService"/>

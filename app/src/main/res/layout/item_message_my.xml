@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <RelativeLayout
+        android:id="@+id/rl_chat_message"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="right"
+        android:minHeight="60dp"
+        android:layout_marginTop="8dp"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        android:gravity="center_vertical"
+        android:background="@drawable/message_my">
+
+        <TextView
+            android:id="@+id/tv_chat_message"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:text="gioioiou;tyuuuuuuuugioioiou;tyuuuuuuuugioioiou;tyuuuuuuuugioioiou;tyuuuuuuuugioioiou;tyuuuuuuuugioioiou;tyuuuuuuuugioioiou;tyuuuuuuuugioioiou;tyuuuuuuuugioioiou;tyuuuuuuuu"
+            android:textColor="@color/black"/>
+    </RelativeLayout>
+</LinearLayout>

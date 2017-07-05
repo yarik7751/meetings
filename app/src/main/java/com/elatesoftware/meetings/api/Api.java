@@ -298,22 +298,23 @@ public class Api {
         String bodyStr = "{\"Id\":" + photoId + "}";
         RequestBody body = RequestBody.create(okhttp3.MediaType.parse("application/json; charset=utf-8"), bodyStr);
         Call<ResponseBody> call = getApi().deletePhoto(sessionKey, body);
-        Response<ResponseBody> response = null;
-        String rawJson = null;
+        Response<ResponseBody> response;
+        String rawJson;
         try {
             response = call.execute();
-            rawJson = response.body().string();
-            rawJson = rawJson.replace("\\", "");
-            Log.d(TAG, "deletePhoto: " + rawJson);
+            if(response != null && response.body() != null){
+                rawJson = response.body().string();
+                rawJson = rawJson.replace("\\", "");
+                Log.d(TAG, "deletePhoto: " + rawJson);
+                if(response.code() == CODE_SUCCESS) {
+                    Gson gson = new Gson();
+                    MessageAnswer answer = gson.fromJson(rawJson, MessageAnswer.class);
+                    return answer;
+                }
+            }
         } catch (IOException e) {
             e.printStackTrace();
-        }
-        if(response != null && rawJson != null){
-            if(response.code() == CODE_SUCCESS) {
-                Gson gson = new Gson();
-                MessageAnswer answer = gson.fromJson(rawJson, MessageAnswer.class);
-                return answer;
-            }
+            return null;
         }
         return null;
     }

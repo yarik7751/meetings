@@ -6,6 +6,8 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.View;
 
+import com.elatesoftware.meetings.ui.activity.all.ChatActivity;
+
 public class ShowScheduledDateActivity extends ShowDateActivity {
 
     public static Intent getIntent(Context context, long creatorId) {
@@ -21,7 +23,7 @@ public class ShowScheduledDateActivity extends ShowDateActivity {
         fabChat.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                startActivity(ChatActivity.getIntent(ShowScheduledDateActivity.this));
             }
         });
 
