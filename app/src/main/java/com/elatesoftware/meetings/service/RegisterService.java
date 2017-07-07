@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.util.Log;
 
 import com.elatesoftware.meetings.api.pojo.LoginAnswer;
+import com.elatesoftware.meetings.model.params.AuthorizationParams;
 import com.elatesoftware.meetings.util.Const;
 import com.elatesoftware.meetings.api.Api;
 import com.google.firebase.iid.FirebaseInstanceId;
@@ -14,9 +15,7 @@ public class RegisterService extends IntentService {
 
     public static final String TAG = "RegisterService_log";
     public static final String ACTION = "com.elatesoftware.meetings.service.RegisterService";
-    public static final String USER_NAME = "USER_NAME";
-    public static final String PASSWORD = "PASSWORD ";
-    public static final String GENDER = "GENDER";
+    public static final String AUTHORIZATION_DATA = "AUTHORIZATION_DATA";
 
 
     public RegisterService() {
@@ -26,14 +25,18 @@ public class RegisterService extends IntentService {
 
     @Override
     protected void onHandleIntent(Intent intent) {
-        String userName = intent.getStringExtra(USER_NAME);
-        String password = intent.getStringExtra(PASSWORD);
-        int gender = intent.getIntExtra(GENDER, -1);
-        LoginAnswer response = Api.register(userName, password, gender, FirebaseInstanceId.getInstance().getToken());
+        AuthorizationParams params = intent.getParcelableExtra(AUTHORIZATION_DATA);
+        LoginAnswer response = Api.register(params);
         Intent responseIntent = new Intent();
         responseIntent.setAction(ACTION);
         responseIntent.addCategory(Intent.CATEGORY_DEFAULT);
         responseIntent.putExtra(Api.RESPONSE, response);
         sendBroadcast(responseIntent);
+    }
+
+    public static Intent getIntent(Context context, AuthorizationParams params) {
+        Intent intent = new Intent(context, RegisterService.class);
+        intent.putExtra(AUTHORIZATION_DATA, params);
+        return intent;
     }
 }

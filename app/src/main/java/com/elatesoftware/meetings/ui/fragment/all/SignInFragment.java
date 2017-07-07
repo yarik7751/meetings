@@ -14,14 +14,19 @@ import android.widget.TextView;
 
 import com.dd.CircularProgressButton;
 import com.elatesoftware.meetings.R;
+import com.elatesoftware.meetings.model.params.AuthorizationParams;
 import com.elatesoftware.meetings.ui.activity.all.MainActivity;
 import com.elatesoftware.meetings.receiver.AutarizationBroadcastReceiver;
 import com.elatesoftware.meetings.service.LoginService;
 import com.elatesoftware.meetings.ui.view.CustomEditText;
+import com.elatesoftware.meetings.util.CustomSharedPreference;
 import com.elatesoftware.meetings.util.DialogUtils;
 import com.elatesoftware.meetings.util.StringUtils;
 import com.elatesoftware.meetings.ui.view.animation.ButtonAnimation;
 import com.elatesoftware.meetings.model.LoginInfo;
+import com.google.firebase.iid.FirebaseInstanceId;
+
+import java.util.Locale;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -105,15 +110,22 @@ public class SignInFragment extends BaseFragment {
     }
 
     public void requestLogin() {
-        String username = cetEmail.getEditText().getText().toString();
-        String pass = cetPass.getEditText().getText().toString();
         if(checkAutInfo(getContext(), cetEmail, cetPass)) {
-            Intent intent = new Intent(getContext(), LoginService.class);
-            intent.putExtra(LoginService.USER_NAME, username);
-            intent.putExtra(LoginService.PASSWORD, pass);
-            getActivity().startService(intent);
+            getActivity().startService(LoginService.getIntent(getContext(), getAuthorizationParams()));
             buttonAnimation.start();
         }
+    }
+
+    private AuthorizationParams getAuthorizationParams() {
+        String userName = cetEmail.getEditText().getText().toString();
+        String password = cetPass.getEditText().getText().toString();
+        return new AuthorizationParams(
+                userName,
+                password,
+                FirebaseInstanceId.getInstance().getToken(),
+                Locale.getDefault().getLanguage(),
+                CustomSharedPreference.getIsMan(getContext())
+        );
     }
 
     public static boolean checkAutInfo(Context context, CustomEditText cetEmail, CustomEditText cetPass) {

@@ -4,6 +4,7 @@ import android.content.Context;
 import android.net.Uri;
 import android.util.Log;
 
+import com.elatesoftware.meetings.model.params.AuthorizationParams;
 import com.elatesoftware.meetings.util.Const;
 import com.elatesoftware.meetings.api.pojo.GetDatesManAnswer;
 import com.elatesoftware.meetings.api.pojo.GetInfoAccAnswer;
@@ -78,79 +79,62 @@ public class Api {
         }
     }
 
-    public static LoginAnswer register(String userName, String password, int gender, String token) {
-        JSONObject object = new JSONObject();
+    public static LoginAnswer register(AuthorizationParams authorizationParams) {
+        Log.d(TAG, "register");
+        Gson gson = new Gson();
+        String bodyStr = gson.toJson(authorizationParams, AuthorizationParams.class);
+        RequestBody body = RequestBody.create(okhttp3.MediaType.parse("application/json; charset=utf-8"), bodyStr);
+
+        Log.d(TAG, "bodyStr: " + bodyStr);
+
+        Call<ResponseBody> call = getApi().register(body);
+        Response<ResponseBody> response;
+        String rawJson;
         try {
-            object.put("Username", userName);
-            object.put("Password", password);
-            object.put("Gender", gender);
-            object.put("Token", token);
-            RequestBody body = RequestBody.create(okhttp3.MediaType.parse("application/json; charset=utf-8"), object.toString());
-
-            Log.d(TAG, "object.toString: " + object.toString());
-
-            Call<ResponseBody> call = getApi().register(body);
-            Response<ResponseBody> response = null;
-            String result = null;
-            String rawJson = null;
-            try {
-                response = call.execute();
-                if(response != null && response.body() != null) {
-                    rawJson = response.body().string();
-                    rawJson = rawJson.replace("\\", "");
-                    Log.d(TAG, "register: " + rawJson);
-                    if(response.code() == CODE_SUCCESS) {
-                        Gson gson = new Gson();
-                        return gson.fromJson(rawJson, LoginAnswer.class);
-                    }
-                } else {
-                    Log.d(TAG, "register: null");
+            response = call.execute();
+            if(response != null && response.body() != null) {
+                rawJson = response.body().string();
+                rawJson = rawJson.replace("\\", "");
+                Log.d(TAG, "rawJson: " + rawJson);
+                if(response.code() == CODE_SUCCESS) {
+                    return gson.fromJson(rawJson, LoginAnswer.class);
                 }
-            } catch (IOException e) {
-                e.printStackTrace();
+            } else {
+                Log.d(TAG, "rawJson: null");
             }
-            return null;
-        } catch (JSONException e) {
+        } catch (IOException e) {
             e.printStackTrace();
-            return null;
         }
+        return null;
     }
 
-    public static LoginAnswer login(String userName, String password, String token) {
-        JSONObject object = new JSONObject();
+    public static LoginAnswer login(AuthorizationParams authorizationParams) {
+        Log.d(TAG, "login");
+        Gson gson = new Gson();
+        String bodyStr = gson.toJson(authorizationParams, AuthorizationParams.class);
+        RequestBody body = RequestBody.create(okhttp3.MediaType.parse("application/json; charset=utf-8"), bodyStr);
+
+        Log.d(TAG, "bodyStr: " + bodyStr);
+
+        Call<ResponseBody> call = getApi().login(body);
+        Response<ResponseBody> response;
+        String rawJson;
         try {
-            object.put("Username", userName);
-            object.put("Password", password);
-            object.put("Token", token);
-            RequestBody body = RequestBody.create(okhttp3.MediaType.parse("application/json; charset=utf-8"), object.toString());
-
-            Log.d(TAG, "object.toString: " + object.toString());
-
-            Call<ResponseBody> call = getApi().login(body);
-            Response<ResponseBody> response = null;
-            String result = null;
-            String rawJson = null;
-            try {
-                response = call.execute();
-                if(response != null && response.body() != null) {
-                    rawJson = response.body().string();
-                    rawJson = rawJson.replace("\\", "");
-                    Log.d(TAG, "login: " + rawJson);
-                    if(response.code() == CODE_SUCCESS) {
-                        Gson gson = new Gson();
-                        return gson.fromJson(rawJson, LoginAnswer.class);
-                    }
-                } else {
-                    Log.d(TAG, "login: null");
+            response = call.execute();
+            if(response != null && response.body() != null) {
+                rawJson = response.body().string();
+                rawJson = rawJson.replace("\\", "");
+                Log.d(TAG, "rawJson: " + rawJson);
+                if(response.code() == CODE_SUCCESS) {
+                    return gson.fromJson(rawJson, LoginAnswer.class);
                 }
-            } catch (IOException e) {
-                e.printStackTrace();
+            } else {
+                Log.d(TAG, "rawJson: null");
             }
-            return null;
-        } catch (JSONException e) {
+        } catch (IOException e) {
             e.printStackTrace();
-            return null;
         }
+        return null;
     }
 
     public static MessageAnswer updateAccountInfo(String sessionKey, HumanAnswer profile) {

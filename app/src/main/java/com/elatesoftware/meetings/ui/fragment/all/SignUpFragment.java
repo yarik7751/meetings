@@ -14,6 +14,7 @@ import android.widget.TextView;
 
 import com.dd.CircularProgressButton;
 import com.elatesoftware.meetings.R;
+import com.elatesoftware.meetings.model.params.AuthorizationParams;
 import com.elatesoftware.meetings.ui.activity.all.MainActivity;
 import com.elatesoftware.meetings.receiver.AutarizationBroadcastReceiver;
 import com.elatesoftware.meetings.service.RegisterService;
@@ -23,6 +24,9 @@ import com.elatesoftware.meetings.util.DialogUtils;
 import com.elatesoftware.meetings.util.StringUtils;
 import com.elatesoftware.meetings.ui.view.animation.ButtonAnimation;
 import com.elatesoftware.meetings.model.LoginInfo;
+import com.google.firebase.iid.FirebaseInstanceId;
+
+import java.util.Locale;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -114,17 +118,23 @@ public class SignUpFragment extends BaseFragment {
     }
 
     private void requestRegister() {
+        if(checkRegInfo(getContext(), cetEmail, cetPass, null)) {
+            getActivity().startService(RegisterService.getIntent(getContext(), getAuthorizationParams()));
+            buttonAnimation.start();
+        }
+    }
+
+    private AuthorizationParams getAuthorizationParams() {
         String userName = cetEmail.getEditText().getText().toString();
         String password = cetPass.getEditText().getText().toString();
         //String repPassword = cetRepPass.getEditText().getText().toString();
-        if(checkRegInfo(getContext(), cetEmail, cetPass, null)) {
-            Intent intent = new Intent(getContext(), RegisterService.class);
-            intent.putExtra(RegisterService.USER_NAME, userName);
-            intent.putExtra(RegisterService.PASSWORD, password);
-            intent.putExtra(RegisterService.GENDER, CustomSharedPreference.getIsMan(getContext()));
-            getActivity().startService(intent);
-            buttonAnimation.start();
-        }
+        return new AuthorizationParams(
+                userName,
+                password,
+                FirebaseInstanceId.getInstance().getToken(),
+                Locale.getDefault().getLanguage(),
+                CustomSharedPreference.getIsMan(getContext())
+        );
     }
 
     public boolean checkRegInfo(Context context, CustomEditText cetEmail, CustomEditText cetPass, CustomEditText cetRepPass) {

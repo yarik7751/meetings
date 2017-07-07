@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.widget.FrameLayout;
+import android.widget.LinearLayout;
 
 import com.elatesoftware.meetings.R;
 import com.elatesoftware.meetings.api.Api;
@@ -18,7 +19,7 @@ import butterknife.BindView;
 
 public class MainActivity extends BaseActivity {
 
-    @BindView(R.id.fl_main) FrameLayout flMain;
+    @BindView(R.id.fl_main) LinearLayout flMain;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
