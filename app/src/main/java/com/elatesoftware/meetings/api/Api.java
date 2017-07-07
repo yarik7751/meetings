@@ -98,20 +98,16 @@ public class Api {
                 if(response != null && response.body() != null) {
                     rawJson = response.body().string();
                     rawJson = rawJson.replace("\\", "");
-                    //rawJson = rawJson.substring(1, rawJson.length() - 1);
                     Log.d(TAG, "register: " + rawJson);
+                    if(response.code() == CODE_SUCCESS) {
+                        Gson gson = new Gson();
+                        return gson.fromJson(rawJson, LoginAnswer.class);
+                    }
                 } else {
                     Log.d(TAG, "register: null");
                 }
             } catch (IOException e) {
                 e.printStackTrace();
-            }
-            if(response != null && rawJson != null){
-                if(response.code() == CODE_SUCCESS) {
-                    Gson gson = new Gson();
-                    LoginAnswer messageAnswer = gson.fromJson(rawJson, LoginAnswer.class);
-                    return messageAnswer;
-                }
             }
             return null;
         } catch (JSONException e) {
@@ -140,18 +136,15 @@ public class Api {
                     rawJson = response.body().string();
                     rawJson = rawJson.replace("\\", "");
                     Log.d(TAG, "login: " + rawJson);
+                    if(response.code() == CODE_SUCCESS) {
+                        Gson gson = new Gson();
+                        return gson.fromJson(rawJson, LoginAnswer.class);
+                    }
                 } else {
                     Log.d(TAG, "login: null");
                 }
             } catch (IOException e) {
                 e.printStackTrace();
-            }
-            if(response != null && rawJson != null){
-                if(response.code() == CODE_SUCCESS) {
-                    Gson gson = new Gson();
-                    LoginAnswer messageAnswer = gson.fromJson(rawJson, LoginAnswer.class);
-                    return messageAnswer;
-                }
             }
             return null;
         } catch (JSONException e) {
@@ -176,17 +169,14 @@ public class Api {
                 rawJson = response.body().string();
                 rawJson = rawJson.replace("\\", "");
                 Log.d(TAG, "updateAccountInfo: " + rawJson);
+                if(response.code() == CODE_SUCCESS) {
+                    return gson.fromJson(rawJson, MessageAnswer.class);
+                }
             } else {
                 Log.d(TAG, "updateAccountInfo: null");
             }
         } catch (IOException e) {
             e.printStackTrace();
-        }
-        if(response != null && rawJson != null){
-            if(response.code() == CODE_SUCCESS) {
-                MessageAnswer messageAnswer = gson.fromJson(rawJson, MessageAnswer.class);
-                return messageAnswer;
-            }
         }
         return null;
     }
@@ -200,15 +190,12 @@ public class Api {
             rawJson = response.body().string();
             rawJson = rawJson.replace("\\", "");
             Log.d(TAG, "getAccountInfo: " + rawJson);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        if(response != null && rawJson != null){
             if(response.code() == CODE_SUCCESS) {
                 Gson gson = new Gson();
-                GetInfoAccAnswer answer = gson.fromJson(rawJson, GetInfoAccAnswer.class);
-                return answer;
+                return gson.fromJson(rawJson, GetInfoAccAnswer.class);
             }
+        } catch (IOException e) {
+            e.printStackTrace();
         }
         return null;
     }
@@ -227,17 +214,14 @@ public class Api {
                 rawJson = response.body().string();
                 rawJson = rawJson.replace("\\", "");
                 Log.d(TAG, "createDate: " + rawJson);
+                if(response.code() == CODE_SUCCESS) {
+                    return gson.fromJson(rawJson, MessageAnswer.class);
+                }
             } else {
                 Log.d(TAG, "createDate: null");
             }
         } catch (IOException e) {
             e.printStackTrace();
-        }
-        if(response != null && rawJson != null){
-            if(response.code() == CODE_SUCCESS) {
-                MessageAnswer messageAnswer = gson.fromJson(rawJson, MessageAnswer.class);
-                return messageAnswer;
-            }
         }
         return null;
     }
@@ -252,18 +236,239 @@ public class Api {
                 rawJson = response.body().string();
                 rawJson = rawJson.replace("\\", "");
                 Log.d(TAG, "getPhotos: " + rawJson);
+                if(response.code() == CODE_SUCCESS) {
+                    Gson gson = new Gson();
+                    return gson.fromJson(rawJson, GetPhotosAnswer.class);
+                }
             } else {
                 Log.d(TAG, "getPhotos: null");
             }
         } catch (IOException e) {
             e.printStackTrace();
         }
-        if(response != null && rawJson != null){
-            if(response.code() == CODE_SUCCESS) {
-                Gson gson = new Gson();
-                GetPhotosAnswer answer = gson.fromJson(rawJson, GetPhotosAnswer.class);
-                return answer;
+        return null;
+    }
+
+    public static MessageAnswer deletePhoto(String sessionKey, long photoId) {
+        String bodyStr = "{\"Id\":" + photoId + "}";
+        RequestBody body = RequestBody.create(okhttp3.MediaType.parse("application/json; charset=utf-8"), bodyStr);
+        Call<ResponseBody> call = getApi().deletePhoto(sessionKey, body);
+        Response<ResponseBody> response;
+        String rawJson;
+        try {
+            response = call.execute();
+            if(response != null && response.body() != null){
+                rawJson = response.body().string();
+                rawJson = rawJson.replace("\\", "");
+                Log.d(TAG, "deletePhoto: " + rawJson);
+                if(response.code() == CODE_SUCCESS) {
+                    Gson gson = new Gson();
+                    return gson.fromJson(rawJson, MessageAnswer.class);
+                }
             }
+        } catch (IOException e) {
+            e.printStackTrace();
+            return null;
+        }
+        return null;
+    }
+
+    public static GetDatesManAnswer getDatesList(String sessionKey) {
+        Log.d(TAG, "getDatesList");
+        Call<ResponseBody> call = getApi().getDatesList(sessionKey);
+        Response<ResponseBody> response = null;
+        String rawJson = null;
+        try {
+            response = call.execute();
+            if(response != null && response.body() != null) {
+                rawJson = response.body().string();
+                rawJson = rawJson.replace("\\", "");
+                Log.d(TAG, "rawJson: " + rawJson);
+                if(response.code() == CODE_SUCCESS) {
+                    Gson gson = new Gson();
+                    return gson.fromJson(rawJson, GetDatesManAnswer.class);
+                }
+            } else {
+                Log.d(TAG, "rawJson: null");
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public static MessageAnswer exit(String sessionKey) {
+        Log.d(TAG, "exit");
+        Call<ResponseBody> call = getApi().exit(sessionKey);
+        Response<ResponseBody> response = null;
+        String rawJson = null;
+        try {
+            response = call.execute();
+            if(response != null && response.body() != null) {
+                rawJson = response.body().string();
+                rawJson = rawJson.replace("\\", "");
+                Log.d(TAG, "rawJson: " + rawJson);
+                if(response.code() == CODE_SUCCESS) {
+                    Gson gson = new Gson();
+                    return gson.fromJson(rawJson, MessageAnswer.class);
+                }
+            } else {
+                Log.d(TAG, "rawJson: null");
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public static SearchDatesAnswer searchDates(String sessionKey, SearchDatesFilter searchDatesFilterParams) {
+        Gson gson = new Gson();
+        Log.d(TAG, "searchDatesStr");
+        Log.d(TAG, "request: " + gson.toJson(searchDatesFilterParams, SearchDatesFilter.class));
+        //todo удалить лишнее гсон
+        Call<ResponseBody> call = getApi().searchDates(sessionKey, searchDatesFilterParams.getAmountStart(), searchDatesFilterParams.getStartTime(), searchDatesFilterParams.getPage());
+        Response<ResponseBody> response = null;
+        String rawJson = null;
+        //todo сделать аккуратнее ifЫ
+        try {
+            response = call.execute();
+            if(response != null && response.body() != null) {
+                rawJson = response.body().string();
+                rawJson = rawJson.replace("\\", "");
+                Log.d(TAG, "responseBody: " + rawJson);
+                if(response.code() == CODE_SUCCESS) {
+                    return gson.fromJson(rawJson, SearchDatesAnswer.class);
+                }
+            } else {
+                Log.d(TAG, "responseBody: null");
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public static GetProfileInfoAnswer getProfileInfo(String sessionKey, long id) {
+        Log.d(TAG, "getProfileInfo");
+        Call<ResponseBody> call = getApi().getProfileInfo(sessionKey, id);
+        Response<ResponseBody> response = null;
+        String rawJson = null;
+        try {
+            response = call.execute();
+            if(response != null && response.body() != null) {
+                rawJson = response.body().string();
+                rawJson = rawJson.replace("\\", "");
+                Log.d(TAG, "response: " + rawJson);
+                if(response.code() == CODE_SUCCESS) {
+                    Gson gson = new Gson();
+                    return gson.fromJson(rawJson, GetProfileInfoAnswer .class);
+                }
+            } else {
+                Log.d(TAG, "response: null");
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public static MessageAnswer addPartner(String sessionKey, long dateId) {
+        Log.d(TAG, "addPartner");
+        Call<ResponseBody> call = getApi().addPartner(sessionKey, dateId);
+        Response<ResponseBody> response = null;
+        String rawJson = null;
+        try {
+            response = call.execute();
+            if(response != null && response.body() != null) {
+                rawJson = response.body().string();
+                rawJson = rawJson.replace("\\", "");
+                Log.d(TAG, "response: " + rawJson);
+                if(response.code() == CODE_SUCCESS) {
+                    Gson gson = new Gson();
+                    return gson.fromJson(rawJson, MessageAnswer.class);
+                }
+            } else {
+                Log.d(TAG, "response: null");
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public static GetPendingWomenAnswer getDatePartners(String sessionKey, long dateId) {
+        Log.d(TAG, "getDatePartners");
+        Call<ResponseBody> call = getApi().getDatePartners(sessionKey, dateId);
+        Response<ResponseBody> response = null;
+        String rawJson = null;
+        try {
+            response = call.execute();
+            if(response != null && response.body() != null) {
+                rawJson = response.body().string();
+                rawJson = rawJson.replace("\\", "");
+                Log.d(TAG, "response: " + rawJson);
+                if(response.code() == CODE_SUCCESS) {
+                    Gson gson = new Gson();
+                    return gson.fromJson(rawJson, GetPendingWomenAnswer.class);
+                }
+            } else {
+                Log.d(TAG, "response: null");
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public static MessageAnswer selectPartner(String sessionKey, SelectPartnerParams selectPartnerParams) {
+        Log.d(TAG, "searchDatesStr");
+        Gson gson = new Gson();
+        String paramsStr = gson.toJson(selectPartnerParams, SelectPartnerParams.class);
+        RequestBody body = RequestBody.create(okhttp3.MediaType.parse("application/json; charset=utf-8"), paramsStr );
+        Log.d(TAG, "request: " + paramsStr );
+        Call<ResponseBody> call = getApi().selectPartner(sessionKey, body);
+        Response<ResponseBody> response = null;
+        String rawJson = null;
+        try {
+            response = call.execute();
+            if(response != null && response.body() != null) {
+                rawJson = response.body().string();
+                rawJson = rawJson.replace("\\", "");
+                Log.d(TAG, "response: " + rawJson);
+                if(response.code() == CODE_SUCCESS) {
+                    return gson.fromJson(rawJson, MessageAnswer.class);
+                }
+            } else {
+                Log.d(TAG, "response: null");
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public static MessageAnswer uploadFile(String sessionKey, String path) {
+        Log.d(TAG, "uploadFile");
+        File file = new File(path);
+        MultipartBody.Part filePart = MultipartBody.Part.createFormData("file", file.getName(), RequestBody.create(MediaType.parse("image/*"), file));
+        Call<ResponseBody> call = getApi().uploadAttachment(sessionKey, filePart);
+        Response<ResponseBody> response = null;
+        String rawJson = null;
+        try {
+            response = call.execute();
+            if(response != null && response.body() != null) {
+                rawJson = response.body().string();
+                rawJson = rawJson.replace("\\", "");
+                Log.d(TAG, "response: " + rawJson);
+                if(response.code() == CODE_SUCCESS) {
+                    Gson gson = new Gson();
+                    return gson.fromJson(rawJson, MessageAnswer.class);
+                }
+            } else {
+                Log.d(TAG, "response: null");
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
         }
         return null;
     }
@@ -293,253 +498,4 @@ public class Api {
         return result;
     }
     //
-
-    public static MessageAnswer deletePhoto(String sessionKey, long photoId) {
-        String bodyStr = "{\"Id\":" + photoId + "}";
-        RequestBody body = RequestBody.create(okhttp3.MediaType.parse("application/json; charset=utf-8"), bodyStr);
-        Call<ResponseBody> call = getApi().deletePhoto(sessionKey, body);
-        Response<ResponseBody> response;
-        String rawJson;
-        try {
-            response = call.execute();
-            if(response != null && response.body() != null){
-                rawJson = response.body().string();
-                rawJson = rawJson.replace("\\", "");
-                Log.d(TAG, "deletePhoto: " + rawJson);
-                if(response.code() == CODE_SUCCESS) {
-                    Gson gson = new Gson();
-                    MessageAnswer answer = gson.fromJson(rawJson, MessageAnswer.class);
-                    return answer;
-                }
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-            return null;
-        }
-        return null;
-    }
-
-    public static GetDatesManAnswer getDatesList(String sessionKey) {
-        Log.d(TAG, "getDatesList");
-        Call<ResponseBody> call = getApi().getDatesList(sessionKey);
-        Response<ResponseBody> response = null;
-        String rawJson = null;
-        try {
-            response = call.execute();
-            if(response != null && response.body() != null) {
-                rawJson = response.body().string();
-                rawJson = rawJson.replace("\\", "");
-                Log.d(TAG, "rawJson: " + rawJson);
-            } else {
-                Log.d(TAG, "rawJson: null");
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        if(response != null && rawJson != null){
-            if(response.code() == CODE_SUCCESS) {
-                Gson gson = new Gson();
-                GetDatesManAnswer answer = gson.fromJson(rawJson, GetDatesManAnswer.class);
-                return answer;
-            }
-        }
-        return null;
-    }
-
-    public static MessageAnswer exit(String sessionKey) {
-        Log.d(TAG, "exit");
-        Call<ResponseBody> call = getApi().exit(sessionKey);
-        Response<ResponseBody> response = null;
-        String rawJson = null;
-        try {
-            response = call.execute();
-            if(response != null && response.body() != null) {
-                rawJson = response.body().string();
-                rawJson = rawJson.replace("\\", "");
-                Log.d(TAG, "rawJson: " + rawJson);
-            } else {
-                Log.d(TAG, "rawJson: null");
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        if(response != null && rawJson != null){
-            if(response.code() == CODE_SUCCESS) {
-                Gson gson = new Gson();
-                MessageAnswer answer = gson.fromJson(rawJson, MessageAnswer.class);
-                return answer;
-            }
-        }
-        return null;
-    }
-
-    public static SearchDatesAnswer searchDates(String sessionKey, SearchDatesFilter searchDatesFilterParams) {
-        Log.d(TAG, "searchDatesStr");
-        Log.d(TAG, "request: " + new Gson().toJson(searchDatesFilterParams, SearchDatesFilter.class));
-        //todo удалить лишнее гсон
-        Gson gson = new Gson();
-        Call<ResponseBody> call = getApi().searchDates(sessionKey, searchDatesFilterParams.getAmountStart(), searchDatesFilterParams.getStartTime(), searchDatesFilterParams.getPage());
-        Response<ResponseBody> response = null;
-        String rawJson = null;
-        //todo сделать аккуратнее ifЫ
-        try {
-            response = call.execute();
-            if(response != null && response.body() != null) {
-                rawJson = response.body().string();
-                rawJson = rawJson.replace("\\", "");
-                Log.d(TAG, "responseBody: " + rawJson);
-            } else {
-                Log.d(TAG, "responseBody: null");
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        //todo переместить response
-        if(response != null && rawJson != null){
-            if(response.code() == CODE_SUCCESS) {
-                return gson.fromJson(rawJson, SearchDatesAnswer.class);
-            }
-        }
-        return null;
-    }
-
-    public static GetProfileInfoAnswer getProfileInfo(String sessionKey, long id) {
-        Log.d(TAG, "getProfileInfo");
-        Call<ResponseBody> call = getApi().getProfileInfo(sessionKey, id);
-        Response<ResponseBody> response = null;
-        String rawJson = null;
-        try {
-            response = call.execute();
-            if(response != null && response.body() != null) {
-                rawJson = response.body().string();
-                rawJson = rawJson.replace("\\", "");
-                Log.d(TAG, "response: " + rawJson);
-            } else {
-                Log.d(TAG, "response: null");
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        if(response != null && rawJson != null){
-            if(response.code() == CODE_SUCCESS) {
-                Gson gson = new Gson();
-                GetProfileInfoAnswer answer = gson.fromJson(rawJson, GetProfileInfoAnswer .class);
-                return answer;
-            }
-        }
-        return null;
-    }
-
-    public static MessageAnswer addPartner(String sessionKey, long dateId) {
-        Log.d(TAG, "addPartner");
-        Call<ResponseBody> call = getApi().addPartner(sessionKey, dateId);
-        Response<ResponseBody> response = null;
-        String rawJson = null;
-        try {
-            response = call.execute();
-            if(response != null && response.body() != null) {
-                rawJson = response.body().string();
-                rawJson = rawJson.replace("\\", "");
-                Log.d(TAG, "response: " + rawJson);
-            } else {
-                Log.d(TAG, "response: null");
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        if(response != null && rawJson != null){
-            if(response.code() == CODE_SUCCESS) {
-                Gson gson = new Gson();
-                MessageAnswer answer = gson.fromJson(rawJson, MessageAnswer.class);
-                return answer;
-            }
-        }
-        return null;
-    }
-
-    public static GetPendingWomenAnswer getDatePartners(String sessionKey, long dateId) {
-        Log.d(TAG, "getDatePartners");
-        Call<ResponseBody> call = getApi().getDatePartners(sessionKey, dateId);
-        Response<ResponseBody> response = null;
-        String rawJson = null;
-        try {
-            response = call.execute();
-            if(response != null && response.body() != null) {
-                rawJson = response.body().string();
-                rawJson = rawJson.replace("\\", "");
-                Log.d(TAG, "response: " + rawJson);
-            } else {
-                Log.d(TAG, "response: null");
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        if(response != null && rawJson != null){
-            if(response.code() == CODE_SUCCESS) {
-                Gson gson = new Gson();
-                GetPendingWomenAnswer answer = gson.fromJson(rawJson, GetPendingWomenAnswer.class);
-                return answer;
-            }
-        }
-        return null;
-    }
-
-    public static MessageAnswer selectPartner(String sessionKey, SelectPartnerParams selectPartnerParams) {
-        Log.d(TAG, "searchDatesStr");
-        Gson gson = new Gson();
-        String paramsStr = gson.toJson(selectPartnerParams, SelectPartnerParams.class);
-        RequestBody body = RequestBody.create(okhttp3.MediaType.parse("application/json; charset=utf-8"), paramsStr );
-        Log.d(TAG, "request: " + paramsStr );
-        Call<ResponseBody> call = getApi().selectPartner(sessionKey, body);
-        Response<ResponseBody> response = null;
-        String rawJson = null;
-        try {
-            response = call.execute();
-            if(response != null && response.body() != null) {
-                rawJson = response.body().string();
-                rawJson = rawJson.replace("\\", "");
-                Log.d(TAG, "response: " + rawJson);
-            } else {
-                Log.d(TAG, "response: null");
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        if(response != null && rawJson != null){
-            if(response.code() == CODE_SUCCESS) {
-                MessageAnswer answer = gson.fromJson(rawJson, MessageAnswer.class);
-                return answer;
-            }
-        }
-        return null;
-    }
-
-    public static MessageAnswer uploadFile(String sessionKey, String path) {
-        Log.d(TAG, "uploadFile");
-        File file = new File(path);
-        MultipartBody.Part filePart = MultipartBody.Part.createFormData("file", file.getName(), RequestBody.create(MediaType.parse("image/*"), file));
-        Call<ResponseBody> call = getApi().uploadAttachment(sessionKey, filePart);
-        Response<ResponseBody> response = null;
-        String rawJson = null;
-        try {
-            response = call.execute();
-            if(response != null && response.body() != null) {
-                rawJson = response.body().string();
-                rawJson = rawJson.replace("\\", "");
-                Log.d(TAG, "response: " + rawJson);
-            } else {
-                Log.d(TAG, "response: null");
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        if(response != null && rawJson != null){
-            if(response.code() == CODE_SUCCESS) {
-                Gson gson = new Gson();
-                MessageAnswer answer = gson.fromJson(rawJson, MessageAnswer.class);
-                return answer;
-            }
-        }
-        return null;
-    }
 }
