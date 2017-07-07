@@ -25,14 +25,14 @@
         android:paddingRight="20dp"
         android:layout_marginTop="8dp"
         android:gravity="center"
-        android:background="@drawable/message_his">
+        android:background="@drawable/chat_message_test_his">
 
         <TextView
             android:id="@+id/tv_chat_message"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="16sp"
-            android:text="gioioiou"
+            android:text="gioioioutytyyfyytytytgrdftdrfxsrferfewswewewewedsdsdsdsdsdsdssdsdsdssdssds"
             android:textColor="@color/black"/>
     </RelativeLayout>
 </LinearLayout>

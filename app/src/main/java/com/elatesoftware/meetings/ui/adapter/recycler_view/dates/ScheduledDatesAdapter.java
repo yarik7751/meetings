@@ -1,4 +1,4 @@
-package com.elatesoftware.meetings.ui.adapter.recycler_view;
+package com.elatesoftware.meetings.ui.adapter.recycler_view.dates;
 
 import android.content.Context;
 import android.view.View;

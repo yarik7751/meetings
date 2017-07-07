@@ -22,6 +22,14 @@ public class ChatMessage {
     @Expose
     private Integer recieverId;
 
+    public ChatMessage(Integer dateId, String text, Long dateTime, Integer senderId, Integer recieverId) {
+        this.dateId = dateId;
+        this.text = text;
+        this.dateTime = dateTime;
+        this.senderId = senderId;
+        this.recieverId = recieverId;
+    }
+
     public Integer getDateId() {
         return dateId;
     }

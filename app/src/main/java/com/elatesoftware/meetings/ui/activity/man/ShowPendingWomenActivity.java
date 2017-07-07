@@ -12,7 +12,7 @@ import com.elatesoftware.meetings.R;
 import com.elatesoftware.meetings.api.Api;
 import com.elatesoftware.meetings.service.GetPendingWomenService;
 import com.elatesoftware.meetings.ui.activity.all.BaseActivity;
-import com.elatesoftware.meetings.ui.adapter.recycler_view.PendingWomenAdapter;
+import com.elatesoftware.meetings.ui.adapter.recycler_view.dates.PendingWomenAdapter;
 import com.elatesoftware.meetings.util.Utils;
 import com.elatesoftware.meetings.api.pojo.GetPendingWomenAnswer;
 

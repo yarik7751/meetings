@@ -9,104 +9,122 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.elatesoftware.meetings.R;
+import com.elatesoftware.meetings.api.pojo.ChatMessage;
+import com.elatesoftware.meetings.util.DateUtils;
 
+import java.util.Date;
 import java.util.List;
 
-public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.ChatMessage> {
+public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.ChatMessageBaseViewHolder> {
 
-    static final int VIEW_TYPE_MESSAGE_MY = 0;
-    static final int VIEW_TYPE_MESSAGE_HIS = 1;
-    static final int VIEW_TYPE_TIME_MY = 2;
-    static final int VIEW_TYPE_TIME_HIS = 3;
+    public static final int INTERVAL = 5;
+
+    private static final int VIEW_TYPE_MESSAGE_MY = 1;
+    private static final int VIEW_TYPE_MESSAGE_HIS_LAST = 2;
+    private static final int VIEW_TYPE_MESSAGE_MY_LAST = 3;
+    private static final int VIEW_TYPE_MESSAGE_HIS = 4;
 
     private Context context;
     private List<ChatMessage> messages;
+    private long hisId;
 
-    public ChatAdapter(Context context, List<ChatMessage> messages) {
+    public ChatAdapter(Context context, List<ChatMessage> messages, long hisId) {
         this.context = context;
         this.messages = messages;
+        this.hisId = hisId;
     }
 
     @Override
-    public ChatMessage onCreateViewHolder(ViewGroup parent, int viewType) {
+    public ChatMessageBaseViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         switch (viewType){
+            case VIEW_TYPE_MESSAGE_MY_LAST:
+                return new ChatMessageViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.item_message_my_first, parent, false));
+            case VIEW_TYPE_MESSAGE_HIS_LAST:
+                return new ChatMessageViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.item_message_his_first, parent, false));
             case VIEW_TYPE_MESSAGE_MY:
-                return new MyChatMessage(LayoutInflater.from(parent.getContext()).inflate(R.layout.item_message_my, parent, false));
+                return new ChatMessageViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.item_message_my, parent, false));
             case VIEW_TYPE_MESSAGE_HIS:
-                return new HisChatMessage(LayoutInflater.from(parent.getContext()).inflate(R.layout.item_message_his, parent, false));
-            case VIEW_TYPE_TIME_MY:
-                return new MyChatDate(LayoutInflater.from(parent.getContext()).inflate(R.layout.item_date_my, parent, false));
-            case VIEW_TYPE_TIME_HIS:
-                return new HisChatDate(LayoutInflater.from(parent.getContext()).inflate(R.layout.item_date_his, parent, false));
+                return new ChatMessageViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.item_message_his, parent, false));
         }
         return null;
     }
 
     @Override
-    public long getItemId(int position) {
-        return super.getItemId(position);
+    public int getItemViewType(int position) {
+        ChatMessage message = messages.get(position);
+        ChatMessage nextMessage = position == messages.size() - 1 ? null : messages.get(position + 1);
+        if(nextMessage == null) {
+            if(hisId == message.getSenderId()) {
+                return VIEW_TYPE_MESSAGE_HIS;
+            } else {
+                return VIEW_TYPE_MESSAGE_MY;
+            }
+        } else {
+            if(nextMessage.getSenderId() == message.getSenderId()) {
+                if(hisId == message.getSenderId()) {
+                    return VIEW_TYPE_MESSAGE_HIS_LAST;
+                } else {
+                    return VIEW_TYPE_MESSAGE_MY_LAST;
+                }
+            } else {
+                if(hisId == message.getSenderId()) {
+                    return VIEW_TYPE_MESSAGE_HIS;
+                } else {
+                    return VIEW_TYPE_MESSAGE_MY;
+                }
+            }
+        }
     }
 
     @Override
-    public void onBindViewHolder(ChatMessage holder, int position) {
+    public void onBindViewHolder(ChatMessageBaseViewHolder holder, int position) {
+        ChatMessage message = messages.get(position);
+        holder.setIsRecyclable(false);
+        ((ChatMessageViewHolder) holder).tvChatMessage.setText(message.getText());
+        ((ChatMessageViewHolder) holder).tvChatDate.setText(DateUtils.getDateByStr(new Date(message.getDateTime() * 1000), DateUtils.DATE_FORMAT_OUTPUT));
+        switch (holder.getItemViewType()) {
+            case VIEW_TYPE_MESSAGE_MY_LAST:
+                break;
 
+            case VIEW_TYPE_MESSAGE_HIS_LAST:
+
+                break;
+
+            case VIEW_TYPE_MESSAGE_MY:
+
+                break;
+
+            case VIEW_TYPE_MESSAGE_HIS:
+
+                break;
+        }
     }
 
     @Override
     public int getItemCount() {
-        return 0;
+        return messages == null ? 0 : messages.size();
     }
 
-    static class ChatMessage extends RecyclerView.ViewHolder {
+    static class ChatMessageBaseViewHolder extends RecyclerView.ViewHolder {
 
         public View itemView;
 
-        public ChatMessage(View itemView) {
+        public ChatMessageBaseViewHolder(View itemView) {
             super(itemView);
             this.itemView = itemView;
         }
     }
 
-    static class MyChatMessage extends ChatMessage {
+    static class ChatMessageViewHolder extends ChatMessageBaseViewHolder {
 
         public TextView tvChatMessage;
+        public TextView tvChatDate;
         public RelativeLayout rlChatMessage;
 
-        public MyChatMessage(View itemView) {
+        public ChatMessageViewHolder(View itemView) {
             super(itemView);
             tvChatMessage = (TextView) itemView.findViewById(R.id.tv_chat_message);
             rlChatMessage = (RelativeLayout) itemView.findViewById(R.id.rl_chat_message);
-        }
-    }
-
-    static class HisChatMessage extends ChatMessage {
-
-        public TextView tvChatMessage;
-        public RelativeLayout rlChatMessage;
-
-        public HisChatMessage(View itemView) {
-            super(itemView);
-            tvChatMessage = (TextView) itemView.findViewById(R.id.tv_chat_message);
-            rlChatMessage = (RelativeLayout) itemView.findViewById(R.id.rl_chat_message);
-        }
-    }
-
-    static class MyChatDate extends ChatMessage {
-
-        public TextView tvChatDate;
-
-        public MyChatDate(View itemView) {
-            super(itemView);
-            tvChatDate = (TextView) itemView.findViewById(R.id.tv_chat_date);
-        }
-    }
-
-    static class HisChatDate extends ChatMessage {
-
-        public TextView tvChatDate;
-
-        public HisChatDate(View itemView) {
-            super(itemView);
             tvChatDate = (TextView) itemView.findViewById(R.id.tv_chat_date);
         }
     }
